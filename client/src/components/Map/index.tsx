@@ -2,7 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import { LatLngBoundsExpression } from 'leaflet';
 import styled from 'styled-components';
-import { drawMap } from 'src/components/UMap/draw-map';
+import { drawMap } from 'src/components/Map/draw-map';
 
 const MapContainer = styled.div`
   cursor: grab;
@@ -50,7 +50,7 @@ export type Props = {
   maxBounds: LatLngBoundsExpression;
 };
 
-const UMap: React.FC<Props> = props => {
+const Map: React.FC<Props> = props => {
   const mapRef = useRef(null);
 
   useEffect(() => {
@@ -62,4 +62,4 @@ const UMap: React.FC<Props> = props => {
   return <MapContainer id="map" ref={mapRef} />;
 };
 
-export default UMap;
+export default Map;

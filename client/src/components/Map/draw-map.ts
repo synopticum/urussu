@@ -1,5 +1,5 @@
 import { LatLngBounds, tileLayer, Map, LatLngBoundsExpression, GridLayer, map } from 'leaflet';
-import { Props } from 'src/components/UMap';
+import { Props } from 'src/components/Map';
 
 const createMapInstance = (): Map => {
   const mapInstance = map('map', {});

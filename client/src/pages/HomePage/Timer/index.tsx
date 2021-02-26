@@ -1,6 +1,6 @@
 import { observer } from 'mobx-react-lite';
 import React, { useEffect, useState } from 'react';
-import TimerState from 'src/pages/Home/Timer/state';
+import TimerState from 'src/pages/HomePage/Timer/state';
 import { autorun } from 'mobx';
 import l from './locale';
 

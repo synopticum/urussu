@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import UMap from 'src/components/UMap';
+import Map from 'src/components/Map';
 import styled from 'styled-components';
 
 const MapWrapper = styled.div`
@@ -11,9 +11,9 @@ const MapWrapper = styled.div`
 
 type Props = {} & RouteComponentProps;
 
-const Map: React.FC<Props> = () => (
+const MapPage: React.FC<Props> = () => (
   <MapWrapper>
-    <UMap
+    <Map
       width={10000}
       height={6250}
       minZoom={4}
@@ -26,4 +26,4 @@ const Map: React.FC<Props> = () => (
   </MapWrapper>
 );
 
-export default Map;
+export default MapPage;

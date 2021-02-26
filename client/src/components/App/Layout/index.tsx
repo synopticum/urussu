@@ -5,11 +5,11 @@ import loadable from '@loadable/component';
 import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import ErrorBoundary from '../../ErrorBoundary';
-import Error404 from 'src/pages/Error404';
+import Error404 from 'src/pages/Error404Page';
 
-const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/Home'));
-const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/Map'));
-const ContactUs = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/ContactUs'));
+const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/HomePage'));
+const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/MapPage'));
+const ContactUs = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/ContactUsPage'));
 const ChunkedPage = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/ChunkedPage'));
 
 const Content = styled.div`
