@@ -13,7 +13,12 @@ const ContactUs = loadable(() => import(/* webpackPrefetch: true */ '../../../pa
 const ChunkedPage = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/ChunkedPage'));
 
 const Content = styled.div`
-  padding: 0;
+  display: flex;
+  flex: 1 1 0;
+
+  & > div {
+    flex: 1;
+  }
 `;
 
 type Props = {};
