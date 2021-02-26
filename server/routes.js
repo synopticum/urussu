@@ -1,0 +1,38 @@
+const multer = require('fastify-multer');
+
+const rootPath = './services';
+const prefix = '/api';
+
+const routes = [
+    { value: '/authenticate' },
+    { value: '/authenticate/checkToken' },
+    { value: '/user/get' },
+    { value: '/user/avatar/get' },
+    { value: '/dots/get' },
+    { value: '/dot/get' },
+    { value: '/dot/put' },
+    { value: '/dot/delete' },
+    { value: '/objects/get' },
+    { value: '/object/get' },
+    { value: '/object/put' },
+    { value: '/object/delete' },
+    { value: '/paths/get' },
+    { value: '/comments/get' },
+    { value: '/comment/put' },
+    { value: '/comment/delete' },
+    { value: '/upload/put', options: { multer } },
+    { value: '/upload/delete', options: { multer } },
+    { value: '/search/get' },
+    { value: '/stats/buildings/addresses/get' },
+    { value: '/stats/buildings/pictured/get' },
+    { value: '/stats/population/get' },
+    { value: '/stats/weather/summer/get' },
+    { value: '/stats/weather/temperature/hottest/get' },
+    { value: '/stats/weather/temperature/lowest/get' },
+];
+
+module.exports = attachRoutes = (fastify) => {
+    for (const route of routes) {
+        fastify.register(require(`${rootPath}${route.value}`), { prefix, ...route.options });
+    }
+};

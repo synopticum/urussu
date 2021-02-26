@@ -1,0 +1,28 @@
+version: '3'
+services:
+  ssr:
+    stdin_open: true
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./ssr
+  client:
+    stdin_open: true
+    build:
+      dockerfile: Dockerfile
+      context: ./client
+    ports:
+      - '9000:9000'
+  nginx:
+    depends_on:
+      - ssr
+      - client
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - /usr/apps/certs:/etc/nginx/certs

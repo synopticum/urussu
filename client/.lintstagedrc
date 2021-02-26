@@ -1,0 +1,17 @@
+{
+  "*.{js,jsx}": [
+    "prettier --write --fix --parser=babel",
+    "eslint --fix",
+    "stylelint './src/**/*.jsx'"
+  ],
+  "*.{ts,tsx}": [
+    "prettier --write --fix --parser=typescript",
+    "eslint --fix",
+    "stylelint './src/**/*.tsx'"
+  ],
+  "*.json": [
+    "prettier --write --parser=json"
+  ],
+  "package.json": [
+  ]
+}

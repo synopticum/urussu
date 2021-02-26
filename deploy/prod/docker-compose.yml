@@ -1,0 +1,16 @@
+version: '3'
+services:
+  ssr:
+    image: "synopticum/user-experience-ssr"
+  client:
+    image: "synopticum/user-experience-client"
+    ports:
+      - '9000:9000'
+  nginx:
+    depends_on:
+      - ssr
+      - client
+    restart: always
+    image: "synopticum/user-experience-nginx"
+    ports:
+      - '80:80'

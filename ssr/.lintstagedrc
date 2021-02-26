@@ -1,0 +1,15 @@
+{
+  "*.{js}": [
+    "prettier --write --fix --parser=babel",
+    "eslint --fix",
+  ],
+  "*.{ts}": [
+    "prettier --write --fix --parser=typescript",
+    "eslint --fix",
+  ],
+  "*.json": [
+    "prettier --write --parser=json"
+  ],
+  "package.json": [
+  ]
+}

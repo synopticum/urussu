@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.idea/
+.DS_Store
+# for env variables local for local copy
+.env
+yarn-error.log
+.\#*
+report.*.json
+package-lock.json
+coverage
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+.yarn_cache
+.yarn
