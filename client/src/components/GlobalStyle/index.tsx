@@ -25,7 +25,7 @@ const commonOverrides = `
     text-decoration-skip-ink: none;
     overflow: auto;
     height: 100%;
-    padding: 30px 140px 30px 30px;
+    padding: 0;
     background: var(--main-light);
     line-height: 1.4;
   }
@@ -58,36 +58,6 @@ const commonOverrides = `
   }
   input[type=password]::-ms-reveal {
     display: none;
-  }
-
-  // scrollbar
-  body::-webkit-scrollbar,body::-webkit-scrollbar-track {
-    overflow: hidden;
-    background: #f1efe9;
-  }
-
-  body::-webkit-scrollbar:horizontal {
-      height: 24px
-  }
-
-  body::-webkit-scrollbar:vertical {
-      width: 24px
-  }
-
-  body::-webkit-scrollbar-thumb {
-      border: 10px solid #f1efe9;
-      -webkit-transition: background .25s;
-      transition: background .25s;
-      background: var(--main-dark);
-  }
-
-  body::-webkit-scrollbar-thumb:horizontal {
-      border-left: none;
-      border-right: none
-  }
-
-  body::-webkit-scrollbar-thumb:hover {
-      background: #fff
   }
 `;
 

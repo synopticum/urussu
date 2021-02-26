@@ -27,6 +27,10 @@ module.exports = {
         test: /\.svg$/,
         use: ['babel-loader', { loader: 'svg-inline-loader', options: { removeSVGTagAttrs: false, idPrefix: true } }],
       },
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
     ],
   },
 };
