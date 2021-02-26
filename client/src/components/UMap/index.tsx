@@ -12,18 +12,6 @@ const maxBounds = [
   [100, 39.5],
 ];
 
-const doesBrowserSupportWebP = (): boolean => {
-  const elem = document.createElement('canvas');
-
-  if (!!(elem.getContext && elem.getContext('2d'))) {
-    // was able or not to get WebP representation
-    return elem.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-  }
-
-  // very old browser like IE 8, canvas not supported
-  return false;
-};
-
 type Props = {};
 
 const MapContainer = styled.div`
@@ -116,9 +104,8 @@ const UMap: React.FC<Props> = props => {
       mapRef.current.unproject([0, height], maxZoom),
       mapRef.current.unproject([width, 0], maxZoom),
     );
-    const tileExtension = doesBrowserSupportWebP() ? 'png.webp' : 'png';
 
-    tileLayer(`/images/tiles/{z}/{x}/{y}.${tileExtension}`, {
+    tileLayer(`/images/tiles/{z}/{x}/{y}.png.webp`, {
       minZoom: minZoom,
       maxZoom: maxZoom,
       bounds,
