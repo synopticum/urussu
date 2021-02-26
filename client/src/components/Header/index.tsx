@@ -51,8 +51,8 @@ const Header: React.FC<Props> = observer(() => {
     <StyledHeader>
       <Logo />
       <Nav>
-        <NavLink to="about">{l('О компании')}</NavLink>
-        <NavLink to="contact-us">{l('Карта')}</NavLink>
+        <NavLink to="map">{l('Карта')}</NavLink>
+        <NavLink to="contact-us">{l('Страница')}</NavLink>
         <NavLink to="chunked-page/123">Chunked Page</NavLink>
       </Nav>
     </StyledHeader>

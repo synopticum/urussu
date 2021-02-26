@@ -8,7 +8,7 @@ import ErrorBoundary from '../../ErrorBoundary';
 import Error404 from 'src/pages/Error404';
 
 const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/Home'));
-const About = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/About'));
+const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/Map'));
 const ContactUs = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/ContactUs'));
 const ChunkedPage = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/ChunkedPage'));
 
@@ -31,7 +31,7 @@ const Layout: React.FC<Props> = () => {
         <Content>
           <Router primary={false}>
             <Home path="/" />
-            <About path="/about/" />
+            <Map path="/map/" />
             <ContactUs path="/contact-us/" />
             <ChunkedPage path="/chunked-page/:id" />
             <Error404 default />

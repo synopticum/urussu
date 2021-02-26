@@ -1,8 +1,8 @@
 import { intl, Intl } from 'src/utils/intl';
 
 const locale = {
-  'О компании': 'About',
-  Карта: 'Карта',
+  Карта: 'Map',
+  Страница: 'Some page',
 };
 
 const l: Intl<typeof locale> = key => intl(key, locale);
