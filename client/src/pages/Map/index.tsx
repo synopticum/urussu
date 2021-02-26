@@ -13,7 +13,16 @@ type Props = {} & RouteComponentProps;
 
 const Map: React.FC<Props> = () => (
   <MapWrapper>
-    <UMap />
+    <UMap
+      width={10000}
+      height={6250}
+      minZoom={4}
+      maxZoom={6}
+      maxBounds={[
+        [39.5, -180],
+        [100, 39.5],
+      ]}
+    />
   </MapWrapper>
 );
 

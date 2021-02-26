@@ -1,18 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
-import { map, tileLayer, GridLayer, LatLngBounds } from 'leaflet';
+import { LatLngBoundsExpression } from 'leaflet';
 import styled from 'styled-components';
-
-const width = 10000;
-const height = 6250;
-const minZoom = 4;
-const maxZoom = 6;
-const maxBounds = [
-  [39.5, -180],
-  [100, 39.5],
-];
-
-type Props = {};
+import { drawMap } from 'src/components/UMap/draw-map';
 
 const MapContainer = styled.div`
   cursor: grab;
@@ -52,78 +42,22 @@ const MapContainer = styled.div`
   }
 `;
 
+export type Props = {
+  width: number;
+  height: 6250;
+  minZoom: number;
+  maxZoom: number;
+  maxBounds: LatLngBoundsExpression;
+};
+
 const UMap: React.FC<Props> = props => {
   const mapRef = useRef(null);
 
-  const createMapInstance = (): void => {
-    mapRef.current = map('map', {});
-    mapRef.current.doubleClickZoom.disable();
-  };
-
-  const apply1pxGapFix = (): void => {
-    if (window.navigator.userAgent.indexOf('Chrome') > -1) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      const originalInitTile = GridLayer.prototype._initTile;
-      GridLayer.include({
-        _initTile: function (tile: { style: { width: string; height: string } }) {
-          originalInitTile.call(this, tile);
-          // eslint-disable-next-line react/no-this-in-sfc
-          const tileSize = this.getTileSize();
-          tile.style.width = tileSize.x + 1 + 'px';
-          tile.style.height = tileSize.y + 1 + 'px';
-        },
-      });
-    }
-  };
-
-  const setDefaultSettings = (): void => {
-    let lat = 69.65;
-    let lng = -20.25;
-    let zoom = 5;
-
-    if (location.search) {
-      const params = new URLSearchParams(location.search);
-      lat = parseInt(params.get('lat'));
-      lng = parseInt(params.get('lng'));
-      zoom = parseInt(params.get('zoom'));
-    } else {
-      const url = `?lat=${lat.toFixed(2)}&lng=${lng.toFixed(2)}&zoom=${zoom}`;
-      window.history.replaceState({}, '', url);
-    }
-
-    mapRef.current.setView([lat, lng], zoom);
-  };
-
-  const setMaxBounds = (): void => {
-    mapRef.current.setMaxBounds(maxBounds);
-  };
-
-  const initializeTiles = (): void => {
-    const bounds = new LatLngBounds(
-      mapRef.current.unproject([0, height], maxZoom),
-      mapRef.current.unproject([width, 0], maxZoom),
-    );
-
-    tileLayer(`/images/tiles/{z}/{x}/{y}.png.webp`, {
-      minZoom: minZoom,
-      maxZoom: maxZoom,
-      bounds,
-      noWrap: true,
-    }).addTo(mapRef.current);
-  };
-
-  const _drawMap = (): void => {
-    createMapInstance();
-    apply1pxGapFix();
-    setDefaultSettings();
-    setMaxBounds();
-    initializeTiles();
-  };
-
   useEffect(() => {
-    _drawMap();
-  }, []);
+    if (mapRef.current) {
+      drawMap(mapRef.current, props);
+    }
+  }, [mapRef.current]);
 
   return <MapContainer id="map" ref={mapRef} />;
 };
