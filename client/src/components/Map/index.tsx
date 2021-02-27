@@ -1,8 +1,10 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect } from 'react';
+import { useStores } from 'src/stores';
 import 'leaflet/dist/leaflet.css';
-import { LatLngBoundsExpression } from 'leaflet';
+import { LatLngBoundsExpression, Map as LeafletMap } from 'leaflet';
 import styled from 'styled-components';
 import { drawMap } from 'src/components/Map/draw-map';
+import { observer } from 'mobx-react-lite';
 
 const MapContainer = styled.div`
   cursor: grab;
@@ -44,22 +46,47 @@ const MapContainer = styled.div`
 
 export type Props = {
   width: number;
-  height: 6250;
+  height: number;
   minZoom: number;
   maxZoom: number;
   maxBounds: LatLngBoundsExpression;
 };
 
-const Map: React.FC<Props> = props => {
-  const mapRef = useRef(null);
+const Debug = styled.div`
+  position: absolute;
+  right: calc(50% - 40px);
+  top: 0;
+  z-index: 999;
+  background: #fff;
+  color: #000000;
+`;
+
+const Map: React.FC<Props> = observer(props => {
+  const { mapStore } = useStores();
+  const { isFetching, error, data } = mapStore.apiDots;
+
+  let mapRootNode: LeafletMap = null;
+  const measuredRef = useCallback(node => {
+    if (node !== null) mapRootNode = node;
+  }, []);
 
   useEffect(() => {
-    if (mapRef.current) {
-      drawMap(mapRef.current, props);
-    }
-  }, [mapRef.current]);
+    const init = async (): Promise<void> => {
+      drawMap(mapRootNode, props);
+      await mapStore.fetchData();
+    };
 
-  return <MapContainer id="map" ref={mapRef} />;
-};
+    if (mapRootNode) init();
+  }, [mapRootNode]);
+
+  return (
+    <div>
+      {/*<Debug>*/}
+      {/*  {JSON.stringify(isFetching)} {JSON.stringify(error)} {JSON.stringify(data)}*/}
+      {/*</Debug>*/}
+      <MapContainer id="map" ref={measuredRef} />
+    </div>
+  );
+});
 
 export default Map;

@@ -1,10 +1,10 @@
 import { makeAutoObservable } from 'mobx';
 
-export class AsyncData {
+export class AsyncData<T> {
   isFetching: boolean;
   isDataLoaded: boolean;
   error: string;
-  data: unknown;
+  data: T;
 
   constructor() {
     this.isFetching = false;

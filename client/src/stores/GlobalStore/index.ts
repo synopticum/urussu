@@ -8,7 +8,7 @@ export default class Index {
 
   language = process.env.DEFAULT_LANGUAGE;
   title = 'some title';
-  apiData = new AsyncData();
+  apiData = new AsyncData<string>();
 
   handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.title = e.target.value;
@@ -19,10 +19,10 @@ export default class Index {
     apiData.isFetching = true;
 
     try {
-      await this.api.get('/test');
+      const { data } = await this.api.get<string>('/test');
 
       apiData.error = null;
-      apiData.data = 'Data returned asynchronously: ' + new Date().toISOString();
+      apiData.data = data;
       apiData.isFetching = false;
       apiData.isDataLoaded = true;
     } catch (e) {
