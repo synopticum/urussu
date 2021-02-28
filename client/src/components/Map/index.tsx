@@ -26,7 +26,7 @@ const StyledMap = styled.div`
     background: transparent;
     border-radius: 10px;
     box-shadow: rgb(17 17 17) 0 0 0 10px;
-    outline: var(--inner-border) solid #111;
+    outline: var(--inner-border) solid var(--main-dark);
   }
 `;
 

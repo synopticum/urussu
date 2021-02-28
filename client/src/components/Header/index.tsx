@@ -25,7 +25,7 @@ const StyledNavLink = styled(Link)`
   &.active {
     cursor: default;
     text-decoration: none;
-    color: #111111;
+    color: var(--main-dark);
   }
 `;
 
@@ -35,7 +35,7 @@ const NavLink: React.FC<{ to: string }> = props => (
     getProps={({ isCurrent }): unknown => {
       return {
         style: {
-          color: isCurrent ? '#111111' : 'var(--link-color)',
+          color: isCurrent ? 'var(--main-dark)' : 'var(--link-color)',
           textDecoration: isCurrent ? 'none' : 'underline',
           cursor: isCurrent ? 'default' : 'pointer',
         },

@@ -9,7 +9,7 @@ const commonOverrides = `
 
   :root {
     --main-light: #fff;
-    --main-dark: #a29b82;
+    --main-dark: #111;
     --link-color: #337ab7;
   }
 

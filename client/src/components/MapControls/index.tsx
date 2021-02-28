@@ -9,7 +9,7 @@ const StyledMapControls = styled.div`
   z-index: 600;
   width: 60px;
   height: 100%;
-  background: #111;
+  background: var(--main-dark);
 `;
 
 const MapControls: React.FC = observer(() => {
