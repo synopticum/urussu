@@ -1,8 +1,12 @@
 import { LatLngBounds, tileLayer, Map, LatLngBoundsExpression, GridLayer, map } from 'leaflet';
-import { Props } from 'src/components/Map';
+import { RefObject, useEffect } from 'react';
+import { mapStore } from 'src/stores';
+import { debounce } from 'ts-debounce';
 
-const createMapInstance = (): Map => {
-  const mapInstance = map('map', {});
+type Options = Pick<typeof mapStore, 'width' | 'height' | 'minZoom' | 'maxZoom' | 'maxBounds'>;
+
+const createMapInstance = (mapRootNode: HTMLElement): Map => {
+  const mapInstance = map(mapRootNode, {});
   mapInstance.doubleClickZoom.disable();
 
   return mapInstance;
@@ -47,7 +51,7 @@ const setMaxBounds = (map: Map, maxBounds: LatLngBoundsExpression): void => {
   map.setMaxBounds(maxBounds);
 };
 
-const initializeTiles = (map: Map, options: Omit<Props, 'maxBounds'>): void => {
+const initializeTiles = (map: Map, options: Omit<Options, 'maxBounds'>): void => {
   const { width, height, minZoom, maxZoom } = options;
   const bounds = new LatLngBounds(map.unproject([0, height], maxZoom), map.unproject([width, 0], maxZoom));
 
@@ -59,11 +63,36 @@ const initializeTiles = (map: Map, options: Omit<Props, 'maxBounds'>): void => {
   }).addTo(map);
 };
 
-export const drawMap = (map: Map, options: Props): void => {
-  const mapInstance = createMapInstance();
+const updateUrl = (mapInstance: Map): void => {
+  const { lat, lng } = mapInstance.getCenter();
+  const zoom = mapInstance.getZoom();
+
+  const url = `?lat=${lat.toFixed(2)}&lng=${lng.toFixed(2)}&zoom=${zoom}`;
+  window.history.replaceState({}, '', url);
+
+  mapStore.currentZoom = zoom;
+};
+
+const debouncedUpdateUrl = debounce(updateUrl, 50);
+
+const drawMap = (mapRootNode: HTMLElement, options: Options): Map => {
+  const mapInstance = createMapInstance(mapRootNode);
+
+  mapInstance.on('zoomend', () => updateUrl(mapInstance));
+  mapInstance.on('drag', () => debouncedUpdateUrl(mapInstance));
 
   apply1pxGapFix();
   setDefaultSettings(mapInstance);
   setMaxBounds(mapInstance, options.maxBounds);
   initializeTiles(mapInstance, options);
+
+  return mapInstance;
+};
+
+export const useMap = (mapRef: RefObject<HTMLDivElement>, mapObject: Map, options: Options): void => {
+  useEffect(() => {
+    if (mapRef.current && !mapObject) {
+      mapStore.mapObject = drawMap(mapRef.current, options);
+    }
+  }, [mapRef.current, mapObject]);
 };

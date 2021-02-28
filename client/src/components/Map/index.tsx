@@ -1,12 +1,12 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useRef } from 'react';
 import { useStores } from 'src/stores';
 import 'leaflet/dist/leaflet.css';
-import { LatLngBoundsExpression, Map as LeafletMap } from 'leaflet';
 import styled from 'styled-components';
-import { drawMap } from 'src/components/Map/draw-map';
 import { observer } from 'mobx-react-lite';
+import { useMap } from 'src/components/Map/use-map';
+import { Dots } from 'src/components/Map/Dots';
 
-const MapContainer = styled.div`
+const MapContainer = styled.div<{ currentZoom: number }>`
   cursor: grab;
   position: absolute;
   left: 0;
@@ -42,15 +42,62 @@ const MapContainer = styled.div`
     opacity: 0.05;
     background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADAQMAAABs5if8AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAA5JREFUCNdjeMDQwNAAAAZmAeFpNQSMAAAAAElFTkSuQmCC');
   }
-`;
 
-export type Props = {
-  width: number;
-  height: number;
-  minZoom: number;
-  maxZoom: number;
-  maxBounds: LatLngBoundsExpression;
-};
+  .leaflet-marker-icon {
+    cursor: default !important;
+    position: relative;
+    background: rgb(232, 168, 38);
+    border: 2px solid rgb(182, 118, -12);
+    border-radius: 50%;
+  }
+
+  .leaflet-marker-icon::before {
+    pointer-events: none;
+    content: '';
+    position: absolute;
+    transform: rotate(-90deg);
+    box-sizing: border-box;
+  }
+
+  .leaflet-marker-icon::after {
+    pointer-events: none;
+    opacity: 0;
+    content: '';
+    position: absolute;
+    left: -5px;
+    bottom: -5px;
+    width: 20px;
+    height: 70px;
+    background: rgb(255, 241, 224);
+    transform: perspective(25px) rotateX(-40deg);
+    transition: opacity 0.3s;
+    filter: blur(5px);
+  }
+
+  .leaflet-marker-icon:hover::after {
+    opacity: 1;
+  }
+
+  .leaflet-marker-icon:focus {
+    outline: none;
+  }
+
+  .leaflet-marker-icon__gold {
+    background-color: #ffb631;
+    border-color: darkgoldenrod;
+  }
+
+  .leaflet-marker-icon:hover {
+    opacity: 1;
+  }
+
+  .leaflet-marker-icon--is-updating {
+    cursor: default;
+    pointer-events: none;
+    opacity: 0.3;
+    filter: grayscale(100%);
+  }
+`;
 
 const Debug = styled.div`
   position: absolute;
@@ -61,30 +108,20 @@ const Debug = styled.div`
   color: #000000;
 `;
 
-const Map: React.FC<Props> = observer(props => {
+const Map: React.FC = observer(() => {
   const { mapStore } = useStores();
-  const { isFetching, error, data } = mapStore.apiDots;
+  const { width, height, minZoom, maxZoom, maxBounds, mapObject } = mapStore;
 
-  let mapRootNode: LeafletMap = null;
-  const measuredRef = useCallback(node => {
-    if (node !== null) mapRootNode = node;
-  }, []);
+  const mapRef = useRef(null);
+  useMap(mapRef, mapObject, { width, height, minZoom, maxZoom, maxBounds });
 
-  useEffect(() => {
-    const init = async (): Promise<void> => {
-      drawMap(mapRootNode, props);
-      await mapStore.fetchData();
-    };
-
-    if (mapRootNode) init();
-  }, [mapRootNode]);
+  // console.log(mapStore.currentZoom);
 
   return (
     <div>
-      {/*<Debug>*/}
-      {/*  {JSON.stringify(isFetching)} {JSON.stringify(error)} {JSON.stringify(data)}*/}
-      {/*</Debug>*/}
-      <MapContainer id="map" ref={measuredRef} />
+      <MapContainer ref={mapRef} currentZoom={mapStore.currentZoom}>
+        <Dots />
+      </MapContainer>
     </div>
   );
 });

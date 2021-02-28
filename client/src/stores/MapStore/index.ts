@@ -1,39 +1,30 @@
 import { makeObservable, observable } from 'mobx';
-import { AxiosInstance } from 'axios';
-import { AsyncData } from 'src/stores/helpers';
-import { DotDto } from 'src/contracts/dots';
+import { LatLngBoundsExpression, Map } from 'leaflet';
 
 export default class Index {
-  private api: AxiosInstance;
+  mapObject: Map;
+  width: number;
+  height: number;
+  minZoom: number;
+  maxZoom: number;
+  maxBounds: LatLngBoundsExpression;
+  currentZoom: number;
 
-  apiDots = new AsyncData<DotDto[]>();
-
-  private fetchDots = async (): Promise<void> => {
-    const { apiDots } = this;
-    apiDots.isFetching = true;
-
-    try {
-      const { data } = await this.api.get<DotDto[]>('/dots');
-
-      apiDots.error = null;
-      apiDots.data = data;
-      apiDots.isFetching = false;
-      apiDots.isDataLoaded = true;
-    } catch (e) {
-      apiDots.error = e.message;
-      apiDots.isFetching = false;
-    }
-  };
-
-  fetchData = async (): Promise<void[]> => {
-    return Promise.all([this.fetchDots()]);
-  };
-
-  constructor(api: AxiosInstance) {
-    this.api = api;
+  constructor() {
+    this.mapObject = null;
+    this.width = 10000;
+    this.height = 6250;
+    this.minZoom = 4;
+    this.maxZoom = 6;
+    this.maxBounds = [
+      [39.5, -180],
+      [100, 39.5],
+    ];
+    this.currentZoom = 5;
 
     makeObservable(this, {
-      apiDots: observable,
+      mapObject: observable,
+      currentZoom: observable,
     });
   }
 }
