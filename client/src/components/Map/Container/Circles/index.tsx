@@ -21,7 +21,7 @@ export const Circles: React.FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (isDataLoaded) drawCircles(mapStore.mapObject, data);
+    if (isDataLoaded) drawCircles(mapStore.map, data);
   }, [isDataLoaded]);
 
   return null;

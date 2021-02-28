@@ -2,7 +2,7 @@ import { makeObservable, observable } from 'mobx';
 import { LatLngBoundsExpression, Map } from 'leaflet';
 
 export default class Index {
-  mapObject: Map;
+  map: Map;
   width: number;
   height: number;
   minZoom: number;
@@ -11,7 +11,7 @@ export default class Index {
   currentZoom: number;
 
   constructor() {
-    this.mapObject = null;
+    this.map = null;
     this.width = 10000;
     this.height = 6250;
     this.minZoom = 4;
@@ -23,7 +23,7 @@ export default class Index {
     this.currentZoom = 5;
 
     makeObservable(this, {
-      mapObject: observable,
+      map: observable,
       currentZoom: observable,
     });
   }

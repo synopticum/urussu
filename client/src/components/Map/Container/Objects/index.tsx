@@ -15,7 +15,7 @@ export const Objects: React.FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (isDataLoaded) drawObjects(mapStore.mapObject, data);
+    if (isDataLoaded) drawObjects(mapStore.map, data);
   }, [isDataLoaded]);
 
   return null;

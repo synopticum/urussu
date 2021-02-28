@@ -12,7 +12,7 @@ export const Dots: React.FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (isDataLoaded) drawDots(mapStore.mapObject, data);
+    if (isDataLoaded) drawDots(mapStore.map, data);
   }, [isDataLoaded]);
 
   return null;

@@ -13,7 +13,7 @@ export const Paths: React.FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (isDataLoaded) drawPaths(mapStore.mapObject, data);
+    if (isDataLoaded) drawPaths(mapStore.map, data);
   }, [isDataLoaded]);
 
   return null;

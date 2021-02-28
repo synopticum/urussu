@@ -32,10 +32,10 @@ const StyledMap = styled.div`
 
 const Map: React.FC = observer(() => {
   const { mapStore } = useStores();
-  const { width, height, minZoom, maxZoom, maxBounds, mapObject } = mapStore;
+  const { width, height, minZoom, maxZoom, maxBounds, map } = mapStore;
 
   const mapRef = useRef(null);
-  useMap(mapRef, mapObject, { width, height, minZoom, maxZoom, maxBounds });
+  useMap(mapRef, map, { width, height, minZoom, maxZoom, maxBounds });
 
   // console.log(mapStore.currentZoom);
 
