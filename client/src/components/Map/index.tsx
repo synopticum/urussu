@@ -7,6 +7,7 @@ import { useMap } from 'src/components/Map/use-map';
 import { Dots } from 'src/components/Map/Dots';
 import { Objects } from 'src/components/Map/Objects';
 import { Paths } from 'src/components/Map/Paths';
+import { Circles } from 'src/components/Map/Circles';
 
 const MapContainer = styled.div<{ currentZoom: number }>`
   cursor: grab;
@@ -77,7 +78,7 @@ const MapContainer = styled.div<{ currentZoom: number }>`
   }
 
   .leaflet-marker-icon:hover::after {
-    opacity: 1;
+    opacity: 0.5;
   }
 
   .leaflet-marker-icon:focus {
@@ -137,15 +138,6 @@ const MapContainer = styled.div<{ currentZoom: number }>`
   }
 `;
 
-const Debug = styled.div`
-  position: absolute;
-  right: calc(50% - 40px);
-  top: 0;
-  z-index: 999;
-  background: #fff;
-  color: #000000;
-`;
-
 const Map: React.FC = observer(() => {
   const { mapStore } = useStores();
   const { width, height, minZoom, maxZoom, maxBounds, mapObject } = mapStore;
@@ -161,6 +153,7 @@ const Map: React.FC = observer(() => {
         <Dots />
         <Objects />
         <Paths />
+        <Circles />
       </MapContainer>
     </div>
   );

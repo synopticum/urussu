@@ -2,16 +2,16 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { useStores } from 'src/stores';
 import { observer } from 'mobx-react-lite';
-import { drawObjects } from 'src/components/Map/Objects/draw-objects';
+import { drawCircles } from 'src/components/Map/Circles/draw-circles';
 
-const StyledObjects = styled.div`
+const StyledCircles = styled.div`
   position: fixed;
   left: 0;
   top: 0;
   z-index: 999;
 `;
 
-export const Objects: React.FC = observer(() => {
+export const Circles: React.FC = observer(() => {
   const { objectsStore, mapStore } = useStores();
   const { isFetching, isDataLoaded, error, data } = objectsStore.apiData;
 
@@ -22,10 +22,10 @@ export const Objects: React.FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (isDataLoaded) drawObjects(mapStore.mapObject, data);
+    if (isDataLoaded) drawCircles(mapStore.mapObject, data);
   }, [isDataLoaded]);
 
-  return <StyledObjects>{/*<div>{isDataLoaded ? JSON.stringify(data) : 'test'}</div>*/}</StyledObjects>;
+  return <StyledCircles>{/*<div>{isDataLoaded ? JSON.stringify(data) : 'test'}</div>*/}</StyledCircles>;
 });
 
-export default Objects;
+export default Circles;

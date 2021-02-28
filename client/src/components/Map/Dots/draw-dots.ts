@@ -37,7 +37,7 @@ const createMarker = (dot: DotDto): Marker => {
     id: dot.id,
     icon,
     draggable: false,
-    // rotationAngle: dot.rotationAngle || 0,
+    rotationAngle: dot.rotationAngle || 0,
   });
 };
 
@@ -49,7 +49,7 @@ const removeCurrentLayersAndMarkers = (map: Map): void => {
 const addMarkersToMap = (map: Map, data: DotDto[]): void => {
   for (const layerName of getDotLayers(data)) {
     const layerDots = data.filter(dot => dot.layer === layerName);
-    overlayMaps[layerName] = layerGroup(layerDots.map(dot => createMarker(dot)));
+    overlayMaps[layerName] = layerGroup(layerDots.map(createMarker));
   }
 };
 

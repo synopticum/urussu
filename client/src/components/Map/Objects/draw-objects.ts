@@ -14,14 +14,14 @@ const getObjectColor = (object: ObjectDto): string => {
 };
 
 const addObjectsToMap = (map: Map, objects: ObjectDto[]): void => {
-  objects.forEach((object: ObjectDto) => {
-    polygon(object.coordinates, {
+  objects.forEach((item: ObjectDto) => {
+    polygon(item.coordinates, {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
-      id: object.id,
-      color: getObjectColor(object),
+      id: item.id,
+      color: getObjectColor(item),
       weight: 2,
-      className: object.images ? 'leaflet-interactive--has-images' : '',
+      className: item.images ? 'leaflet-interactive--has-images' : '',
     }).addTo(map);
   });
 };

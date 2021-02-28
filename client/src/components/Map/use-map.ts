@@ -2,6 +2,7 @@ import { LatLngBounds, tileLayer, Map, LatLngBoundsExpression, GridLayer, map } 
 import { RefObject, useEffect } from 'react';
 import { mapStore } from 'src/stores';
 import { debounce } from 'ts-debounce';
+import { useRotatedMarker } from 'src/components/Map/use-rotated-marker';
 
 type Options = Pick<typeof mapStore, 'width' | 'height' | 'minZoom' | 'maxZoom' | 'maxBounds'>;
 
@@ -90,6 +91,8 @@ const drawMap = (mapRootNode: HTMLElement, options: Options): Map => {
 };
 
 export const useMap = (mapRef: RefObject<HTMLDivElement>, mapObject: Map, options: Options): void => {
+  useRotatedMarker();
+
   useEffect(() => {
     if (mapRef.current && !mapObject) {
       mapStore.mapObject = drawMap(mapRef.current, options);
