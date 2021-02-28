@@ -1,10 +1,10 @@
-import { LatLngExpression } from 'leaflet';
+import { LatLngTuple } from 'leaflet';
 
 export type DotDto = {
   id: string;
   instanceType: string;
   layer: string;
-  coordinates: LatLngExpression;
+  coordinates: LatLngTuple;
   authorId: string;
   rotationAngle: number;
   title?: string;

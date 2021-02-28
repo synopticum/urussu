@@ -1,4 +1,4 @@
-import { Map, divIcon, marker, layerGroup, control, Marker, Control, LayerGroup } from 'leaflet';
+import { Map, divIcon, marker, layerGroup, control, Marker, Control, LayerGroup, LatLngTuple } from 'leaflet';
 import { DotDto } from 'src/contracts/dots';
 
 type OverlayMaps = {
@@ -34,7 +34,7 @@ const createMarker = (dot: DotDto): Marker => {
   return marker(dot.coordinates, {
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
-    // id: dot.id,
+    id: dot.id,
     icon,
     draggable: false,
     // rotationAngle: dot.rotationAngle || 0,
@@ -54,7 +54,6 @@ const addMarkersToMap = (map: Map, data: DotDto[]): void => {
 };
 
 const addLayersToMap = (map: Map): void => {
-  // debugger;
   Object.values(overlayMaps).forEach(layer => layer.addTo(map));
   layerControl = control.layers(null, overlayMaps).addTo(map);
 };
@@ -63,5 +62,4 @@ export const drawDots = (map: Map, data: DotDto[]): void => {
   removeCurrentLayersAndMarkers(map);
   addMarkersToMap(map, data);
   addLayersToMap(map);
-  // debugger;
 };

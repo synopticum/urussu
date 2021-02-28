@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
 import { useMap } from 'src/components/Map/use-map';
 import { Dots } from 'src/components/Map/Dots';
+import { Objects } from 'src/components/Map/Objects';
 
 const MapContainer = styled.div<{ currentZoom: number }>`
   cursor: grab;
@@ -97,6 +98,42 @@ const MapContainer = styled.div<{ currentZoom: number }>`
     opacity: 0.3;
     filter: grayscale(100%);
   }
+
+  path.leaflet-interactive {
+    cursor: pointer;
+    /*opacity: .75;*/
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+
+  path.leaflet-interactive:hover {
+    opacity: 1;
+  }
+
+  path.leaflet-interactive--error {
+    pointer-events: none;
+    opacity: 0.75;
+    animation-name: disappear;
+    animation-duration: 2000ms;
+    animation-fill-mode: forwards;
+  }
+
+  path.leaflet-interactive--has-images {
+    /*opacity: .75;*/
+  }
+
+  @keyframes disappear {
+    0% {
+      opacity: 0.75;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      display: none;
+      opacity: 0;
+    }
+  }
 `;
 
 const Debug = styled.div`
@@ -121,6 +158,7 @@ const Map: React.FC = observer(() => {
     <div>
       <MapContainer ref={mapRef} currentZoom={mapStore.currentZoom}>
         <Dots />
+        <Objects />
       </MapContainer>
     </div>
   );
