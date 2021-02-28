@@ -2,6 +2,7 @@ import GlobalStore from './GlobalStore';
 import MapStore from './MapStore';
 import DotsStore from './MapStore/DotsStore';
 import ObjectsStore from './MapStore/ObjectsStore';
+import PathsStore from './MapStore/PathsStore';
 import React from 'react';
 import axios from 'axios';
 
@@ -13,12 +14,14 @@ export const globalStore = new GlobalStore(api);
 export const mapStore = new MapStore();
 export const dotsStore = new DotsStore(api);
 export const objectsStore = new ObjectsStore(api);
+export const pathsStore = new PathsStore(api);
 
 export const stores = {
   globalStore,
   mapStore,
   dotsStore,
   objectsStore,
+  pathsStore,
 };
 
 const StoresContext = React.createContext(stores);

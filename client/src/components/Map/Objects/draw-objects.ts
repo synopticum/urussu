@@ -13,8 +13,8 @@ const getObjectColor = (object: ObjectDto): string => {
   return '#f00';
 };
 
-const addObjectsToMap = (map: Map, data: ObjectDto[]): void => {
-  data.forEach((object: ObjectDto) => {
+const addObjectsToMap = (map: Map, objects: ObjectDto[]): void => {
+  objects.forEach((object: ObjectDto) => {
     polygon(object.coordinates, {
       // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
       // @ts-ignore
@@ -27,6 +27,8 @@ const addObjectsToMap = (map: Map, data: ObjectDto[]): void => {
 };
 
 export const drawObjects = (map: Map, data: ObjectDto[]): void => {
+  const objects = data.filter(object => object.instanceType === 'object');
+
   removeCurrentObjects();
-  addObjectsToMap(map, data);
+  addObjectsToMap(map, objects);
 };

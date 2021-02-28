@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { useMap } from 'src/components/Map/use-map';
 import { Dots } from 'src/components/Map/Dots';
 import { Objects } from 'src/components/Map/Objects';
+import { Paths } from 'src/components/Map/Paths';
 
 const MapContainer = styled.div<{ currentZoom: number }>`
   cursor: grab;
@@ -159,6 +160,7 @@ const Map: React.FC = observer(() => {
       <MapContainer ref={mapRef} currentZoom={mapStore.currentZoom}>
         <Dots />
         <Objects />
+        <Paths />
       </MapContainer>
     </div>
   );

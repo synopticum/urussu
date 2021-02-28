@@ -1,6 +1,7 @@
 import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData } from 'src/stores/helpers';
+import { PathDto } from 'src/contracts/paths';
 import { ObjectDto } from 'src/contracts/objects';
 
 export default class Index {
@@ -13,7 +14,7 @@ export default class Index {
     apiData.isFetching = true;
 
     try {
-      const { data } = await this.api.get<ObjectDto[]>('/objects');
+      const { data } = await this.api.get<PathDto[]>('/paths');
 
       apiData.error = null;
       apiData.data = data;
