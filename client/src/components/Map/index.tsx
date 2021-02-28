@@ -34,14 +34,14 @@ const Map: React.FC = observer(() => {
   const { mapStore } = useStores();
   const { width, height, minZoom, maxZoom, maxBounds, map } = mapStore;
 
-  const mapRef = useRef(null);
-  useMap(mapRef, map, { width, height, minZoom, maxZoom, maxBounds });
+  const containerRef = useRef(null);
+  useMap(containerRef, map, { width, height, minZoom, maxZoom, maxBounds });
 
   // console.log(mapStore.currentZoom);
 
   return (
     <StyledMap>
-      <Container ref={mapRef} currentZoom={mapStore.currentZoom}>
+      <Container ref={containerRef} currentZoom={mapStore.currentZoom}>
         <Dots />
         <Objects />
         <Paths />

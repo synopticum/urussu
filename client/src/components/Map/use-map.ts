@@ -90,12 +90,12 @@ const drawMap = (mapRootNode: HTMLElement, options: Options): Map => {
   return map;
 };
 
-export const useMap = (mapRef: RefObject<HTMLDivElement>, map: Map, options: Options): void => {
+export const useMap = (containerRef: RefObject<HTMLDivElement>, map: Map, options: Options): void => {
   useRotatedMarker();
 
   useEffect(() => {
-    if (mapRef.current && !map) {
-      mapStore.map = drawMap(mapRef.current, options);
+    if (containerRef.current && !map) {
+      mapStore.map = drawMap(containerRef.current, options);
     }
-  }, [mapRef.current, map]);
+  }, [containerRef.current, map]);
 };
