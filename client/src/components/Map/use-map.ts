@@ -77,17 +77,17 @@ const updateUrl = (mapInstance: Map): void => {
 const debouncedUpdateUrl = debounce(updateUrl, 50);
 
 const drawMap = (mapRootNode: HTMLElement, options: Options): Map => {
-  const mapInstance = createMapInstance(mapRootNode);
+  const map = createMapInstance(mapRootNode);
 
-  mapInstance.on('zoomend', () => updateUrl(mapInstance));
-  mapInstance.on('drag', () => debouncedUpdateUrl(mapInstance));
+  map.on('zoomend', () => updateUrl(map));
+  map.on('drag', () => debouncedUpdateUrl(map));
 
   apply1pxGapFix();
-  setDefaultSettings(mapInstance);
-  setMaxBounds(mapInstance, options.maxBounds);
-  initializeTiles(mapInstance, options);
+  setDefaultSettings(map);
+  setMaxBounds(map, options.maxBounds);
+  initializeTiles(map, options);
 
-  return mapInstance;
+  return map;
 };
 
 export const useMap = (mapRef: RefObject<HTMLDivElement>, mapObject: Map, options: Options): void => {

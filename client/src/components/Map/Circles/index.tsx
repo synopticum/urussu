@@ -8,7 +8,6 @@ const StyledCircles = styled.div`
   position: fixed;
   left: 0;
   top: 0;
-  z-index: 999;
 `;
 
 export const Circles: React.FC = observer(() => {

@@ -48,7 +48,6 @@ const MapContainer = styled.div<{ currentZoom: number }>`
 
   .leaflet-marker-icon {
     cursor: default !important;
-    position: relative;
     background: rgb(232, 168, 38);
     border: 2px solid rgb(182, 118, -12);
     border-radius: 50%;
@@ -135,6 +134,21 @@ const MapContainer = styled.div<{ currentZoom: number }>`
       display: none;
       opacity: 0;
     }
+  }
+
+  .leaflet-control-attribution {
+    margin: 0 20px 20px 0 !important;
+    background: none !important;
+  }
+
+  .leaflet-control-attribution a {
+    color: #fff !important;
+    text-decoration: none !important;
+    opacity: 0.5;
+  }
+
+  .leaflet-control-layers {
+    display: none;
   }
 `;
 
