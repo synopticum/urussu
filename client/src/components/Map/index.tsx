@@ -9,6 +9,8 @@ import { Objects } from 'src/components/Map/Objects';
 import { Paths } from 'src/components/Map/Paths';
 import { Circles } from 'src/components/Map/Circles';
 
+const StyledMap = styled.div``;
+
 const MapContainer = styled.div<{ currentZoom: number }>`
   cursor: grab;
   position: absolute;
@@ -162,14 +164,14 @@ const Map: React.FC = observer(() => {
   // console.log(mapStore.currentZoom);
 
   return (
-    <div>
+    <StyledMap>
       <MapContainer ref={mapRef} currentZoom={mapStore.currentZoom}>
         <Dots />
         <Objects />
         <Paths />
         <Circles />
       </MapContainer>
-    </div>
+    </StyledMap>
   );
 });
 

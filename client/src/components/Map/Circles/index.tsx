@@ -24,7 +24,7 @@ export const Circles: React.FC = observer(() => {
     if (isDataLoaded) drawCircles(mapStore.mapObject, data);
   }, [isDataLoaded]);
 
-  return <StyledCircles>{/*<div>{isDataLoaded ? JSON.stringify(data) : 'test'}</div>*/}</StyledCircles>;
+  return null;
 });
 
 export default Circles;
