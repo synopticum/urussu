@@ -23,5 +23,5 @@ export const getColor = (name: ColorName): CSSVariable => `var(--colors-${name})
 
 export const getFont = (name: FontName): CSSVariable => `var(--fonts-${name})`;
 
-const theme = generateTheme(tokens);
-export default theme;
+const index = generateTheme(tokens);
+export default index;
