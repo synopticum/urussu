@@ -3,13 +3,9 @@ import { RouteComponentProps } from '@reach/router';
 import Map from 'src/components/Map';
 import styled from 'styled-components';
 import MapControls from 'src/components/MapControls';
-import Aside from 'src/components/Aside';
+import { Page, Aside } from 'src/components/Page';
 
-const StyledMapPage = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-`;
+const StyledMapPage = styled(Page)``;
 
 type Props = {} & RouteComponentProps;
 

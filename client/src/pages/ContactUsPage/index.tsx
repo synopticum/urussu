@@ -1,16 +1,11 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import styled from 'styled-components';
-import Aside from 'src/components/Aside';
-import Content from 'src/components/Content';
+import { Page, Aside, Content } from 'src/components/Page';
 
 type Props = {} & RouteComponentProps;
 
-const StyledContactUsPage = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-`;
+const StyledContactUsPage = styled(Page)``;
 
 const ContactUs: React.FC<Props> = () => (
   <StyledContactUsPage>
