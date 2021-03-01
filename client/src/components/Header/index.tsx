@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
 import Logo from './Logo';
+import Login from './Login';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
 import { color } from 'src/components/GlobalStyle/theme';
-import { authStore } from 'src/stores';
 
 const StyledHeader = styled.header`
   position: relative;
@@ -50,23 +50,13 @@ const NavLink: React.FC<{ to: string }> = props => (
 type Props = {};
 
 const Header: React.FC<Props> = observer(() => {
-  const redirectUrl = `${window.location.origin}/login`;
-
   return (
     <StyledHeader>
       <Nav>
         <NavLink to="map">{l('Карта')}</NavLink>
         <NavLink to="contact-us">{l('Страница')}</NavLink>
         <NavLink to="chunked-page/123">Chunked Page</NavLink>
-        {!authStore.isLogged ? (
-          <a
-            href={`https://oauth.vk.com/authorize?client_id=4447151&display=page&redirect_uri=${redirectUrl}&response_type=code&v=5.95`}
-          >
-            Login
-          </a>
-        ) : (
-          <a onClick={(): void => authStore.logout()}>Logout</a>
-        )}
+        <Login />
       </Nav>
     </StyledHeader>
   );
