@@ -2,12 +2,12 @@ import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData } from 'src/stores/helpers';
 import { PathDto } from 'src/contracts/paths';
-import { ObjectDto } from 'src/contracts/objects';
+import { map, PathItem } from 'src/stores/MapStore/PathsStore/map';
 
 export default class Index {
   private api: AxiosInstance;
 
-  apiData = new AsyncData<ObjectDto[]>();
+  apiData = new AsyncData<PathItem[]>();
 
   fetchData = async (): Promise<void> => {
     const { apiData } = this;
@@ -17,7 +17,7 @@ export default class Index {
       const { data } = await this.api.get<PathDto[]>('/paths');
 
       apiData.error = null;
-      apiData.data = data;
+      apiData.data = map(data);
       apiData.isFetching = false;
       apiData.isDataLoaded = true;
     } catch (e) {
