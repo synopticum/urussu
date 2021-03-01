@@ -16,11 +16,7 @@ const StyledFooter = styled.footer`
 type Props = {};
 
 export const Footer: React.FC<Props> = () => {
-  return (
-    <StyledFooter>
-      <Logo />
-    </StyledFooter>
-  );
+  return <StyledFooter>{/*<Logo />*/}</StyledFooter>;
 };
 
 export default Footer;

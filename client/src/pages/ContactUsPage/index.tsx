@@ -2,6 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import styled from 'styled-components';
 import Aside from 'src/components/Aside';
+import Content from 'src/components/Content';
 
 type Props = {} & RouteComponentProps;
 
@@ -14,7 +15,7 @@ const StyledContactUsPage = styled.div`
 const ContactUs: React.FC<Props> = () => (
   <StyledContactUsPage>
     <Aside>zz</Aside>
-    contact us
+    <Content>contact us</Content>
   </StyledContactUsPage>
 );
 

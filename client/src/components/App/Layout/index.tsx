@@ -20,6 +20,7 @@ const Content = styled.div`
   & > div {
     position: relative;
     flex: 1;
+    background-color: ${color('black-1')};
 
     &::before {
       content: '';

@@ -9,6 +9,7 @@ const Aside = styled.aside`
   width: 60px;
   height: 100%;
   background: ${color('black-1')};
+  overflow: hidden;
 `;
 
 export default Aside;
