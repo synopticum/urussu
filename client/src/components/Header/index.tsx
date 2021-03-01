@@ -4,13 +4,14 @@ import { Link } from '@reach/router';
 import Logo from './Logo';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
+import { getColor } from 'src/components/GlobalStyle/theme';
 
 const StyledHeader = styled.header`
   position: relative;
   padding: 20px 40px;
   display: flex;
   align-items: center;
-  background-color: var(--main-dark);
+  background-color: ${getColor('black-1')};
   justify-content: flex-end;
 `;
 
@@ -26,7 +27,7 @@ const StyledNavLink = styled(Link)`
   &.active {
     cursor: default;
     text-decoration: none;
-    color: var(--main-dark);
+    color: ${getColor('black-1')};
   }
 `;
 
@@ -36,7 +37,7 @@ const NavLink: React.FC<{ to: string }> = props => (
     getProps={({ isCurrent }): unknown => {
       return {
         style: {
-          color: isCurrent ? 'var(--main-light)' : 'var(--link-color)',
+          color: isCurrent ? getColor('white-1') : getColor('blue-1'),
           textDecoration: isCurrent ? 'none' : 'underline',
           cursor: isCurrent ? 'default' : 'pointer',
         },

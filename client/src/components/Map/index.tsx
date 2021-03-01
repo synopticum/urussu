@@ -9,10 +9,11 @@ import Objects from './Container/Objects';
 import Paths from './Container/Paths';
 import Circles from './Container/Circles';
 import { mapStore } from 'src/stores';
+import { getColor } from 'src/components/GlobalStyle/theme';
 
 const StyledMap = styled.div`
   height: 100%;
-  background-color: var(--main-dark);
+  background-color: ${getColor('black-1')};
 
   &::before {
     content: '';
@@ -29,7 +30,7 @@ const StyledMap = styled.div`
     background: transparent;
     border-radius: 10px;
     box-shadow: rgb(17 17 17) 0 0 0 10px;
-    outline: var(--inner-border) solid var(--main-dark);
+    outline: var(--inner-border) solid ${getColor('black-1')};
   }
 `;
 

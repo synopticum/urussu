@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { getColor, getFont } from 'src/components/GlobalStyle/theme';
 
 const Container = styled.div`
   cursor: grab;
@@ -7,7 +8,7 @@ const Container = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: #000000;
+  background-color: ${getColor('black-1')};
   pointer-events: all;
 
   &:active {
