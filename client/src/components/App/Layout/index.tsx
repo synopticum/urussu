@@ -8,7 +8,7 @@ import ErrorBoundary from '../../ErrorBoundary';
 import Error404 from 'src/pages/Error404Page';
 import { color } from 'src/components/GlobalStyle/theme';
 import LoginPage from 'src/pages/Login/LoginPage';
-import { authStore } from 'src/stores';
+import { authStore, userStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 
 const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/HomePage'));
@@ -61,9 +61,15 @@ const Content = styled.div`
 type Props = {};
 
 const Layout: React.FC<Props> = observer(() => {
+  const { isLogged, token } = authStore;
+
   useEffect(() => {
     authStore.login();
   }, []);
+
+  useEffect(() => {
+    if (isLogged) userStore.fetchData(token);
+  }, [isLogged]);
 
   return (
     <>

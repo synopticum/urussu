@@ -1,6 +1,6 @@
 import GlobalStore from './GlobalStore';
 import AuthStore from './AuthStore';
-import UserStore from './AuthStore';
+import UserStore from './UserStore';
 import MapStore from './MapStore';
 import DotsStore from './MapStore/DotsStore';
 import ObjectsStore from './MapStore/ObjectsStore';

@@ -3,21 +3,20 @@ import { AxiosInstance } from 'axios';
 import { AsyncData } from 'src/stores/helpers';
 import { map, User } from 'src/stores/UserStore/map';
 import { UserDto } from 'src/contracts/user';
-import { authStore } from 'src/stores';
 
 export default class UserStore {
   private api: AxiosInstance;
 
   apiData = new AsyncData<User>();
 
-  fetchData = async (): Promise<void> => {
+  fetchData = async (token: string): Promise<void> => {
     const { apiData } = this;
     apiData.isFetching = true;
 
     try {
       const { data } = await this.api.get<UserDto>('/user', {
         headers: {
-          token: authStore.token,
+          token,
         },
       });
 
