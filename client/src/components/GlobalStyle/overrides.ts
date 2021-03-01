@@ -1,4 +1,4 @@
-import { getColor } from 'src/components/GlobalStyle/theme';
+import { color } from 'src/components/GlobalStyle/theme';
 
 const overrides = `
   *, *:before, *:after { box-sizing: inherit; }
@@ -31,7 +31,7 @@ const overrides = `
 
   a {
     margin-left: 5px;
-    color: ${getColor('blue-1')};
+    color: ${color('blue-1')};
   }
 
   input, textarea, button { font-family: "Roboto",Arial,"Helvetica Neue",sans-serif; }

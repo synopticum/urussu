@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Logo from 'src/components/Header/Logo';
-import { getColor } from 'src/components/GlobalStyle/theme';
+import { color } from 'src/components/GlobalStyle/theme';
 
 const StyledFooter = styled.footer`
   position: relative;
@@ -10,7 +10,7 @@ const StyledFooter = styled.footer`
   justify-content: center;
   align-items: center;
   font-size: 14px;
-  background-color: ${getColor('black-1')};
+  background-color: ${color('black-1')};
 `;
 
 type Props = {};

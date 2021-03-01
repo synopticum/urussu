@@ -19,9 +19,9 @@ const generateTheme = (tokens: Tokens): string => {
   `;
 };
 
-export const getColor = (name: ColorName): CSSVariable => `var(--colors-${name})`;
+export const color = (name: ColorName): CSSVariable => `var(--colors-${name})`;
 
-export const getFont = (name: FontName): CSSVariable => `var(--fonts-${name})`;
+export const font = (name: FontName): CSSVariable => `var(--fonts-${name})`;
 
 const index = generateTheme(tokens);
 export default index;
