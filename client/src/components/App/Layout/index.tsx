@@ -21,12 +21,25 @@ const Content = styled.div`
     position: relative;
     flex: 1;
     background-color: ${color('black-1')};
+    --inner-border: 15px;
+
+    &::before,
+    &::after {
+      content: '';
+      position: absolute;
+      pointer-events: none;
+    }
+
+    &::after {
+      left: 65px;
+      top: var(--inner-border);
+      width: calc(100% - 65px - var(--inner-border));
+      height: calc(100% - var(--inner-border) * 2);
+      z-index: 495;
+      box-shadow: inset 0 0 200px rgba(0, 0, 0, 0.9);
+    }
 
     &::before {
-      content: '';
-      --inner-border: 15px;
-      pointer-events: none;
-      position: absolute;
       left: 65px;
       top: 0;
       z-index: 500;
