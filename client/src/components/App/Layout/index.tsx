@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Router } from '@reach/router';
 import styled from 'styled-components';
 import loadable from '@loadable/component';
@@ -8,6 +8,8 @@ import ErrorBoundary from '../../ErrorBoundary';
 import Error404 from 'src/pages/Error404Page';
 import { color } from 'src/components/GlobalStyle/theme';
 import LoginPage from 'src/pages/Login/LoginPage';
+import { authStore } from 'src/stores';
+import { observer } from 'mobx-react-lite';
 
 const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/HomePage'));
 const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/MapPage'));
@@ -58,7 +60,11 @@ const Content = styled.div`
 
 type Props = {};
 
-const Layout: React.FC<Props> = () => {
+const Layout: React.FC<Props> = observer(() => {
+  useEffect(() => {
+    authStore.login();
+  }, []);
+
   return (
     <>
       <ErrorBoundary>
@@ -83,6 +89,6 @@ const Layout: React.FC<Props> = () => {
       </ErrorBoundary>
     </>
   );
-};
+});
 
 export default Layout;

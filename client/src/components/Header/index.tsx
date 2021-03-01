@@ -5,7 +5,7 @@ import Logo from './Logo';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
 import { color } from 'src/components/GlobalStyle/theme';
-import { userStore } from 'src/stores';
+import { authStore } from 'src/stores';
 
 const StyledHeader = styled.header`
   position: relative;
@@ -58,14 +58,14 @@ const Header: React.FC<Props> = observer(() => {
         <NavLink to="map">{l('Карта')}</NavLink>
         <NavLink to="contact-us">{l('Страница')}</NavLink>
         <NavLink to="chunked-page/123">Chunked Page</NavLink>
-        {!userStore.isLogged ? (
+        {!authStore.isLogged ? (
           <a
             href={`https://oauth.vk.com/authorize?client_id=4447151&display=page&redirect_uri=${redirectUrl}&response_type=code&v=5.95`}
           >
             Login
           </a>
         ) : (
-          <a onClick={(): void => userStore.logout()}>Logout</a>
+          <a onClick={(): void => authStore.logout()}>Logout</a>
         )}
       </Nav>
     </StyledHeader>

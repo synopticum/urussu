@@ -2,7 +2,7 @@ import React from 'react';
 import { Redirect, RouteComponentProps } from '@reach/router';
 import { useLocation } from '@reach/router';
 import { parse } from 'query-string';
-import { userStore } from 'src/stores';
+import { authStore } from 'src/stores';
 
 type Props = {} & RouteComponentProps;
 
@@ -11,7 +11,7 @@ const LoginPage: React.FC<Props> = () => {
   const { code } = parse(location.search);
 
   if (typeof code === 'string') {
-    userStore.setCode(code);
+    authStore.login(code);
   }
 
   location.search = '';
