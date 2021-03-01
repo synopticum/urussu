@@ -16,7 +16,7 @@ const LoginPage: React.FC<Props> = () => {
 
   location.search = '';
 
-  return <Redirect to="/contact-us" noThrow />;
+  return <Redirect to="/" noThrow />;
 };
 
 export default LoginPage;
