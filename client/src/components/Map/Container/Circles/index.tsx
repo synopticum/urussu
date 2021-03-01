@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { useStores } from 'src/stores';
+import { objectsStore, mapStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 import { drawCircles } from 'src/components/Map/Container/Circles/draw-circles';
 
@@ -11,7 +11,6 @@ const StyledCircles = styled.div`
 `;
 
 export const Circles: React.FC = observer(() => {
-  const { objectsStore, mapStore } = useStores();
   const { isFetching, isDataLoaded, error, data } = objectsStore.apiData;
 
   useEffect(() => {

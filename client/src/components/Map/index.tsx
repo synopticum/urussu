@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import { useStores } from 'src/stores';
 import 'leaflet/dist/leaflet.css';
 import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
@@ -9,6 +8,7 @@ import Dots from './Container/Dots';
 import Objects from './Container/Objects';
 import Paths from './Container/Paths';
 import Circles from './Container/Circles';
+import { mapStore } from 'src/stores';
 
 const StyledMap = styled.div`
   &::before {
@@ -31,11 +31,10 @@ const StyledMap = styled.div`
 `;
 
 const Map: React.FC = observer(() => {
-  const { mapStore } = useStores();
   const containerRef = useRef(null);
   useMap(containerRef);
 
-  console.log(mapStore.options.currentZoom);
+  console.log(mapStore.currentZoom);
 
   return (
     <StyledMap>

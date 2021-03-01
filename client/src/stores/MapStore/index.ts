@@ -1,36 +1,26 @@
 import { makeObservable, observable } from 'mobx';
 import { LatLngBoundsExpression, Map } from 'leaflet';
 
-export default class Index {
-  map: Map;
-  width: number;
-  height: number;
-  minZoom: number;
-  maxZoom: number;
-  maxBounds: LatLngBoundsExpression;
+export default class MapStore {
+  readonly width: number = 10000;
+  readonly height: number = 6250;
+  readonly minZoom: number = 4;
+  readonly maxZoom: number = 6;
+  readonly maxBounds: LatLngBoundsExpression = [
+    [39.5, -180],
+    [100, 39.5],
+  ];
 
-  options: {
-    currentZoom: number;
-  };
+  map: Map;
+  currentZoom: number;
 
   constructor() {
     this.map = null;
-    this.width = 10000;
-    this.height = 6250;
-    this.minZoom = 4;
-    this.maxZoom = 6;
-    this.maxBounds = [
-      [39.5, -180],
-      [100, 39.5],
-    ];
-
-    this.options = {
-      currentZoom: 5,
-    };
+    this.currentZoom = 5;
 
     makeObservable(this, {
       map: observable,
-      options: observable,
+      currentZoom: observable,
     });
   }
 }

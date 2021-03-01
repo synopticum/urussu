@@ -15,15 +15,3 @@ export const mapStore = new MapStore();
 export const dotsStore = new DotsStore(api);
 export const objectsStore = new ObjectsStore(api);
 export const pathsStore = new PathsStore(api);
-
-export const stores = {
-  globalStore,
-  mapStore,
-  dotsStore,
-  objectsStore,
-  pathsStore,
-};
-
-const StoresContext = React.createContext(stores);
-
-export const useStores = (): typeof stores => React.useContext(StoresContext);
