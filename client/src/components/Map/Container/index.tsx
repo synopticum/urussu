@@ -23,7 +23,7 @@ const Container = styled.div`
     top: 0;
     width: 100%;
     height: 100%;
-    z-index: 500;
+    z-index: 400;
   }
 
   /* shadow */
@@ -34,7 +34,7 @@ const Container = styled.div`
   /* overlay */
   &::after {
     opacity: 0.05;
-    background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAMAAAADAQMAAABs5if8AAAABlBMVEUAAAD///+l2Z/dAAAAAXRSTlMAQObYZgAAAA5JREFUCNdjeMDQwNAAAAZmAeFpNQSMAAAAAElFTkSuQmCC');
+    background: url('/images/grid.png');
   }
 
   .leaflet-marker-icon {
