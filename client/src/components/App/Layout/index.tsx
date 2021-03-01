@@ -6,6 +6,7 @@ import Header from 'src/components/Header';
 import Footer from 'src/components/Footer';
 import ErrorBoundary from '../../ErrorBoundary';
 import Error404 from 'src/pages/Error404Page';
+import { color } from 'src/components/GlobalStyle/theme';
 
 const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/HomePage'));
 const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/MapPage'));
@@ -17,7 +18,26 @@ const Content = styled.div`
   flex: 1 1 0;
 
   & > div {
+    position: relative;
     flex: 1;
+
+    &::before {
+      content: '';
+      --inner-border: 15px;
+      pointer-events: none;
+      position: absolute;
+      left: 65px;
+      top: 0;
+      z-index: 500;
+      width: calc(100% - 50px - var(--inner-border) * 2);
+      height: calc(100% - 30px);
+      margin: 15px 15px 15px 0;
+      box-sizing: border-box;
+      background: transparent;
+      border-radius: 10px;
+      box-shadow: rgb(17 17 17) 0 0 0 10px;
+      outline: var(--inner-border) solid ${color('black-1')};
+    }
   }
 `;
 

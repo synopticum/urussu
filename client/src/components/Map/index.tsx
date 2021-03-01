@@ -14,24 +14,6 @@ import { color } from 'src/components/GlobalStyle/theme';
 const StyledMap = styled.div`
   height: 100%;
   background-color: ${color('black-1')};
-
-  &::before {
-    content: '';
-    --inner-border: 15px;
-    pointer-events: none;
-    position: absolute;
-    left: 65px;
-    top: 0;
-    z-index: 500;
-    width: calc(100% - 50px - var(--inner-border) * 2);
-    height: calc(100% - 30px);
-    margin: 15px 15px 15px 0;
-    box-sizing: border-box;
-    background: transparent;
-    border-radius: 10px;
-    box-shadow: rgb(17 17 17) 0 0 0 10px;
-    outline: var(--inner-border) solid ${color('black-1')};
-  }
 `;
 
 const Map: React.FC = observer(() => {
