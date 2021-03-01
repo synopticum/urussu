@@ -5,7 +5,9 @@ import { debounce } from 'ts-debounce';
 import { useRotatedMarker } from 'src/components/Map/use-rotated-marker';
 
 const createMapInstance = (mapRootNode: HTMLElement): Map => {
-  const mapInstance = map(mapRootNode, {});
+  const mapInstance = map(mapRootNode, {
+    zoomControl: false,
+  });
   mapInstance.doubleClickZoom.disable();
 
   return mapInstance;

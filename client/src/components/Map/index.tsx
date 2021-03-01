@@ -11,6 +11,9 @@ import Circles from './Container/Circles';
 import { mapStore } from 'src/stores';
 
 const StyledMap = styled.div`
+  height: 100%;
+  background-color: var(--main-dark);
+
   &::before {
     content: '';
     --inner-border: 15px;
