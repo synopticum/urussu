@@ -7,6 +7,7 @@ import Footer from 'src/components/Footer';
 import ErrorBoundary from '../../ErrorBoundary';
 import Error404 from 'src/pages/Error404Page';
 import { color } from 'src/components/GlobalStyle/theme';
+import LoginPage from 'src/pages/Login/LoginPage';
 
 const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/HomePage'));
 const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/MapPage'));
@@ -71,6 +72,7 @@ const Layout: React.FC<Props> = () => {
             <Map path="/map/" />
             <ContactUs path="/contact-us/" />
             <ChunkedPage path="/chunked-page/:id" />
+            <LoginPage path="/login" />
             <Error404 default />
           </Router>
         </Content>

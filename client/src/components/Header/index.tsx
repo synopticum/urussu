@@ -55,6 +55,11 @@ const Header: React.FC<Props> = observer(() => {
         <NavLink to="map">{l('Карта')}</NavLink>
         <NavLink to="contact-us">{l('Страница')}</NavLink>
         <NavLink to="chunked-page/123">Chunked Page</NavLink>
+        <a
+          href={`https://oauth.vk.com/authorize?client_id=4447151&display=page&redirect_uri=http://localhost:9000/login&response_type=code&v=5.95`}
+        >
+          Login
+        </a>
       </Nav>
     </StyledHeader>
   );
