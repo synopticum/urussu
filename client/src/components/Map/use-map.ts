@@ -97,5 +97,11 @@ export const useMap = (containerRef: RefObject<HTMLDivElement>, map: Map, option
     if (containerRef.current && !map) {
       mapStore.map = drawMap(containerRef.current, options);
     }
+
+    return (): void => {
+      if (map) {
+        mapStore.map = null;
+      }
+    };
   }, [containerRef.current, map]);
 };
