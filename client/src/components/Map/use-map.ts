@@ -1,10 +1,10 @@
 import { LatLngBounds, tileLayer, Map, LatLngBoundsExpression, GridLayer, map } from 'leaflet';
 import { RefObject, useEffect } from 'react';
-import { mapStore } from 'src/stores';
+import { mapStore, useStores } from 'src/stores';
 import { debounce } from 'ts-debounce';
 import { useRotatedMarker } from 'src/components/Map/use-rotated-marker';
 
-type Options = Pick<typeof mapStore, 'width' | 'height' | 'minZoom' | 'maxZoom' | 'maxBounds'>;
+type Options = Pick<typeof mapStore, 'width' | 'height' | 'minZoom' | 'maxZoom' | 'maxBounds' | 'options'>;
 
 const createMapInstance = (mapRootNode: HTMLElement): Map => {
   const mapInstance = map(mapRootNode, {});
@@ -64,14 +64,14 @@ const initializeTiles = (map: Map, options: Omit<Options, 'maxBounds'>): void =>
   }).addTo(map);
 };
 
-const updateUrl = (mapInstance: Map): void => {
-  const { lat, lng } = mapInstance.getCenter();
-  const zoom = mapInstance.getZoom();
+const updateUrl = (map: Map, options: Options): void => {
+  const { lat, lng } = map.getCenter();
+  const zoom = map.getZoom();
 
   const url = `?lat=${lat.toFixed(2)}&lng=${lng.toFixed(2)}&zoom=${zoom}`;
   window.history.replaceState({}, '', url);
 
-  mapStore.currentZoom = zoom;
+  options.options.currentZoom = zoom;
 };
 
 const debouncedUpdateUrl = debounce(updateUrl, 50);
@@ -79,8 +79,8 @@ const debouncedUpdateUrl = debounce(updateUrl, 50);
 const drawMap = (mapRootNode: HTMLElement, options: Options): Map => {
   const map = createMapInstance(mapRootNode);
 
-  map.on('zoomend', () => updateUrl(map));
-  map.on('drag', () => debouncedUpdateUrl(map));
+  map.on('zoomend', () => updateUrl(map, options));
+  map.on('drag', () => debouncedUpdateUrl(map, options));
 
   apply1pxGapFix();
   setDefaultSettings(map);
@@ -90,12 +90,15 @@ const drawMap = (mapRootNode: HTMLElement, options: Options): Map => {
   return map;
 };
 
-export const useMap = (containerRef: RefObject<HTMLDivElement>, map: Map, options: Options): void => {
+export const useMap = (containerRef: RefObject<HTMLDivElement>): void => {
+  const { mapStore } = useStores();
+  const { width, height, minZoom, maxZoom, maxBounds, options, map } = mapStore;
+
   useRotatedMarker();
 
   useEffect(() => {
     if (containerRef.current && !map) {
-      mapStore.map = drawMap(containerRef.current, options);
+      mapStore.map = drawMap(containerRef.current, { width, height, minZoom, maxZoom, maxBounds, options });
     }
 
     return (): void => {

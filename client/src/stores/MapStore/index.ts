@@ -8,7 +8,10 @@ export default class Index {
   minZoom: number;
   maxZoom: number;
   maxBounds: LatLngBoundsExpression;
-  currentZoom: number;
+
+  options: {
+    currentZoom: number;
+  };
 
   constructor() {
     this.map = null;
@@ -20,11 +23,14 @@ export default class Index {
       [39.5, -180],
       [100, 39.5],
     ];
-    this.currentZoom = 5;
+
+    this.options = {
+      currentZoom: 5,
+    };
 
     makeObservable(this, {
       map: observable,
-      currentZoom: observable,
+      options: observable,
     });
   }
 }

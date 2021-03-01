@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const Container = styled.div<{ currentZoom: number }>`
+const Container = styled.div`
   cursor: grab;
   position: absolute;
   left: 0;
