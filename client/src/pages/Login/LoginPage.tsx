@@ -1,12 +1,8 @@
 import React from 'react';
-import { RouteComponentProps } from '@reach/router';
-import styled from 'styled-components';
-import { Page, Aside } from 'src/components/Page';
+import { Redirect, RouteComponentProps } from '@reach/router';
 import { useLocation } from '@reach/router';
 import { parse } from 'query-string';
 import { userStore } from 'src/stores';
-
-const StyledLoginPage = styled(Page)``;
 
 type Props = {} & RouteComponentProps;
 
@@ -18,7 +14,9 @@ const LoginPage: React.FC<Props> = () => {
     userStore.setCode(code);
   }
 
-  return <StyledLoginPage>Redirecting...</StyledLoginPage>;
+  location.search = '';
+
+  return <Redirect to="/contact-us" noThrow />;
 };
 
 export default LoginPage;

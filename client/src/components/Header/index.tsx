@@ -5,6 +5,7 @@ import Logo from './Logo';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
 import { color } from 'src/components/GlobalStyle/theme';
+import { userStore } from 'src/stores';
 
 const StyledHeader = styled.header`
   position: relative;
@@ -49,17 +50,23 @@ const NavLink: React.FC<{ to: string }> = props => (
 type Props = {};
 
 const Header: React.FC<Props> = observer(() => {
+  const redirectUrl = `${window.location.origin}/login`;
+
   return (
     <StyledHeader>
       <Nav>
         <NavLink to="map">{l('Карта')}</NavLink>
         <NavLink to="contact-us">{l('Страница')}</NavLink>
         <NavLink to="chunked-page/123">Chunked Page</NavLink>
-        <a
-          href={`https://oauth.vk.com/authorize?client_id=4447151&display=page&redirect_uri=http://localhost:9000/login&response_type=code&v=5.95`}
-        >
-          Login
-        </a>
+        {!userStore.isLogged ? (
+          <a
+            href={`https://oauth.vk.com/authorize?client_id=4447151&display=page&redirect_uri=${redirectUrl}&response_type=code&v=5.95`}
+          >
+            Login
+          </a>
+        ) : (
+          <a onClick={(): void => userStore.logout()}>Logout</a>
+        )}
       </Nav>
     </StyledHeader>
   );
