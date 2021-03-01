@@ -18,12 +18,12 @@ const StyledHeader = styled.header`
 
 const Nav = styled.div`
   margin-top: 12px;
+  font-style: italic;
 `;
 
 const StyledNavLink = styled(Link)`
   margin: 0 20px 0 0;
   text-decoration: underline;
-  font-style: italic;
 
   &.active {
     cursor: default;
