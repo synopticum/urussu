@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import { Link } from '@reach/router';
 
 const StyledLogo = styled.header`
-  height: 76px;
+  position: absolute;
+  left: calc(50% - 100px);
+  top: -90px;
+  z-index: 600;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -24,7 +27,7 @@ const Logo: React.FC<Props> = () => {
   return (
     <StyledLogo>
       <NavLink to="/" title={title}>
-        <img src="/images/logo.png" width="287" height="38" alt={title} />
+        <img src="/images/logo.png" width="200" height="126" alt={title} />
       </NavLink>
     </StyledLogo>
   );
