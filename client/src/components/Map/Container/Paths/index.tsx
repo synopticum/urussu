@@ -7,7 +7,9 @@ export const Paths: React.FC = observer(() => {
   const { isFetching, isDataLoaded, error, data } = pathsStore.apiData;
 
   useEffect(() => {
-    pathsStore.fetchData();
+    if (!isDataLoaded) {
+      pathsStore.fetchData();
+    }
   }, []);
 
   useEffect(() => {
