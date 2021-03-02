@@ -17,9 +17,14 @@ const Link = styled.span`
 const UserMenu: React.FC = observer(() => {
   const { data } = userStore.apiData;
 
+  if (!data) {
+    return null;
+  }
+
   return (
     <StyledUserMenu>
-      Hi {data && data.firstName}, <Link onClick={(): void => authStore.logout()}>Logout</Link>
+      {<img src={data.image} alt="" />}
+      Hi {data.firstName}, <Link onClick={(): void => authStore.logout()}>Logout</Link>
     </StyledUserMenu>
   );
 });
