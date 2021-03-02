@@ -16,9 +16,6 @@ const getObjectColor = (object: ObjectDto): string => {
 const addObjectsToMap = (map: Map, objects: ObjectDto[]): void => {
   objects.forEach((item: ObjectDto) => {
     polygon(item.coordinates, {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      id: item.id,
       color: getObjectColor(item),
       weight: 2,
       className: item.images ? 'leaflet-interactive--has-images' : '',

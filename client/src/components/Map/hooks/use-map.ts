@@ -1,10 +1,10 @@
-import { LatLngBounds, tileLayer, Map, LatLngBoundsExpression, GridLayer, map } from 'leaflet';
+import { GridLayer, LatLngBounds, LatLngBoundsExpression, Map, map, tileLayer } from 'leaflet';
 import { RefObject, useEffect } from 'react';
 import { mapStore } from 'src/stores';
 import { debounce } from 'ts-debounce';
 import { useRotatedMarker } from 'src/components/Map/hooks/use-rotated-marker';
 
-const createMapInstance = (mapRootNode: HTMLElement): Map => {
+const createMap = (mapRootNode: HTMLElement): Map => {
   const mapInstance = map(mapRootNode, {
     zoomControl: false,
   });
@@ -18,10 +18,11 @@ const apply1pxGapFix = (): void => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     const originalInitTile = GridLayer.prototype._initTile;
+
     GridLayer.include({
       _initTile: function (tile: { style: { width: string; height: string } }) {
         originalInitTile.call(this, tile);
-        // eslint-disable-next-line react/no-this-in-sfc
+
         const tileSize = this.getTileSize();
         tile.style.width = tileSize.x + 1 + 'px';
         tile.style.height = tileSize.y + 1 + 'px';
@@ -80,7 +81,7 @@ const updateUrl = (): void => {
 const debouncedUpdateUrl = debounce(updateUrl, 50);
 
 const drawMap = (mapRootNode: HTMLElement): Map => {
-  const map = createMapInstance(mapRootNode);
+  const map = createMap(mapRootNode);
   mapStore.map = map;
   const { maxBounds } = mapStore;
 

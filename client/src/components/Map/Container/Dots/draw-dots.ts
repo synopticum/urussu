@@ -32,11 +32,10 @@ const createMarker = (dot: DotDto): Marker => {
   });
 
   return marker(dot.coordinates, {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    id: dot.id,
     icon,
     draggable: false,
+    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // @ts-ignore
     rotationAngle: dot.rotationAngle || 0,
   });
 };

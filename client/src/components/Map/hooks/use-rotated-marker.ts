@@ -1,7 +1,6 @@
 import { Marker, DomUtil, DragEndEvent } from 'leaflet';
 
 export const useRotatedMarker = (): void => {
-  // save these original methods before they are overwritten
   // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
   // @ts-ignore
   const proto_initIcon = Marker.prototype._initIcon;
