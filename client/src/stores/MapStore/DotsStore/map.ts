@@ -1,5 +1,5 @@
 import { DotDto } from 'src/contracts/dots';
 
-export type DotItem = DotDto;
+export type DotMapped = DotDto;
 
-export const map = (data: DotDto[]): DotItem[] => data;
+export const map = (data: DotDto[]): DotMapped[] => data;

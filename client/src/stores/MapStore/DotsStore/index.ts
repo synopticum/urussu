@@ -1,30 +1,20 @@
 import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
-import { AsyncData } from 'src/stores/helpers';
+import { AsyncData, fetchData } from 'src/stores/helpers';
 import { DotDto } from 'src/contracts/dots';
-import { DotItem, map } from 'src/stores/MapStore/DotsStore/map';
+import { DotMapped, map } from 'src/stores/MapStore/DotsStore/map';
 
 export default class Index {
   private api: AxiosInstance;
 
-  apiData = new AsyncData<DotItem[]>();
+  apiData = new AsyncData<DotMapped[]>();
 
-  fetchData = async (): Promise<void> => {
-    const { apiData } = this;
-    apiData.isFetching = true;
+  fetchApiData(): void {
+    const { api, apiData } = this;
+    const options = { api, apiData, map };
 
-    try {
-      const { data } = await this.api.get<DotDto[]>('/dots');
-
-      apiData.error = null;
-      apiData.data = map(data);
-      apiData.isFetching = false;
-      apiData.isDataLoaded = true;
-    } catch (e) {
-      apiData.error = e.message;
-      apiData.isFetching = false;
-    }
-  };
+    fetchData<DotDto[], DotMapped[]>('/dots', options);
+  }
 
   constructor(api: AxiosInstance) {
     this.api = api;

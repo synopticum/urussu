@@ -1,34 +1,20 @@
 import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
-import { AsyncData } from 'src/stores/helpers';
-import { map, User } from 'src/stores/UserStore/map';
+import { AsyncData, fetchData } from 'src/stores/helpers';
+import { map, UserMapped } from 'src/stores/UserStore/map';
 import { UserDto } from 'src/contracts/user';
 
 export default class UserStore {
   private api: AxiosInstance;
 
-  apiData = new AsyncData<User>();
+  apiData = new AsyncData<UserMapped>();
 
-  fetchData = async (token: string): Promise<void> => {
-    const { apiData } = this;
-    apiData.isFetching = true;
+  fetchApiData(token: string): void {
+    const { api, apiData } = this;
+    const options = { api, apiData, map, token };
 
-    try {
-      const { data } = await this.api.get<UserDto>('/user', {
-        headers: {
-          token,
-        },
-      });
-
-      apiData.error = null;
-      apiData.data = map(data);
-      apiData.isFetching = false;
-      apiData.isDataLoaded = true;
-    } catch (e) {
-      apiData.error = e.message;
-      apiData.isFetching = false;
-    }
-  };
+    fetchData<UserDto, UserMapped>('/user', options);
+  }
 
   constructor(api: AxiosInstance) {
     this.api = api;

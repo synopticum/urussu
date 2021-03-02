@@ -8,7 +8,7 @@ export const Objects: React.FC = observer(() => {
 
   useEffect(() => {
     if (!isDataLoaded) {
-      objectsStore.fetchData();
+      objectsStore.fetchApiData();
     }
   }, []);
 

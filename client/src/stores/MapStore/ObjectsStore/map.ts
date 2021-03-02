@@ -1,5 +1,5 @@
 import { ObjectDto } from 'src/contracts/objects';
 
-export type ObjectItem = ObjectDto;
+export type ObjectMapped = ObjectDto;
 
-export const map = (data: ObjectDto[]): ObjectItem[] => data;
+export const map = (data: ObjectDto[]): ObjectMapped[] => data;

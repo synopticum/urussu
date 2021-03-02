@@ -8,7 +8,7 @@ export const Dots: React.FC = observer(() => {
 
   useEffect(() => {
     if (!isDataLoaded) {
-      dotsStore.fetchData();
+      dotsStore.fetchApiData();
     }
   }, []);
 

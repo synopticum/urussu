@@ -15,7 +15,7 @@ export const Circles: React.FC = observer(() => {
 
   useEffect(() => {
     if (!isDataLoaded) {
-      objectsStore.fetchData();
+      objectsStore.fetchApiData();
     }
   }, []);
 

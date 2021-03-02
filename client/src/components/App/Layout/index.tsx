@@ -68,7 +68,7 @@ const Layout: React.FC<Props> = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (isLogged) userStore.fetchData(token);
+    if (isLogged) userStore.fetchApiData(token);
   }, [isLogged]);
 
   return (
