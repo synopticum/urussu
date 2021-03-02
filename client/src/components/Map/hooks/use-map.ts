@@ -2,7 +2,7 @@ import { LatLngBounds, tileLayer, Map, LatLngBoundsExpression, GridLayer, map } 
 import { RefObject, useEffect } from 'react';
 import { mapStore } from 'src/stores';
 import { debounce } from 'ts-debounce';
-import { useRotatedMarker } from 'src/components/Map/use-rotated-marker';
+import { useRotatedMarker } from 'src/components/Map/hooks/use-rotated-marker';
 
 const createMapInstance = (mapRootNode: HTMLElement): Map => {
   const mapInstance = map(mapRootNode, {

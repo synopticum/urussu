@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { color } from 'src/components/GlobalStyle/theme';
 import Login from 'src/components/Header/UserMenu/Login';
 import state from './state';
-import { useClickOutside } from 'src/components/App/use-outside-click';
+import { useClickOutside } from 'src/components/App/hooks/use-outside-click';
 import { Menu, MenuItem } from 'src/components/Header/UserMenu/Menu';
 
 const StyledUserMenu = styled.span`
