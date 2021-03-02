@@ -4,7 +4,6 @@ import { Link } from '@reach/router';
 import Logo from './Logo';
 import Login from './Login';
 import l from './locale';
-import { observer } from 'mobx-react-lite';
 import { color } from 'src/components/GlobalStyle/theme';
 
 const StyledHeader = styled.header`
@@ -49,7 +48,7 @@ const NavLink: React.FC<{ to: string }> = props => (
 
 type Props = {};
 
-const Header: React.FC<Props> = observer(() => {
+const Header: React.FC<Props> = () => {
   return (
     <StyledHeader>
       <Nav>
@@ -60,6 +59,6 @@ const Header: React.FC<Props> = observer(() => {
       </Nav>
     </StyledHeader>
   );
-});
+};
 
 export default Header;
