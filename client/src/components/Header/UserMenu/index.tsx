@@ -1,9 +1,11 @@
 import { authStore, userStore } from 'src/stores';
-import React, { SetStateAction, useCallback, useState } from 'react';
+import React, { useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import { color } from 'src/components/GlobalStyle/theme';
 import Login from 'src/components/Header/UserMenu/Login';
+import state from './state';
+import { useClickOutside } from 'src/components/App/use-outside-click';
 
 const StyledUserMenu = styled.span`
   position: relative;
@@ -42,7 +44,16 @@ const Item = styled.li`
 `;
 
 const UserMenu: React.FC = observer(() => {
-  const [isOpen, setIsOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useClickOutside(menuRef, () => {
+    state.isOpen = false;
+  });
+
+  const toggleMenu = (e: React.MouseEvent): void => {
+    e.stopPropagation();
+    state.isOpen = !state.isOpen;
+  };
 
   const { isLogged } = authStore;
   if (!isLogged) return <Login />;
@@ -52,10 +63,10 @@ const UserMenu: React.FC = observer(() => {
 
   return (
     <StyledUserMenu>
-      <Avatar src={data.image} width="50" height="50" alt="" onClick={(): void => setIsOpen(!isOpen)} />
+      <Avatar src={data.image} width="50" height="50" alt="" onClick={toggleMenu} />
 
-      {isOpen && (
-        <Menu>
+      {state.isOpen && (
+        <Menu ref={menuRef}>
           <Item>Привет, {data.firstName}</Item>
           <Item>
             <Link onClick={(): void => authStore.logout()}>Выйти</Link>
