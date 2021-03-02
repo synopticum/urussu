@@ -2,13 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
 import Logo from './Logo';
-import Login from './Login';
+import UserMenu from './UserMenu';
 import l from './locale';
 import { color } from 'src/components/GlobalStyle/theme';
 
 const StyledHeader = styled.header`
   position: relative;
-  padding: 20px 40px;
+  z-index: 600;
+  height: 70px;
+  padding: 15px 40px 0 40px;
   display: flex;
   align-items: center;
   background-color: ${color('black-1')};
@@ -16,7 +18,6 @@ const StyledHeader = styled.header`
 `;
 
 const Nav = styled.div`
-  margin-top: 12px;
   font-style: italic;
 `;
 
@@ -55,8 +56,8 @@ const Header: React.FC<Props> = () => {
         <NavLink to="map">{l('Карта')}</NavLink>
         <NavLink to="contact-us">{l('Страница')}</NavLink>
         <NavLink to="chunked-page/123">Chunked Page</NavLink>
-        <Login />
       </Nav>
+      <UserMenu />
     </StyledHeader>
   );
 };

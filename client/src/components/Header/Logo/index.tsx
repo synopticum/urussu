@@ -6,7 +6,6 @@ const StyledLogo = styled.header`
   position: absolute;
   left: calc(50% - 100px);
   top: -90px;
-  z-index: 600;
   display: flex;
   justify-content: center;
   align-items: center;
