@@ -1,5 +1,6 @@
 import { ObjectDto } from 'src/contracts/objects';
 import { polygon, Map } from 'leaflet';
+import { entityStore } from 'src/stores';
 
 const removeCurrentObjects = (): void => {};
 
@@ -13,13 +14,23 @@ const getObjectColor = (object: ObjectDto): string => {
   return '#f00';
 };
 
+const getClassName = (item: ObjectDto): string => {
+  const hasImages = item.images ? 'leaflet-interactive--has-images' : '';
+  return `${hasImages}`;
+};
+
 const addObjectsToMap = (map: Map, objects: ObjectDto[]): void => {
   objects.forEach((item: ObjectDto) => {
     polygon(item.coordinates, {
       color: getObjectColor(item),
+      className: getClassName(item),
       weight: 2,
-      className: item.images ? 'leaflet-interactive--has-images' : '',
-    }).addTo(map);
+    })
+      .on('click', e => {
+        const id = item.id;
+        entityStore.fetchApiData(id);
+      })
+      .addTo(map);
   });
 };
 

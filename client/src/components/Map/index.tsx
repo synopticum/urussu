@@ -8,8 +8,9 @@ import Dots from './Container/Dots';
 import Objects from './Container/Objects';
 import Paths from './Container/Paths';
 import Circles from './Container/Circles';
-import { mapStore } from 'src/stores';
+import { entityStore, mapStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
+import { Entity } from 'src/components/Map/Entity';
 
 const StyledMap = styled.div`
   height: 100%;
@@ -19,6 +20,8 @@ const StyledMap = styled.div`
 const Map: React.FC = observer(() => {
   const containerRef = useRef(null);
   useMap(containerRef);
+
+  const { data } = entityStore.apiData;
 
   console.log(mapStore.currentZoom);
 
@@ -30,6 +33,8 @@ const Map: React.FC = observer(() => {
         <Paths />
         <Circles />
       </Container>
+
+      {data && <Entity />}
     </StyledMap>
   );
 });
