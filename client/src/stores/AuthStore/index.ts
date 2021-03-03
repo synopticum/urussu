@@ -52,19 +52,27 @@ export default class AuthStore {
   }
 
   private async getNewToken(code: Code): Promise<Token> {
-    const { error, data } = await this.api.get(`/authenticate?code=${code}`);
+    try {
+      const { error, data } = await this.api.get(`/authenticate?code=${code}`);
 
-    if (error) {
-      console.info('Cannot get new token, the auth code is invalid');
+      if (error) {
+        console.info('Cannot get new token, the auth code is invalid');
+        return null;
+      }
+
+      return data.token;
+    } catch (e) {
       return null;
     }
-
-    return data.token;
   }
 
   private async isTokenValid(): Promise<boolean> {
-    const { data } = await this.api.get(`/checkToken?token=${this.token}`);
-    return Boolean(data);
+    try {
+      const { data } = await this.api.get(`/checkToken?token=${this.token}`);
+      return Boolean(data);
+    } catch (e) {
+      return false;
+    }
   }
 
   constructor(api: AxiosInstance) {
