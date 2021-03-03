@@ -5,7 +5,7 @@ import MapStore from './MapStore';
 import DotsStore from './MapStore/DotsStore';
 import ObjectsStore from './MapStore/ObjectsStore';
 import PathsStore from './MapStore/PathsStore';
-import EntityStore from './MapStore/EntityStore';
+import ObjectStore from './MapStore/ObjectStore';
 import axios from 'axios';
 
 const api = axios.create({
@@ -19,4 +19,4 @@ export const mapStore = new MapStore();
 export const dotsStore = new DotsStore(api);
 export const objectsStore = new ObjectsStore(api);
 export const pathsStore = new PathsStore(api);
-export const entityStore = new EntityStore(api);
+export const objectStore = new ObjectStore(api);

@@ -1,4 +1,4 @@
-import { ObjectDto } from 'src/contracts/objects';
+import { ObjectDto } from 'src/contracts/object';
 import { circle, Map } from 'leaflet';
 
 const removeCurrentCircles = (): void => {};

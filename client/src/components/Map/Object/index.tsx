@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { color } from 'src/components/GlobalStyle/theme';
-import { entityStore } from 'src/stores';
+import { objectStore } from 'src/stores';
 
-const StyledEntity = styled.div`
+const StyledObject = styled.div`
   position: absolute;
   left: 75px;
   top: 25px;
@@ -30,16 +30,17 @@ const Close = styled.button`
 
 type Props = {};
 
-export const Entity: React.FC<Props> = () => {
-  const { data } = entityStore.apiData;
+export const ObjectX: React.FC<Props> = () => {
+  const { data } = objectStore.apiData;
 
-  const close = (): void => entityStore.resetData();
+  const close = (): void => objectStore.resetData();
 
   return (
-    <StyledEntity>
+    <StyledObject>
+      {/*<div>{data.}</div>*/}
       {JSON.stringify(data)}, <Close onClick={close} />
-    </StyledEntity>
+    </StyledObject>
   );
 };
 
-export default Entity;
+export default ObjectX;
