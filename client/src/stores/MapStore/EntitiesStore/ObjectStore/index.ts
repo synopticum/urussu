@@ -19,6 +19,8 @@ export default class ObjectStore {
 
   resetData(): void {
     this.apiData = new AsyncData<ObjectMapped>();
+    this.selectedImage = null;
+    this.selectedDecade = null;
   }
 
   private getMaxDecadeWithImage(images: ImagesMapped): number {
@@ -48,6 +50,7 @@ export default class ObjectStore {
     return `${process.env.S3_URL}/${image}`;
   }
 
+  selectedImage: string;
   selectedDecade: number;
 
   constructor(api: AxiosInstance) {
@@ -55,6 +58,7 @@ export default class ObjectStore {
 
     makeObservable(this, {
       apiData: observable,
+      selectedImage: observable,
       selectedDecade: observable,
       initialImage: computed,
       initialDecade: computed,

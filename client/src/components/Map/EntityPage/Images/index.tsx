@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 import { Timeline } from 'src/components/Map/EntityPage/Images/Timeline';
 import { objectStore } from 'src/stores';
+import { observer } from 'mobx-react-lite';
 
 const StyledImages = styled.div`
   height: 100%;
@@ -22,22 +22,24 @@ const CurrentImage = styled.div`
 
 type Props = {};
 
-export const Images: React.FC<Props> = () => {
+export const Images: React.FC<Props> = observer(() => {
   const { data } = objectStore.apiData;
 
   if (!data.images) {
     return <div>No images found</div>;
   }
 
+  objectStore.selectedImage = objectStore.selectedImage || objectStore.initialImage;
+
   return (
     <StyledImages>
       <CurrentImage>
-        <img src={objectStore.initialImage} alt="" />
+        <img src={objectStore.selectedImage} alt="" />
       </CurrentImage>
 
       <Timeline />
     </StyledImages>
   );
-};
+});
 
 export default Images;

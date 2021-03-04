@@ -42,6 +42,8 @@ export const Timeline: React.FC = observer(() => {
     return null;
   }
 
+  objectStore.selectedDecade = objectStore.selectedDecade || objectStore.initialDecade;
+
   const changeDecade = (decade: string): void => {
     objectStore.selectedDecade = parseInt(decade);
   };
