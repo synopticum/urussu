@@ -28,8 +28,10 @@ export default class ObjectStore {
       return null;
     }
 
-    const values = Object.values(data.images);
-    return `${process.env.S3_URL}/${values[values.length - 1]}`;
+    const decade = Math.max(...Object.keys(data.images).map(decade => parseInt(decade)));
+    const image = data.images[decade][0][1];
+
+    return `${process.env.S3_URL}/${image}`;
   }
 
   constructor(api: AxiosInstance) {
