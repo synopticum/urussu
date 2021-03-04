@@ -1,5 +1,9 @@
 import { LatLngExpression } from 'leaflet';
 
+type ImagesDto = {
+  [year: number]: string;
+};
+
 export type ObjectDto = {
   id: string;
   instanceType: string;
@@ -9,7 +13,7 @@ export type ObjectDto = {
   shortDescription?: string;
   fullDescription?: string;
   thumbnail?: string;
-  images?: object;
+  images?: ImagesDto;
   street?: string;
   house?: string;
   radius?: string;

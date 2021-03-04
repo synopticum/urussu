@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Entity } from 'src/stores/MapStore';
-import ObjectPage from 'src/components/Map/ObjectPage';
+import ObjectPage from 'src/components/Map/EntityPage/ObjectPage';
 import { mapStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
 
@@ -14,8 +14,7 @@ const StyledEntityPage = styled.div`
   border-radius: 10px;
   z-index: 550;
   background-color: ${color('white-1')};
-  padding: 50px;
-  overflow-y: auto;
+  overflow: hidden;
 `;
 
 const Close = styled.button`
@@ -24,9 +23,10 @@ const Close = styled.button`
   right: 20px;
   top: 20px;
   border: 0;
-  width: 20px;
-  height: 20px;
-  background: url('/images/common/close.svg') no-repeat 50% 50%;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: url('/images/common/close.svg') no-repeat 50% 50% #fff;
   background-size: 20px;
 `;
 

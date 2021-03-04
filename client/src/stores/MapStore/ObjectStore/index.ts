@@ -1,4 +1,4 @@
-import { makeObservable, observable } from 'mobx';
+import { computed, makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/object';
@@ -20,11 +20,23 @@ export default class ObjectStore {
     this.apiData = new AsyncData<ObjectMapped>();
   }
 
+  get initialImage(): string {
+    const { data } = this.apiData;
+
+    if (!data || !data.images) {
+      return null;
+    }
+
+    const values = Object.values(data.images);
+    return `${process.env.S3_URL}/${values[values.length - 1]}`;
+  }
+
   constructor(api: AxiosInstance) {
     this.api = api;
 
     makeObservable(this, {
       apiData: observable,
+      initialImage: computed,
     });
   }
 }
