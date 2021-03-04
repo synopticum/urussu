@@ -15,9 +15,7 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
   useEffect(() => {
     objectStore.fetchApiData(id);
 
-    return (): void => {
-      objectStore.resetData();
-    };
+    return (): void => objectStore.resetData();
   }, []);
 
   if (!data) {

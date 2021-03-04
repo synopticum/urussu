@@ -1,10 +1,10 @@
-import { ObjectDto } from 'src/contracts/object';
 import { polygon, Map } from 'leaflet';
 import { mapStore } from 'src/stores';
+import { ObjectMapped } from 'src/stores/MapStore/ObjectStore/map';
 
 const removeCurrentObjects = (): void => {};
 
-const getObjectColor = (object: ObjectDto): string => {
+const getObjectColor = (object: ObjectMapped): string => {
   if (object.street && object.house) {
     return '#ffc600';
   } else if (object.street === '' && object.house === '') {
@@ -14,27 +14,26 @@ const getObjectColor = (object: ObjectDto): string => {
   return '#f00';
 };
 
-const getClassName = (item: ObjectDto): string => {
+const getClassName = (item: ObjectMapped): string => {
   const hasImages = item.images ? 'leaflet-interactive--has-images' : '';
   return `${hasImages}`;
 };
 
-const addObjectsToMap = (map: Map, objects: ObjectDto[]): void => {
-  objects.forEach((item: ObjectDto) => {
+const addObjectsToMap = (map: Map, objects: ObjectMapped[]): void => {
+  const handleClick = (id: string): void => mapStore.setEntity({ type: 'object', id });
+
+  objects.forEach((item: ObjectMapped) => {
     polygon(item.coordinates, {
       color: getObjectColor(item),
       className: getClassName(item),
       weight: 2,
     })
-      .on('click', e => {
-        const id = item.id;
-        mapStore.setEntity({ type: 'object', id });
-      })
+      .on('click', () => handleClick(item.id))
       .addTo(map);
   });
 };
 
-export const drawObjects = (map: Map, data: ObjectDto[]): void => {
+export const drawObjects = (map: Map, data: ObjectMapped[]): void => {
   const objects = data.filter(object => object.instanceType === 'object');
 
   removeCurrentObjects();

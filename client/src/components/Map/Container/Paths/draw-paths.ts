@@ -1,9 +1,9 @@
-import { PathDto } from 'src/contracts/paths';
 import { Map, polyline } from 'leaflet';
+import { PathMapped } from 'src/stores/MapStore/PathsStore/map';
 
 const removeCurrentPaths = (): void => {};
 
-const addPathsToMap = (map: Map, data: PathDto[]): void => {
+const addPathsToMap = (map: Map, data: PathMapped[]): void => {
   data.forEach(path => {
     polyline(path.coordinates, {
       color: 'green',
@@ -12,7 +12,7 @@ const addPathsToMap = (map: Map, data: PathDto[]): void => {
   });
 };
 
-export const drawPaths = (map: Map, data: PathDto[]): void => {
+export const drawPaths = (map: Map, data: PathMapped[]): void => {
   removeCurrentPaths();
   addPathsToMap(map, data);
 };

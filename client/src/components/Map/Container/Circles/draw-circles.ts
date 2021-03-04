@@ -1,9 +1,9 @@
-import { ObjectDto } from 'src/contracts/object';
 import { circle, Map } from 'leaflet';
+import { ObjectMapped } from 'src/stores/MapStore/ObjectStore/map';
 
 const removeCurrentCircles = (): void => {};
 
-const addCirclesToMap = (map: Map, circles: ObjectDto[]): void => {
+const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
   circles.forEach(item => {
     const { coordinates, radius } = item;
 
@@ -14,7 +14,7 @@ const addCirclesToMap = (map: Map, circles: ObjectDto[]): void => {
   });
 };
 
-export const drawCircles = (map: Map, data: ObjectDto[]): void => {
+export const drawCircles = (map: Map, data: ObjectMapped[]): void => {
   const circles = data.filter(object => object.instanceType === 'circle');
 
   removeCurrentCircles();
