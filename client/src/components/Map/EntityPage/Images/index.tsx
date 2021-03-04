@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import { objectStore } from 'src/stores';
 import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 import { Timeline } from 'src/components/Map/EntityPage/Images/Timeline';
+import { objectStore } from 'src/stores';
 
 const StyledImages = styled.div`
   height: 100%;
@@ -20,13 +20,12 @@ const CurrentImage = styled.div`
   }
 `;
 
-type Props = {
-  images: ImagesMapped;
-  initialImage: string;
-};
+type Props = {};
 
-export const Images: React.FC<Props> = ({ images, initialImage }) => {
-  if (!images) {
+export const Images: React.FC<Props> = () => {
+  const { data } = objectStore.apiData;
+
+  if (!data.images) {
     return <div>No images found</div>;
   }
 
@@ -35,7 +34,8 @@ export const Images: React.FC<Props> = ({ images, initialImage }) => {
       <CurrentImage>
         <img src={objectStore.initialImage} alt="" />
       </CurrentImage>
-      <Timeline images={images} />
+
+      <Timeline />
     </StyledImages>
   );
 };

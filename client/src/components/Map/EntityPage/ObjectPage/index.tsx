@@ -27,7 +27,7 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
 
   return (
     <StyledObjectPage>
-      <Images images={data.images} initialImage={objectStore.initialImage} />
+      <Images />
     </StyledObjectPage>
   );
 });
