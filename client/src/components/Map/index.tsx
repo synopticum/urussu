@@ -8,7 +8,7 @@ import Dots from './Container/Dots';
 import Objects from './Container/Objects';
 import Paths from './Container/Paths';
 import Circles from './Container/Circles';
-import ObjectX from './Object';
+import ObjectPage from './ObjectPage';
 import { objectStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
 
@@ -35,7 +35,7 @@ const Map: React.FC = observer(() => {
       </Container>
 
       {/*{dotData && <Dot />}*/}
-      {objectData && <ObjectX />}
+      {objectData && <ObjectPage />}
       {/*{pathData && <Path />}*/}
     </StyledMap>
   );

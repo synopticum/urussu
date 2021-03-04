@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { color } from 'src/components/GlobalStyle/theme';
 import { objectStore } from 'src/stores';
 
-const StyledObject = styled.div`
+const StyledObjectPage = styled.div`
   position: absolute;
   left: 75px;
   top: 25px;
@@ -30,17 +30,31 @@ const Close = styled.button`
 
 type Props = {};
 
-export const ObjectX: React.FC<Props> = () => {
+export const ObjectPage: React.FC<Props> = () => {
   const { data } = objectStore.apiData;
 
   const close = (): void => objectStore.resetData();
 
   return (
-    <StyledObject>
-      {/*<div>{data.}</div>*/}
-      {JSON.stringify(data)}, <Close onClick={close} />
-    </StyledObject>
+    <StyledObjectPage>
+      <Close onClick={close} />
+
+      {data.thumbnail && <img src={data.thumbnail} alt="" />}
+      <div>{data.title}</div>
+      <div>
+        {data.street}, {data.house}
+      </div>
+      <div>{data.shortDescription}</div>
+      <div>
+        {data.images &&
+          Object.entries(data.images).map(([year, url]) => (
+            <div key={url}>
+              {year} - {url}
+            </div>
+          ))}
+      </div>
+    </StyledObjectPage>
   );
 };
 
-export default ObjectX;
+export default ObjectPage;
