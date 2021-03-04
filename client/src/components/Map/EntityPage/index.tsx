@@ -7,12 +7,20 @@ import { color } from 'src/components/GlobalStyle/theme';
 
 const StyledEntityPage = styled.div`
   position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 550;
+`;
+
+const Wrapper = styled.div`
+  position: absolute;
   left: 75px;
   top: 25px;
   width: calc(100% - 100px);
   height: calc(100% - 50px);
   border-radius: 10px;
-  z-index: 550;
   background-color: ${color('white-1')};
   overflow: hidden;
 `;
@@ -55,8 +63,10 @@ export const EntityPage: React.FC<Props> = ({ entity }) => {
 
   return (
     <StyledEntityPage>
-      <Close onClick={close} />
-      <Page id={entity.id} />
+      <Wrapper>
+        <Close onClick={close} />
+        <Page id={entity.id} />
+      </Wrapper>
     </StyledEntityPage>
   );
 };
