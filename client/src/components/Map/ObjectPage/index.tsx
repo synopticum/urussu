@@ -26,9 +26,6 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
     <StyledObjectPage>
       {data.thumbnail && <img src={data.thumbnail} alt="" />}
       <div>{data.title}</div>
-      <div>
-        {data.street}, {data.house}
-      </div>
       <div>{data.shortDescription}</div>
       <div>
         {data.images &&

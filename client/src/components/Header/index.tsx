@@ -5,12 +5,14 @@ import Logo from './Logo';
 import UserMenu from './UserMenu';
 import l from './locale';
 import { color } from 'src/components/GlobalStyle/theme';
+import { objectStore } from 'src/stores';
+import { observer } from 'mobx-react-lite';
 
 const StyledHeader = styled.header`
   position: relative;
   z-index: 600;
   height: 70px;
-  padding: 15px 40px 0 40px;
+  padding: 15px 40px 0 75px;
   display: flex;
   align-items: center;
   background-color: ${color('black-1')};
@@ -47,11 +49,24 @@ const NavLink: React.FC<{ to: string }> = props => (
   />
 );
 
+const Title = styled.div`
+  font-size: 24px;
+  margin-right: auto;
+  color: ${color('white-1')};
+`;
+
 type Props = {};
 
-const Header: React.FC<Props> = () => {
+const Header: React.FC<Props> = observer(() => {
+  const { data } = objectStore.apiData;
+
   return (
     <StyledHeader>
+      {data && data.street && data.house && (
+        <Title>
+          {data.street}, {data.house}
+        </Title>
+      )}
       <Nav>
         <NavLink to="map">{l('Карта')}</NavLink>
         <NavLink to="contact-us">{l('Страница')}</NavLink>
@@ -60,6 +75,6 @@ const Header: React.FC<Props> = () => {
       <UserMenu />
     </StyledHeader>
   );
-};
+});
 
 export default Header;
