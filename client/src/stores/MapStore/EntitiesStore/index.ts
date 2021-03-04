@@ -1,12 +1,14 @@
 import { ImagesDto } from 'src/contracts/entities';
 
-type Image = {
+export type Image = {
   [year: number]: string;
 };
 
 export type ImagesMapped = {
   [decade: number]: Image[];
 };
+
+export type EntityId = string;
 
 const createImagesMapped = (): ImagesMapped => {
   const decades = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
