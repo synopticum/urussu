@@ -1,5 +1,5 @@
 import { Map, divIcon, marker, layerGroup, control, Marker, Control, LayerGroup } from 'leaflet';
-import { DotMapped } from 'src/stores/MapStore/DotsStore/map';
+import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotsStore/map';
 
 type OverlayMaps = {
   [layerName: string]: LayerGroup;

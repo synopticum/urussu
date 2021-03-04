@@ -1,4 +1,5 @@
 import { LatLngTuple } from 'leaflet';
+import { ImagesDto } from 'src/contracts/entities';
 
 export type DotDto = {
   id: string;
@@ -11,5 +12,5 @@ export type DotDto = {
   shortDescription?: string;
   fullDescription?: string;
   thumbnail?: string;
-  images?: object;
+  images?: ImagesDto;
 };

@@ -1,5 +1,5 @@
 import { circle, Map } from 'leaflet';
-import { ObjectMapped } from 'src/stores/MapStore/ObjectStore/map';
+import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 
 const removeCurrentCircles = (): void => {};
 

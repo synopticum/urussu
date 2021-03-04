@@ -1,6 +1,6 @@
 import { polygon, Map } from 'leaflet';
 import { mapStore } from 'src/stores';
-import { ObjectMapped } from 'src/stores/MapStore/ObjectStore/map';
+import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 
 const removeCurrentObjects = (): void => {};
 

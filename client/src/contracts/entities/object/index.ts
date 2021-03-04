@@ -1,6 +1,7 @@
 import { LatLngExpression } from 'leaflet';
+import { ImagesDto } from 'src/contracts/entities';
 
-export type PathDto = {
+export type ObjectDto = {
   id: string;
   instanceType: string;
   type: string;
@@ -9,5 +10,8 @@ export type PathDto = {
   shortDescription?: string;
   fullDescription?: string;
   thumbnail?: string;
-  images?: object;
+  images?: ImagesDto;
+  street?: string;
+  house?: string;
+  radius?: string;
 };

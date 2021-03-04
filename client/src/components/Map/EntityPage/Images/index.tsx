@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { objectStore } from 'src/stores';
-import { observer } from 'mobx-react-lite';
-import { ImagesMapped } from 'src/stores/MapStore/ObjectStore/map';
+import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
+import { Timeline } from 'src/components/Map/EntityPage/Images/Timeline';
 
 const StyledImages = styled.div`
   height: 100%;
@@ -35,7 +35,7 @@ export const Images: React.FC<Props> = ({ images, initialImage }) => {
       <CurrentImage>
         <img src={objectStore.initialImage} alt="" />
       </CurrentImage>
-      {/*<div>{JSON.stringify(images)}</div>*/}
+      <Timeline images={images} />
     </StyledImages>
   );
 };

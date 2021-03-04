@@ -1,8 +1,8 @@
 import { computed, makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
-import { ObjectDto } from 'src/contracts/object';
-import { ObjectMapped, map } from 'src/stores/MapStore/ObjectStore/map';
+import { ObjectDto } from 'src/contracts/entities/object';
+import { ObjectMapped, map } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 
 export default class ObjectStore {
   private api: AxiosInstance;

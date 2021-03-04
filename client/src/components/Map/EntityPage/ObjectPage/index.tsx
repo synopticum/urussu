@@ -27,18 +27,7 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
 
   return (
     <StyledObjectPage>
-      {/*{data.thumbnail && <img src={data.thumbnail} alt="" />}*/}
-      {/*<div>{data.title}</div>*/}
-      {/*<div>{data.shortDescription}</div>*/}
       <Images images={data.images} initialImage={objectStore.initialImage} />
-      <div>
-        {/*{data.images &&*/}
-        {/*  Object.entries(data.images).map(([year, url]) => (*/}
-        {/*    <div key={url}>*/}
-        {/*      {year} - {url}*/}
-        {/*    </div>*/}
-        {/*  ))}*/}
-      </div>
     </StyledObjectPage>
   );
 });

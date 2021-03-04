@@ -1,8 +1,8 @@
 import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
-import { DotDto } from 'src/contracts/dots';
-import { DotMapped, map } from 'src/stores/MapStore/DotsStore/map';
+import { DotDto } from 'src/contracts/entities/dots';
+import { DotMapped, map } from 'src/stores/MapStore/EntitiesStore/DotsStore/map';
 
 export default class Index {
   private api: AxiosInstance;

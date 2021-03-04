@@ -1,4 +1,4 @@
-import { PathDto } from 'src/contracts/paths';
+import { PathDto } from 'src/contracts/entities/paths';
 
 export type PathMapped = PathDto;
 
