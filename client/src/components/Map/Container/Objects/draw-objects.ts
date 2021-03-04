@@ -1,6 +1,6 @@
 import { ObjectDto } from 'src/contracts/object';
 import { polygon, Map } from 'leaflet';
-import { objectStore } from 'src/stores';
+import { mapStore } from 'src/stores';
 
 const removeCurrentObjects = (): void => {};
 
@@ -28,7 +28,7 @@ const addObjectsToMap = (map: Map, objects: ObjectDto[]): void => {
     })
       .on('click', e => {
         const id = item.id;
-        objectStore.fetchApiData(id);
+        mapStore.setEntity({ type: 'object', id });
       })
       .addTo(map);
   });

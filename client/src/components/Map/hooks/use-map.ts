@@ -3,6 +3,7 @@ import { RefObject, useEffect } from 'react';
 import { mapStore } from 'src/stores';
 import { debounce } from 'ts-debounce';
 import { useRotatedMarker } from 'src/components/Map/hooks/use-rotated-marker';
+import { Entity } from 'src/stores/MapStore';
 
 const createMap = (mapRootNode: HTMLElement): Map => {
   const mapInstance = map(mapRootNode, {
@@ -31,22 +32,16 @@ const apply1pxGapFix = (): void => {
   }
 };
 
-const setDefaultSettings = (): void => {
-  const { map } = mapStore;
-  let lat = 69.65;
-  let lng = -20.25;
-  let zoom = 5;
+const setInitialSettings = (): void => {
+  const { map, lat, lng, zoom, entity } = mapStore;
 
-  if (location.search) {
-    const params = new URLSearchParams(location.search);
-    lat = parseInt(params.get('lat'));
-    lng = parseInt(params.get('lng'));
-    zoom = parseInt(params.get('zoom'));
-  } else {
-    const url = `?lat=${lat.toFixed(2)}&lng=${lng.toFixed(2)}&zoom=${zoom}`;
-    window.history.replaceState({}, '', url);
+  let url = `?lat=${lat.toFixed(2)}&lng=${lng.toFixed(2)}&zoom=${zoom}`;
+
+  if (entity) {
+    url += `&entity=${entity.type},${entity.id}`;
   }
 
+  window.history.replaceState({}, '', url);
   map.setView([lat, lng], zoom);
 };
 
@@ -67,29 +62,27 @@ const initializeTiles = (): void => {
   }).addTo(map);
 };
 
-const updateUrl = (): void => {
+export const updateSettings = (): void => {
   const { map } = mapStore;
-  const { lat, lng } = map.getCenter();
   const zoom = map.getZoom();
+  const { lat, lng } = map.getCenter();
 
-  const url = `?lat=${lat.toFixed(2)}&lng=${lng.toFixed(2)}&zoom=${zoom}`;
-  window.history.replaceState({}, '', url);
-
-  mapStore.currentZoom = zoom;
+  mapStore.setZoom(zoom);
+  mapStore.setLatLng([lat, lng]);
 };
 
-const debouncedUpdateUrl = debounce(updateUrl, 50);
+const debouncedUpdateSettings = debounce(updateSettings, 50);
 
 const drawMap = (mapRootNode: HTMLElement): Map => {
   const map = createMap(mapRootNode);
   mapStore.map = map;
   const { maxBounds } = mapStore;
 
-  map.on('zoomend', () => updateUrl());
-  map.on('drag', () => debouncedUpdateUrl());
+  map.on('zoomend', () => updateSettings());
+  map.on('drag', () => debouncedUpdateSettings());
 
   apply1pxGapFix();
-  setDefaultSettings();
+  setInitialSettings();
   setMaxBounds(maxBounds);
   initializeTiles();
 

@@ -1,44 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { color } from 'src/components/GlobalStyle/theme';
 import { objectStore } from 'src/stores';
+import { observer } from 'mobx-react-lite';
 
-const StyledObjectPage = styled.div`
-  position: absolute;
-  left: 75px;
-  top: 25px;
-  width: calc(100% - 100px);
-  height: calc(100% - 50px);
-  border-radius: 10px;
-  z-index: 550;
-  background-color: ${color('white-1')};
-  padding: 50px;
-  overflow-y: auto;
-`;
+const StyledObjectPage = styled.div``;
 
-const Close = styled.button`
-  cursor: pointer;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  border: 0;
-  width: 20px;
-  height: 20px;
-  background: url('/images/common/close.svg') no-repeat 50% 50%;
-  background-size: 20px;
-`;
+type Props = {
+  id: string;
+};
 
-type Props = {};
-
-export const ObjectPage: React.FC<Props> = () => {
+export const ObjectPage: React.FC<Props> = observer(({ id }) => {
   const { data } = objectStore.apiData;
 
-  const close = (): void => objectStore.resetData();
+  useEffect(() => {
+    objectStore.fetchApiData(id);
+
+    return (): void => {
+      objectStore.resetData();
+    };
+  }, []);
+
+  if (!data) {
+    return null;
+  }
 
   return (
     <StyledObjectPage>
-      <Close onClick={close} />
-
       {data.thumbnail && <img src={data.thumbnail} alt="" />}
       <div>{data.title}</div>
       <div>
@@ -55,6 +42,6 @@ export const ObjectPage: React.FC<Props> = () => {
       </div>
     </StyledObjectPage>
   );
-};
+});
 
 export default ObjectPage;

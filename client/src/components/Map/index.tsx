@@ -8,8 +8,8 @@ import Dots from './Container/Dots';
 import Objects from './Container/Objects';
 import Paths from './Container/Paths';
 import Circles from './Container/Circles';
-import ObjectPage from './ObjectPage';
-import { objectStore } from 'src/stores';
+import EntityPage from './EntityPage';
+import { mapStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
 
 const StyledMap = styled.div`
@@ -21,9 +21,7 @@ const Map: React.FC = observer(() => {
   const containerRef = useRef(null);
   useMap(containerRef);
 
-  // const { data: dotData } = dotStore.apiData;
-  const { data: objectData } = objectStore.apiData;
-  // const { data: pathData } = pathStore.apiData;
+  const { entity } = mapStore;
 
   return (
     <StyledMap>
@@ -34,9 +32,7 @@ const Map: React.FC = observer(() => {
         <Circles />
       </Container>
 
-      {/*{dotData && <Dot />}*/}
-      {objectData && <ObjectPage />}
-      {/*{pathData && <Path />}*/}
+      <EntityPage entity={entity} />
     </StyledMap>
   );
 });
