@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
 import { ObjectMapped, map } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
-import { EntityId, ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
+import { EntityId, ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 
 export default class ObjectStore {
   private api: AxiosInstance;
@@ -37,7 +37,7 @@ export default class ObjectStore {
     return this.getMaxDecadeWithImage(data.images);
   }
 
-  get initialImage(): string {
+  get initialImage(): ImageMapped {
     const { data } = this.apiData;
 
     if (!data || !data.images) {
@@ -45,12 +45,11 @@ export default class ObjectStore {
     }
 
     const decade = this.getMaxDecadeWithImage(data.images);
-    const image = data.images[decade][0][1];
 
-    return `${process.env.S3_URL}/${image}`;
+    return data.images[decade][0];
   }
 
-  selectedImage: string;
+  selectedImage: ImageMapped;
   selectedDecade: number;
 
   constructor(api: AxiosInstance) {

@@ -41,6 +41,7 @@ const YearValue = styled.div`
 `;
 
 const NestedYearValue = styled.div`
+  cursor: pointer;
   position: absolute;
   left: 0;
   bottom: calc(100% + 10px);
@@ -82,22 +83,27 @@ export const Timeline: React.FC = observer(() => {
 
   objectStore.selectedDecade = objectStore.selectedDecade || objectStore.initialDecade;
 
-  const changeDecade = (decade: string): void => {
+  const changeSelectedDecade = (decade: string): void => {
     objectStore.selectedDecade = parseInt(decade);
+  };
+
+  const changeSelectedImage = (image: ImageMapped, decade: string): void => {
+    objectStore.selectedDecade = parseInt(decade);
+    objectStore.selectedImage = image;
   };
 
   const isDecadeActive = (decade: string): boolean => objectStore.selectedDecade === parseInt(decade);
 
-  const isNested = (year: string): boolean => year.includes('_');
+  const isNested = (currentYear: string): boolean => currentYear.toString().includes('_');
 
   const getNested = (currentYear: string, images: ImageMapped[]): ImageMapped => {
-    const image = images.find(([year]: [string, string]) => year.includes(`${currentYear}_`));
+    const image = images.find(({ year }) => year.includes(`${currentYear}_`));
 
     if (!image) {
       return null;
     }
 
-    return image[0].split('_')[1];
+    return image;
   };
 
   return (
@@ -106,17 +112,23 @@ export const Timeline: React.FC = observer(() => {
         {Object.entries(data.images).map(([decade, images]) => {
           return (
             <Decade key={decade} active={isDecadeActive(decade)}>
-              <DecadeValue onClick={(): void => changeDecade(decade)} active={isDecadeActive(decade)}>
+              <DecadeValue onClick={(): void => changeSelectedDecade(decade)} active={isDecadeActive(decade)}>
                 {decade}
               </DecadeValue>
               <Years>
-                {images.map(([year, url]: [string, string]) => {
-                  const nested = getNested(year, images);
+                {images.map(image => {
+                  const nested = getNested(image.year, images);
 
                   return (
-                    <Year key={year}>
-                      {!isNested(year) && <YearValue>{year}</YearValue>}
-                      {nested && <NestedYearValue>{nested}</NestedYearValue>}
+                    <Year key={image.url}>
+                      {!isNested(image.year) && (
+                        <YearValue onClick={(): void => changeSelectedImage(image, decade)}>{image.year}</YearValue>
+                      )}
+                      {nested && (
+                        <NestedYearValue onClick={(): void => changeSelectedImage(nested, decade)}>
+                          {nested.year.split('_')[1]}
+                        </NestedYearValue>
+                      )}
                     </Year>
                   );
                 })}

@@ -1,7 +1,8 @@
 import { ImagesDto } from 'src/contracts/entities';
 
 export type ImageMapped = {
-  [year: number]: string;
+  year: string;
+  url: string;
 };
 
 export type ImagesMapped = {
@@ -17,15 +18,16 @@ export const mapImages = (imagesDto: ImagesDto): ImagesMapped => {
 
   const imagesMapped: ImagesMapped = {};
 
-  Object.entries(imagesDto).forEach(image => {
-    const year = image[0];
-    const decade = parseInt(`${year.substring(0, 3)}0`);
+  Object.entries(imagesDto).forEach(imageDto => {
+    const year = imageDto[0];
+    const url = imageDto[1];
+    const decade = parseInt(`${year.toString().substring(0, 3)}0`);
 
     if (!imagesMapped[decade]) {
       imagesMapped[decade] = [];
     }
 
-    imagesMapped[decade].push(image);
+    imagesMapped[decade].push({ year, url });
   });
 
   return imagesMapped;

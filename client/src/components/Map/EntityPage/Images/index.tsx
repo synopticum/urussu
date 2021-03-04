@@ -34,7 +34,7 @@ export const Images: React.FC<Props> = observer(() => {
   return (
     <StyledImages>
       <CurrentImage>
-        <img src={objectStore.selectedImage} alt="" />
+        <img src={`${process.env.S3_URL}/${objectStore.selectedImage.url}`} alt="" />
       </CurrentImage>
 
       <Timeline />
