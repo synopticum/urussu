@@ -40,6 +40,16 @@ const YearValue = styled.div`
   background-color: ${color('white-1')};
 `;
 
+const NestedYearValue = styled.div`
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+  padding: 5px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  background-color: ${color('white-1')};
+`;
+
 const Decades = styled.ul`
   display: flex;
   justify-content: center;
@@ -56,10 +66,11 @@ const Decade = styled.li<{ active: boolean }>`
 `;
 
 const DecadeValue = styled.div<{ active: boolean }>`
-  cursor: pointer;
+  cursor: ${({ active }): string => (active ? 'default' : 'pointer')};
   padding: 5px 10px;
   border-radius: 10px;
   background-color: ${({ active }): string => (active ? color('blue-1') : color('white-1'))};
+  opacity: 0.3;
 `;
 
 export const Timeline: React.FC = observer(() => {
@@ -77,6 +88,18 @@ export const Timeline: React.FC = observer(() => {
 
   const isDecadeActive = (decade: string): boolean => objectStore.selectedDecade === parseInt(decade);
 
+  const isNested = (year: string): boolean => year.includes('_');
+
+  const getNested = (currentYear: string, images: ImageMapped[]): ImageMapped => {
+    const image = images.find(([year]: [string, string]) => year.includes(`${currentYear}_`));
+
+    if (!image) {
+      return null;
+    }
+
+    return image[0].split('_')[1];
+  };
+
   return (
     <StyledTimeline>
       <Decades>
@@ -87,11 +110,16 @@ export const Timeline: React.FC = observer(() => {
                 {decade}
               </DecadeValue>
               <Years>
-                {images.map((image: ImageMapped) => (
-                  <Year key={image[1]}>
-                    <YearValue>{image[0]}</YearValue>
-                  </Year>
-                ))}
+                {images.map(([year, url]: [string, string]) => {
+                  const nested = getNested(year, images);
+
+                  return (
+                    <Year key={year}>
+                      {!isNested(year) && <YearValue>{year}</YearValue>}
+                      {nested && <NestedYearValue>{nested}</NestedYearValue>}
+                    </Year>
+                  );
+                })}
               </Years>
             </Decade>
           );
