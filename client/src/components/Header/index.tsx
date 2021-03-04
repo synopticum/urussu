@@ -12,7 +12,7 @@ const StyledHeader = styled.header`
   position: relative;
   z-index: 600;
   height: 70px;
-  padding: 15px 40px 0 75px;
+  padding: 15px 15px 0 75px;
   display: flex;
   align-items: center;
   background-color: ${color('black-1')};
