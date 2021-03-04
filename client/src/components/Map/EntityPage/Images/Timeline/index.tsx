@@ -12,27 +12,54 @@ const StyledTimeline = styled.div`
   width: 100%;
 `;
 
+const Years = styled.ul`
+  display: none;
+  position: absolute;
+  left: 0;
+  bottom: calc(100% + 10px);
+`;
+
+const Year = styled.li`
+  position: relative;
+  margin: 0 5px;
+
+  &:first-of-type {
+    margin-left: 0;
+  }
+
+  &:last-of-type {
+    margin-right: 0;
+  }
+`;
+
+const YearValue = styled.div`
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 10px;
+  white-space: nowrap;
+  background-color: ${color('white-1')};
+`;
+
 const Decades = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
-const Decade = styled.li`
+const Decade = styled.li<{ active: boolean }>`
+  position: relative;
   margin: 0 5px;
+
+  ${Years} {
+    display: ${({ active }): string => (active ? 'flex' : 'none')};
+  }
 `;
 
-const Years = styled.ul`
-  display: none;
-`;
-
-const Year = styled.li``;
-
-const Item = styled.div`
+const DecadeValue = styled.div<{ active: boolean }>`
   cursor: pointer;
-  background-color: ${color('white-1')};
   padding: 5px 10px;
   border-radius: 10px;
+  background-color: ${({ active }): string => (active ? color('blue-1') : color('white-1'))};
 `;
 
 export const Timeline: React.FC = observer(() => {
@@ -48,18 +75,22 @@ export const Timeline: React.FC = observer(() => {
     objectStore.selectedDecade = parseInt(decade);
   };
 
+  const isDecadeActive = (decade: string): boolean => objectStore.selectedDecade === parseInt(decade);
+
   return (
     <StyledTimeline>
       <Decades>
         {Object.entries(data.images).map(([decade, images]) => {
           return (
-            <Decade key={decade}>
-              <Item onClick={(): void => changeDecade(decade)}>
-                {decade} {JSON.stringify(objectStore.selectedDecade === parseInt(decade))}
-              </Item>
+            <Decade key={decade} active={isDecadeActive(decade)}>
+              <DecadeValue onClick={(): void => changeDecade(decade)} active={isDecadeActive(decade)}>
+                {decade}
+              </DecadeValue>
               <Years>
                 {images.map((image: ImageMapped) => (
-                  <Year key={image[1]}>{image[0]}</Year>
+                  <Year key={image[1]}>
+                    <YearValue>{image[0]}</YearValue>
+                  </Year>
                 ))}
               </Years>
             </Decade>
