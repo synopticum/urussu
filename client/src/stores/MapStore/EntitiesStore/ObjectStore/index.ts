@@ -3,7 +3,8 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
 import { ObjectMapped, map } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
-import { EntityId, ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
+import { ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
+import { EntityId } from 'src/contracts/entities';
 
 export default class ObjectStore {
   private api: AxiosInstance;
