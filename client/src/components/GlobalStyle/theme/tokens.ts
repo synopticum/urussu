@@ -5,6 +5,7 @@ const tokens = {
   },
   colors: {
     'black-1': '#111',
+    'black-2': '#444',
     'white-1': '#fff',
     'blue-1': '#337ab7',
   },

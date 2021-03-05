@@ -17,6 +17,7 @@ const CurrentImage = styled.div`
     height: 100%;
     object-fit: cover;
     user-select: none;
+    border-radius: 10px;
   }
 `;
 

@@ -22,7 +22,6 @@ const Wrapper = styled.div`
   height: calc(100% - 50px);
   border-radius: 10px;
   background-color: ${color('white-1')};
-  overflow: hidden;
 `;
 
 const Close = styled.button`

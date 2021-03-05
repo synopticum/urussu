@@ -50,7 +50,7 @@ const NavLink: React.FC<{ to: string }> = props => (
 );
 
 const Title = styled.div`
-  font-size: 24px;
+  font-size: 32px;
   margin-right: auto;
   color: ${color('white-1')};
 `;
