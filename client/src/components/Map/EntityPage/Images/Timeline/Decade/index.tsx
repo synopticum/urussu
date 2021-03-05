@@ -1,17 +1,15 @@
 import styled from 'styled-components';
 import React from 'react';
-import { objectStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
 import { Years } from 'src/components/Map/EntityPage/Images/Timeline/Decade/Years';
 import { ImageMapped } from 'src/stores/MapStore/EntitiesStore';
-import { observer } from 'mobx-react-lite';
 
 const StyledDecade = styled.li`
   position: relative;
   margin: 0 5px;
 `;
 
-const DecadeValue = styled.div<{ isActive: boolean }>`
+const Value = styled.div<{ isActive: boolean }>`
   cursor: ${({ isActive }): string => (isActive ? 'default' : 'pointer')};
   padding: 5px 10px;
   border-radius: 10px;
@@ -20,22 +18,23 @@ const DecadeValue = styled.div<{ isActive: boolean }>`
 `;
 
 type Props = {
-  value: [string, ImageMapped[]];
+  decade: string;
+  images: ImageMapped[];
+  change: () => void;
+  isActive: boolean;
 };
 
-export const Decade: React.FC<Props> = observer(({ value: [decade, images] }) => {
-  const changeSelectedDecade = (decade: string): void => {
-    objectStore.selectedDecade = parseInt(decade);
-  };
-
-  const isActive = (decade: string): boolean => objectStore.selectedDecade === parseInt(decade);
+export const Decade: React.FC<Props> = ({ decade, images, change, isActive }) => {
+  if (!images) {
+    return null;
+  }
 
   return (
     <StyledDecade>
-      <DecadeValue onClick={(): void => changeSelectedDecade(decade)} isActive={isActive(decade)}>
+      <Value onClick={change} isActive={isActive}>
         {decade}
-      </DecadeValue>
-      <Years decade={decade} images={images} isActive={isActive(decade)} />
+      </Value>
+      <Years decade={decade} images={images} isDecadeActive={isActive} />
     </StyledDecade>
   );
-});
+};

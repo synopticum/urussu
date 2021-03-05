@@ -9,12 +9,26 @@ const mapImages = (imagesDto) => {
     const year = imageDto[0];
     const url = imageDto[1];
     const decade = parseInt(`${year.toString().substring(0, 3)}0`);
+    let nestedImage = null;
+
+    const nested = Object.entries(imagesDto).find(([targetYear]) =>
+      targetYear.startsWith(`${year}_`)
+    );
+
+    if (nested) {
+      let [year, url] = nested;
+      nestedImage = { year: year.split("_")[1], url };
+    }
+
+    const isNested = (image) => image[0].includes("_");
 
     if (!imagesMapped[decade]) {
       imagesMapped[decade] = [];
     }
 
-    imagesMapped[decade].push({ year, url });
+    if (!isNested(imageDto)) {
+      imagesMapped[decade].push({ year, url, image: nestedImage });
+    }
   });
 
   return imagesMapped;

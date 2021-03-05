@@ -1,6 +1,7 @@
 export type ImageDto = {
   year: string;
   url: string;
+  image?: ImageDto;
 };
 
 export type ImagesDto = {

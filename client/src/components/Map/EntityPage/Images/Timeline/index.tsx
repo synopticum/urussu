@@ -3,6 +3,7 @@ import React from 'react';
 import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 import { objectStore } from 'src/stores';
 import { Decade } from 'src/components/Map/EntityPage/Images/Timeline/Decade';
+import { observer } from 'mobx-react-lite';
 
 const StyledTimeline = styled.div`
   position: absolute;
@@ -19,7 +20,7 @@ const Decades = styled.ul`
 
 type Props = {};
 
-export const Timeline: React.FC<Props> = () => {
+export const Timeline: React.FC<Props> = observer(() => {
   const { data } = objectStore.apiData;
 
   if (!data.images) {
@@ -28,16 +29,27 @@ export const Timeline: React.FC<Props> = () => {
 
   objectStore.selectedDecade = objectStore.selectedDecade || objectStore.initialDecade;
 
+  const changeSelectedDecade = (decade: string): void => {
+    objectStore.selectedDecade = parseInt(decade);
+  };
+
+  const isActive = (decade: string): boolean => objectStore.selectedDecade === parseInt(decade);
+
   const decades = Object.entries(data.images);
 
   return (
     <StyledTimeline>
       <Decades>
-        {decades.map(decade => {
-          const key = decade[0];
-          return <Decade value={decade} key={key} />;
-        })}
+        {decades.map(([decade, images]) => (
+          <Decade
+            decade={decade}
+            images={images}
+            isActive={isActive(decade)}
+            change={(): void => changeSelectedDecade(decade)}
+            key={decade}
+          />
+        ))}
       </Decades>
     </StyledTimeline>
   );
-};
+});
