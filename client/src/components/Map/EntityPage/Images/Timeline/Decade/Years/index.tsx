@@ -4,13 +4,38 @@ import { objectStore } from 'src/stores';
 import { ImageMapped } from 'src/stores/MapStore/EntitiesStore';
 import { observer } from 'mobx-react-lite';
 import { color } from 'src/components/GlobalStyle/theme';
-import image from './images/curly-braces.svg';
+import image from './images/curly.png';
 
 const StyledYears = styled.ul<{ isDecadeActive: boolean }>`
   position: absolute;
   left: 0;
-  bottom: calc(100% + 10px);
+  bottom: calc(100% + 0px);
+  transform: translateX(calc(-50% + 40px));
   display: ${({ isDecadeActive }): string => (isDecadeActive ? 'flex' : 'none')};
+  padding-bottom: 20px;
+  background: url(${image}) 50% 100% no-repeat;
+  background-size: 500px;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    width: 10px;
+    height: 10px;
+    background: url(${image}) no-repeat;
+    background-size: 500px;
+  }
+
+  &::before {
+    left: -9px;
+    background-position: 0 0;
+  }
+
+  &::after {
+    right: -9px;
+    background-position: 100% 0;
+  }
 `;
 
 const Image = styled.li`
