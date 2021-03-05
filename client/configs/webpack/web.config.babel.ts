@@ -45,9 +45,6 @@ const config = merge([
       }),
       new HtmlWebpackPlugin({
         template: path.resolve(path.join('.', 'src', 'index.ejs')),
-        templateParameters: {
-          ssrData: null,
-        },
       }),
       new CopyPlugin({
         patterns: [
