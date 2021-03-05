@@ -15,5 +15,5 @@
     "moduleResolution": "Node",
     "noEmitOnError": true
   },
-  "exclude": ["node_modules", "typings"]
+  "exclude": ["node_modules"]
 }

@@ -4,7 +4,7 @@ import { objectStore } from 'src/stores';
 import { ImageMapped } from 'src/stores/MapStore/EntitiesStore';
 import { observer } from 'mobx-react-lite';
 import { color } from 'src/components/GlobalStyle/theme';
-// import image from './images/curly-braces.svg';
+import image from './images/curly-braces.svg';
 
 const StyledYears = styled.ul<{ isDecadeActive: boolean }>`
   position: absolute;
