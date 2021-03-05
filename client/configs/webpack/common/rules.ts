@@ -12,20 +12,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.(png|jpg|gif)$/i,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 8192,
-              fallback: 'file-loader',
-            },
-          },
-        ],
-      },
-      {
-        test: /\.svg$/,
-        use: ['babel-loader', { loader: 'svg-inline-loader', options: { removeSVGTagAttrs: false, idPrefix: true } }],
+        test: /\.(png|jpg|svg)$/i,
+        type: 'asset/resource',
       },
       {
         test: /\.css$/i,

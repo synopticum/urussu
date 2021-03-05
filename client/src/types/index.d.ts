@@ -17,6 +17,7 @@ declare global {
 }
 
 declare module '*.html';
+declare module '*.svg';
 declare module '*.css';
 declare module '*.png' {
   const content: string;
@@ -25,16 +26,6 @@ declare module '*.png' {
 declare module '*.jpg' {
   const content: string;
   export default content;
-}
-declare module '*.svg' {
-  const SVGComponent: React.FC<React.SVGAttributes<SVGElement>>;
-  export default SVGComponent;
-}
-
-declare module 'raw-loader!*.ejs';
-declare module '!url-loader!*.svg' {
-  const DataURL: string;
-  export default DataURL;
 }
 
 interface Document {

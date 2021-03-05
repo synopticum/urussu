@@ -53,9 +53,9 @@ export default class AuthStore {
 
   private async getNewToken(code: Code): Promise<Token> {
     try {
-      const { error, data } = await this.api.get(`/authenticate?code=${code}`);
+      const { data } = await this.api.get(`/authenticate?code=${code}`);
 
-      if (error) {
+      if (data.error) {
         console.info('Cannot get new token, the auth code is invalid');
         return null;
       }

@@ -15,6 +15,5 @@
     "noEmitOnError": true,
     "useDefineForClassFields": true
   },
-  "typeRoots": ["./node_modules/@types", "./node_modules/gsap"],
   "exclude": ["node_modules", "typings"]
 }
