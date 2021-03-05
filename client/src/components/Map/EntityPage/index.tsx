@@ -11,7 +11,7 @@ const StyledEntityPage = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  z-index: 550;
+  z-index: 1050;
 `;
 
 const Wrapper = styled.div`

@@ -10,7 +10,7 @@ import { observer } from 'mobx-react-lite';
 
 const StyledHeader = styled.header`
   position: relative;
-  z-index: 600;
+  z-index: 1060;
   height: 70px;
   padding: 15px 15px 0 75px;
   display: flex;

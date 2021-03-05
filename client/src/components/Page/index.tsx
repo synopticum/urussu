@@ -11,7 +11,7 @@ export const Aside = styled.aside`
   position: absolute;
   left: 0;
   top: 0;
-  z-index: 600;
+  z-index: 1060;
   width: 60px;
   height: 100%;
   background: ${color('black-1')};
