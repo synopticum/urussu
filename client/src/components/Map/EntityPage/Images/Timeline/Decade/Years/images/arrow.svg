@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" x="0px" y="0px" viewBox="0 0 100 125">
+  <g transform="translate(0,-952.36218)">
+    <path
+      d="m 19.99999,1002.3631 c 0.038,0.4256 0.2156,0.9938 0.5,1.3125 l 15,17 c 0.6543,0.8883 2.0034,0.8854 2.8337,0.1589 0.8303,-0.7266 0.8936,-2.0174 0.1663,-2.7839 l -12.0938,-13.6875 51.59382,0 c 1.1045,0 2,-0.8954 2,-2 0,-1.1046 -0.8955,-2 -2,-2 l -51.59382,0 12.0938,-13.68753 c 0.7936,-0.7664 0.5704,-2.0808 -0.2599,-2.8073 -0.8303,-0.7265 -2.0858,-0.6747 -2.7401,0.1823 l -15,17.00003 c -0.4009,0.4343 -0.4774,0.9056 -0.5,1.3125 z"
+      style="text-indent:0;text-transform:none;direction:ltr;block-progression:tb;baseline-shift:baseline;color:#000000;enable-background:accumulate;"
+      fill="#ffffff" fill-opacity="1" stroke="none" marker="none" visibility="visible" display="inline"
+      overflow="visible"/>
+  </g>
+  <text x="0" y="115" fill="#000000" font-size="5px" font-weight="bold"
+        font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">Created by Three Six Five
+  </text>
+  <text x="0" y="120" fill="#000000" font-size="5px" font-weight="bold"
+        font-family="'Helvetica Neue', Helvetica, Arial-Unicode, Arial, Sans-serif">from the Noun Project
+  </text>
+</svg>

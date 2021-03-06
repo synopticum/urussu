@@ -8,6 +8,7 @@ const EmptyDecadeValue = styled.div`
   color: ${color('black-2')};
   font-size: 14px;
   border-bottom: 1px solid ${color('black-2')};
+  user-select: none;
 `;
 
 const StyledEmptyDecade = styled.li`

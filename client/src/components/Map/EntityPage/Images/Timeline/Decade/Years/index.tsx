@@ -4,16 +4,17 @@ import { objectStore } from 'src/stores';
 import { ImageMapped } from 'src/stores/MapStore/EntitiesStore';
 import { observer } from 'mobx-react-lite';
 import { color } from 'src/components/GlobalStyle/theme';
-import image from './images/curly.png';
+import curlyBracesImage from './images/curly.png';
+import arrowImage from './images/arrow.svg';
 
 const StyledYears = styled.ul<{ isDecadeActive: boolean }>`
   position: absolute;
   left: 0;
-  bottom: calc(100% + 0px);
+  bottom: 100%;
   transform: translateX(calc(-50% + 40px));
   display: ${({ isDecadeActive }): string => (isDecadeActive ? 'flex' : 'none')};
-  padding-bottom: 20px;
-  background: url(${image}) 50% 100% no-repeat;
+  padding-bottom: 15px;
+  background: url(${curlyBracesImage}) 50% 100% no-repeat;
   background-size: 500px;
 
   &::before,
@@ -23,7 +24,7 @@ const StyledYears = styled.ul<{ isDecadeActive: boolean }>`
     bottom: 4px;
     width: 10px;
     height: 10px;
-    background: url(${image}) no-repeat;
+    background: url(${curlyBracesImage}) no-repeat;
     background-size: 500px;
   }
 
@@ -43,31 +44,43 @@ const Image = styled.li`
   margin: 0 5px;
 
   &:first-of-type {
-    margin-left: 0;
+    margin-left: -5px;
   }
 
   &:last-of-type {
-    margin-right: 0;
+    margin-right: -5px;
   }
 `;
 
 const YearValue = styled.div<{ isActive: boolean }>`
+  position: relative;
   cursor: ${({ isActive }): string => (isActive ? 'default' : 'pointer')};
-  padding: 5px 10px;
-  border-radius: 10px;
+  padding: 4px 8px;
+  border-radius: 5px;
   white-space: nowrap;
-  background-color: ${({ isActive }): string => (isActive ? color('blue-1') : color('white-1'))};
+  font-size: 14px;
+  color: ${({ isActive }): string => (isActive ? color('black-1') : color('white-1'))};
+  background-color: ${({ isActive }): string => (isActive ? color('white-1') : color('black-1'))};
+  user-select: none;
 `;
 
-const NestedYearValue = styled.div<{ isActive: boolean }>`
-  cursor: ${({ isActive }): string => (isActive ? 'default' : 'pointer')};
+const NestedYearValue = styled(YearValue)<{ isActive: boolean }>`
   position: absolute;
   left: 0;
-  bottom: calc(100% + 10px);
-  padding: 5px 10px;
-  border-radius: 10px;
-  white-space: nowrap;
-  background-color: ${({ isActive }): string => (isActive ? color('blue-1') : color('white-1'))};
+  bottom: calc(100% + 12px);
+  border-bottom: 2px solid ${color('white-1')};
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: calc(50% - 8px);
+    top: 100%;
+    width: 20px;
+    height: 17px;
+    background: url(${arrowImage}) no-repeat;
+    background-size: 20px;
+    transform: rotate(90deg);
+  }
 `;
 
 type Props = {

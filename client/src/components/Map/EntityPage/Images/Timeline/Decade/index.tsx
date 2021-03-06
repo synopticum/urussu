@@ -11,6 +11,7 @@ const DecadeValue = styled.div<{ isActive: boolean }>`
   font-size: 14px;
   border-bottom: 1px solid ${color('black-2')};
   transition: color 0.3s;
+  user-select: none;
 
   &:hover {
     color: ${color('white-1')};
