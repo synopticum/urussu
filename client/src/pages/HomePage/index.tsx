@@ -4,7 +4,9 @@ import { globalStore } from 'src/stores';
 import Timer from './Timer';
 import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
-import { Aside, Page, Content } from 'src/components/Page';
+import Page from 'src/components/Page';
+import Aside from 'src/components/Page/Aside';
+import Content from 'src/components/Page/Content';
 
 const StyledHomePage = styled(Page)``;
 

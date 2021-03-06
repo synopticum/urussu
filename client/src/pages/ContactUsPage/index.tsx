@@ -1,7 +1,9 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import styled from 'styled-components';
-import { Page, Aside, Content } from 'src/components/Page';
+import Page from 'src/components/Page';
+import Aside from 'src/components/Page/Aside';
+import Content from 'src/components/Page/Content';
 
 type Props = {} & RouteComponentProps;
 
