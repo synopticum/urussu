@@ -5,6 +5,7 @@ import ObjectPage from 'src/components/Map/EntityPage/ObjectPage';
 import DotPage from 'src/components/Map/EntityPage/DotPage';
 import { mapStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
+import PathPage from 'src/components/Map/EntityPage/PathPage';
 
 const StyledEntityPage = styled.div`
   position: absolute;
@@ -41,7 +42,7 @@ const Close = styled.button`
 const Pages: { dot: typeof DotPage; object: typeof ObjectPage; path: typeof ObjectPage } = {
   dot: DotPage,
   object: ObjectPage,
-  path: ObjectPage,
+  path: PathPage,
 };
 
 type Props = {

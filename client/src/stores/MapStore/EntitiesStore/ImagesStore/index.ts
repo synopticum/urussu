@@ -2,9 +2,10 @@ import { computed, makeObservable, observable } from 'mobx';
 import ObjectStore from 'src/stores/MapStore/EntitiesStore/ObjectStore';
 import DotStore from 'src/stores/MapStore/EntitiesStore/DotStore';
 import { ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
+import PathStore from 'src/stores/MapStore/EntitiesStore/PathStore';
 
 export default class ImagesStore {
-  store: ObjectStore | DotStore;
+  store: ObjectStore | DotStore | PathStore;
 
   selectedImage: ImageMapped;
 
