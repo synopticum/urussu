@@ -3,7 +3,7 @@ import { ImagesDto } from 'src/contracts/entities';
 
 export type PathDto = {
   id: string;
-  instanceType: string;
+  instanceType: 'dot' | 'object' | 'path' | 'circle';
   type: string;
   coordinates: LatLngExpression[];
   title?: string;

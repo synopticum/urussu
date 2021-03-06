@@ -1,11 +1,11 @@
-import { LatLngExpression } from 'leaflet';
+import { LatLngExpression, LatLngTuple } from 'leaflet';
 import { ImagesDto } from 'src/contracts/entities';
 
 export type ObjectDto = {
   id: string;
-  instanceType: string;
+  instanceType: 'dot' | 'object' | 'path' | 'circle';
   type: string;
-  coordinates: LatLngExpression[];
+  coordinates: LatLngTuple[][];
   title?: string;
   shortDescription?: string;
   fullDescription?: string;

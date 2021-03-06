@@ -9,7 +9,7 @@ type Controls = 'search';
 export default class ControlsStore {
   private api: AxiosInstance;
 
-  searchResultData = new AsyncData<SearchResultMapped[]>();
+  searchData = new AsyncData<SearchResultMapped>();
 
   selected: Controls;
 
@@ -19,14 +19,14 @@ export default class ControlsStore {
   }
 
   resetSearchData(): void {
-    this.searchResultData = new AsyncData<SearchResultMapped[]>();
+    this.searchData = new AsyncData<SearchResultMapped>();
   }
 
   search(value: string): void {
-    const { api, searchResultData } = this;
-    const options = { api, apiData: searchResultData, map };
+    const { api, searchData } = this;
+    const options = { api, apiData: searchData, map };
 
-    fetchData<SearchResultDto[], SearchResultMapped[]>(`/search?value=${value}`, options);
+    fetchData<SearchResultDto, SearchResultMapped>(`/search?value=${value}`, options);
   }
 
   constructor(api: AxiosInstance) {

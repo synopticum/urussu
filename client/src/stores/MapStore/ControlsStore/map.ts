@@ -1,5 +1,10 @@
 import { SearchResultDto } from 'src/contracts/search';
+import { ObjectDto } from 'src/contracts/entities/object';
+import { DotDto } from 'src/contracts/entities/dot';
+import { PathDto } from 'src/contracts/entities/path';
 
-export type SearchResultMapped = SearchResultDto;
+export type ResultItemMapped = ObjectDto | PathDto | DotDto;
 
-export const map = (data: SearchResultDto[]): SearchResultMapped[] => data;
+export type SearchResultMapped = ResultItemMapped[];
+
+export const map = (data: SearchResultDto): SearchResultMapped => data;

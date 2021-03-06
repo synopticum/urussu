@@ -15,8 +15,13 @@ const getObjectColor = (object: ObjectMapped): string => {
 };
 
 const getClassName = (item: ObjectMapped): string => {
-  const hasImages = item.images ? 'leaflet-interactive--has-images' : '';
-  return `${hasImages}`;
+  let className = `id_${item.id}`;
+
+  if (item.images) {
+    className += ' leaflet-interactive--has-images';
+  }
+
+  return `${className}`;
 };
 
 const addObjectsToMap = (map: Map, objects: ObjectMapped[]): void => {

@@ -1,5 +1,4 @@
 import { DotDto } from 'src/contracts/entities/dot';
-
-export type DotMapped = DotDto;
+import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 
 export const map = (data: DotDto[]): DotMapped[] => data;

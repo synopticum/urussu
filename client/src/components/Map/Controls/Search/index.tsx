@@ -5,14 +5,16 @@ import { color, shadow } from 'src/components/GlobalStyle/theme';
 import { mapStore } from 'src/stores';
 import { debounce } from 'ts-debounce';
 import { useAutoFocus } from 'src/components/App/hooks/use-auto-focus';
+import Results from 'src/components/Map/Controls/Search/Results';
 
 const StyledSearch = styled.div`
   position: absolute;
   left: calc(100% + 20px);
   top: -5px;
-  width: 350px;
-  padding: 7px 20px;
+  width: 300px;
+  padding: 10px 10px 20px 20px;
   min-height: 55px;
+  max-height: calc(100vh - 160px);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -57,6 +59,7 @@ const Search: React.FC = observer(() => {
   return (
     <StyledSearch>
       <Input type="text" onInput={debouncedSearch} ref={inputRef} />
+      <Results />
     </StyledSearch>
   );
 });

@@ -17,6 +17,10 @@ const StyledMap = styled.div`
   background-color: ${color('black-1')};
 `;
 
+const ActiveEntity: React.FC = observer(() => {
+  return <style>{`.id_${mapStore.activeEntity} { opacity: 1 !important; }`}</style>;
+});
+
 const Map: React.FC = observer(() => {
   const containerRef = useRef(null);
   useMap(containerRef);
@@ -30,6 +34,8 @@ const Map: React.FC = observer(() => {
         <Objects />
         <Paths />
         <Circles />
+
+        <ActiveEntity />
       </Container>
 
       <EntityPage entity={entity} />

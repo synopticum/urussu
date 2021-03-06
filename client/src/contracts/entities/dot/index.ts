@@ -3,7 +3,7 @@ import { ImagesDto } from 'src/contracts/entities';
 
 export type DotDto = {
   id: string;
-  instanceType: string;
+  instanceType: 'dot' | 'object' | 'path' | 'circle';
   layer: string;
   coordinates: LatLngTuple;
   authorId: string;
