@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
-import { objectStore } from 'src/stores';
+import { imagesStore } from 'src/stores';
 import { Decade } from 'src/components/Map/EntityPage/Images/Timeline/Decade';
 import { EmptyDecade } from 'src/components/Map/EntityPage/Images/Timeline/EmptyDecade';
 import { observer } from 'mobx-react-lite';
@@ -36,19 +36,20 @@ const createTimeline = (images: ImagesMapped): ImagesMapped => {
 type Props = {};
 
 export const Timeline: React.FC<Props> = observer(() => {
-  const { data } = objectStore.apiData;
+  const { store } = imagesStore;
+  const { data } = store.apiData;
 
   if (!data.images) {
     return null;
   }
 
-  objectStore.selectedDecade = objectStore.selectedDecade || objectStore.initialDecade;
+  imagesStore.selectedDecade = imagesStore.selectedDecade || imagesStore.initialDecade;
 
   const changeSelectedDecade = (decade: string): void => {
-    objectStore.selectedDecade = parseInt(decade);
+    imagesStore.selectedDecade = parseInt(decade);
   };
 
-  const isActive = (decade: string): boolean => objectStore.selectedDecade === parseInt(decade);
+  const isActive = (decade: string): boolean => imagesStore.selectedDecade === parseInt(decade);
 
   const timeline = createTimeline(data.images);
 
@@ -56,8 +57,8 @@ export const Timeline: React.FC<Props> = observer(() => {
     <StyledTimeline>
       <Decades>
         {Object.entries(timeline).map(([decade, images]) => {
-          if (!decade || !images) {
-            return <EmptyDecade>{decade}</EmptyDecade>;
+          if (!images) {
+            return <EmptyDecade key={decade}>{decade}</EmptyDecade>;
           }
 
           return (

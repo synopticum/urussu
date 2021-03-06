@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Timeline } from 'src/components/Map/EntityPage/Images/Timeline';
-import { objectStore } from 'src/stores';
+import { imagesStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 
 const StyledImages = styled.div`
@@ -24,18 +24,19 @@ const CurrentImage = styled.div`
 type Props = {};
 
 export const Images: React.FC<Props> = observer(() => {
-  const { data } = objectStore.apiData;
+  const { store } = imagesStore;
+  const { data } = store.apiData;
 
-  if (!data.images) {
+  if (!store || !data.images) {
     return <div>No images found</div>;
   }
 
-  objectStore.selectedImage = objectStore.selectedImage || objectStore.initialImage;
+  imagesStore.selectedImage = imagesStore.selectedImage || imagesStore.initialImage;
 
   return (
     <StyledImages>
       <CurrentImage>
-        <img src={`${process.env.S3_URL}/${objectStore.selectedImage.url}`} alt="" />
+        <img src={`${process.env.S3_URL}/${imagesStore.selectedImage.url}`} alt="" />
       </CurrentImage>
 
       <Timeline />

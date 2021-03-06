@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Entity } from 'src/stores/MapStore';
 import ObjectPage from 'src/components/Map/EntityPage/ObjectPage';
+import DotPage from 'src/components/Map/EntityPage/DotPage';
 import { mapStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
 
@@ -37,8 +38,8 @@ const Close = styled.button`
   background-size: 20px;
 `;
 
-const Pages: { dot: typeof ObjectPage; object: typeof ObjectPage; path: typeof ObjectPage } = {
-  dot: ObjectPage,
+const Pages: { dot: typeof DotPage; object: typeof ObjectPage; path: typeof ObjectPage } = {
+  dot: DotPage,
   object: ObjectPage,
   path: ObjectPage,
 };

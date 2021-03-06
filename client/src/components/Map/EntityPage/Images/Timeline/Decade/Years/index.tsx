@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import { objectStore } from 'src/stores';
+import { imagesStore } from 'src/stores';
 import { ImageMapped } from 'src/stores/MapStore/EntitiesStore';
 import { observer } from 'mobx-react-lite';
 import { color } from 'src/components/GlobalStyle/theme';
@@ -91,11 +91,11 @@ type Props = {
 
 export const Years: React.FC<Props> = observer(({ decade, images, isDecadeActive }) => {
   const changeSelectedImage = (image: ImageMapped): void => {
-    objectStore.selectedImage = image;
+    imagesStore.selectedImage = image;
   };
 
   const isActive = (image: ImageMapped): boolean => {
-    const { year, url } = objectStore.selectedImage;
+    const { year, url } = imagesStore.selectedImage;
     return image.year === year && image.url === url;
   };
 
