@@ -1,5 +1,6 @@
 import { makeObservable, observable } from 'mobx';
 import { LatLngBoundsExpression, LatLngTuple, Map } from 'leaflet';
+import ControlsStore from 'src/stores/MapStore/ControlsStore';
 
 export type Entity = {
   type: 'dot' | 'object' | 'path';
@@ -31,6 +32,7 @@ export default class MapStore {
   lat: number;
   lng: number;
   entity: Entity;
+  controls: ControlsStore;
 
   setZoom(zoom: number): void {
     this.zoom = zoom;
@@ -62,6 +64,7 @@ export default class MapStore {
 
   constructor() {
     this.map = null;
+    this.controls = new ControlsStore();
 
     if (location.search) {
       const params = new URLSearchParams(location.search);

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import searchImage from './images/search.svg';
+import closeImage from './images/close.svg';
 
 type ButtonTypes = 'search' | 'close';
 
@@ -8,7 +9,7 @@ const icons: {
   [type in ButtonTypes]: string;
 } = {
   search: searchImage,
-  close: '',
+  close: closeImage,
 };
 
 export const StyledButton = styled.button<{ icon: string }>`
@@ -55,10 +56,11 @@ export const StyledButton = styled.button<{ icon: string }>`
 
 type Props = {
   type: ButtonTypes;
+  onClick: () => void;
 };
 
-const Button: React.FC<Props> = ({ type }) => {
-  return <StyledButton icon={icons[type]} />;
+const Button: React.FC<Props> = ({ type, onClick }) => {
+  return <StyledButton icon={icons[type]} onClick={onClick} />;
 };
 
 export default Button;
