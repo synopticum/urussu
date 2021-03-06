@@ -1,7 +1,7 @@
 import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
-import { PathDto } from 'src/contracts/entities/paths';
+import { PathDto } from 'src/contracts/entities/path';
 import { map, PathMapped } from 'src/stores/MapStore/EntitiesStore/PathsStore/map';
 
 export default class Index {

@@ -1,6 +1,7 @@
 import { makeObservable, observable } from 'mobx';
 import { LatLngBoundsExpression, LatLngTuple, Map } from 'leaflet';
 import ControlsStore from 'src/stores/MapStore/ControlsStore';
+import { AxiosInstance } from 'axios';
 
 export type Entity = {
   type: 'dot' | 'object' | 'path';
@@ -62,9 +63,9 @@ export default class MapStore {
     this.map.setView([this.lat, this.lng], this.zoom);
   }
 
-  constructor() {
+  constructor(api: AxiosInstance) {
     this.map = null;
-    this.controls = new ControlsStore();
+    this.controls = new ControlsStore(api);
 
     if (location.search) {
       const params = new URLSearchParams(location.search);

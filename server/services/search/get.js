@@ -28,7 +28,7 @@ async function registerRoutes(fastify, opts) {
         let pathsResult = await findPathsByTitle(value);
         let finalResult;
 
-        if (!objectsResult.length) {
+        if (!objectsResult || !objectsResult.length) {
           objectsResult = await findObjectsByTitle(value);
         }
 

@@ -34,7 +34,7 @@ const overrides = `
     color: ${color('blue-1')};
   }
 
-  input, textarea, button { font-family: "Roboto",Arial,"Helvetica Neue",sans-serif; }
+  input, textarea, button { font-family: "PT Serif", Times New Roman, "Helvetica Neue", sans-serif; }
   input:active, textarea:active, button:active, input:focus, textarea:focus, button:focus { outline: none; }
 
   input,

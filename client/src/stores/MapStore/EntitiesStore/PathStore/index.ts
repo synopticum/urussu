@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { EntityId } from 'src/contracts/entities';
 import { PathMapped, map } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
-import { PathDto } from 'src/contracts/entities/paths';
+import { PathDto } from 'src/contracts/entities/path';
 
 export default class PathStore {
   private api: AxiosInstance;

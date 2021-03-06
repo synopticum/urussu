@@ -20,7 +20,7 @@ const Controls: React.FC = observer(() => {
       return;
     }
 
-    controls.selected = null;
+    controls.resetData();
   };
 
   return (

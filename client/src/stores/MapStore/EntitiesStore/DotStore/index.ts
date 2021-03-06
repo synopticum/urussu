@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { EntityId } from 'src/contracts/entities';
 import { DotMapped, map } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
-import { DotDto } from 'src/contracts/entities/dots';
+import { DotDto } from 'src/contracts/entities/dot';
 
 export default class DotStore {
   private api: AxiosInstance;

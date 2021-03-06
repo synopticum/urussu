@@ -3,6 +3,7 @@ import tokens from './tokens';
 type Tokens = typeof tokens;
 type ColorName = keyof typeof tokens.colors;
 type FontName = keyof typeof tokens.fonts;
+type ShadowName = keyof typeof tokens.shadows;
 type CSSVariable = string;
 
 const generateTheme = (tokens: Tokens): string => {
@@ -22,6 +23,8 @@ const generateTheme = (tokens: Tokens): string => {
 export const color = (name: ColorName): CSSVariable => `var(--colors-${name})`;
 
 export const font = (name: FontName): CSSVariable => `var(--fonts-${name})`;
+
+export const shadow = (name: ShadowName): CSSVariable => `var(--shadows-${name})`;
 
 const index = generateTheme(tokens);
 export default index;

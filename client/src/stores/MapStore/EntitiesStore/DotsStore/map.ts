@@ -1,4 +1,4 @@
-import { DotDto } from 'src/contracts/entities/dots';
+import { DotDto } from 'src/contracts/entities/dot';
 
 export type DotMapped = DotDto;
 

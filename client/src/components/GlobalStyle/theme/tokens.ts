@@ -9,6 +9,9 @@ const tokens = {
     'white-1': '#fff',
     'blue-1': '#337ab7',
   },
+  shadows: {
+    'shadow-1': '1px 1px 3px rgba(0, 0, 0, 0.5)',
+  },
 };
 
 export default tokens;
