@@ -1,6 +1,7 @@
 import { polygon, Map } from 'leaflet';
 import { mapStore } from 'src/stores';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
+import { getClassName } from 'src/components/Map/Container';
 
 const removeCurrentObjects = (): void => {};
 
@@ -12,16 +13,6 @@ const getObjectColor = (object: ObjectMapped): string => {
   }
 
   return '#f00';
-};
-
-const getClassName = (item: ObjectMapped): string => {
-  let className = `id_${item.id}`;
-
-  if (item.images) {
-    className += ' leaflet-interactive--has-images';
-  }
-
-  return `${className}`;
 };
 
 const addObjectsToMap = (map: Map, objects: ObjectMapped[]): void => {

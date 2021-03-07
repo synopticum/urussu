@@ -1,6 +1,7 @@
 import { Map, divIcon, marker, layerGroup, control, Marker, Control, LayerGroup } from 'leaflet';
 import { mapStore } from 'src/stores';
 import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
+import { getClassName } from 'src/components/Map/Container';
 
 type OverlayMaps = {
   [layerName: string]: LayerGroup;
@@ -14,22 +15,9 @@ const getDotLayers = (data: DotMapped[]): Set<string> => {
 };
 
 const createMarker = (item: DotMapped): Marker => {
-  let className;
-  const year = item.images ? Object.keys(item.images)[0] : 1940;
-  const hasMoreThanOneImage =
-    item.images && Array.isArray(Object.keys(item.images)) && Object.keys(item.images).length > 1;
-
-  if (hasMoreThanOneImage) {
-    className = `leaflet-marker-icon__${year}`;
-  } else {
-    className = `leaflet-marker-icon__${year}`;
-  }
-
-  if (!item.title) className += ' ololo';
-
   const icon = divIcon({
     iconSize: [9, 9],
-    className,
+    className: getClassName(item),
   });
 
   const handleClick = (id: string): void => mapStore.setEntity({ type: 'dot', id });

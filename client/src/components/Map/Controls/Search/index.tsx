@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { ChangeEvent, useEffect, useRef } from 'react';
+import React, { ChangeEvent, MutableRefObject, useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { color, shadow } from 'src/components/GlobalStyle/theme';
 import { mapStore } from 'src/stores';
@@ -12,9 +12,9 @@ const StyledSearch = styled.div`
   left: calc(100% + 20px);
   top: -5px;
   width: 300px;
-  padding: 10px 10px 20px 20px;
+  padding: 10px 10px 20px 15px;
   min-height: 55px;
-  max-height: calc(100vh - 160px);
+  max-height: calc(100vh - 260px);
   border-radius: 5px;
   display: flex;
   flex-direction: column;
@@ -37,7 +37,7 @@ const StyledSearch = styled.div`
 const Input = styled.input`
   display: block;
   width: 100%;
-  padding: 10px 0;
+  padding: 10px 5px;
   font-size: 16px;
   border: 0;
   background: none;
@@ -47,7 +47,11 @@ const Input = styled.input`
   }
 `;
 
-const Search: React.FC = observer(() => {
+type Props = {
+  ref: MutableRefObject<HTMLDivElement>;
+};
+
+const Search: React.FC<Props> = observer(() => {
   const { controls } = mapStore;
   const inputRef = useRef(null);
 

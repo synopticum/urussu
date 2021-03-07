@@ -20,6 +20,8 @@ export const getEntity = (params: URLSearchParams): Entity => {
 };
 
 export default class MapStore {
+  private readonly api: AxiosInstance;
+
   readonly width: number = 10000;
   readonly height: number = 6250;
   readonly minZoom: number = 4;
@@ -34,8 +36,13 @@ export default class MapStore {
   lat: number;
   lng: number;
   entity: Entity;
-  activeEntity: EntityId;
+  activeEntityId: EntityId;
   controls: ControlsStore;
+
+  private resetControls(): void {
+    this.activeEntityId = null;
+    this.controls = new ControlsStore(this.api);
+  }
 
   setZoom(zoom: number): void {
     this.zoom = zoom;
@@ -49,6 +56,7 @@ export default class MapStore {
   }
 
   setEntity(entity: Entity): void {
+    this.resetControls();
     this.entity = entity;
     this.updateRoute();
   }
@@ -66,9 +74,10 @@ export default class MapStore {
   }
 
   constructor(api: AxiosInstance) {
+    this.api = api;
     this.map = null;
     this.entity = null;
-    this.activeEntity = null;
+    this.activeEntityId = null;
     this.controls = new ControlsStore(api);
 
     if (location.search) {
@@ -93,7 +102,8 @@ export default class MapStore {
       lat: observable,
       lng: observable,
       entity: observable,
-      activeEntity: observable,
+      controls: observable,
+      activeEntityId: observable,
     });
   }
 }

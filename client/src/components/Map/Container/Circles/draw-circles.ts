@@ -1,6 +1,7 @@
 import { circle, Map } from 'leaflet';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 import { mapStore } from 'src/stores';
+import { getClassName } from 'src/components/Map/Container';
 
 const removeCurrentCircles = (): void => {};
 
@@ -15,6 +16,7 @@ const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
     circle(coordinates[0], parseInt(radius), {
       color: 'rgb(255, 198, 0)',
       weight: 2,
+      className: getClassName(item),
     })
       .on('click', () => handleClick(item.id))
       .addTo(map);

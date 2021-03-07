@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
 import Button from 'src/components/Page/Aside/Button';
@@ -13,6 +13,7 @@ const Control = styled.div`
 
 const Controls: React.FC = observer(() => {
   const { controls } = mapStore;
+  const searchRef = useRef(null);
 
   const toggleSearch = (): void => {
     if (!controls.selected) {
@@ -20,6 +21,7 @@ const Controls: React.FC = observer(() => {
       return;
     }
 
+    mapStore.activeEntityId = null;
     controls.resetData();
   };
 
@@ -27,7 +29,7 @@ const Controls: React.FC = observer(() => {
     <StyledControls>
       <Control>
         <Button type={controls.selected === 'search' ? 'close' : 'search'} onClick={toggleSearch} />
-        {controls.selected === 'search' && <Search />}
+        {controls.selected === 'search' && <Search ref={searchRef} />}
       </Control>
     </StyledControls>
   );

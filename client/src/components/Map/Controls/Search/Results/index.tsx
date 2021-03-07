@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { mapStore } from 'src/stores';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
@@ -54,18 +54,20 @@ const Results: React.FC = observer(() => {
   }
 
   const openDot = (item: DotMapped): void => {
-    const { instanceType, id, coordinates } = item;
+    const { id, coordinates } = item;
+    mapStore.activeEntityId = id;
     map.setView(coordinates, 6);
   };
 
   const openObject = (item: ObjectMapped): void => {
-    const { instanceType, id, coordinates } = item;
-    mapStore.activeEntity = id;
+    const { id, coordinates } = item;
+    mapStore.activeEntityId = id;
     map.setView(coordinates[0][0], 6);
   };
 
   const openPath = (item: PathMapped): void => {
-    const { instanceType, id, coordinates } = item;
+    const { id, coordinates } = item;
+    mapStore.activeEntityId = id;
     map.setView(coordinates[0], 6);
   };
 

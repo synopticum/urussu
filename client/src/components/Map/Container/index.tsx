@@ -1,5 +1,18 @@
 import styled from 'styled-components';
-import { color, font } from 'src/components/GlobalStyle/theme';
+import { color } from 'src/components/GlobalStyle/theme';
+import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
+import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
+import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
+
+export const getClassName = (item: DotMapped | ObjectMapped | PathMapped): string => {
+  let className = `id_${item.id}`;
+
+  if (item.images) {
+    className += ' leaflet-interactive--has-images';
+  }
+
+  return `${className}`;
+};
 
 const Container = styled.div`
   cursor: grab;

@@ -11,15 +11,12 @@ import Circles from './Container/Circles';
 import EntityPage from './EntityPage';
 import { mapStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
+import { ActiveEntity } from 'src/components/Map/Container/ActiveEntity';
 
 const StyledMap = styled.div`
   height: 100%;
   background-color: ${color('black-1')};
 `;
-
-const ActiveEntity: React.FC = observer(() => {
-  return <style>{`.id_${mapStore.activeEntity} { opacity: 1 !important; }`}</style>;
-});
 
 const Map: React.FC = observer(() => {
   const containerRef = useRef(null);
@@ -35,7 +32,7 @@ const Map: React.FC = observer(() => {
         <Paths />
         <Circles />
 
-        <ActiveEntity />
+        <ActiveEntity id={mapStore.activeEntityId} />
       </Container>
 
       <EntityPage entity={entity} />
