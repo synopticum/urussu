@@ -13,7 +13,7 @@ import { color } from 'src/components/GlobalStyle/theme';
 import { ActiveEntity } from 'src/components/Map/Container/ActiveEntity';
 import Portal from 'src/components/App/Portal';
 import Button from 'src/components/Page/Aside/Button';
-import Search from 'src/components/Page/Aside/Search';
+import Search from 'src/components/Map/Search';
 import { Control } from 'src/components/Page/Aside';
 import { mapStore } from 'src/stores/MapStore';
 import { controlsStore } from 'src/stores/ControlsStore';

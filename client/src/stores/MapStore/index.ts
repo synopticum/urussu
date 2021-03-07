@@ -3,6 +3,12 @@ import { LatLngBoundsExpression, LatLngTuple, Map } from 'leaflet';
 import { AxiosInstance } from 'axios';
 import { EntityId, EntityType } from 'src/contracts/entities';
 import { api } from 'src/stores';
+import { AsyncData, fetchData } from 'src/stores/helpers';
+import { map, SearchResultMapped } from 'src/stores/ControlsStore/map';
+import { SearchResultDto } from 'src/contracts/search';
+import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
+import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
+import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 
 export type Entity = {
   type: EntityType;
@@ -51,6 +57,8 @@ export default class MapStore {
 
   setEntity(entity: Entity): void {
     this.activeEntityId = null;
+    this.resetSearchData();
+
     this.entity = entity;
     this.updateRoute();
   }
@@ -65,6 +73,34 @@ export default class MapStore {
     window.history.replaceState({}, '', url);
 
     this.map.setView([this.lat, this.lng], this.zoom);
+  }
+
+  searchData = new AsyncData<SearchResultMapped>();
+
+  resetSearchData(): void {
+    this.searchData = new AsyncData<SearchResultMapped>();
+  }
+
+  search(value: string): void {
+    const { searchData } = this;
+    const options = { apiData: searchData, map };
+
+    fetchData<SearchResultDto, SearchResultMapped>(`/search?value=${value}`, options);
+  }
+
+  openDot({ id, coordinates }: DotMapped): void {
+    this.activeEntityId = id;
+    this.map.setView(coordinates, 6);
+  }
+
+  openObject({ id, coordinates }: ObjectMapped): void {
+    this.activeEntityId = id;
+    this.map.setView(coordinates[0][0], 6);
+  }
+
+  openPath({ id, coordinates }: PathMapped): void {
+    this.activeEntityId = id;
+    this.map.setView(coordinates[0], 6);
   }
 
   constructor(api: AxiosInstance) {

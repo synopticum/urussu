@@ -5,7 +5,7 @@ import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map'
 import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 import { color } from 'src/components/GlobalStyle/theme';
-import { DotItem, ObjectItem, PathItem } from 'src/components/Page/Aside/Search/Results/Item';
+import { DotItem, ObjectItem, PathItem } from 'src/components/Map/Search/Results/Item';
 import { controlsStore } from 'src/stores/ControlsStore';
 import { mapStore } from 'src/stores/MapStore';
 
@@ -46,46 +46,29 @@ const StyledResults = styled.div`
 `;
 
 const Results: React.FC = observer(() => {
-  const { data } = controlsStore.searchData;
-  const { map } = mapStore;
+  const {
+    searchData: { data },
+  } = mapStore;
 
   if (!data) {
     return null;
   }
-
-  const openDot = (item: DotMapped): void => {
-    const { id, coordinates } = item;
-    mapStore.activeEntityId = id;
-    map.setView(coordinates, 6);
-  };
-
-  const openObject = (item: ObjectMapped): void => {
-    const { id, coordinates } = item;
-    mapStore.activeEntityId = id;
-    map.setView(coordinates[0][0], 6);
-  };
-
-  const openPath = (item: PathMapped): void => {
-    const { id, coordinates } = item;
-    mapStore.activeEntityId = id;
-    map.setView(coordinates[0], 6);
-  };
 
   return (
     <StyledResults>
       {data.map(item => {
         switch (item.instanceType) {
           case 'dot':
-            return <DotItem item={item as DotMapped} key={item.id} open={openDot} />;
+            return <DotItem item={item as DotMapped} key={item.id} />;
 
           case 'object':
-            return <ObjectItem item={item as ObjectMapped} key={item.id} open={openObject} />;
+            return <ObjectItem item={item as ObjectMapped} key={item.id} />;
 
           case 'path':
-            return <PathItem item={item as PathMapped} key={item.id} open={openPath} />;
+            return <PathItem item={item as PathMapped} key={item.id} />;
 
           case 'circle':
-            return <ObjectItem item={item as ObjectMapped} key={item.id} open={openObject} />;
+            return <ObjectItem item={item as ObjectMapped} key={item.id} />;
         }
 
         return null;

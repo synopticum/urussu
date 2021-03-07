@@ -4,8 +4,8 @@ import { observer } from 'mobx-react-lite';
 import { color, shadow } from 'src/components/GlobalStyle/theme';
 import { debounce } from 'ts-debounce';
 import { useAutoFocus } from 'src/components/App/hooks/use-auto-focus';
-import Results from 'src/components/Page/Aside/Search/Results';
-import { controlsStore } from 'src/stores/ControlsStore';
+import Results from 'src/components/Map/Search/Results';
+import { mapStore } from 'src/stores/MapStore';
 
 const StyledSearch = styled.div`
   position: absolute;
@@ -51,7 +51,7 @@ const Input = styled.input`
 const Search: React.FC = observer(() => {
   const inputRef = useRef(null);
 
-  const search = (e: ChangeEvent<HTMLInputElement>): void => controlsStore.search(e.target.value);
+  const search = (e: ChangeEvent<HTMLInputElement>): void => mapStore.search(e.target.value);
   const debouncedSearch = debounce(search, 300);
 
   useAutoFocus(inputRef);
