@@ -4,7 +4,7 @@ import { AsyncData, fetchData } from 'src/stores/helpers';
 import { SearchResultMapped, map } from 'src/stores/MapStore/ControlsStore/map';
 import { SearchResultDto } from 'src/contracts/search';
 
-type Controls = 'search';
+type Controls = 'search' | 'comments';
 
 export default class ControlsStore {
   private api: AxiosInstance;

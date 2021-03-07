@@ -12,6 +12,7 @@ import ObjectStore from './MapStore/EntitiesStore/ObjectStore';
 import PathStore from './MapStore/EntitiesStore/PathStore';
 
 import ImagesStore from 'src/stores/MapStore/EntitiesStore/ImagesStore';
+import CommentsStore from 'src/stores/MapStore/EntitiesStore/CommentsStore';
 
 import axios from 'axios';
 
@@ -33,3 +34,4 @@ export const objectStore = new ObjectStore(api);
 export const pathStore = new PathStore(api);
 
 export const imagesStore = new ImagesStore();
+export const commentsStore = new CommentsStore(api);

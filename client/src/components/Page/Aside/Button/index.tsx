@@ -1,14 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import searchImage from './images/search.svg';
+import commentsImage from './images/comments.svg';
 import closeImage from './images/close.svg';
 
-type ButtonTypes = 'search' | 'close';
+type ButtonTypes = 'search' | 'comments' | 'close';
 
 const icons: {
   [type in ButtonTypes]: string;
 } = {
   search: searchImage,
+  comments: commentsImage,
   close: closeImage,
 };
 

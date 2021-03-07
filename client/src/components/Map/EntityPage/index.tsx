@@ -39,10 +39,11 @@ const Close = styled.button`
   background-size: 20px;
 `;
 
-const Pages: { dot: typeof DotPage; object: typeof ObjectPage; path: typeof ObjectPage } = {
+const Pages: { dot: typeof DotPage; object: typeof ObjectPage; path: typeof ObjectPage; circle: typeof ObjectPage } = {
   dot: DotPage,
   object: ObjectPage,
   path: PathPage,
+  circle: ObjectPage,
 };
 
 type Props = {

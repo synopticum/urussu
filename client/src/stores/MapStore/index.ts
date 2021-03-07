@@ -2,11 +2,11 @@ import { makeObservable, observable } from 'mobx';
 import { LatLngBoundsExpression, LatLngTuple, Map } from 'leaflet';
 import ControlsStore from 'src/stores/MapStore/ControlsStore';
 import { AxiosInstance } from 'axios';
-import { EntityId } from 'src/contracts/entities';
+import { EntityId, EntityType } from 'src/contracts/entities';
 
 export type Entity = {
-  type: 'dot' | 'object' | 'path';
-  id: string;
+  type: EntityType;
+  id: EntityId;
 };
 
 export const getEntity = (params: URLSearchParams): Entity => {

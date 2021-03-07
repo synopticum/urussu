@@ -1,9 +1,9 @@
 import { LatLngExpression, LatLngTuple } from 'leaflet';
-import { ImagesDto } from 'src/contracts/entities';
+import { EntityId, EntityType, ImagesDto } from 'src/contracts/entities';
 
 export type ObjectDto = {
-  id: string;
-  instanceType: 'dot' | 'object' | 'path' | 'circle';
+  id: EntityId;
+  instanceType: EntityType;
   type: string;
   coordinates: LatLngTuple[][];
   title?: string;

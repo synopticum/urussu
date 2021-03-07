@@ -47,11 +47,7 @@ const Input = styled.input`
   }
 `;
 
-type Props = {
-  ref: MutableRefObject<HTMLDivElement>;
-};
-
-const Search: React.FC<Props> = observer(() => {
+const Search: React.FC = observer(() => {
   const { controls } = mapStore;
   const inputRef = useRef(null);
 
