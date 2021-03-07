@@ -3,11 +3,14 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { SearchResultMapped, map } from 'src/stores/MapStore/ControlsStore/map';
 import { SearchResultDto } from 'src/contracts/search';
+import { MutableRefObject } from 'react';
 
 type Controls = 'search' | 'comments';
 
 export default class ControlsStore {
   private api: AxiosInstance;
+
+  ref: MutableRefObject<HTMLDivElement>;
 
   searchData = new AsyncData<SearchResultMapped>();
 
@@ -31,9 +34,11 @@ export default class ControlsStore {
 
   constructor(api: AxiosInstance) {
     this.api = api;
+    this.ref = null;
     this.selected = null;
 
     makeObservable(this, {
+      ref: observable,
       selected: observable,
     });
   }

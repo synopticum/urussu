@@ -41,7 +41,7 @@ export default class MapStore {
 
   private resetControls(): void {
     this.activeEntityId = null;
-    this.controls = new ControlsStore(this.api);
+    this.controls.resetData();
   }
 
   setZoom(zoom: number): void {
