@@ -45,9 +45,13 @@ export default class CommentsStore {
       ...author,
     };
 
-    const d = await put<CommentDto, CommentMapped>(url, comment, 'json');
-
-    console.log(d);
+    try {
+      const newComment = await put<CommentDto, CommentMapped>(url, comment, 'json');
+      this.apiData.data.push(newComment);
+    } catch (e) {
+      alert('hui');
+      // handle somehow
+    }
   }
 
   constructor(api: AxiosInstance) {

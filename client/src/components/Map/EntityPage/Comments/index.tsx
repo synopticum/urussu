@@ -62,10 +62,6 @@ export const Comments: React.FC<Props> = observer(({ type, id }) => {
   }, []);
 
   const addComment = (): void => {
-    const data = {
-      text: 'test',
-    };
-
     commentsStore.addComment('zxczxc');
   };
 
@@ -74,6 +70,8 @@ export const Comments: React.FC<Props> = observer(({ type, id }) => {
       <Title>Комментарии</Title>
 
       {!data || (!data.length && <NoComments>Никто не оставил ни одного комментария.</NoComments>)}
+
+      {JSON.stringify(data)}
 
       <Textarea />
       <Button type="button" onClick={(): void => addComment()}>
