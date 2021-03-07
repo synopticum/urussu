@@ -59,9 +59,7 @@ const Content = styled.div`
   }
 `;
 
-type Props = {};
-
-const Layout: React.FC<Props> = observer(() => {
+const Layout: React.FC = observer(() => {
   const { isLogged } = authStore;
 
   useEffect(() => {

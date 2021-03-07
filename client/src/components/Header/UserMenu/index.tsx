@@ -28,12 +28,12 @@ const UserMenu: React.FC = observer(() => {
   const menuRef = useRef(null);
 
   useClickOutside(menuRef, () => {
-    state.isOpen = false;
+    state.close();
   });
 
   const toggleMenu = useCallback((e: React.MouseEvent): void => {
     e.stopPropagation();
-    state.isOpen = !state.isOpen;
+    state.toggle();
   }, []);
 
   const { isLogged } = authStore;

@@ -1,4 +1,4 @@
-import { makeObservable, observable } from 'mobx';
+import { computed, makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
@@ -22,11 +22,22 @@ export default class ObjectStore {
     this.apiData = new AsyncData<ObjectMapped>();
   }
 
+  get address(): string {
+    const { data } = this.apiData;
+
+    if (!data || !data.street) {
+      return null;
+    }
+
+    return `${data.street}, ${data.house}`;
+  }
+
   constructor(api: AxiosInstance) {
     this.api = api;
 
     makeObservable(this, {
       apiData: observable,
+      address: computed,
     });
   }
 }

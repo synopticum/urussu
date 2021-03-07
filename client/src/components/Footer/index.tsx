@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from 'src/components/Header/Logo';
 import { color } from 'src/components/GlobalStyle/theme';
 
 const StyledFooter = styled.footer`
@@ -13,10 +12,8 @@ const StyledFooter = styled.footer`
   background-color: ${color('black-1')};
 `;
 
-type Props = {};
-
-export const Footer: React.FC<Props> = () => {
-  return <StyledFooter>{/*<Logo />*/}</StyledFooter>;
+export const Footer: React.FC = () => {
+  return <StyledFooter>footer</StyledFooter>;
 };
 
 export default Footer;

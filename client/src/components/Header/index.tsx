@@ -54,18 +54,13 @@ const Title = styled.div`
   color: ${color('white-1')};
 `;
 
-type Props = {};
-
-const Header: React.FC<Props> = observer(() => {
-  const { data } = objectStore.apiData;
+const Header: React.FC = observer(() => {
+  const { address } = objectStore;
 
   return (
     <StyledHeader>
-      {data && data.street && data.house && (
-        <Title>
-          {data.street}, {data.house}
-        </Title>
-      )}
+      {address && <Title>{address}</Title>}
+
       <Nav>
         <NavLink to="map">{l('Карта')}</NavLink>
         <NavLink to="contact-us">{l('Страница')}</NavLink>
