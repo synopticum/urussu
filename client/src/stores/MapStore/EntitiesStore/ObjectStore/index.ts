@@ -4,6 +4,7 @@ import { AsyncData, fetchData } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
 import { ObjectMapped, map } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 import { EntityId } from 'src/contracts/entities';
+import { api } from 'src/stores';
 
 export default class ObjectStore {
   private api: AxiosInstance;
@@ -29,3 +30,5 @@ export default class ObjectStore {
     });
   }
 }
+
+export const objectStore = new ObjectStore(api);

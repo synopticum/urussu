@@ -9,6 +9,8 @@ import { CommentMapped, map } from 'src/stores/MapStore/EntitiesStore/CommentsSt
 import { EntityId, EntityType } from 'src/contracts/entities';
 import { Token } from 'src/stores/AuthStore';
 import { v4 as uuidv4 } from 'uuid';
+import { api } from 'src/stores';
+import { userStore } from 'src/stores/UserStore';
 
 export default class CommentsStore {
   private api: AxiosInstance;
@@ -28,18 +30,20 @@ export default class CommentsStore {
     this.apiData = new AsyncData<CommentMapped[]>();
   }
 
-  async addComment(data: Omit<CommentMapped, 'id' | 'date' | 'originType' | 'originId'>, token: Token): Promise<void> {
+  async addComment(text: string, token: Token): Promise<void> {
     const { api, store } = this;
     const { instanceType: originType, id: originId } = store.apiData.data;
     const commentId = uuidv4();
     const url = `/${originType}/${originId}/comments/${commentId}`;
+    const { author } = userStore;
 
     const comment: CommentMapped = {
       id: commentId,
       originType,
       originId,
       date: Date.now().toString(),
-      ...data,
+      text,
+      ...author,
     };
 
     const d = await put<CommentDto, CommentMapped>(url, comment, { api, type: 'json', token });
@@ -55,3 +59,5 @@ export default class CommentsStore {
     });
   }
 }
+
+export const commentsStore = new CommentsStore(api);

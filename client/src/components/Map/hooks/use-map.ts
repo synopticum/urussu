@@ -1,8 +1,8 @@
 import { GridLayer, LatLngBounds, LatLngBoundsExpression, Map, map, tileLayer } from 'leaflet';
 import { RefObject, useEffect } from 'react';
-import { mapStore } from 'src/stores';
 import { debounce } from 'ts-debounce';
 import { useRotatedMarker } from 'src/components/Map/hooks/use-rotated-marker';
+import { mapStore } from 'src/stores/MapStore';
 
 const createMap = (mapRootNode: HTMLElement): Map => {
   const mapInstance = map(mapRootNode, {

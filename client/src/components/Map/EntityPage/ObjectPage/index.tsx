@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { commentsStore, controlsStore, imagesStore, objectStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 import Images from 'src/components/Map/EntityPage/Images';
 import Comments from 'src/components/Map/EntityPage/Comments';
 import Portal from 'src/components/App/Portal';
 import Button from 'src/components/Page/Aside/Button';
 import { Control } from 'src/components/Page/Aside';
+import { objectStore } from 'src/stores/MapStore/EntitiesStore/ObjectStore';
+import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
+import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 const StyledObjectPage = styled.div`
   height: 100%;

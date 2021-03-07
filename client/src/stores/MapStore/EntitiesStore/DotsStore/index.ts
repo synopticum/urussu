@@ -4,8 +4,9 @@ import { AsyncData, fetchData } from 'src/stores/helpers';
 import { DotDto } from 'src/contracts/entities/dot';
 import { map } from 'src/stores/MapStore/EntitiesStore/DotsStore/map';
 import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
+import { api } from 'src/stores';
 
-export default class Index {
+export default class DotsStore {
   private api: AxiosInstance;
 
   apiData = new AsyncData<DotMapped[]>();
@@ -25,3 +26,5 @@ export default class Index {
     });
   }
 }
+
+export const dotsStore = new DotsStore(api);

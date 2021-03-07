@@ -1,12 +1,13 @@
 import styled from 'styled-components';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { controlsStore, mapStore } from 'src/stores';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 import { color } from 'src/components/GlobalStyle/theme';
 import { DotItem, ObjectItem, PathItem } from 'src/components/Page/Aside/Search/Results/Item';
+import { controlsStore } from 'src/stores/ControlsStore';
+import { mapStore } from 'src/stores/MapStore';
 
 const StyledResults = styled.div`
   max-height: 100%;

@@ -57,3 +57,5 @@ export default class ImagesStore {
     });
   }
 }
+
+export const imagesStore = new ImagesStore();

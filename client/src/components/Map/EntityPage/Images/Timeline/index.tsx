@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 import React from 'react';
-import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
-import { imagesStore } from 'src/stores';
 import { Decade } from 'src/components/Map/EntityPage/Images/Timeline/Decade';
 import { EmptyDecade } from 'src/components/Map/EntityPage/Images/Timeline/EmptyDecade';
 import { observer } from 'mobx-react-lite';
+import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
+import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 
 const StyledTimeline = styled.div`
   position: absolute;

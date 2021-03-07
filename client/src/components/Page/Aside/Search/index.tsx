@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import React, { ChangeEvent, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { color, shadow } from 'src/components/GlobalStyle/theme';
-import { controlsStore } from 'src/stores';
 import { debounce } from 'ts-debounce';
 import { useAutoFocus } from 'src/components/App/hooks/use-auto-focus';
 import Results from 'src/components/Page/Aside/Search/Results';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 const StyledSearch = styled.div`
   position: absolute;

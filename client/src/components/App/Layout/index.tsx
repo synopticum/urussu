@@ -8,8 +8,9 @@ import ErrorBoundary from '../../ErrorBoundary';
 import Error404 from 'src/pages/Error404Page';
 import { color } from 'src/components/GlobalStyle/theme';
 import LoginPage from 'src/pages/Login/LoginPage';
-import { authStore, userStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
+import { authStore } from 'src/stores/AuthStore';
+import { userStore } from 'src/stores/UserStore';
 
 const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/HomePage'));
 const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/MapPage'));

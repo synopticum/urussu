@@ -1,9 +1,10 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { authStore, commentsStore, userStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 import { EntityId, EntityType } from 'src/contracts/entities';
 import { color, shadow } from 'src/components/GlobalStyle/theme';
+import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
+import { authStore } from 'src/stores/AuthStore';
 
 const StyledComments = styled.div`
   position: absolute;
@@ -53,7 +54,6 @@ type Props = {
 export const Comments: React.FC<Props> = observer(({ type, id }) => {
   const { data } = commentsStore.apiData;
   const { token } = authStore;
-  const { author } = userStore;
 
   useEffect(() => {
     commentsStore.fetchApiData(type, id);
@@ -66,10 +66,9 @@ export const Comments: React.FC<Props> = observer(({ type, id }) => {
   const addComment = (): void => {
     const data = {
       text: 'test',
-      ...author,
     };
 
-    commentsStore.addComment(data, token);
+    commentsStore.addComment('zxczxc', token);
   };
 
   return (

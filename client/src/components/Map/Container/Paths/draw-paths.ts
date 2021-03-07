@@ -1,7 +1,8 @@
 import { Map, polyline } from 'leaflet';
-import { controlsStore, mapStore } from 'src/stores';
-import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 import { getClassName } from 'src/components/Map/Container';
+import { controlsStore } from 'src/stores/ControlsStore';
+import { mapStore } from 'src/stores/MapStore';
+import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 
 const removeCurrentPaths = (): void => {};
 

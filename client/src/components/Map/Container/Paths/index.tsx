@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { pathsStore, mapStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 import { drawPaths } from 'src/components/Map/Container/Paths/draw-paths';
+import { pathsStore } from 'src/stores/MapStore/EntitiesStore/PathsStore';
+import { mapStore } from 'src/stores/MapStore';
 
 export const Paths: React.FC = observer(() => {
   const { isFetching, isDataLoaded, error, data } = pathsStore.apiData;

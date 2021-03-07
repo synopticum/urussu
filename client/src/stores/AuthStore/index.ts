@@ -1,5 +1,6 @@
 import { computed, makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
+import { api } from 'src/stores';
 
 type Code = string;
 export type Token = string;
@@ -84,3 +85,5 @@ export default class AuthStore {
     });
   }
 }
+
+export const authStore = new AuthStore(api);

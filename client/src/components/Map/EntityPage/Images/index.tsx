@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Timeline } from 'src/components/Map/EntityPage/Images/Timeline';
-import { imagesStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
+import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
 
 const StyledImages = styled.div`
   height: 100%;

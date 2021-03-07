@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { Entity } from 'src/stores/MapStore';
+import { Entity, mapStore } from 'src/stores/MapStore';
 import ObjectPage from 'src/components/Map/EntityPage/ObjectPage';
 import DotPage from 'src/components/Map/EntityPage/DotPage';
-import { controlsStore, mapStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
 import PathPage from 'src/components/Map/EntityPage/PathPage';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 const StyledEntityPage = styled.div`
   position: absolute;

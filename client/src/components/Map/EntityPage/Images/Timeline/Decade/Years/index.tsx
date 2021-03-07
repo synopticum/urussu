@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import React from 'react';
-import { imagesStore } from 'src/stores';
 import { ImageMapped } from 'src/stores/MapStore/EntitiesStore';
 import { observer } from 'mobx-react-lite';
 import { color } from 'src/components/GlobalStyle/theme';
 import curlyBracesImage from './images/curly.png';
 import arrowImage from './images/arrow.svg';
+import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
 
 const StyledYears = styled.ul<{ isDecadeActive: boolean }>`
   position: absolute;

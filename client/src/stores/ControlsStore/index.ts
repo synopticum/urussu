@@ -4,6 +4,7 @@ import { AsyncData, fetchData } from 'src/stores/helpers';
 import { SearchResultMapped, map } from 'src/stores/ControlsStore/map';
 import { SearchResultDto } from 'src/contracts/search';
 import { MutableRefObject } from 'react';
+import { api } from 'src/stores';
 
 type Controls = 'search' | 'comments';
 
@@ -44,3 +45,5 @@ export default class ControlsStore {
     });
   }
 }
+
+export const controlsStore = new ControlsStore(api);

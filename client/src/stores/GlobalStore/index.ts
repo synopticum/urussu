@@ -2,8 +2,9 @@ import React from 'react';
 import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData } from 'src/stores/helpers';
+import { api } from 'src/stores';
 
-export default class Index {
+export default class GlobalStore {
   private api: AxiosInstance;
 
   language = process.env.DEFAULT_LANGUAGE;
@@ -41,3 +42,5 @@ export default class Index {
     });
   }
 }
+
+export const globalStore = new GlobalStore(api);

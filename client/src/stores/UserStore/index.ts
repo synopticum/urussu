@@ -3,6 +3,7 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { map, UserMapped } from 'src/stores/UserStore/map';
 import { UserDto } from 'src/contracts/user';
+import { api } from 'src/stores';
 
 export type Author = {
   author: string;
@@ -45,3 +46,5 @@ export default class UserStore {
     });
   }
 }
+
+export const userStore = new UserStore(api);

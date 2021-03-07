@@ -1,4 +1,4 @@
-import { globalStore } from 'src/stores';
+import { globalStore } from 'src/stores/GlobalStore';
 
 export type Intl<T> = (key: keyof T) => unknown;
 

@@ -1,8 +1,9 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { dotStore, imagesStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 import Images from 'src/components/Map/EntityPage/Images';
+import { dotStore } from 'src/stores/MapStore/EntitiesStore/DotStore';
+import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
 
 const StyledDotPage = styled.div`
   height: 100%;

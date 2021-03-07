@@ -2,6 +2,7 @@ import { makeObservable, observable } from 'mobx';
 import { LatLngBoundsExpression, LatLngTuple, Map } from 'leaflet';
 import { AxiosInstance } from 'axios';
 import { EntityId, EntityType } from 'src/contracts/entities';
+import { api } from 'src/stores';
 
 export type Entity = {
   type: EntityType;
@@ -98,3 +99,5 @@ export default class MapStore {
     });
   }
 }
+
+export const mapStore = new MapStore(api);

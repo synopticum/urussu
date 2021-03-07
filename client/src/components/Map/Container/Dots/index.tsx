@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react';
-import { dotsStore, mapStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 import { drawDots } from 'src/components/Map/Container/Dots/draw-dots';
+import { dotsStore } from 'src/stores/MapStore/EntitiesStore/DotsStore';
+import { mapStore } from 'src/stores/MapStore';
 
 export const Dots: React.FC = observer(() => {
   const { isFetching, isDataLoaded, error, data } = dotsStore.apiData;

@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
-import { objectsStore, mapStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 import { drawCircles } from 'src/components/Map/Container/Circles/draw-circles';
+import { mapStore } from 'src/stores/MapStore';
+import { objectsStore } from 'src/stores/MapStore/EntitiesStore/ObjectsStore';
 
 export const Circles: React.FC = observer(() => {
   const { isFetching, isDataLoaded, error, data } = objectsStore.apiData;

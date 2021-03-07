@@ -1,12 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
-import Logo from './Logo';
 import UserMenu from './UserMenu';
 import l from './locale';
 import { color } from 'src/components/GlobalStyle/theme';
-import { objectStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
+import { objectStore } from 'src/stores/MapStore/EntitiesStore/ObjectStore';
 
 const StyledHeader = styled.header`
   position: relative;
