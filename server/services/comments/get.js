@@ -17,7 +17,7 @@ async function registerRoutes(fastify, opts) {
     try {
       reply.type("application/json").code(200);
       return await CommentModel.find({
-        id: { $regex: originId, $options: "i" },
+        originId: { $regex: originId, $options: "i" },
       }).select({ _id: 0, __v: 0 });
     } catch (e) {
       reply.type("application/json").code(500);
