@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { color } from 'src/components/GlobalStyle/theme';
 
 const Page = styled.main`
   position: relative;

@@ -1,8 +1,9 @@
 import GlobalStore from './GlobalStore';
 import AuthStore from './AuthStore';
 import UserStore from './UserStore';
-import MapStore from './MapStore';
+import ControlsStore from 'src/stores/ControlsStore';
 
+import MapStore from './MapStore';
 import DotsStore from './MapStore/EntitiesStore/DotsStore';
 import ObjectsStore from './MapStore/EntitiesStore/ObjectsStore';
 import PathsStore from './MapStore/EntitiesStore/PathsStore';
@@ -23,8 +24,9 @@ const api = axios.create({
 export const globalStore = new GlobalStore(api);
 export const authStore = new AuthStore(api);
 export const userStore = new UserStore(api);
-export const mapStore = new MapStore(api);
+export const controlsStore = new ControlsStore(api);
 
+export const mapStore = new MapStore(api);
 export const dotsStore = new DotsStore(api);
 export const objectsStore = new ObjectsStore(api);
 export const pathsStore = new PathsStore(api);

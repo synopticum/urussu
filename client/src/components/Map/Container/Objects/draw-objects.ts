@@ -1,5 +1,5 @@
 import { polygon, Map } from 'leaflet';
-import { mapStore } from 'src/stores';
+import { controlsStore, mapStore } from 'src/stores';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 import { getClassName } from 'src/components/Map/Container';
 
@@ -16,7 +16,10 @@ const getObjectColor = (object: ObjectMapped): string => {
 };
 
 const addObjectsToMap = (map: Map, objects: ObjectMapped[]): void => {
-  const handleClick = (id: string): void => mapStore.setEntity({ type: 'object', id });
+  const handleClick = (id: string): void => {
+    controlsStore.resetData();
+    mapStore.setEntity({ type: 'object', id });
+  };
 
   objects.forEach((item: ObjectMapped) => {
     polygon(item.coordinates, {

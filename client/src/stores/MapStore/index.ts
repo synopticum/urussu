@@ -1,6 +1,5 @@
 import { makeObservable, observable } from 'mobx';
 import { LatLngBoundsExpression, LatLngTuple, Map } from 'leaflet';
-import ControlsStore from 'src/stores/MapStore/ControlsStore';
 import { AxiosInstance } from 'axios';
 import { EntityId, EntityType } from 'src/contracts/entities';
 
@@ -37,12 +36,6 @@ export default class MapStore {
   lng: number;
   entity: Entity;
   activeEntityId: EntityId;
-  controls: ControlsStore;
-
-  private resetControls(): void {
-    this.activeEntityId = null;
-    this.controls.resetData();
-  }
 
   setZoom(zoom: number): void {
     this.zoom = zoom;
@@ -56,7 +49,7 @@ export default class MapStore {
   }
 
   setEntity(entity: Entity): void {
-    this.resetControls();
+    this.activeEntityId = null;
     this.entity = entity;
     this.updateRoute();
   }
@@ -78,7 +71,6 @@ export default class MapStore {
     this.map = null;
     this.entity = null;
     this.activeEntityId = null;
-    this.controls = new ControlsStore(api);
 
     if (location.search) {
       const params = new URLSearchParams(location.search);
@@ -102,7 +94,6 @@ export default class MapStore {
       lat: observable,
       lng: observable,
       entity: observable,
-      controls: observable,
       activeEntityId: observable,
     });
   }

@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { mapStore } from 'src/stores';
+import { controlsStore, mapStore } from 'src/stores';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 import { color } from 'src/components/GlobalStyle/theme';
-import { DotItem, ObjectItem, PathItem } from 'src/components/Map/Controls/Search/Results/Item';
+import { DotItem, ObjectItem, PathItem } from 'src/components/Page/Aside/Search/Results/Item';
 
 const StyledResults = styled.div`
   max-height: 100%;
@@ -45,8 +45,7 @@ const StyledResults = styled.div`
 `;
 
 const Results: React.FC = observer(() => {
-  const { controls } = mapStore;
-  const { data } = controls.searchData;
+  const { data } = controlsStore.searchData;
   const { map } = mapStore;
 
   if (!data) {

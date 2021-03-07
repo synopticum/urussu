@@ -9,9 +9,13 @@ import Objects from './Container/Objects';
 import Paths from './Container/Paths';
 import Circles from './Container/Circles';
 import EntityPage from './EntityPage';
-import { mapStore } from 'src/stores';
+import { controlsStore, mapStore } from 'src/stores';
 import { color } from 'src/components/GlobalStyle/theme';
 import { ActiveEntity } from 'src/components/Map/Container/ActiveEntity';
+import Portal from 'src/components/App/Portal';
+import Button from 'src/components/Page/Aside/Button';
+import Search from 'src/components/Page/Aside/Search';
+import { Control } from 'src/components/Page/Aside';
 
 const StyledMap = styled.div`
   height: 100%;
@@ -24,6 +28,17 @@ const Map: React.FC = observer(() => {
 
   const { entity } = mapStore;
 
+  const toggleSearch = (): void => {
+    if (!controlsStore.selected) {
+      controlsStore.selected = 'search';
+      return;
+    }
+
+    mapStore.activeEntityId = null;
+    controlsStore.resetData();
+  };
+
+  console.log(entity);
   return (
     <StyledMap>
       <Container ref={containerRef}>
@@ -34,6 +49,16 @@ const Map: React.FC = observer(() => {
 
         <ActiveEntity id={mapStore.activeEntityId} />
       </Container>
+
+      {controlsStore.selected === 'search' && <Search />}
+
+      {!entity && (
+        <Portal parent={controlsStore.ref}>
+          <Control>
+            <Button type={controlsStore.selected === 'search' ? 'close' : 'search'} onClick={toggleSearch} />
+          </Control>
+        </Portal>
+      )}
 
       <EntityPage entity={entity} />
     </StyledMap>

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Link, Router } from '@reach/router';
+import { Router } from '@reach/router';
 import styled from 'styled-components';
 import loadable from '@loadable/component';
 import Header from 'src/components/Header';

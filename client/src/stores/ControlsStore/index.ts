@@ -1,7 +1,7 @@
 import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
-import { SearchResultMapped, map } from 'src/stores/MapStore/ControlsStore/map';
+import { SearchResultMapped, map } from 'src/stores/ControlsStore/map';
 import { SearchResultDto } from 'src/contracts/search';
 import { MutableRefObject } from 'react';
 
@@ -17,6 +17,7 @@ export default class ControlsStore {
   selected: Controls;
 
   resetData(): void {
+    // this.ref = null;
     this.selected = null;
     this.resetSearchData();
   }

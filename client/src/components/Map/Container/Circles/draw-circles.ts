@@ -1,12 +1,15 @@
 import { circle, Map } from 'leaflet';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
-import { mapStore } from 'src/stores';
+import { controlsStore, mapStore } from 'src/stores';
 import { getClassName } from 'src/components/Map/Container';
 
 const removeCurrentCircles = (): void => {};
 
 const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
-  const handleClick = (id: string): void => mapStore.setEntity({ type: 'object', id });
+  const handleClick = (id: string): void => {
+    controlsStore.resetData();
+    mapStore.setEntity({ type: 'object', id });
+  };
 
   circles.forEach(item => {
     const { coordinates, radius } = item;

@@ -1,12 +1,15 @@
 import { Map, polyline } from 'leaflet';
-import { mapStore } from 'src/stores';
+import { controlsStore, mapStore } from 'src/stores';
 import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 import { getClassName } from 'src/components/Map/Container';
 
 const removeCurrentPaths = (): void => {};
 
 const addPathsToMap = (map: Map, data: PathMapped[]): void => {
-  const handleClick = (id: string): void => mapStore.setEntity({ type: 'path', id });
+  const handleClick = (id: string): void => {
+    controlsStore.resetData();
+    mapStore.setEntity({ type: 'path', id });
+  };
 
   data.forEach(item => {
     polyline(item.coordinates, {

@@ -1,6 +1,12 @@
 import styled from 'styled-components';
 import { color } from 'src/components/GlobalStyle/theme';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { observer } from 'mobx-react-lite';
+import { controlsStore } from 'src/stores';
+
+export const Control = styled.div`
+  position: relative;
+`;
 
 const StyledAside = styled.aside`
   position: absolute;
@@ -14,4 +20,20 @@ const StyledAside = styled.aside`
   padding: 23px 0 0 10px;
 `;
 
-export default StyledAside;
+const Aside: React.FC = observer(({ children }) => {
+  const ref = useRef(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      controlsStore.ref = ref;
+    }
+
+    return (): void => {
+      controlsStore.resetData();
+    };
+  }, [ref.current]);
+
+  return <StyledAside ref={ref}>{children}</StyledAside>;
+});
+
+export default Aside;

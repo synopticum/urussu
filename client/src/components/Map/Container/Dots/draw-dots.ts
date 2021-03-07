@@ -1,5 +1,5 @@
 import { Map, divIcon, marker, layerGroup, control, Marker, Control, LayerGroup } from 'leaflet';
-import { mapStore } from 'src/stores';
+import { controlsStore, mapStore } from 'src/stores';
 import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 import { getClassName } from 'src/components/Map/Container';
 
@@ -20,7 +20,10 @@ const createMarker = (item: DotMapped): Marker => {
     className: getClassName(item),
   });
 
-  const handleClick = (id: string): void => mapStore.setEntity({ type: 'dot', id });
+  const handleClick = (id: string): void => {
+    controlsStore.resetData();
+    mapStore.setEntity({ type: 'dot', id });
+  };
 
   return marker(item.coordinates, {
     icon,

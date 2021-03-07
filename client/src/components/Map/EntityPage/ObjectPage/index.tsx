@@ -1,12 +1,12 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { commentsStore, imagesStore, mapStore, objectStore } from 'src/stores';
+import { commentsStore, controlsStore, imagesStore, objectStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 import Images from 'src/components/Map/EntityPage/Images';
 import Comments from 'src/components/Map/EntityPage/Comments';
 import Portal from 'src/components/App/Portal';
 import Button from 'src/components/Page/Aside/Button';
-import { Control } from 'src/components/Map/Controls';
+import { Control } from 'src/components/Page/Aside';
 
 const StyledObjectPage = styled.div`
   height: 100%;
@@ -18,7 +18,6 @@ type Props = {
 
 export const ObjectPage: React.FC<Props> = observer(({ id }) => {
   const { data } = objectStore.apiData;
-  const { controls } = mapStore;
 
   useEffect(() => {
     imagesStore.store = objectStore;
@@ -36,22 +35,22 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
   }
 
   const toggleComments = (): void => {
-    if (!controls.selected) {
-      controls.selected = 'comments';
+    if (!controlsStore.selected) {
+      controlsStore.selected = 'comments';
       return;
     }
 
-    controls.resetData();
+    controlsStore.resetData();
   };
 
   return (
     <StyledObjectPage>
       <Images />
-      {controls.selected === 'comments' && <Comments type="object" id={id} />}
+      {controlsStore.selected === 'comments' && <Comments type="object" id={id} />}
 
-      <Portal parent={controls.ref}>
+      <Portal parent={controlsStore.ref}>
         <Control>
-          <Button type={controls.selected === 'comments' ? 'close' : 'comments'} onClick={toggleComments} />
+          <Button type={controlsStore.selected === 'comments' ? 'close' : 'comments'} onClick={toggleComments} />
         </Control>
       </Portal>
     </StyledObjectPage>
