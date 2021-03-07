@@ -84,21 +84,11 @@ const NestedYearValue = styled(YearValue)<{ isActive: boolean }>`
 `;
 
 type Props = {
-  decade: string;
   images: ImageMapped[];
   isDecadeActive?: boolean;
 };
 
-export const Years: React.FC<Props> = observer(({ decade, images, isDecadeActive }) => {
-  const changeSelectedImage = (image: ImageMapped): void => {
-    imagesStore.selectedImage = image;
-  };
-
-  const isActive = (image: ImageMapped): boolean => {
-    const { year, url } = imagesStore.selectedImage;
-    return image.year === year && image.url === url;
-  };
-
+export const Years: React.FC<Props> = observer(({ images, isDecadeActive }) => {
   return (
     <StyledYears isDecadeActive={isDecadeActive}>
       {images.map(image => {
@@ -106,11 +96,17 @@ export const Years: React.FC<Props> = observer(({ decade, images, isDecadeActive
 
         return (
           <Image key={url}>
-            <YearValue isActive={isActive(image)} onClick={(): void => changeSelectedImage(image)}>
+            <YearValue
+              isActive={imagesStore.isImageActive(image)}
+              onClick={(): void => imagesStore.changeSelectedImage(image)}
+            >
               {year}
             </YearValue>
             {nestedImage && (
-              <NestedYearValue isActive={isActive(nestedImage)} onClick={(): void => changeSelectedImage(nestedImage)}>
+              <NestedYearValue
+                isActive={imagesStore.isImageActive(nestedImage)}
+                onClick={(): void => imagesStore.changeSelectedImage(nestedImage)}
+              >
                 {nestedImage.year}
               </NestedYearValue>
             )}

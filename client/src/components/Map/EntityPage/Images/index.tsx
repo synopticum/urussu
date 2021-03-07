@@ -21,9 +21,7 @@ const CurrentImage = styled.div`
   }
 `;
 
-type Props = {};
-
-export const Images: React.FC<Props> = observer(() => {
+export const Images = observer(() => {
   const { store } = imagesStore;
   const { data } = store.apiData;
 

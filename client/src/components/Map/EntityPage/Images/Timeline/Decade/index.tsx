@@ -63,7 +63,7 @@ export const Decade: React.FC<Props> = ({ decade, images, change, isActive }) =>
       <DecadeValue onClick={change} isActive={isActive}>
         {decade}
       </DecadeValue>
-      <Years decade={decade} images={images} isDecadeActive={isActive} />
+      <Years images={images} isDecadeActive={isActive} />
     </StyledDecade>
   );
 };

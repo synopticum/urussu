@@ -4,7 +4,6 @@ import { Decade } from 'src/components/Map/EntityPage/Images/Timeline/Decade';
 import { EmptyDecade } from 'src/components/Map/EntityPage/Images/Timeline/EmptyDecade';
 import { observer } from 'mobx-react-lite';
 import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
-import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 
 const StyledTimeline = styled.div`
   position: absolute;
@@ -19,23 +18,7 @@ const Decades = styled.ul`
   align-items: center;
 `;
 
-const createTimeline = (images: ImagesMapped): ImagesMapped => {
-  const DECADES = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
-  const timeline: ImagesMapped = {};
-  const decades = Object.entries(images);
-
-  DECADES.forEach(decade => (timeline[decade] = null));
-
-  decades.forEach(([decade, images]) => {
-    timeline[parseInt(decade)] = images;
-  });
-
-  return timeline;
-};
-
-type Props = {};
-
-export const Timeline: React.FC<Props> = observer(() => {
+export const Timeline = observer(() => {
   const { store } = imagesStore;
   const { data } = store.apiData;
 
@@ -45,13 +28,7 @@ export const Timeline: React.FC<Props> = observer(() => {
 
   imagesStore.selectedDecade = imagesStore.selectedDecade || imagesStore.initialDecade;
 
-  const changeSelectedDecade = (decade: string): void => {
-    imagesStore.selectedDecade = parseInt(decade);
-  };
-
-  const isActive = (decade: string): boolean => imagesStore.selectedDecade === parseInt(decade);
-
-  const timeline = createTimeline(data.images);
+  const timeline = imagesStore.createTimeline(data.images);
 
   return (
     <StyledTimeline>
@@ -65,8 +42,8 @@ export const Timeline: React.FC<Props> = observer(() => {
             <Decade
               decade={decade}
               images={images}
-              isActive={isActive(decade)}
-              change={(): void => changeSelectedDecade(decade)}
+              isActive={imagesStore.isDecadeActive(decade)}
+              change={(): void => imagesStore.changeSelectedDecade(decade)}
               key={decade}
             />
           );
