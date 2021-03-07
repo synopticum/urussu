@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { EntityId, EntityType } from 'src/contracts/entities';
 import { color, shadow } from 'src/components/GlobalStyle/theme';
 import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
+import Comment from './Comment';
 
 const StyledComments = styled.div`
   position: absolute;
@@ -61,20 +62,26 @@ export const Comments: React.FC<Props> = observer(({ type, id }) => {
     };
   }, []);
 
-  const addComment = (): void => {
-    commentsStore.addComment('zxczxc');
-  };
+  if (!data) {
+    return null;
+  }
 
   return (
     <StyledComments>
       <Title>Комментарии</Title>
 
-      {!data || (!data.length && <NoComments>Никто не оставил ни одного комментария.</NoComments>)}
+      {!data.length && <NoComments>Никто не оставил ни одного комментария.</NoComments>}
 
-      {JSON.stringify(data)}
+      <div>
+        {data.map(item => (
+          <Comment item={item} key={item.id} />
+        ))}
+      </div>
 
-      <Textarea />
-      <Button type="button" onClick={(): void => addComment()}>
+      <Textarea onInput={commentsStore.handleCommentInput} value={commentsStore.currentValue} />
+      <div>{commentsStore.currentValue}</div>
+
+      <Button type="button" onClick={(): Promise<void> => commentsStore.addComment()}>
         Submit
       </Button>
     </StyledComments>

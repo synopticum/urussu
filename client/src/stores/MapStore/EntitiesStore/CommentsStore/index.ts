@@ -10,9 +10,12 @@ import { EntityId, EntityType } from 'src/contracts/entities';
 import { v4 as uuidv4 } from 'uuid';
 import { api } from 'src/stores';
 import { userStore } from 'src/stores/UserStore';
+import React from 'react';
 
 export default class CommentsStore {
   private api: AxiosInstance;
+
+  currentValue: string;
 
   apiData = new AsyncData<CommentMapped[]>();
 
@@ -26,11 +29,17 @@ export default class CommentsStore {
   }
 
   resetData(): void {
+    this.currentValue = null;
     this.apiData = new AsyncData<CommentMapped[]>();
   }
 
-  async addComment(text: string): Promise<void> {
-    const { store } = this;
+  handleCommentInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+    const { value } = e.target;
+    this.currentValue = value;
+  };
+
+  async addComment(): Promise<void> {
+    const { store, currentValue } = this;
     const { instanceType: originType, id: originId } = store.apiData.data;
     const commentId = uuidv4();
     const url = `/${originType}/${originId}/comments/${commentId}`;
@@ -41,13 +50,14 @@ export default class CommentsStore {
       originType,
       originId,
       date: Date.now().toString(),
-      text,
+      text: currentValue,
       ...author,
     };
 
     try {
       const newComment = await put<CommentDto, CommentMapped>(url, comment, 'json');
       this.apiData.data.push(newComment);
+      this.currentValue = '';
     } catch (e) {
       alert('hui');
       // handle somehow
@@ -56,9 +66,12 @@ export default class CommentsStore {
 
   constructor(api: AxiosInstance) {
     this.api = api;
+    this.currentValue = '';
 
     makeObservable(this, {
       apiData: observable,
+      store: observable,
+      currentValue: observable,
     });
   }
 }

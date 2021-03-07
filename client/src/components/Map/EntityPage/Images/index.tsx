@@ -28,7 +28,11 @@ export const Images: React.FC<Props> = observer(() => {
   const { data } = store.apiData;
 
   if (!store || !data.images) {
-    return <div>No images found</div>;
+    return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+        No images found
+      </div>
+    );
   }
 
   imagesStore.selectedImage = imagesStore.selectedImage || imagesStore.initialImage;
