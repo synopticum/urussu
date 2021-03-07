@@ -12,8 +12,8 @@ export default class ObjectStore {
   apiData = new AsyncData<ObjectMapped>();
 
   fetchApiData(id: EntityId): void {
-    const { api, apiData } = this;
-    const options = { api, apiData, map };
+    const { apiData } = this;
+    const options = { apiData, map };
 
     fetchData<ObjectDto, ObjectMapped>(`/objects/${id}`, options);
   }

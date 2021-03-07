@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
-import { AxiosInstance } from 'axios';
-import { Token } from 'src/stores/AuthStore';
+import { authStore } from 'src/stores/AuthStore';
+import { api } from 'src/stores/index';
 
 export class AsyncData<T> {
   isFetching: boolean;
@@ -19,24 +19,22 @@ export class AsyncData<T> {
 }
 
 type FetchDataOptions<Dto, Mapped> = {
-  api: AxiosInstance;
   apiData: AsyncData<Mapped>;
   map: (data: Dto) => Mapped;
-  token?: Token;
 };
 
 export const fetchData = async function <Dto, Mapped>(
   url: string,
   options: FetchDataOptions<Dto, Mapped>,
 ): Promise<void> {
-  const { apiData, api, map, token } = options;
+  const { apiData, map } = options;
 
   apiData.isFetching = true;
 
   try {
     const { data } = await api.get<Dto>(url, {
       headers: {
-        token,
+        token: authStore.token,
       },
     });
 
@@ -50,28 +48,16 @@ export const fetchData = async function <Dto, Mapped>(
   }
 };
 
-type PutDataOptions<Dto, Mapped> = {
-  api: AxiosInstance;
-  type: 'json' | 'formData';
-  token?: Token;
-};
-
 const contentTypes = {
   json: 'application/json',
   formData: 'multipart/form-data',
 };
 
-export const put = async function <Dto, Mapped>(
-  url: string,
-  model: Mapped,
-  options: PutDataOptions<Dto, Mapped>,
-): Promise<Dto> {
-  const { api, type, token } = options;
-
+export const put = async function <Dto, Mapped>(url: string, model: Mapped, type: 'json' | 'formData'): Promise<Dto> {
   const { data } = await api.put<Dto>(url, model, {
     headers: {
-      token,
       'Content-Type': contentTypes[type],
+      token: authStore.token,
     },
   });
 

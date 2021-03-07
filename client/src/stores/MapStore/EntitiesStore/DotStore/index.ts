@@ -12,8 +12,8 @@ export default class DotStore {
   apiData = new AsyncData<DotMapped>();
 
   fetchApiData(id: EntityId): void {
-    const { api, apiData } = this;
-    const options = { api, apiData, map };
+    const { apiData } = this;
+    const options = { apiData, map };
 
     fetchData<DotDto, DotMapped>(`/dots/${id}`, options);
   }

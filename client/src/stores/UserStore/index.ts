@@ -30,9 +30,9 @@ export default class UserStore {
     };
   }
 
-  fetchApiData(token: string): void {
-    const { api, apiData } = this;
-    const options = { api, apiData, map, token };
+  fetchApiData(): void {
+    const { apiData } = this;
+    const options = { apiData, map };
 
     fetchData<UserDto, UserMapped>('/user', options);
   }

@@ -28,8 +28,8 @@ export default class ControlsStore {
   }
 
   search(value: string): void {
-    const { api, searchData } = this;
-    const options = { api, apiData: searchData, map };
+    const { searchData } = this;
+    const options = { apiData: searchData, map };
 
     fetchData<SearchResultDto, SearchResultMapped>(`/search?value=${value}`, options);
   }

@@ -62,14 +62,14 @@ const Content = styled.div`
 type Props = {};
 
 const Layout: React.FC<Props> = observer(() => {
-  const { isLogged, token } = authStore;
+  const { isLogged } = authStore;
 
   useEffect(() => {
     authStore.login();
   }, []);
 
   useEffect(() => {
-    if (isLogged) userStore.fetchApiData(token);
+    if (isLogged) userStore.fetchApiData();
   }, [isLogged]);
 
   return (

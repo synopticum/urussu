@@ -7,7 +7,6 @@ import { AsyncData, fetchData, put } from 'src/stores/helpers';
 import { CommentDto } from 'src/contracts/entities/comments';
 import { CommentMapped, map } from 'src/stores/MapStore/EntitiesStore/CommentsStore/map';
 import { EntityId, EntityType } from 'src/contracts/entities';
-import { Token } from 'src/stores/AuthStore';
 import { v4 as uuidv4 } from 'uuid';
 import { api } from 'src/stores';
 import { userStore } from 'src/stores/UserStore';
@@ -20,8 +19,8 @@ export default class CommentsStore {
   store: ObjectStore | DotStore | PathStore;
 
   fetchApiData(type: EntityType, id: EntityId): void {
-    const { api, apiData } = this;
-    const options = { api, apiData, map };
+    const { apiData } = this;
+    const options = { apiData, map };
 
     fetchData<CommentDto[], CommentMapped[]>(`/${type}/${id}/comments`, options);
   }
@@ -30,8 +29,8 @@ export default class CommentsStore {
     this.apiData = new AsyncData<CommentMapped[]>();
   }
 
-  async addComment(text: string, token: Token): Promise<void> {
-    const { api, store } = this;
+  async addComment(text: string): Promise<void> {
+    const { store } = this;
     const { instanceType: originType, id: originId } = store.apiData.data;
     const commentId = uuidv4();
     const url = `/${originType}/${originId}/comments/${commentId}`;
@@ -46,7 +45,7 @@ export default class CommentsStore {
       ...author,
     };
 
-    const d = await put<CommentDto, CommentMapped>(url, comment, { api, type: 'json', token });
+    const d = await put<CommentDto, CommentMapped>(url, comment, 'json');
 
     console.log(d);
   }

@@ -12,8 +12,8 @@ export default class PathStore {
   apiData = new AsyncData<PathMapped>();
 
   fetchApiData(id: EntityId): void {
-    const { api, apiData } = this;
-    const options = { api, apiData, map };
+    const { apiData } = this;
+    const options = { apiData, map };
 
     fetchData<PathDto, PathMapped>(`/paths/${id}`, options);
   }

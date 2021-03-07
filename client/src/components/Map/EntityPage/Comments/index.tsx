@@ -4,7 +4,6 @@ import { observer } from 'mobx-react-lite';
 import { EntityId, EntityType } from 'src/contracts/entities';
 import { color, shadow } from 'src/components/GlobalStyle/theme';
 import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
-import { authStore } from 'src/stores/AuthStore';
 
 const StyledComments = styled.div`
   position: absolute;
@@ -53,7 +52,6 @@ type Props = {
 
 export const Comments: React.FC<Props> = observer(({ type, id }) => {
   const { data } = commentsStore.apiData;
-  const { token } = authStore;
 
   useEffect(() => {
     commentsStore.fetchApiData(type, id);
@@ -68,7 +66,7 @@ export const Comments: React.FC<Props> = observer(({ type, id }) => {
       text: 'test',
     };
 
-    commentsStore.addComment('zxczxc', token);
+    commentsStore.addComment('zxczxc');
   };
 
   return (
