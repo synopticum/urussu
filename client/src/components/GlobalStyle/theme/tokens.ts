@@ -11,6 +11,7 @@ const tokens = {
   },
   shadows: {
     'shadow-1': '1px 1px 3px rgba(0, 0, 0, 0.5)',
+    'shadow-2': '3px 3px 6px rgba(0, 0, 0, 0.3)',
   },
 };
 

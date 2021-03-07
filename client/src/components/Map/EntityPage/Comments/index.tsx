@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import { commentsStore } from 'src/stores';
+import { authStore, commentsStore, userStore } from 'src/stores';
 import { observer } from 'mobx-react-lite';
 import { EntityId, EntityType } from 'src/contracts/entities';
 import { color, shadow } from 'src/components/GlobalStyle/theme';
@@ -10,14 +10,14 @@ const StyledComments = styled.div`
   left: 0;
   top: 0;
   width: 400px;
-  padding: 10px 10px 20px 15px;
+  padding: 20px 25px 30px 25px;
   height: calc(100vh - 170px);
   border-radius: 5px 0 0 5px;
   display: flex;
   flex-direction: column;
   opacity: 0.95;
   background: ${color('white-1')};
-  box-shadow: ${shadow('shadow-1')};
+  box-shadow: ${shadow('shadow-2')};
 
   &::before {
     display: none;
@@ -33,6 +33,18 @@ const StyledComments = styled.div`
   }
 `;
 
+const Title = styled.h1`
+  font-size: 24px;
+`;
+
+const NoComments = styled.div`
+  margin: 15px 0;
+`;
+
+const Textarea = styled.textarea``;
+
+const Button = styled.button``;
+
 type Props = {
   type: EntityType;
   id: EntityId;
@@ -40,6 +52,8 @@ type Props = {
 
 export const Comments: React.FC<Props> = observer(({ type, id }) => {
   const { data } = commentsStore.apiData;
+  const { token } = authStore;
+  const { author } = userStore;
 
   useEffect(() => {
     commentsStore.fetchApiData(type, id);
@@ -49,11 +63,27 @@ export const Comments: React.FC<Props> = observer(({ type, id }) => {
     };
   }, []);
 
-  if (!data) {
-    return <StyledComments>No comments found</StyledComments>;
-  }
+  const addComment = (): void => {
+    const data = {
+      text: 'test',
+      ...author,
+    };
 
-  return <StyledComments>{JSON.stringify(data)}</StyledComments>;
+    commentsStore.addComment(data, token);
+  };
+
+  return (
+    <StyledComments>
+      <Title>Комментарии</Title>
+
+      {!data || (!data.length && <NoComments>Никто не оставил ни одного комментария.</NoComments>)}
+
+      <Textarea />
+      <Button type="button" onClick={(): void => addComment()}>
+        Submit
+      </Button>
+    </StyledComments>
+  );
 });
 
 export default Comments;

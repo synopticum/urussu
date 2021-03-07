@@ -2,7 +2,7 @@ import { computed, makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 
 type Code = string;
-type Token = string;
+export type Token = string;
 
 export default class AuthStore {
   token: Token = null;

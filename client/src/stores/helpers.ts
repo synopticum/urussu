@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { AxiosInstance } from 'axios';
+import { Token } from 'src/stores/AuthStore';
 
 export class AsyncData<T> {
   isFetching: boolean;
@@ -21,7 +22,7 @@ type FetchDataOptions<Dto, Mapped> = {
   api: AxiosInstance;
   apiData: AsyncData<Mapped>;
   map: (data: Dto) => Mapped;
-  token?: string;
+  token?: Token;
 };
 
 export const fetchData = async function <Dto, Mapped>(
@@ -47,4 +48,32 @@ export const fetchData = async function <Dto, Mapped>(
     apiData.error = e.message;
     apiData.isFetching = false;
   }
+};
+
+type PutDataOptions<Dto, Mapped> = {
+  api: AxiosInstance;
+  type: 'json' | 'formData';
+  token?: Token;
+};
+
+const contentTypes = {
+  json: 'application/json',
+  formData: 'multipart/form-data',
+};
+
+export const put = async function <Dto, Mapped>(
+  url: string,
+  model: Mapped,
+  options: PutDataOptions<Dto, Mapped>,
+): Promise<Dto> {
+  const { api, type, token } = options;
+
+  const { data } = await api.put<Dto>(url, model, {
+    headers: {
+      token,
+      'Content-Type': contentTypes[type],
+    },
+  });
+
+  return data;
 };

@@ -38,7 +38,6 @@ const Map: React.FC = observer(() => {
     controlsStore.resetData();
   };
 
-  console.log(entity);
   return (
     <StyledMap>
       <Container ref={containerRef}>
