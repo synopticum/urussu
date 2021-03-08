@@ -59,8 +59,19 @@ export const EntityPage: React.FC<Props> = ({ entity }) => {
     mapStore.setEntity(null);
   };
 
+  const handleEscape = (e: KeyboardEvent): void => {
+    if (e.key === 'Escape') {
+      close();
+    }
+  };
+
   useEffect(() => {
-    return (): void => close();
+    document.addEventListener('keyup', handleEscape);
+
+    return (): void => {
+      document.removeEventListener('keyup', handleEscape);
+      close();
+    };
   }, []);
 
   const Page = Pages[entity.type];

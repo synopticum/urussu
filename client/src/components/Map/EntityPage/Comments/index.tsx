@@ -13,7 +13,7 @@ const StyledComments = styled.div`
   width: 400px;
   padding: 20px 25px 30px 25px;
   height: calc(100vh - 170px);
-  border-radius: 5px 0 0 5px;
+  border-radius: 10px 0 0 10px;
   display: flex;
   flex-direction: column;
   opacity: 0.95;
