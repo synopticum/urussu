@@ -2,7 +2,7 @@ import { EntityId, EntityType } from 'src/contracts/entities';
 
 export type CommentDto = {
   id: string;
-  date: string;
+  date: Date;
   originType: EntityType;
   originId: EntityId;
   text: string;

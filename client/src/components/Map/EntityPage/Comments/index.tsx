@@ -42,6 +42,10 @@ const NoComments = styled.div`
   margin: 15px 0;
 `;
 
+const List = styled.div`
+  margin: 20px 0;
+`;
+
 const Textarea = styled.textarea``;
 
 const Button = styled.button``;
@@ -72,11 +76,11 @@ export const Comments: React.FC<Props> = observer(({ type, id }) => {
 
       {!data.length && <NoComments>Никто не оставил ни одного комментария.</NoComments>}
 
-      <div>
+      <List>
         {data.map(item => (
           <Comment item={item} key={item.id} />
         ))}
-      </div>
+      </List>
 
       <Textarea onInput={commentsStore.handleCommentInput} value={commentsStore.currentValue} />
       <div>{commentsStore.currentValue}</div>
