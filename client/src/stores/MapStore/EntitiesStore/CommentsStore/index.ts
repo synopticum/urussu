@@ -8,11 +8,11 @@ import { CommentDto } from 'src/contracts/entities/comments';
 import { CommentMapped, map } from 'src/stores/MapStore/EntitiesStore/CommentsStore/map';
 import { EntityId, EntityType } from 'src/contracts/entities';
 import { v4 as uuidv4 } from 'uuid';
-import { api } from 'src/stores';
+import { api, BaseStore } from 'src/stores';
 import { userStore } from 'src/stores/UserStore';
 import React from 'react';
 
-export default class CommentsStore {
+export default class CommentsStore implements BaseStore {
   private api: AxiosInstance;
 
   currentValue: string;

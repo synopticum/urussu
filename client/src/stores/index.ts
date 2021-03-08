@@ -4,6 +4,6 @@ export const api = axios.create({
   baseURL: process.env.API_URL,
 });
 
-// interface BaseStore {
-//   resetData(): void;
-// }
+export interface BaseStore {
+  resetData(): void;
+}

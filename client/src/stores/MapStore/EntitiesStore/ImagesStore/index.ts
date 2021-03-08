@@ -3,6 +3,7 @@ import ObjectStore from 'src/stores/MapStore/EntitiesStore/ObjectStore';
 import DotStore from 'src/stores/MapStore/EntitiesStore/DotStore';
 import { ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 import PathStore from 'src/stores/MapStore/EntitiesStore/PathStore';
+import { BaseStore } from 'src/stores';
 
 export const getImage = (params: URLSearchParams): ImageMapped => {
   const [year, url] = params.get('image').split(',');
@@ -10,7 +11,7 @@ export const getImage = (params: URLSearchParams): ImageMapped => {
   return { year, url };
 };
 
-export default class ImagesStore {
+export default class ImagesStore implements BaseStore {
   store: ObjectStore | DotStore | PathStore;
 
   selectedImage: ImageMapped;

@@ -42,6 +42,11 @@ const UserMenu: React.FC = observer(() => {
   const { data } = userStore.apiData;
   if (!data) return null;
 
+  const logout = (): void => {
+    authStore.logout();
+    userStore.resetData();
+  };
+
   return (
     <StyledUserMenu>
       <Avatar src={data.image} width="50" height="50" alt="" onClick={toggleMenu} />
@@ -50,7 +55,7 @@ const UserMenu: React.FC = observer(() => {
         <Menu ref={menuRef}>
           <MenuItem>Привет, {data.firstName}</MenuItem>
           <MenuItem>
-            <Link onClick={(): void => authStore.logout()}>Выйти</Link>
+            <Link onClick={logout}>Выйти</Link>
           </MenuItem>
         </Menu>
       )}

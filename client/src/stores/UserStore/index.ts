@@ -3,7 +3,7 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { map, UserMapped } from 'src/stores/UserStore/map';
 import { UserDto } from 'src/contracts/user';
-import { api } from 'src/stores';
+import { api, BaseStore } from 'src/stores';
 
 export type Author = {
   author: string;
@@ -11,7 +11,7 @@ export type Author = {
   authorVkId: UserMapped['vkId'];
 };
 
-export default class UserStore {
+export default class UserStore implements BaseStore {
   private api: AxiosInstance;
 
   apiData = new AsyncData<UserMapped>();
@@ -35,6 +35,10 @@ export default class UserStore {
     const options = { apiData, map };
 
     fetchData<UserDto, UserMapped>('/user', options);
+  }
+
+  resetData(): void {
+    this.apiData = new AsyncData<UserMapped>();
   }
 
   constructor(api: AxiosInstance) {

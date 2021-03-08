@@ -4,9 +4,9 @@ import { AsyncData, fetchData } from 'src/stores/helpers';
 import { EntityId } from 'src/contracts/entities';
 import { DotMapped, map } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 import { DotDto } from 'src/contracts/entities/dot';
-import { api } from 'src/stores';
+import { api, BaseStore } from 'src/stores';
 
-export default class DotStore {
+export default class DotStore implements BaseStore {
   private api: AxiosInstance;
 
   apiData = new AsyncData<DotMapped>();

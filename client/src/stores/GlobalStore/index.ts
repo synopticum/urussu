@@ -2,13 +2,13 @@ import React from 'react';
 import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData } from 'src/stores/helpers';
-import { api } from 'src/stores';
+import { api, BaseStore } from 'src/stores';
 
-export default class GlobalStore {
+export default class GlobalStore implements BaseStore {
   private api: AxiosInstance;
 
-  language = process.env.DEFAULT_LANGUAGE;
-  title = 'some title';
+  language: string;
+  title: string;
   apiData = new AsyncData<string>();
 
   handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -32,8 +32,16 @@ export default class GlobalStore {
     }
   };
 
+  resetData(): void {
+    this.title = null;
+    this.language = 'ru';
+    this.apiData = new AsyncData<string>();
+  }
+
   constructor(api: AxiosInstance) {
     this.api = api;
+    this.title = 'some title';
+    this.language = process.env.DEFAULT_LANGUAGE;
 
     makeObservable(this, {
       language: observable,

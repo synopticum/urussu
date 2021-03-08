@@ -2,7 +2,7 @@ import { computed, makeObservable, observable } from 'mobx';
 import { GridLayer, LatLngBounds, LatLngBoundsExpression, LatLngTuple, Map, tileLayer } from 'leaflet';
 import { AxiosInstance } from 'axios';
 import { EntityId, EntityType } from 'src/contracts/entities';
-import { api } from 'src/stores';
+import { api, BaseStore } from 'src/stores';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { map, SearchResultMapped } from 'src/stores/ControlsStore/map';
 import { SearchResultDto } from 'src/contracts/search';
@@ -28,7 +28,7 @@ export const getEntity = (params: URLSearchParams): Entity => {
   return { type, id };
 };
 
-export default class MapStore {
+export default class MapStore implements BaseStore {
   private readonly api: AxiosInstance;
   private readonly defaultZoom = 5;
   private readonly defaultLat = 69.65;

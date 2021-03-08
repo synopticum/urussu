@@ -4,9 +4,9 @@ import { AsyncData, fetchData } from 'src/stores/helpers';
 import { PathDto } from 'src/contracts/entities/path';
 import { map } from 'src/stores/MapStore/EntitiesStore/PathsStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
-import { api } from 'src/stores';
+import { api, BaseStore } from 'src/stores';
 
-export default class PathsStore {
+export default class PathsStore implements BaseStore {
   private api: AxiosInstance;
 
   apiData = new AsyncData<PathMapped[]>();

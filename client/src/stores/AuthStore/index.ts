@@ -1,18 +1,18 @@
 import { computed, makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
-import { api } from 'src/stores';
+import { api, BaseStore } from 'src/stores';
 
 type Code = string;
 export type Token = string;
 
-export default class AuthStore {
+export default class AuthStore implements BaseStore {
+  private api: AxiosInstance;
+
   token: Token = null;
 
-  get isLogged(): boolean {
-    return Boolean(this.token);
+  resetData(): void {
+    this.logout();
   }
-
-  private api: AxiosInstance;
 
   async login(code?: Code): Promise<boolean> {
     this.token = await this.getToken(code);
@@ -74,6 +74,10 @@ export default class AuthStore {
     } catch (e) {
       return false;
     }
+  }
+
+  get isLogged(): boolean {
+    return Boolean(this.token);
   }
 
   constructor(api: AxiosInstance) {

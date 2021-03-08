@@ -1,12 +1,12 @@
 import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { MutableRefObject } from 'react';
-import { api } from 'src/stores';
+import { api, BaseStore } from 'src/stores';
 import { ButtonTypes } from 'src/components/Page/Aside/Button';
 
 export type Controls = 'search' | 'comments';
 
-export default class ControlsStore {
+export default class ControlsStore implements BaseStore {
   private api: AxiosInstance;
 
   ref: MutableRefObject<HTMLDivElement>;

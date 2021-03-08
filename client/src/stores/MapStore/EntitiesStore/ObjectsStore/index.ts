@@ -4,9 +4,9 @@ import { AsyncData, fetchData } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
 import { map } from 'src/stores/MapStore/EntitiesStore/ObjectsStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
-import { api } from 'src/stores';
+import { api, BaseStore } from 'src/stores';
 
-export default class ObjectsStore {
+export default class ObjectsStore implements BaseStore {
   private api: AxiosInstance;
 
   apiData = new AsyncData<ObjectMapped[]>();
