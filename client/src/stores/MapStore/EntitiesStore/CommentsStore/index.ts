@@ -40,6 +40,11 @@ export default class CommentsStore {
 
   async add(): Promise<void> {
     const { store, currentValue } = this;
+
+    if (!currentValue) {
+      return;
+    }
+
     const { instanceType: originType, id: originId } = store.apiData.data;
     const id = uuidv4();
     const url = `/${originType}/${originId}/comments/${id}`;

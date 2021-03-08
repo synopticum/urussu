@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color } from 'src/components/GlobalStyle/theme';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const EmptyDecadeValue = styled.div`
   cursor: default;

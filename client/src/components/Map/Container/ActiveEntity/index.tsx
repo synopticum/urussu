@@ -1,5 +1,5 @@
 import React from 'react';
-import { animation } from 'src/components/GlobalStyle/theme';
+import { animation } from 'src/components/GlobalStyle/theme/helpers';
 
 export const ActiveEntity: React.FC<{ id: string }> = ({ id }) => {
   return (

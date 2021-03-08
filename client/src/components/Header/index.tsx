@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import { Link } from '@reach/router';
 import UserMenu from './UserMenu';
 import l from './locale';
-import { color } from 'src/components/GlobalStyle/theme';
 import { observer } from 'mobx-react-lite';
 import { objectStore } from 'src/stores/MapStore/EntitiesStore/ObjectStore';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const StyledHeader = styled.header`
   position: relative;

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
-import { color } from 'src/components/GlobalStyle/theme';
 import { Years } from 'src/components/Map/EntityPage/Images/Timeline/Decade/Years';
 import { ImageMapped } from 'src/stores/MapStore/EntitiesStore';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const DecadeValue = styled.div<{ isActive: boolean }>`
   cursor: ${({ isActive }): string => (isActive ? 'default' : 'pointer')};

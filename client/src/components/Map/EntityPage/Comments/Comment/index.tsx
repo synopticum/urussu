@@ -1,24 +1,27 @@
 import React from 'react';
 import { CommentMapped } from 'src/stores/MapStore/EntitiesStore/CommentsStore/map';
 import styled from 'styled-components';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 type Props = {
   item: CommentMapped;
 };
 
 const StyledComment = styled.div`
-  margin: 10px 0;
+  padding: 10px 0;
+  border-bottom: 1px solid ${color('white-2')};
 
   &:first-of-type {
-    margin-top: 0;
+    padding-top: 0;
   }
 
   &:last-of-type {
-    margin-bottom: 0;
+    border-bottom: 0;
   }
 `;
 
 const Meta = styled.div`
+  margin-top: 10px;
   font-size: 12px;
   text-align: right;
 `;
@@ -28,10 +31,11 @@ const Comment: React.FC<Props> = ({ item }) => {
     <StyledComment>
       <div>{item.text}</div>
       <Meta>
+        Написал
         <a href={`https://vk.com/id${item.authorVkId}`} target="_blank" rel="noreferrer">
           {item.author}
         </a>{' '}
-        написал {item.date}
+        {item.date}
       </Meta>
     </StyledComment>
   );

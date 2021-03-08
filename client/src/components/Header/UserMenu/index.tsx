@@ -1,13 +1,13 @@
 import React, { useCallback, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
-import { color } from 'src/components/GlobalStyle/theme';
 import Login from 'src/components/Header/UserMenu/Login';
 import state from './state';
 import { useClickOutside } from 'src/components/App/hooks/use-outside-click';
 import { Menu, MenuItem } from 'src/components/Header/UserMenu/Menu';
 import { authStore } from 'src/stores/AuthStore';
 import { userStore } from 'src/stores/UserStore';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const StyledUserMenu = styled.span`
   position: relative;

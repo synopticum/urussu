@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { color } from 'src/components/GlobalStyle/theme';
 import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { controlsStore } from 'src/stores/ControlsStore';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 export const Control = styled.div`
   position: relative;

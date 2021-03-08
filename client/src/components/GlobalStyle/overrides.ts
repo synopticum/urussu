@@ -1,4 +1,4 @@
-import { color } from 'src/components/GlobalStyle/theme';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const overrides = `
   *, *:before, *:after { box-sizing: inherit; }

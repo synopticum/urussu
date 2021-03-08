@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color } from 'src/components/GlobalStyle/theme';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const Content = styled.main`
   width: 100%;

@@ -9,7 +9,6 @@ import Objects from './Container/Objects';
 import Paths from './Container/Paths';
 import Circles from './Container/Circles';
 import EntityPage from './EntityPage';
-import { color } from 'src/components/GlobalStyle/theme';
 import { ActiveEntity } from 'src/components/Map/Container/ActiveEntity';
 import Portal from 'src/components/App/Portal';
 import Button from 'src/components/Page/Aside/Button';
@@ -17,6 +16,7 @@ import Search from 'src/components/Map/Search';
 import { Control } from 'src/components/Page/Aside';
 import { mapStore } from 'src/stores/MapStore';
 import { controlsStore } from 'src/stores/ControlsStore';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const StyledMap = styled.div`
   height: 100%;

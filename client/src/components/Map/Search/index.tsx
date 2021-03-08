@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 import React, { ChangeEvent, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
-import { color, shadow } from 'src/components/GlobalStyle/theme';
 import { debounce } from 'ts-debounce';
 import { useAutoFocus } from 'src/components/App/hooks/use-auto-focus';
 import Results from 'src/components/Map/Search/Results';
 import { mapStore } from 'src/stores/MapStore';
+import { color, shadow } from 'src/components/GlobalStyle/theme/helpers';
 
 const StyledSearch = styled.div`
   position: absolute;

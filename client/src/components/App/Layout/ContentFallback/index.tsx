@@ -1,8 +1,8 @@
 import styled from 'styled-components';
-import { color } from 'src/components/GlobalStyle/theme';
 import React from 'react';
 import Aside from 'src/components/Page/Aside';
 import Content, { Link } from 'src/components/App/Layout/Content';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const Fallback = styled.div`
   display: flex;

@@ -2,16 +2,17 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
 import { EntityId, EntityType } from 'src/contracts/entities';
-import { color, shadow } from 'src/components/GlobalStyle/theme';
 import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
 import Comment from './Comment';
+import { color, scrollbar, shadow } from 'src/components/GlobalStyle/theme/helpers';
+import { Add } from 'src/components/Map/EntityPage/Comments/Add';
 
 const StyledComments = styled.div`
   position: absolute;
   left: 0;
   top: 0;
   width: 400px;
-  padding: 20px 25px 30px 25px;
+  padding: 20px 10px 20px 25px;
   height: calc(100vh - 170px);
   border-radius: 10px 0 0 10px;
   display: flex;
@@ -43,12 +44,13 @@ const NoComments = styled.div`
 `;
 
 const List = styled.div`
+  flex: 1 1 auto;
+  height: 0;
   margin: 20px 0;
+  padding-right: 10px;
+  overflow-y: auto;
+  ${scrollbar(color('black-1'), color('white-1'))}
 `;
-
-const Textarea = styled.textarea``;
-
-const Button = styled.button``;
 
 type Props = {
   type: EntityType;
@@ -82,11 +84,7 @@ export const Comments: React.FC<Props> = observer(({ type, id }) => {
         ))}
       </List>
 
-      <Textarea onInput={commentsStore.handleCommentInput} value={commentsStore.currentValue} />
-
-      <Button type="button" onClick={(): Promise<void> => commentsStore.add()}>
-        Submit
-      </Button>
+      <Add />
     </StyledComments>
   );
 });

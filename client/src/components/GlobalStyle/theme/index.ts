@@ -1,12 +1,7 @@
-import tokens from './tokens';
+import tokens, { Tokens } from './tokens';
+import { CSSChunk } from 'src/components/GlobalStyle/theme/helpers';
 
-type Tokens = typeof tokens;
-type ColorName = keyof typeof tokens.colors;
-type FontName = keyof typeof tokens.fonts;
-type ShadowName = keyof typeof tokens.shadows;
-type CSSVariable = string;
-
-const generateTheme = (tokens: Tokens): string => {
+const generateTheme = (tokens: Tokens): CSSChunk => {
   return `
   :root {
     ${Object.entries(tokens)
@@ -18,28 +13,6 @@ const generateTheme = (tokens: Tokens): string => {
       .join('')}
   }
   `;
-};
-
-export const color = (name: ColorName): CSSVariable => `var(--colors-${name})`;
-
-export const font = (name: FontName): CSSVariable => `var(--fonts-${name})`;
-
-export const shadow = (name: ShadowName): CSSVariable => `var(--shadows-${name})`;
-
-export const animation = {
-  bounce: (property: string, from: string, to: string): string => {
-    return `
-     @keyframes bounce {
-        0%,
-        100% {
-          ${property}: ${from};
-        }
-        50% {
-          ${property}: ${to};
-        }
-     }
-    `;
-  },
 };
 
 const index = generateTheme(tokens);

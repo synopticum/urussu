@@ -3,9 +3,8 @@ import styled from 'styled-components';
 import { Entity, mapStore } from 'src/stores/MapStore';
 import ObjectPage from 'src/components/Map/EntityPage/ObjectPage';
 import DotPage from 'src/components/Map/EntityPage/DotPage';
-import { color } from 'src/components/GlobalStyle/theme';
 import PathPage from 'src/components/Map/EntityPage/PathPage';
-import { controlsStore } from 'src/stores/ControlsStore';
+import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const StyledEntityPage = styled.div`
   position: absolute;

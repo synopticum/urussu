@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, shadow } from 'src/components/GlobalStyle/theme';
+import { color, shadow } from 'src/components/GlobalStyle/theme/helpers';
 
 export const Menu = styled.ul`
   position: absolute;

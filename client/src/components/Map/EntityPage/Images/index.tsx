@@ -28,7 +28,7 @@ export const Images = observer(() => {
   if (!store || !data.images) {
     return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
-        No images found
+        Фотографии отсутствуют.
       </div>
     );
   }
