@@ -83,7 +83,6 @@ export const Comments: React.FC<Props> = observer(({ type, id }) => {
       </List>
 
       <Textarea onInput={commentsStore.handleCommentInput} value={commentsStore.currentValue} />
-      <div>{commentsStore.currentValue}</div>
 
       <Button type="button" onClick={(): Promise<void> => commentsStore.add()}>
         Submit

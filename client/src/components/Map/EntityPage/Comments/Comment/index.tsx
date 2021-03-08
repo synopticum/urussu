@@ -1,7 +1,6 @@
 import React from 'react';
 import { CommentMapped } from 'src/stores/MapStore/EntitiesStore/CommentsStore/map';
 import styled from 'styled-components';
-import { format, parseISO } from 'date-fns';
 
 type Props = {
   item: CommentMapped;
@@ -29,7 +28,10 @@ const Comment: React.FC<Props> = ({ item }) => {
     <StyledComment>
       <div>{item.text}</div>
       <Meta>
-        {item.author} at {JSON.stringify(format(parseISO(item.date), "yyyy-MM-dd'T'HH:mm"))}
+        <a href={`https://vk.com/id${item.authorVkId}`} target="_blank" rel="noreferrer">
+          {item.author}
+        </a>{' '}
+        написал {item.date}
       </Meta>
     </StyledComment>
   );

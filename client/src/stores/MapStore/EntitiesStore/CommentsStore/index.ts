@@ -49,14 +49,14 @@ export default class CommentsStore {
       id,
       originType,
       originId,
-      date: new Date().toString(),
       text: currentValue,
       ...author,
     };
 
     try {
-      const newComment = await put<CommentDto, CommentMapped>(url, comment, 'json');
-      this.apiData.data.push(newComment);
+      const newCommentDto = await put<CommentDto, CommentMapped>(url, comment, 'json');
+      const [newCommentMapped] = map([newCommentDto]);
+      this.apiData.data.push(newCommentMapped);
       this.currentValue = '';
     } catch (e) {
       alert('hui');
