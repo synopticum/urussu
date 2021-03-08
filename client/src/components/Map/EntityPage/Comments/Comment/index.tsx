@@ -1,7 +1,7 @@
 import React from 'react';
 import { CommentMapped } from 'src/stores/MapStore/EntitiesStore/CommentsStore/map';
 import styled from 'styled-components';
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 type Props = {
   item: CommentMapped;
@@ -29,7 +29,7 @@ const Comment: React.FC<Props> = ({ item }) => {
     <StyledComment>
       <div>{item.text}</div>
       <Meta>
-        {item.author} at {JSON.stringify(format(item.date, "yyyy-MM-dd'T'HH:mm"))}
+        {item.author} at {JSON.stringify(format(parseISO(item.date), "yyyy-MM-dd'T'HH:mm"))}
       </Meta>
     </StyledComment>
   );

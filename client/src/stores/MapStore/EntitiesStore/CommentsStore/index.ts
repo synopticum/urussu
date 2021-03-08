@@ -49,7 +49,7 @@ export default class CommentsStore {
       id,
       originType,
       originId,
-      date: new Date(),
+      date: new Date().toString(),
       text: currentValue,
       ...author,
     };
