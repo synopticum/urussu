@@ -23,6 +23,12 @@ const StyledMap = styled.div`
   background-color: ${color('black-1')};
 `;
 
+const RouteWatcher: React.FC = observer(() => {
+  window.history.replaceState({}, '', mapStore.route);
+  // this.map.setView([this.lat, this.lng], this.zoom);
+  return null;
+});
+
 const Map: React.FC = observer(() => {
   const containerRef = useRef(null);
   useMap(containerRef);
@@ -47,6 +53,7 @@ const Map: React.FC = observer(() => {
 
   return (
     <StyledMap>
+      <RouteWatcher />
       <Container ref={containerRef}>
         <Dots />
         <Objects />

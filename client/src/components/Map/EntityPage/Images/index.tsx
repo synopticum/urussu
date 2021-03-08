@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Timeline } from 'src/components/Map/EntityPage/Images/Timeline';
 import { observer } from 'mobx-react-lite';
@@ -24,6 +24,12 @@ const CurrentImage = styled.div`
 export const Images = observer(() => {
   const { store } = imagesStore;
   const { data } = store.apiData;
+
+  useEffect(() => {
+    return (): void => {
+      imagesStore.resetData();
+    };
+  }, []);
 
   if (!store || !data.images) {
     return (

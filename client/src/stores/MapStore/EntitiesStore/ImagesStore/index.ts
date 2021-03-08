@@ -4,6 +4,12 @@ import DotStore from 'src/stores/MapStore/EntitiesStore/DotStore';
 import { ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 import PathStore from 'src/stores/MapStore/EntitiesStore/PathStore';
 
+export const getImage = (params: URLSearchParams): ImageMapped => {
+  const [year, url] = params.get('image').split(',');
+
+  return { year, url };
+};
+
 export default class ImagesStore {
   store: ObjectStore | DotStore | PathStore;
 
@@ -76,8 +82,16 @@ export default class ImagesStore {
 
   constructor() {
     this.store = null;
-    this.selectedImage = null;
-    this.selectedDecade = null;
+
+    if (location.search) {
+      const params = new URLSearchParams(location.search);
+
+      if (params.has('image')) {
+        const image = getImage(params);
+        this.selectedImage = image;
+        this.selectedDecade = parseInt(`${image.year.substring(0, 3)}0`);
+      }
+    }
 
     makeObservable(this, {
       store: observable,

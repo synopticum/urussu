@@ -32,15 +32,7 @@ const apply1pxGapFix = (): void => {
 };
 
 const setInitialSettings = (): void => {
-  const { map, lat, lng, zoom, entity } = mapStore;
-
-  let url = `?lat=${lat.toFixed(2)}&lng=${lng.toFixed(2)}&zoom=${zoom}`;
-
-  if (entity) {
-    url += `&entity=${entity.type},${entity.id}`;
-  }
-
-  window.history.replaceState({}, '', url);
+  const { map, lat, lng, zoom } = mapStore;
   map.setView([lat, lng], zoom);
 };
 

@@ -1,4 +1,4 @@
-import { makeObservable, observable } from 'mobx';
+import { computed, makeObservable, observable } from 'mobx';
 import { LatLngBoundsExpression, LatLngTuple, Map } from 'leaflet';
 import { AxiosInstance } from 'axios';
 import { EntityId, EntityType } from 'src/contracts/entities';
@@ -9,6 +9,7 @@ import { SearchResultDto } from 'src/contracts/search';
 import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
+import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
 
 export type Entity = {
   type: EntityType;
@@ -58,13 +59,11 @@ export default class MapStore {
 
   setZoom(zoom: number): void {
     this.zoom = zoom;
-    this.updateRoute();
   }
 
   setLatLng([lat, lng]: LatLngTuple): void {
     this.lat = lat;
     this.lng = lng;
-    this.updateRoute();
   }
 
   setEntity(entity: Entity): void {
@@ -72,19 +71,21 @@ export default class MapStore {
     this.resetSearchData();
 
     this.entity = entity;
-    this.updateRoute();
   }
 
-  updateRoute(): void {
-    let url = `?lat=${this.lat.toFixed(2)}&lng=${this.lng.toFixed(2)}&zoom=${this.zoom}`;
+  get route(): string {
+    let route = `?lat=${this.lat.toFixed(2)}&lng=${this.lng.toFixed(2)}&zoom=${this.zoom}`;
 
     if (this.entity) {
-      url += `&entity=${this.entity.type},${this.entity.id}`;
+      route += `&entity=${this.entity.type},${this.entity.id}`;
     }
 
-    window.history.replaceState({}, '', url);
+    if (imagesStore.selectedImage) {
+      const { year, url } = imagesStore.selectedImage;
+      route += `&image=${year},${url}`;
+    }
 
-    this.map.setView([this.lat, this.lng], this.zoom);
+    return route;
   }
 
   searchData = new AsyncData<SearchResultMapped>();
@@ -144,6 +145,7 @@ export default class MapStore {
       lng: observable,
       entity: observable,
       activeEntityId: observable,
+      route: computed,
     });
   }
 }
