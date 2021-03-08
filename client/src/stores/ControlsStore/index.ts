@@ -2,8 +2,9 @@ import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { MutableRefObject } from 'react';
 import { api } from 'src/stores';
+import { ButtonTypes } from 'src/components/Page/Aside/Button';
 
-type Controls = 'search' | 'comments';
+export type Controls = 'search' | 'comments';
 
 export default class ControlsStore {
   private api: AxiosInstance;
@@ -17,7 +18,7 @@ export default class ControlsStore {
     this.selected = null;
   }
 
-  getStateFor(value: Controls): Controls | 'close' {
+  getStateFor(value: Controls): ButtonTypes {
     return this.selected === value ? 'close' : value;
   }
 

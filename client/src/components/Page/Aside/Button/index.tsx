@@ -3,8 +3,9 @@ import styled from 'styled-components';
 import searchImage from './images/search.svg';
 import commentsImage from './images/comments.svg';
 import closeImage from './images/close.svg';
+import { Controls } from 'src/stores/ControlsStore';
 
-type ButtonTypes = 'search' | 'comments' | 'close';
+export type ButtonTypes = Controls | 'close';
 
 const icons: {
   [type in ButtonTypes]: string;
