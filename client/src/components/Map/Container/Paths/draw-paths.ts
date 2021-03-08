@@ -8,7 +8,7 @@ const removeCurrentPaths = (): void => {};
 
 const addPathsToMap = (map: Map, data: PathMapped[]): void => {
   const handleClick = (id: string): void => {
-    controlsStore.resetData();
+    controlsStore.selected = null;
     mapStore.setEntity({ type: 'path', id });
   };
 

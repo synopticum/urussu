@@ -36,7 +36,7 @@ const Map: React.FC = observer(() => {
     }
 
     mapStore.activeEntityId = null;
-    controlsStore.resetData();
+    controlsStore.selected = null;
   };
 
   return (

@@ -8,7 +8,7 @@ const removeCurrentCircles = (): void => {};
 
 const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
   const handleClick = (id: string): void => {
-    controlsStore.resetData();
+    controlsStore.selected = null;
     mapStore.setEntity({ type: 'object', id });
   };
 

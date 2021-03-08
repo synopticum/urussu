@@ -22,7 +22,7 @@ const createMarker = (item: DotMapped): Marker => {
   });
 
   const handleClick = (id: string): void => {
-    controlsStore.resetData();
+    controlsStore.selected = null;
     mapStore.setEntity({ type: 'dot', id });
   };
 

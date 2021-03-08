@@ -56,7 +56,6 @@ export const EntityPage: React.FC<Props> = ({ entity }) => {
   }
 
   const close = (): void => {
-    controlsStore.resetData();
     mapStore.setEntity(null);
   };
 

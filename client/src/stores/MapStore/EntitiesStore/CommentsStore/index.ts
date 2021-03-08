@@ -38,15 +38,15 @@ export default class CommentsStore {
     this.currentValue = value;
   };
 
-  async addComment(): Promise<void> {
+  async add(): Promise<void> {
     const { store, currentValue } = this;
     const { instanceType: originType, id: originId } = store.apiData.data;
-    const commentId = uuidv4();
-    const url = `/${originType}/${originId}/comments/${commentId}`;
+    const id = uuidv4();
+    const url = `/${originType}/${originId}/comments/${id}`;
     const { author } = userStore;
 
     const comment: CommentMapped = {
-      id: commentId,
+      id,
       originType,
       originId,
       date: Date.now().toString(),

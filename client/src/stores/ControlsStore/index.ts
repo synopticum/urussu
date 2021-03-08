@@ -13,9 +13,21 @@ export default class ControlsStore {
   selected: Controls;
 
   resetData(): void {
-    // this.ref = null;
+    this.ref = null;
     this.selected = null;
-    // this.resetSearchData();
+  }
+
+  getStateFor(value: Controls): Controls | 'close' {
+    return this.selected === value ? 'close' : value;
+  }
+
+  toggle(value: Controls): void {
+    if (!this.selected) {
+      this.selected = value;
+      return;
+    }
+
+    this.selected = null;
   }
 
   constructor(api: AxiosInstance) {
