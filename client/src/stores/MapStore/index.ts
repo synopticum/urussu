@@ -1,5 +1,5 @@
 import { computed, makeObservable, observable } from 'mobx';
-import { LatLngBoundsExpression, LatLngTuple, Map } from 'leaflet';
+import { GridLayer, LatLngBounds, LatLngBoundsExpression, LatLngTuple, Map, tileLayer } from 'leaflet';
 import { AxiosInstance } from 'axios';
 import { EntityId, EntityType } from 'src/contracts/entities';
 import { api } from 'src/stores';
@@ -10,6 +10,8 @@ import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
+import { map as leafletMap } from 'leaflet';
+import { debounce } from 'ts-debounce';
 
 export type Entity = {
   type: EntityType;
@@ -57,15 +59,6 @@ export default class MapStore {
     this.lng = this.defaultLng;
   }
 
-  setZoom(zoom: number): void {
-    this.zoom = zoom;
-  }
-
-  setLatLng([lat, lng]: LatLngTuple): void {
-    this.lat = lat;
-    this.lng = lng;
-  }
-
   setEntity(entity: Entity): void {
     this.activeEntityId = null;
     this.resetSearchData();
@@ -73,6 +66,9 @@ export default class MapStore {
     this.entity = entity;
   }
 
+  /**
+   * Getter consumed by simple internal router, made specially for map page
+   */
   get route(): string {
     let route = `?lat=${this.lat.toFixed(2)}&lng=${this.lng.toFixed(2)}&zoom=${this.zoom}`;
 
@@ -88,6 +84,9 @@ export default class MapStore {
     return route;
   }
 
+  /**
+   * Methods responsible for search on a map
+   */
   searchData = new AsyncData<SearchResultMapped>();
 
   resetSearchData(): void {
@@ -116,6 +115,91 @@ export default class MapStore {
     this.map.setView(coordinates[0], 6);
   }
 
+  /**
+   * Methods responsible for drawing map using Leaflet.js
+   */
+  drawMap(mapRootNode: HTMLElement): void {
+    this.createMap(mapRootNode);
+    const { maxBounds } = this;
+    const debouncedUpdateSettings = debounce(this.updateSettings.bind(this), 50);
+
+    this.map.on('zoomend', this.updateSettings.bind(this));
+    this.map.on('drag', () => debouncedUpdateSettings());
+
+    this.apply1pxGapFix();
+    this.setInitialSettings();
+    this.setMaxBounds(maxBounds);
+    this.initializeTiles();
+  }
+
+  private createMap(mapRootNode: HTMLElement): void {
+    this.map = leafletMap(mapRootNode, {
+      zoomControl: false,
+    });
+
+    this.map.doubleClickZoom.disable();
+  }
+
+  private apply1pxGapFix(): void {
+    if (window.navigator.userAgent.indexOf('Chrome') > -1) {
+      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // @ts-ignore
+      const originalInitTile = GridLayer.prototype._initTile;
+
+      GridLayer.include({
+        _initTile: function (tile: { style: { width: string; height: string } }) {
+          originalInitTile.call(this, tile);
+
+          const tileSize = this.getTileSize();
+          tile.style.width = tileSize.x + 1 + 'px';
+          tile.style.height = tileSize.y + 1 + 'px';
+        },
+      });
+    }
+  }
+
+  private setInitialSettings = (): void => {
+    const { map, lat, lng, zoom } = this;
+    map.setView([lat, lng], zoom);
+  };
+
+  private setMaxBounds(maxBounds: LatLngBoundsExpression): void {
+    const { map } = this;
+    map.setMaxBounds(maxBounds);
+  }
+
+  private initializeTiles(): void {
+    const { map, width, height, minZoom, maxZoom } = this;
+    const bounds = new LatLngBounds(map.unproject([0, height], maxZoom), map.unproject([width, 0], maxZoom));
+
+    tileLayer(`/images/tiles/{z}/{x}/{y}.png.webp`, {
+      minZoom,
+      maxZoom,
+      bounds,
+      noWrap: true,
+    }).addTo(map);
+  }
+
+  private updateSettings(): void {
+    const zoom = this.map.getZoom();
+    const { lat, lng } = this.map.getCenter();
+
+    this.setZoom(zoom);
+    this.setLatLng([lat, lng]);
+  }
+
+  private setZoom(zoom: number): void {
+    this.zoom = zoom;
+  }
+
+  private setLatLng([lat, lng]: LatLngTuple): void {
+    this.lat = lat;
+    this.lng = lng;
+  }
+
+  /**
+   * @constructor
+   */
   constructor(api: AxiosInstance) {
     this.api = api;
     this.map = null;
