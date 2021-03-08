@@ -11,6 +11,11 @@ export const Dots: React.FC = observer(() => {
     if (!isDataLoaded) {
       dotsStore.fetchApiData();
     }
+
+    return (): void => {
+      // Возможно стоит оставлять эти данные в кеше
+      // dotsStore.resetData();
+    };
   }, []);
 
   useEffect(() => {

@@ -18,6 +18,10 @@ export default class DotsStore {
     fetchData<DotDto[], DotMapped[]>('/dots', options);
   }
 
+  resetData(): void {
+    this.apiData = new AsyncData<DotMapped[]>();
+  }
+
   constructor(api: AxiosInstance) {
     this.api = api;
 

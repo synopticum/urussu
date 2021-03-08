@@ -11,6 +11,11 @@ export const Objects: React.FC = observer(() => {
     if (!isDataLoaded) {
       objectsStore.fetchApiData();
     }
+
+    return (): void => {
+      // Возможно стоит оставлять эти данные в кеше
+      // objectsStore.resetData();
+    };
   }, []);
 
   useEffect(() => {

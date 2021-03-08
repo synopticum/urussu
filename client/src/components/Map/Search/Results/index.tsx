@@ -6,12 +6,12 @@ import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 import { color } from 'src/components/GlobalStyle/theme';
 import { DotItem, ObjectItem, PathItem } from 'src/components/Map/Search/Results/Item';
-import { controlsStore } from 'src/stores/ControlsStore';
 import { mapStore } from 'src/stores/MapStore';
 
 const StyledResults = styled.div`
   max-height: 100%;
   overflow-y: auto;
+  margin-bottom: 20px;
 
   &::-webkit-scrollbar,
   &::-webkit-scrollbar-track {

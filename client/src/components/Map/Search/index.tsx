@@ -9,11 +9,11 @@ import { mapStore } from 'src/stores/MapStore';
 
 const StyledSearch = styled.div`
   position: absolute;
-  left: 68px;
+  left: 70px;
   top: 18px;
   z-index: 1050;
   width: 300px;
-  padding: 10px 10px 20px 15px;
+  padding: 0 10px 0 15px;
   min-height: 55px;
   max-height: calc(100vh - 260px);
   border-radius: 5px;
@@ -38,6 +38,7 @@ const StyledSearch = styled.div`
 const Input = styled.input`
   display: block;
   width: 100%;
+  margin-top: 6px;
   padding: 10px 5px;
   font-size: 16px;
   border: 0;

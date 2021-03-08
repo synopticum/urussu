@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import 'leaflet/dist/leaflet.css';
 import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
@@ -39,6 +39,12 @@ const Map: React.FC = observer(() => {
     controlsStore.selected = null;
   };
 
+  useEffect(() => {
+    return (): void => {
+      mapStore.resetData();
+    };
+  }, []);
+
   return (
     <StyledMap>
       <Container ref={containerRef}>
@@ -55,7 +61,7 @@ const Map: React.FC = observer(() => {
       {!entity && (
         <Portal parent={controlsStore.ref}>
           <Control>
-            <Button type={controlsStore.selected === 'search' ? 'close' : 'search'} onClick={toggleSearch} />
+            <Button type={controlsStore.getStateFor('search')} onClick={toggleSearch} />
           </Control>
         </Portal>
       )}

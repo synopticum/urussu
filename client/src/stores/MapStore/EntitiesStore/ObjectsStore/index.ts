@@ -18,6 +18,10 @@ export default class ObjectsStore {
     fetchData<ObjectDto[], ObjectMapped[]>('/objects', options);
   }
 
+  resetData(): void {
+    this.apiData = new AsyncData<ObjectMapped[]>();
+  }
+
   constructor(api: AxiosInstance) {
     this.api = api;
 

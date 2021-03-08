@@ -18,6 +18,10 @@ export default class PathsStore {
     fetchData<PathDto[], PathMapped[]>('/paths', options);
   }
 
+  resetData(): void {
+    this.apiData = new AsyncData<PathMapped[]>();
+  }
+
   constructor(api: AxiosInstance) {
     this.api = api;
 

@@ -11,6 +11,11 @@ export const Paths: React.FC = observer(() => {
     if (!isDataLoaded) {
       pathsStore.fetchApiData();
     }
+
+    return (): void => {
+      // Возможно стоит оставлять эти данные в кеше
+      // pathsStore.resetData();
+    };
   }, []);
 
   useEffect(() => {

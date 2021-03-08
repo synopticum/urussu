@@ -27,6 +27,9 @@ export const getEntity = (params: URLSearchParams): Entity => {
 
 export default class MapStore {
   private readonly api: AxiosInstance;
+  private readonly defaultZoom = 5;
+  private readonly defaultLat = 69.65;
+  private readonly defaultLng = -20.25;
 
   readonly width: number = 10000;
   readonly height: number = 6250;
@@ -38,11 +41,20 @@ export default class MapStore {
   ];
 
   map: Map;
+  entity: Entity;
+  activeEntityId: EntityId;
   zoom: number;
   lat: number;
   lng: number;
-  entity: Entity;
-  activeEntityId: EntityId;
+
+  resetData(): void {
+    this.map = null;
+    this.entity = null;
+    this.activeEntityId = null;
+    this.zoom = this.defaultZoom;
+    this.lat = this.defaultLat;
+    this.lng = this.defaultLng;
+  }
 
   setZoom(zoom: number): void {
     this.zoom = zoom;
@@ -119,9 +131,9 @@ export default class MapStore {
         this.entity = getEntity(params);
       }
     } else {
-      this.zoom = 5;
-      this.lat = 69.65;
-      this.lng = -20.25;
+      this.zoom = this.defaultZoom;
+      this.lat = this.defaultLat;
+      this.lng = this.defaultLng;
       this.entity = null;
     }
 
