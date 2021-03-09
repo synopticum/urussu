@@ -4,23 +4,35 @@ import DotStore from 'src/stores/MapStore/EntitiesStore/DotStore';
 import { ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 import PathStore from 'src/stores/MapStore/EntitiesStore/PathStore';
 import { BaseStore } from 'src/stores';
+import { ImageId } from 'src/contracts/entities';
 
-export const getImage = (params: URLSearchParams): ImageMapped => {
-  const [year, url] = params.get('image').split(',');
+export const getImageId = (params: URLSearchParams): ImageId => params.get('image');
 
-  return { year, url };
+export const getImageDecade = (id: ImageId): number => {
+  return parseInt(`${id.split(',')[0].substring(0, 3)}0`);
 };
 
 export default class ImagesStore implements BaseStore {
   store: ObjectStore | DotStore | PathStore;
 
-  selectedImage: ImageMapped;
+  selectedImageId: ImageId;
+
+  get selectedImage(): ImageMapped {
+    const { data } = this.store.apiData;
+
+    if (!data || !data.images) {
+      return null;
+    }
+
+    const images = Object.values(data.images).flat();
+    return images.find(image => image.id === this.selectedImageId);
+  }
 
   selectedDecade: number;
 
   resetData(): void {
     this.store = null;
-    this.selectedImage = null;
+    this.selectedImageId = null;
     this.selectedDecade = null;
   }
 
@@ -60,16 +72,15 @@ export default class ImagesStore implements BaseStore {
     return Math.max(...Object.keys(images).map(decade => parseInt(decade)));
   }
 
-  changeSelectedImage(image: ImageMapped): void {
-    this.selectedImage = image;
+  changeSelectedImageId(id: ImageId): void {
+    this.selectedImageId = id;
   }
 
-  isImageActive = (image: ImageMapped): boolean => {
-    const { year, url } = this.selectedImage;
-    return image.year === year && image.url === url;
+  isImageActive = (id: ImageId): boolean => {
+    return id === this.selectedImageId;
   };
 
-  get initialImage(): ImageMapped {
+  get initialImageId(): ImageId {
     const { data } = this.store.apiData;
 
     if (!data || !data.images) {
@@ -78,7 +89,7 @@ export default class ImagesStore implements BaseStore {
 
     const decade = this.getMaxDecadeWithImage(data.images);
 
-    return data.images[decade][0];
+    return data.images[decade][0].id;
   }
 
   constructor() {
@@ -88,18 +99,20 @@ export default class ImagesStore implements BaseStore {
       const params = new URLSearchParams(location.search);
 
       if (params.has('image')) {
-        const image = getImage(params);
-        this.selectedImage = image;
-        this.selectedDecade = parseInt(`${image.year.substring(0, 3)}0`);
+        const id = getImageId(params);
+        this.selectedImageId = id;
+        this.selectedDecade = getImageDecade(id);
       }
     }
 
     makeObservable(this, {
       store: observable,
-      selectedImage: observable,
+      selectedImageId: observable,
       selectedDecade: observable,
-      initialImage: computed,
+
+      initialImageId: computed,
       initialDecade: computed,
+      selectedImage: computed,
     });
   }
 }

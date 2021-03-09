@@ -39,7 +39,7 @@ export const Images = observer(() => {
     );
   }
 
-  imagesStore.selectedImage = imagesStore.selectedImage || imagesStore.initialImage;
+  imagesStore.selectedImageId = imagesStore.selectedImageId || imagesStore.initialImageId;
 
   return (
     <StyledImages>

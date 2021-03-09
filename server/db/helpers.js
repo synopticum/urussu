@@ -1,3 +1,9 @@
+const md5 = require("md5");
+
+const hashImage = (year, url) => {
+  return `${year},${md5(`${year},${url}`).substring(0, 7)}`;
+};
+
 const mapImages = (imagesDto) => {
   if (!imagesDto) {
     return null;
@@ -8,6 +14,7 @@ const mapImages = (imagesDto) => {
   Object.entries(imagesDto).forEach((imageDto) => {
     const year = imageDto[0];
     const url = imageDto[1];
+    const id = hashImage(year, url);
     const decade = parseInt(`${year.toString().substring(0, 3)}0`);
     let nestedImage = null;
 
@@ -16,8 +23,9 @@ const mapImages = (imagesDto) => {
     );
 
     if (nested) {
-      let [year, url] = nested;
-      nestedImage = { year: year.split("_")[1], url };
+      const [year, url] = nested;
+      const id = hashImage(year, url);
+      nestedImage = { id, year: year.split("_")[1], url };
     }
 
     const isNested = (image) => image[0].includes("_");
@@ -27,7 +35,13 @@ const mapImages = (imagesDto) => {
     }
 
     if (!isNested(imageDto)) {
-      imagesMapped[decade].push({ year, url, image: nestedImage });
+      const image = { id, year, url };
+
+      if (nestedImage) {
+        image.image = nestedImage;
+      }
+
+      imagesMapped[decade].push(image);
     }
   });
 

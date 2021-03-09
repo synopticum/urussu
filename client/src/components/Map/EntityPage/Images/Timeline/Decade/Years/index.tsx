@@ -91,23 +91,21 @@ type Props = {
 export const Years: React.FC<Props> = observer(({ images, isDecadeActive }) => {
   return (
     <StyledYears isDecadeActive={isDecadeActive}>
-      {images.map(image => {
-        const { year, url, image: nestedImage } = image;
-
+      {images.map(({ year, id, image }) => {
         return (
-          <Image key={url}>
+          <Image key={id}>
             <YearValue
-              isActive={imagesStore.isImageActive(image)}
-              onClick={(): void => imagesStore.changeSelectedImage(image)}
+              isActive={imagesStore.isImageActive(id)}
+              onClick={(): void => imagesStore.changeSelectedImageId(id)}
             >
               {year}
             </YearValue>
-            {nestedImage && (
+            {image && (
               <NestedYearValue
-                isActive={imagesStore.isImageActive(nestedImage)}
-                onClick={(): void => imagesStore.changeSelectedImage(nestedImage)}
+                isActive={imagesStore.isImageActive(image.id)}
+                onClick={(): void => imagesStore.changeSelectedImageId(image.id)}
               >
-                {nestedImage.year}
+                {image.year}
               </NestedYearValue>
             )}
           </Image>

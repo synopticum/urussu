@@ -76,9 +76,8 @@ export default class MapStore implements BaseStore {
       route += `&entity=${this.entity.type},${this.entity.id}`;
     }
 
-    if (imagesStore.selectedImage) {
-      const { year, url } = imagesStore.selectedImage;
-      route += `&image=${year},${url}`;
+    if (imagesStore.selectedImageId) {
+      route += `&image=${imagesStore.selectedImageId}`;
     }
 
     return route;

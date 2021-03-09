@@ -25,9 +25,6 @@ const StyledMap = styled.div`
 
 const Router: React.FC = observer(() => {
   window.history.replaceState({}, '', mapStore.route);
-  // if () {
-  //   this.map.setView([this.lat, this.lng], this.zoom);
-  // }
   return null;
 });
 
