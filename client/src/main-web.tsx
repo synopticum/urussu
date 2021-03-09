@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
-import App from './components/App';
+import App from './features/App';
 
 const el = document.getElementById('main');
 render(<App />, el);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import Map from 'src/components/Map';
+import Map from 'src/features/Map';
 import styled from 'styled-components';
 import Page from 'src/components/Page';
 import Aside from 'src/components/Page/Aside';
