@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import ObjectStore from 'src/stores/MapStore/EntitiesStore/ObjectStore';
 import DotStore from 'src/stores/MapStore/EntitiesStore/DotStore';
-import { ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
+import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
 import PathStore from 'src/stores/MapStore/EntitiesStore/PathStore';
 import { BaseStore } from 'src/stores';
 import { ImageId } from 'src/contracts/entities';
@@ -17,7 +17,7 @@ export default class ImagesStore implements BaseStore {
 
   selectedImageId: ImageId;
 
-  get selectedImage(): ImageMapped {
+  get selectedImageUrl(): string {
     const { data } = this.store.apiData;
 
     if (!data || !data.images) {
@@ -25,7 +25,16 @@ export default class ImagesStore implements BaseStore {
     }
 
     const images = Object.values(data.images).flat();
-    return images.find(image => image.id === this.selectedImageId);
+
+    images.forEach(({ image: nestedImage }) => {
+      if (nestedImage) {
+        images.push(nestedImage);
+      }
+    });
+
+    const image = images.find(image => image.id === this.selectedImageId);
+
+    return `${process.env.S3_URL}/${image.url}`;
   }
 
   selectedDecade: number;
@@ -112,7 +121,7 @@ export default class ImagesStore implements BaseStore {
 
       initialImageId: computed,
       initialDecade: computed,
-      selectedImage: computed,
+      selectedImageUrl: computed,
     });
   }
 }

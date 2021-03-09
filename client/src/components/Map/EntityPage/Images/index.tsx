@@ -44,7 +44,7 @@ export const Images = observer(() => {
   return (
     <StyledImages>
       <CurrentImage>
-        <img src={`${process.env.S3_URL}/${imagesStore.selectedImage.url}`} alt="" />
+        <img src={imagesStore.selectedImageUrl} alt="" />
       </CurrentImage>
 
       <Timeline />
