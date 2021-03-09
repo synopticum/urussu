@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
-import { EntityId, EntityType } from 'src/contracts/entities';
+import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
 import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
 import Comment from './Comment';
 import { color, scrollbar, shadow } from 'src/components/GlobalStyle/theme/helpers';
@@ -53,15 +53,16 @@ const List = styled.div`
 `;
 
 type Props = {
-  type: EntityType;
-  id: EntityId;
+  entityType: EntityType;
+  entityId: EntityId;
+  imageId?: ImageId;
 };
 
-export const Comments: React.FC<Props> = observer(({ type, id }) => {
+export const Comments: React.FC<Props> = observer(({ entityType, entityId, imageId }) => {
   const { data } = commentsStore.apiData;
 
   useEffect(() => {
-    commentsStore.fetchApiData(type, id);
+    commentsStore.fetchApiData(entityType, entityId, imageId);
 
     return (): void => {
       commentsStore.resetData();

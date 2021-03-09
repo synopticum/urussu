@@ -6,11 +6,12 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData, put } from 'src/stores/helpers';
 import { CommentDto } from 'src/contracts/entities/comments';
 import { CommentMapped, map } from 'src/stores/MapStore/EntitiesStore/CommentsStore/map';
-import { EntityId, EntityType } from 'src/contracts/entities';
+import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
 import { v4 as uuidv4 } from 'uuid';
 import { api, BaseStore } from 'src/stores';
 import { userStore } from 'src/stores/UserStore';
 import React from 'react';
+import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
 
 export default class CommentsStore implements BaseStore {
   private api: AxiosInstance;
@@ -21,11 +22,16 @@ export default class CommentsStore implements BaseStore {
 
   store: ObjectStore | DotStore | PathStore;
 
-  fetchApiData(type: EntityType, id: EntityId): void {
+  fetchApiData(entityType: EntityType, entityId: EntityId, imageId?: ImageId): void {
     const { apiData } = this;
     const options = { apiData, map };
+    let url = `${entityType}/${entityId}/comments`;
 
-    fetchData<CommentDto[], CommentMapped[]>(`/${type}/${id}/comments`, options);
+    if (imageId) {
+      url += `/${imageId}`;
+    }
+
+    fetchData<CommentDto[], CommentMapped[]>(url, options);
   }
 
   resetData(): void {
@@ -49,11 +55,13 @@ export default class CommentsStore implements BaseStore {
     const id = uuidv4();
     const url = `/${originType}/${originId}/comments/${id}`;
     const { author } = userStore;
+    const { selectedImageId: imageId } = imagesStore;
 
     const comment: CommentMapped = {
       id,
       originType,
       originId,
+      imageId,
       text: currentValue,
       ...author,
     };
