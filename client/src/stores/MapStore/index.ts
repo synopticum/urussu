@@ -4,7 +4,6 @@ import { AxiosInstance } from 'axios';
 import { EntityId, EntityType } from 'src/contracts/entities';
 import { api, BaseStore } from 'src/stores';
 import { AsyncData, fetchData } from 'src/stores/helpers';
-import { map, SearchResultMapped } from 'src/stores/ControlsStore/map';
 import { SearchResultDto } from 'src/contracts/search';
 import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
@@ -12,6 +11,7 @@ import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
 import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
 import { map as leafletMap } from 'leaflet';
 import { debounce } from 'ts-debounce';
+import { SearchResultMapped, map } from 'src/stores/MapStore/map';
 
 export type Entity = {
   type: EntityType;
