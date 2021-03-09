@@ -2,8 +2,8 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
 import Images from 'src/components/Map/EntityPage/Images';
-import { pathStore } from 'src/stores/MapStore/EntitiesStore/PathStore';
-import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
+import { pathStore } from 'src/stores/MapStore/EntityStore/PathStore';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
 const StyledPathPage = styled.div`
   height: 100%;

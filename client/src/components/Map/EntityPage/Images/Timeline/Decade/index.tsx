@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { Years } from 'src/components/Map/EntityPage/Images/Timeline/Decade/Years';
-import { ImageMapped } from 'src/stores/MapStore/EntitiesStore';
+import { ImageMapped } from 'src/stores/MapStore/EntityStore';
 import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const DecadeValue = styled.div<{ isActive: boolean }>`

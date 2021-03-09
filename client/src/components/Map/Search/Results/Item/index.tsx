@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import React from 'react';
-import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
-import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
-import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
+import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
+import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
+import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import dotIcon from './images/dot.svg';
 import objectIcon from './images/object.svg';
 import pathIcon from './images/path.svg';

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
+import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const StyledAdd = styled.div`

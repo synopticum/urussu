@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
-import { DotMapped } from 'src/stores/MapStore/EntitiesStore/DotStore/map';
-import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
+import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
+import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
+import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { DotItem, ObjectItem, PathItem } from 'src/components/Map/Search/Results/Item';
 import { mapStore } from 'src/stores/MapStore';
 import { color, scrollbar } from 'src/components/GlobalStyle/theme/helpers';

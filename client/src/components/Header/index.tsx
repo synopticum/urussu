@@ -4,7 +4,7 @@ import { Link } from '@reach/router';
 import UserMenu from './UserMenu';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
-import { objectStore } from 'src/stores/MapStore/EntitiesStore/ObjectStore';
+import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import { color } from 'src/components/GlobalStyle/theme/helpers';
 
 const StyledHeader = styled.header`

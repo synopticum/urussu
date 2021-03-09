@@ -3,7 +3,7 @@ import React from 'react';
 import { Decade } from 'src/components/Map/EntityPage/Images/Timeline/Decade';
 import { EmptyDecade } from 'src/components/Map/EntityPage/Images/Timeline/EmptyDecade';
 import { observer } from 'mobx-react-lite';
-import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
 const StyledTimeline = styled.div`
   position: absolute;

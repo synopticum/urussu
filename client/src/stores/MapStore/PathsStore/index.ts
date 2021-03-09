@@ -2,8 +2,8 @@ import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { PathDto } from 'src/contracts/entities/path';
-import { map } from 'src/stores/MapStore/EntitiesStore/PathsStore/map';
-import { PathMapped } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
+import { map } from 'src/stores/MapStore/PathsStore/map';
+import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { api, BaseStore } from 'src/stores';
 
 export default class PathsStore implements BaseStore {

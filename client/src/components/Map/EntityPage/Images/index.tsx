@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { Timeline } from 'src/components/Map/EntityPage/Images/Timeline';
 import { observer } from 'mobx-react-lite';
-import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
 const StyledImages = styled.div`
   height: 100%;

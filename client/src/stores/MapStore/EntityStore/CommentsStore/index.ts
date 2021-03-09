@@ -1,17 +1,17 @@
 import { makeObservable, observable } from 'mobx';
-import ObjectStore from 'src/stores/MapStore/EntitiesStore/ObjectStore';
-import DotStore from 'src/stores/MapStore/EntitiesStore/DotStore';
-import PathStore from 'src/stores/MapStore/EntitiesStore/PathStore';
+import ObjectStore from 'src/stores/MapStore/EntityStore/ObjectStore';
+import DotStore from 'src/stores/MapStore/EntityStore/DotStore';
+import PathStore from 'src/stores/MapStore/EntityStore/PathStore';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData, put } from 'src/stores/helpers';
 import { CommentDto } from 'src/contracts/entities/comments';
-import { CommentMapped, map } from 'src/stores/MapStore/EntitiesStore/CommentsStore/map';
+import { CommentMapped, map } from 'src/stores/MapStore/EntityStore/CommentsStore/map';
 import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
 import { v4 as uuidv4 } from 'uuid';
 import { api, BaseStore } from 'src/stores';
 import { userStore } from 'src/stores/UserStore';
 import React from 'react';
-import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
 export default class CommentsStore implements BaseStore {
   private api: AxiosInstance;

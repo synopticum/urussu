@@ -1,6 +1,6 @@
 import { polygon, Map } from 'leaflet';
 import { getClassName } from 'src/components/Map/Container';
-import { ObjectMapped } from 'src/stores/MapStore/EntitiesStore/ObjectStore/map';
+import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { controlsStore } from 'src/stores/ControlsStore';
 import { mapStore } from 'src/stores/MapStore';
 

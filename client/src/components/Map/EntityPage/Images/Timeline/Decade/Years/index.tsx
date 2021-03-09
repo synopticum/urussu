@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import React from 'react';
-import { ImageMapped } from 'src/stores/MapStore/EntitiesStore';
+import { ImageMapped } from 'src/stores/MapStore/EntityStore';
 import { observer } from 'mobx-react-lite';
 import curlyBracesImage from './images/curly.png';
 import arrowImage from './images/arrow.svg';
-import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { color } from 'src/components/GlobalStyle/theme/helpers';
 import { ImageId } from 'src/contracts/entities';
-import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
+import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { controlsStore } from 'src/stores/ControlsStore';
 
 const StyledYears = styled.ul<{ isDecadeActive: boolean }>`

@@ -2,7 +2,7 @@ import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { EntityId } from 'src/contracts/entities';
-import { PathMapped, map } from 'src/stores/MapStore/EntitiesStore/PathStore/map';
+import { PathMapped, map } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { PathDto } from 'src/contracts/entities/path';
 import { api, BaseStore } from 'src/stores';
 

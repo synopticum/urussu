@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
 import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
-import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
+import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import Comment from './Comment';
 import { color, scrollbar, shadow } from 'src/components/GlobalStyle/theme/helpers';
 import { Add } from 'src/components/Map/EntityPage/Comments/Add';

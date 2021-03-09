@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { drawPaths } from 'src/components/Map/Container/Paths/draw-paths';
-import { pathsStore } from 'src/stores/MapStore/EntitiesStore/PathsStore';
+import { pathsStore } from 'src/stores/MapStore/PathsStore';
 import { mapStore } from 'src/stores/MapStore';
 
 export const Paths: React.FC = observer(() => {

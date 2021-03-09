@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import { drawObjects } from 'src/components/Map/Container/Objects/draw-objects';
-import { objectsStore } from 'src/stores/MapStore/EntitiesStore/ObjectsStore';
+import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
 import { mapStore } from 'src/stores/MapStore';
 
 export const Objects: React.FC = observer(() => {

@@ -6,9 +6,9 @@ import Comments from 'src/components/Map/EntityPage/Comments';
 import Portal from 'src/components/App/Portal';
 import Button from 'src/components/Page/Aside/Button';
 import { Control } from 'src/components/Page/Aside';
-import { objectStore } from 'src/stores/MapStore/EntitiesStore/ObjectStore';
-import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
-import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
+import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
+import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { controlsStore } from 'src/stores/ControlsStore';
 
 const StyledObjectPage = styled.div`

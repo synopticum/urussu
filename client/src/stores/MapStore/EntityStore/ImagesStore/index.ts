@@ -1,8 +1,8 @@
 import { computed, makeObservable, observable } from 'mobx';
-import ObjectStore from 'src/stores/MapStore/EntitiesStore/ObjectStore';
-import DotStore from 'src/stores/MapStore/EntitiesStore/DotStore';
-import { ImagesMapped } from 'src/stores/MapStore/EntitiesStore';
-import PathStore from 'src/stores/MapStore/EntitiesStore/PathStore';
+import ObjectStore from 'src/stores/MapStore/EntityStore/ObjectStore';
+import DotStore from 'src/stores/MapStore/EntityStore/DotStore';
+import { ImagesMapped } from 'src/stores/MapStore/EntityStore';
+import PathStore from 'src/stores/MapStore/EntityStore/PathStore';
 import { BaseStore } from 'src/stores';
 import { ImageId } from 'src/contracts/entities';
 
