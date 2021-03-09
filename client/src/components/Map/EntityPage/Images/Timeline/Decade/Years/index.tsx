@@ -6,6 +6,9 @@ import curlyBracesImage from './images/curly.png';
 import arrowImage from './images/arrow.svg';
 import { imagesStore } from 'src/stores/MapStore/EntitiesStore/ImagesStore';
 import { color } from 'src/components/GlobalStyle/theme/helpers';
+import { ImageId } from 'src/contracts/entities';
+import { commentsStore } from 'src/stores/MapStore/EntitiesStore/CommentsStore';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 const StyledYears = styled.ul<{ isDecadeActive: boolean }>`
   position: absolute;
@@ -89,21 +92,24 @@ type Props = {
 };
 
 export const Years: React.FC<Props> = observer(({ images, isDecadeActive }) => {
+  const changeSelectedImage = (id: ImageId): void => {
+    imagesStore.changeSelectedImageId(id);
+    controlsStore.toggle('comments');
+    commentsStore.resetData();
+  };
+
   return (
     <StyledYears isDecadeActive={isDecadeActive}>
       {images.map(({ year, id, image }) => {
         return (
           <Image key={id}>
-            <YearValue
-              isActive={imagesStore.isImageActive(id)}
-              onClick={(): void => imagesStore.changeSelectedImageId(id)}
-            >
+            <YearValue isActive={imagesStore.isImageActive(id)} onClick={(): void => changeSelectedImage(id)}>
               {year}
             </YearValue>
             {image && (
               <NestedYearValue
                 isActive={imagesStore.isImageActive(image.id)}
-                onClick={(): void => imagesStore.changeSelectedImageId(image.id)}
+                onClick={(): void => changeSelectedImage(image.id)}
               >
                 {image.year}
               </NestedYearValue>
