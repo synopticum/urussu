@@ -5,7 +5,7 @@ import { dotsStore } from 'src/stores/MapStore/DotsStore';
 import { mapStore } from 'src/stores/MapStore';
 
 export const Dots: React.FC = observer(() => {
-  const { isFetching, isDataLoaded, error, data } = dotsStore.apiData;
+  const { isDataLoaded, data } = dotsStore.apiData;
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -13,8 +13,7 @@ export const Dots: React.FC = observer(() => {
     }
 
     return (): void => {
-      // Возможно стоит оставлять эти данные в кеше
-      // dotsStore.resetData();
+      // Cleaning up is made by <Map />
     };
   }, []);
 

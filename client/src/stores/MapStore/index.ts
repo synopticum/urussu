@@ -12,6 +12,7 @@ import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { map as leafletMap } from 'leaflet';
 import { debounce } from 'ts-debounce';
 import { SearchResultMapped, map } from 'src/stores/MapStore/map';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 export type Entity = {
   type: EntityType;
@@ -60,6 +61,8 @@ export default class MapStore implements BaseStore {
   }
 
   setEntity(entity: Entity): void {
+    controlsStore.selected = null;
+
     this.activeEntityId = null;
     this.resetSearchData();
 
@@ -97,6 +100,16 @@ export default class MapStore implements BaseStore {
     const options = { apiData: searchData, map };
 
     fetchData<SearchResultDto, SearchResultMapped>(`/search?value=${value}`, options);
+  }
+
+  toggleSearch(): void {
+    if (!controlsStore.selected) {
+      controlsStore.selected = 'search';
+      return;
+    }
+
+    this.activeEntityId = null;
+    controlsStore.selected = null;
   }
 
   openDot({ id, coordinates }: DotMapped): void {

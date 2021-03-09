@@ -92,9 +92,7 @@ type Props = {
 };
 
 export const Years: React.FC<Props> = observer(({ images, isDecadeActive }) => {
-  const changeSelectedImage = (id: ImageId): void => {
-    imagesStore.changeSelectedImageId(id);
-  };
+  const changeSelectedImage = (id: ImageId): void => imagesStore.changeSelectedImageId(id);
 
   return (
     <StyledYears isDecadeActive={isDecadeActive}>

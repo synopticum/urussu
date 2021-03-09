@@ -3,8 +3,10 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
 import { ObjectMapped, map } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
-import { EntityId } from 'src/contracts/entities';
+import { EntityId, ImageId } from 'src/contracts/entities';
 import { api, BaseStore } from 'src/stores';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
+import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 
 export default class ObjectStore implements BaseStore {
   private api: AxiosInstance;
@@ -18,8 +20,15 @@ export default class ObjectStore implements BaseStore {
     fetchData<ObjectDto, ObjectMapped>(`/objects/${id}`, options);
   }
 
+  initData(id: ImageId): void {
+    imagesStore.store = this;
+    commentsStore.store = this;
+    this.fetchApiData(id);
+  }
+
   resetData(): void {
     this.apiData = new AsyncData<ObjectMapped>();
+    imagesStore.resetData();
   }
 
   get address(): string {

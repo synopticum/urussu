@@ -5,7 +5,7 @@ import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
 import { mapStore } from 'src/stores/MapStore';
 
 export const Objects: React.FC = observer(() => {
-  const { isFetching, isDataLoaded, error, data } = objectsStore.apiData;
+  const { isDataLoaded, data } = objectsStore.apiData;
 
   useEffect(() => {
     if (!isDataLoaded) {
@@ -13,8 +13,7 @@ export const Objects: React.FC = observer(() => {
     }
 
     return (): void => {
-      // Возможно стоит оставлять эти данные в кеше
-      // objectsStore.resetData();
+      // Cleaning up is made by <Map />
     };
   }, []);
 

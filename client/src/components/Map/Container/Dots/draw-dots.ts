@@ -21,8 +21,7 @@ const createMarker = (item: DotMapped): Marker => {
     className: getClassName(item),
   });
 
-  const handleClick = (id: string): void => {
-    controlsStore.selected = null;
+  const setEntity = (id: string): void => {
     mapStore.setEntity({ type: 'dot', id });
   };
 
@@ -32,7 +31,7 @@ const createMarker = (item: DotMapped): Marker => {
     // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
     // @ts-ignore
     rotationAngle: item.rotationAngle || 0,
-  }).on('click', () => handleClick(item.id));
+  }).on('click', () => setEntity(item.id));
 };
 
 const removeCurrentLayersAndMarkers = (map: Map): void => {

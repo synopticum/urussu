@@ -39,8 +39,7 @@ export default class CommentsStore implements BaseStore {
     this.apiData = new AsyncData<CommentMapped[]>();
   }
 
-  handleCommentInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    const { value } = e.target;
+  handleInput = (value: string): void => {
     this.currentValue = value;
   };
 

@@ -17,8 +17,7 @@ const getObjectColor = (object: ObjectMapped): string => {
 };
 
 const addObjectsToMap = (map: Map, objects: ObjectMapped[]): void => {
-  const handleClick = (id: string): void => {
-    controlsStore.selected = null;
+  const setEntity = (id: string): void => {
     mapStore.setEntity({ type: 'object', id });
   };
 
@@ -28,7 +27,7 @@ const addObjectsToMap = (map: Map, objects: ObjectMapped[]): void => {
       className: getClassName(item),
       weight: 2,
     })
-      .on('click', () => handleClick(item.id))
+      .on('click', () => setEntity(item.id))
       .addTo(map);
   });
 };

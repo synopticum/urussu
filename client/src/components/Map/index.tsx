@@ -35,13 +35,7 @@ const Map: React.FC = observer(() => {
   const { entity } = mapStore;
 
   const toggleSearch = (): void => {
-    if (!controlsStore.selected) {
-      controlsStore.selected = 'search';
-      return;
-    }
-
-    mapStore.activeEntityId = null;
-    controlsStore.selected = null;
+    mapStore.toggleSearch();
   };
 
   useEffect(() => {

@@ -8,7 +8,6 @@ import Button from 'src/components/Page/Aside/Button';
 import { Control } from 'src/components/Page/Aside';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
-import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { controlsStore } from 'src/stores/ControlsStore';
 
 const StyledObjectPage = styled.div`
@@ -23,12 +22,9 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
   const { data } = objectStore.apiData;
 
   useEffect(() => {
-    imagesStore.store = objectStore;
-    commentsStore.store = objectStore;
-    objectStore.fetchApiData(id);
+    objectStore.initData(id);
 
     return (): void => {
-      imagesStore.resetData();
       objectStore.resetData();
     };
   }, []);

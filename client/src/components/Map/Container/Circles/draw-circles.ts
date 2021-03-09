@@ -1,14 +1,12 @@
 import { circle, Map } from 'leaflet';
 import { getClassName } from 'src/components/Map/Container';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
-import { controlsStore } from 'src/stores/ControlsStore';
 import { mapStore } from 'src/stores/MapStore';
 
 const removeCurrentCircles = (): void => {};
 
 const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
-  const handleClick = (id: string): void => {
-    controlsStore.selected = null;
+  const setEntity = (id: string): void => {
     mapStore.setEntity({ type: 'object', id });
   };
 
@@ -22,7 +20,7 @@ const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
       weight: 2,
       className: getClassName(item),
     })
-      .on('click', () => handleClick(item.id))
+      .on('click', () => setEntity(item.id))
       .addTo(map);
   });
 };

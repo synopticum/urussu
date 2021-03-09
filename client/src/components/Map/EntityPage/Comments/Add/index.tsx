@@ -56,10 +56,11 @@ const Submit = styled.button`
 
 export const Add: React.FC = observer(() => {
   const addComment = (): Promise<void> => commentsStore.add();
+  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => commentsStore.handleInput(e.target.value);
 
   return (
     <StyledAdd>
-      <Textarea onInput={commentsStore.handleCommentInput} value={commentsStore.currentValue} />
+      <Textarea onInput={handleInput} value={commentsStore.currentValue} />
 
       <Submit type="button" onClick={addComment}>
         Отправить

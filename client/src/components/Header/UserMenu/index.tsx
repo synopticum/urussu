@@ -44,7 +44,6 @@ const UserMenu: React.FC = observer(() => {
 
   const logout = (): void => {
     authStore.logout();
-    userStore.resetData();
   };
 
   return (

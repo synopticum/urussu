@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
 import Images from 'src/components/Map/EntityPage/Images';
 import { dotStore } from 'src/stores/MapStore/EntityStore/DotStore';
-import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
 const StyledDotPage = styled.div`
   height: 100%;
@@ -17,11 +16,9 @@ export const DotPage: React.FC<Props> = observer(({ id }) => {
   const { data } = dotStore.apiData;
 
   useEffect(() => {
-    imagesStore.store = dotStore;
-    dotStore.fetchApiData(id);
+    dotStore.initData(id);
 
     return (): void => {
-      imagesStore.resetData();
       dotStore.resetData();
     };
   }, []);

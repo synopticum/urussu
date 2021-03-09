@@ -1,6 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { api, BaseStore } from 'src/stores';
+import { userStore } from 'src/stores/UserStore';
 
 type Code = string;
 export type Token = string;
@@ -36,6 +37,7 @@ export default class AuthStore implements BaseStore {
   logout(): void {
     this.token = null;
     localStorage.removeItem('token');
+    userStore.resetData();
   }
 
   private async getToken(code?: Code): Promise<Token> {
