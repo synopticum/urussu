@@ -2,7 +2,7 @@ import { computed, makeObservable, observable } from 'mobx';
 import { GridLayer, LatLngBounds, LatLngBoundsExpression, LatLngTuple, Map, tileLayer } from 'leaflet';
 import { AxiosInstance } from 'axios';
 import { EntityId, EntityType } from 'src/contracts/entities';
-import { api, BaseStore } from 'src/stores';
+import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { SearchResultDto } from 'src/contracts/search';
 import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
@@ -29,8 +29,7 @@ export const getEntity = (params: URLSearchParams): Entity => {
   return { type, id };
 };
 
-export default class MapStore implements BaseStore {
-  private readonly api: AxiosInstance;
+export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResultMapped> implements BaseStore {
   private readonly defaultZoom = 5;
   private readonly defaultLat = 69.65;
   private readonly defaultLng = -20.25;
@@ -89,17 +88,12 @@ export default class MapStore implements BaseStore {
   /**
    * Methods responsible for search on a map
    */
-  searchData = new AsyncData<SearchResultMapped>();
-
   resetSearchData(): void {
-    this.searchData = new AsyncData<SearchResultMapped>();
+    this.apiData = new AsyncData<SearchResultMapped>();
   }
 
   search(value: string): void {
-    const { searchData } = this;
-    const options = { apiData: searchData, map };
-
-    fetchData<SearchResultDto, SearchResultMapped>(`/search?value=${value}`, options);
+    fetchData<SearchResultDto, SearchResultMapped>(`/search?value=${value}`, this.getApiOptions(map));
   }
 
   toggleSearch(): void {
@@ -213,7 +207,8 @@ export default class MapStore implements BaseStore {
    * @constructor
    */
   constructor(api: AxiosInstance) {
-    this.api = api;
+    super(api);
+
     this.map = null;
     this.entity = null;
     this.activeEntityId = null;

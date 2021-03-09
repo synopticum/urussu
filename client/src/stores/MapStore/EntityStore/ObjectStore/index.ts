@@ -4,20 +4,23 @@ import { AsyncData, fetchData } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
 import { ObjectMapped, map } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { EntityId, ImageId } from 'src/contracts/entities';
-import { api, BaseStore } from 'src/stores';
+import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 
-export default class ObjectStore implements BaseStore {
-  private api: AxiosInstance;
+export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped> implements BaseStore {
+  get address(): string {
+    const { data } = this.apiData;
 
-  apiData = new AsyncData<ObjectMapped>();
+    if (!data || !data.street) {
+      return null;
+    }
+
+    return `${data.street}, ${data.house}`;
+  }
 
   fetchApiData(id: EntityId): void {
-    const { apiData } = this;
-    const options = { apiData, map };
-
-    fetchData<ObjectDto, ObjectMapped>(`/objects/${id}`, options);
+    fetchData<ObjectDto, ObjectMapped>(`/objects/${id}`, this.getApiOptions(map));
   }
 
   initData(id: ImageId): void {
@@ -31,21 +34,10 @@ export default class ObjectStore implements BaseStore {
     imagesStore.resetData();
   }
 
-  get address(): string {
-    const { data } = this.apiData;
-
-    if (!data || !data.street) {
-      return null;
-    }
-
-    return `${data.street}, ${data.house}`;
-  }
-
   constructor(api: AxiosInstance) {
-    this.api = api;
+    super(api);
 
     makeObservable(this, {
-      apiData: observable,
       address: computed,
     });
   }

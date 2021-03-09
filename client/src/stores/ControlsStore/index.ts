@@ -1,14 +1,11 @@
 import { makeObservable, observable } from 'mobx';
-import { AxiosInstance } from 'axios';
 import { MutableRefObject } from 'react';
-import { api, BaseStore } from 'src/stores';
+import { BaseStore } from 'src/stores';
 import { ButtonTypes } from 'src/components/Page/Aside/Button';
 
 export type Controls = 'search' | 'comments';
 
 export default class ControlsStore implements BaseStore {
-  private api: AxiosInstance;
-
   ref: MutableRefObject<HTMLDivElement>;
 
   selected: Controls;
@@ -31,8 +28,7 @@ export default class ControlsStore implements BaseStore {
     this.selected = null;
   }
 
-  constructor(api: AxiosInstance) {
-    this.api = api;
+  constructor() {
     this.ref = null;
     this.selected = null;
 
@@ -43,4 +39,4 @@ export default class ControlsStore implements BaseStore {
   }
 }
 
-export const controlsStore = new ControlsStore(api);
+export const controlsStore = new ControlsStore();

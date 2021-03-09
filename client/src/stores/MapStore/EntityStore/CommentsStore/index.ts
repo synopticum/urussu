@@ -8,30 +8,23 @@ import { CommentDto } from 'src/contracts/entities/comments';
 import { CommentMapped, map } from 'src/stores/MapStore/EntityStore/CommentsStore/map';
 import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
 import { v4 as uuidv4 } from 'uuid';
-import { api, BaseStore } from 'src/stores';
+import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { userStore } from 'src/stores/UserStore';
-import React from 'react';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
-export default class CommentsStore implements BaseStore {
-  private api: AxiosInstance;
+export default class CommentsStore extends BaseAsyncStore<CommentDto[], CommentMapped[]> implements BaseStore {
+  store: ObjectStore | DotStore | PathStore;
 
   currentValue: string;
 
-  apiData = new AsyncData<CommentMapped[]>();
-
-  store: ObjectStore | DotStore | PathStore;
-
   fetchApiData(entityType: EntityType, entityId: EntityId, imageId?: ImageId): void {
-    const { apiData } = this;
-    const options = { apiData, map };
     let url = `${entityType}/${entityId}/comments`;
 
     if (imageId) {
       url += `/${imageId}`;
     }
 
-    fetchData<CommentDto[], CommentMapped[]>(url, options);
+    fetchData<CommentDto[], CommentMapped[]>(url, this.getApiOptions(map));
   }
 
   resetData(): void {
@@ -77,11 +70,11 @@ export default class CommentsStore implements BaseStore {
   }
 
   constructor(api: AxiosInstance) {
-    this.api = api;
+    super(api);
+
     this.currentValue = '';
 
     makeObservable(this, {
-      apiData: observable,
       store: observable,
       currentValue: observable,
     });

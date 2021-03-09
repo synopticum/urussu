@@ -17,7 +17,7 @@ const StyledResults = styled.div`
 
 const Results: React.FC = observer(() => {
   const {
-    searchData: { data },
+    apiData: { data },
   } = mapStore;
 
   if (!data) {

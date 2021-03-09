@@ -1,21 +1,13 @@
-import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { PathDto } from 'src/contracts/entities/path';
 import { map } from 'src/stores/MapStore/PathsStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
-import { api, BaseStore } from 'src/stores';
+import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 
-export default class PathsStore implements BaseStore {
-  private api: AxiosInstance;
-
-  apiData = new AsyncData<PathMapped[]>();
-
+export default class PathsStore extends BaseAsyncStore<PathDto[], PathMapped[]> implements BaseStore {
   fetchApiData(): void {
-    const { apiData } = this;
-    const options = { apiData, map };
-
-    fetchData<PathDto[], PathMapped[]>('/paths', options);
+    fetchData<PathDto[], PathMapped[]>('/paths', this.getApiOptions(map));
   }
 
   resetData(): void {
@@ -23,11 +15,7 @@ export default class PathsStore implements BaseStore {
   }
 
   constructor(api: AxiosInstance) {
-    this.api = api;
-
-    makeObservable(this, {
-      apiData: observable,
-    });
+    super(api);
   }
 }
 

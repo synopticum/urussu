@@ -7,9 +7,13 @@ type Code = string;
 export type Token = string;
 
 export default class AuthStore implements BaseStore {
-  private api: AxiosInstance;
-
   token: Token = null;
+
+  get isLogged(): boolean {
+    return Boolean(this.token);
+  }
+
+  private api: AxiosInstance;
 
   resetData(): void {
     this.logout();
@@ -76,10 +80,6 @@ export default class AuthStore implements BaseStore {
     } catch (e) {
       return false;
     }
-  }
-
-  get isLogged(): boolean {
-    return Boolean(this.token);
   }
 
   constructor(api: AxiosInstance) {

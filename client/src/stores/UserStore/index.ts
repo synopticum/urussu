@@ -1,9 +1,9 @@
-import { computed, makeObservable, observable } from 'mobx';
+import { computed, makeObservable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { map, UserMapped } from 'src/stores/UserStore/map';
 import { UserDto } from 'src/contracts/user';
-import { api, BaseStore } from 'src/stores';
+import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 
 export type Author = {
   author: string;
@@ -11,11 +11,7 @@ export type Author = {
   authorVkId: UserMapped['vkId'];
 };
 
-export default class UserStore implements BaseStore {
-  private api: AxiosInstance;
-
-  apiData = new AsyncData<UserMapped>();
-
+export default class UserStore extends BaseAsyncStore<UserDto, UserMapped> implements BaseStore {
   get author(): Author {
     const { data } = this.apiData;
 
@@ -31,10 +27,7 @@ export default class UserStore implements BaseStore {
   }
 
   fetchApiData(): void {
-    const { apiData } = this;
-    const options = { apiData, map };
-
-    fetchData<UserDto, UserMapped>('/user', options);
+    fetchData<UserDto, UserMapped>('/user', this.getApiOptions(map));
   }
 
   resetData(): void {
@@ -42,10 +35,9 @@ export default class UserStore implements BaseStore {
   }
 
   constructor(api: AxiosInstance) {
-    this.api = api;
+    super(api);
 
     makeObservable(this, {
-      apiData: observable,
       author: computed,
     });
   }

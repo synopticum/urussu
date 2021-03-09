@@ -1,22 +1,14 @@
-import { makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { EntityId, ImageId } from 'src/contracts/entities';
 import { DotMapped, map } from 'src/stores/MapStore/EntityStore/DotStore/map';
 import { DotDto } from 'src/contracts/entities/dot';
-import { api, BaseStore } from 'src/stores';
+import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
-export default class DotStore implements BaseStore {
-  private api: AxiosInstance;
-
-  apiData = new AsyncData<DotMapped>();
-
+export default class DotStore extends BaseAsyncStore<DotDto, DotMapped> implements BaseStore {
   fetchApiData(id: EntityId): void {
-    const { apiData } = this;
-    const options = { apiData, map };
-
-    fetchData<DotDto, DotMapped>(`/dots/${id}`, options);
+    fetchData<DotDto, DotMapped>(`/dots/${id}`, this.getApiOptions(map));
   }
 
   initData(id: ImageId): void {
@@ -30,11 +22,7 @@ export default class DotStore implements BaseStore {
   }
 
   constructor(api: AxiosInstance) {
-    this.api = api;
-
-    makeObservable(this, {
-      apiData: observable,
-    });
+    super(api);
   }
 }
 
