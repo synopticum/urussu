@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "webpack serve --config ./configs/webpack/web.config.babel.ts --host 0.0.0.0 --disable-host-check",
     "build": "rm -rf ./dist/* && webpack --config ./configs/webpack/web.config.babel.ts",
-    "test": "NODE_ENV=test jest --projects ./jest.client.config.js"
+    "test": "NODE_ENV=test jest --projects ./jest.client.config.js",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "dependencies": {
     "@babel/runtime": "7.12.5",
@@ -41,7 +43,10 @@
     "@loadable/babel-plugin": "5.13.2",
     "@loadable/webpack-plugin": "5.14.0",
     "@shopify/jest-dom-mocks": "2.9.3",
-    "@storybook/react": "6.0.21",
+    "@storybook/addon-actions": "6.1.21",
+    "@storybook/addon-essentials": "6.1.21",
+    "@storybook/addon-links": "6.1.21",
+    "@storybook/react": "6.1.21",
     "@types/copy-webpack-plugin": "6.0.0",
     "@types/ejs": "3.0.5",
     "@types/enzyme": "3.10.8",
