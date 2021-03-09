@@ -1,11 +1,21 @@
 import React from 'react';
 import Layout from 'src/components/App/Layout';
-import Providers from 'src/providers';
 import './mobxConfig';
+import ErrorBoundary from 'src/components/ErrorBoundary';
+import GlobalStyle from 'src/components/GlobalStyle';
 
-type Props = {};
+const Providers: React.FC = ({ children }) => {
+  return (
+    <React.StrictMode>
+      <ErrorBoundary>
+        <GlobalStyle />
+        {children}
+      </ErrorBoundary>
+    </React.StrictMode>
+  );
+};
 
-const App: React.FC<Props> = props => {
+const App: React.FC = props => {
   return (
     <Providers {...props}>
       <Layout />
