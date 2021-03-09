@@ -2,7 +2,6 @@ require('dotenv').config();
 import path from 'path';
 import LoadablePlugin from '@loadable/webpack-plugin';
 import webpack from 'webpack';
-import CircularDependencyPlugin from 'circular-dependency-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import merge from 'webpack-merge';
 import CopyPlugin from 'copy-webpack-plugin';
@@ -37,12 +36,6 @@ const config = merge([
       new StylelintPlugin({ files: '**/*.(ts|tsx)' }),
       new webpack.EnvironmentPlugin(Object.keys(process.env)),
       new LoadablePlugin(),
-      new CircularDependencyPlugin({
-        exclude: /node_modules/,
-        failOnError: true,
-        allowAsyncCycles: false,
-        cwd: process.cwd(),
-      }),
       new HtmlWebpackPlugin({
         template: path.resolve(path.join('.', 'src', 'index.ejs')),
       }),
