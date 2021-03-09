@@ -15,6 +15,7 @@ type Props = {} & RouteComponentProps;
 const HomePage: React.FC<Props> = observer(() => {
   const { isFetching, error, data } = globalStore.apiData;
   const content = isFetching ? <div>Fetching...</div> : error ? <div>Error: {error}</div> : <div>{data}</div>;
+  const fetchTestData = (): Promise<void> => globalStore.fetchData();
 
   return (
     <StyledHomePage>
@@ -24,7 +25,7 @@ const HomePage: React.FC<Props> = observer(() => {
         <div>{globalStore.title}</div>
         <div>{content}</div>
         <div>
-          <button onClick={(): Promise<void> => globalStore.fetchData()}>test async</button>
+          <button onClick={fetchTestData}>test async</button>
         </div>
         <Timer />
       </Content>

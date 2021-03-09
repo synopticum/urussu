@@ -24,6 +24,8 @@ const Message = styled.div`
 `;
 
 const ContentFallback: React.FC = () => {
+  const reload = (): void => window.location.reload();
+
   return (
     <Content>
       <div>
@@ -34,7 +36,7 @@ const ContentFallback: React.FC = () => {
             <br />
             Произошла неизвестная ошибка.
             <br />
-            Пожалуйста, <Link onClick={(): void => window.location.reload()}>перезагрузите страницу</Link>.
+            Пожалуйста, <Link onClick={reload}>перезагрузите страницу</Link>.
           </Message>
         </Fallback>
       </div>

@@ -37,6 +37,8 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
     return null;
   }
 
+  const toggleComments = (): void => controlsStore.toggle('comments');
+
   return (
     <StyledObjectPage>
       <Images />
@@ -44,7 +46,7 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
 
       <Portal parent={controlsStore.ref}>
         <Control>
-          <Button type={controlsStore.getStateFor('comments')} onClick={(): void => controlsStore.toggle('comments')} />
+          <Button type={controlsStore.getStateFor('comments')} onClick={toggleComments} />
         </Control>
       </Portal>
     </StyledObjectPage>

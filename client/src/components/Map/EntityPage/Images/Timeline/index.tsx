@@ -38,12 +38,14 @@ export const Timeline = observer(() => {
             return <EmptyDecade key={decade}>{decade}</EmptyDecade>;
           }
 
+          const changeSelectedDecade = (): void => imagesStore.changeSelectedDecade(decade);
+
           return (
             <Decade
               decade={decade}
               images={images}
               isActive={imagesStore.isDecadeActive(decade)}
-              change={(): void => imagesStore.changeSelectedDecade(decade)}
+              change={changeSelectedDecade}
               key={decade}
             />
           );

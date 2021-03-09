@@ -27,10 +27,11 @@ const Value = styled.span`
 
 export const DotItem: React.FC<{ item: DotMapped }> = ({ item }) => {
   const { title } = item;
+  const open = (): void => mapStore.openDot(item);
 
   return (
     <StyledItem icon={dotIcon}>
-      <Value onClick={(): void => mapStore.openDot(item)}>{title}</Value>
+      <Value onClick={open}>{title}</Value>
     </StyledItem>
   );
 };
@@ -38,10 +39,11 @@ export const DotItem: React.FC<{ item: DotMapped }> = ({ item }) => {
 export const ObjectItem: React.FC<{ item: ObjectMapped }> = ({ item }) => {
   const { street, house } = item;
   const override = { backgroundPosition: '5px calc(50% - 1px)' };
+  const open = (): void => mapStore.openObject(item);
 
   return (
     <StyledItem icon={objectIcon} style={override}>
-      <Value onClick={(): void => mapStore.openObject(item)}>
+      <Value onClick={open}>
         {street}, {house}
       </Value>
     </StyledItem>
@@ -51,10 +53,11 @@ export const ObjectItem: React.FC<{ item: ObjectMapped }> = ({ item }) => {
 export const PathItem: React.FC<{ item: PathMapped }> = ({ item }) => {
   const { title } = item;
   const override = { backgroundPosition: '-5px 50%' };
+  const open = (): void => mapStore.openPath(item);
 
   return (
     <StyledItem icon={pathIcon} style={override}>
-      <Value onClick={(): void => mapStore.openPath(item)}>{title}</Value>
+      <Value onClick={open}>{title}</Value>
     </StyledItem>
   );
 };

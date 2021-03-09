@@ -33,20 +33,19 @@ const StyledNavLink = styled(Link)`
   }
 `;
 
-const NavLink: React.FC<{ to: string }> = props => (
-  <StyledNavLink
-    {...props}
-    getProps={({ isCurrent }): unknown => {
-      return {
-        style: {
-          color: isCurrent ? color('white-1') : color('blue-1'),
-          textDecoration: isCurrent ? 'none' : 'underline',
-          cursor: isCurrent ? 'default' : 'pointer',
-        },
-      };
-    }}
-  />
-);
+const NavLink: React.FC<{ to: string }> = props => {
+  const getProps = ({ isCurrent }: { isCurrent: boolean }): unknown => {
+    return {
+      style: {
+        color: isCurrent ? color('white-1') : color('blue-1'),
+        textDecoration: isCurrent ? 'none' : 'underline',
+        cursor: isCurrent ? 'default' : 'pointer',
+      },
+    };
+  };
+
+  return <StyledNavLink {...props} getProps={getProps} />;
+};
 
 const Title = styled.div`
   font-size: 32px;
