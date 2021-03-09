@@ -6,16 +6,12 @@ import PathStore from 'src/stores/MapStore/EntitiesStore/PathStore';
 import { BaseStore } from 'src/stores';
 import { ImageId } from 'src/contracts/entities';
 
-export const getImageId = (params: URLSearchParams): ImageId => params.get('image');
-
-export const getImageDecade = (id: ImageId): number => {
-  return parseInt(`${id.split(',')[0].substring(0, 3)}0`);
-};
-
 export default class ImagesStore implements BaseStore {
   store: ObjectStore | DotStore | PathStore;
 
   selectedImageId: ImageId;
+
+  selectedDecade: number;
 
   get selectedImageUrl(): string {
     const { data } = this.store.apiData;
@@ -37,28 +33,6 @@ export default class ImagesStore implements BaseStore {
     return `${process.env.S3_URL}/${image.url}`;
   }
 
-  selectedDecade: number;
-
-  resetData(): void {
-    this.store = null;
-    this.selectedImageId = null;
-    this.selectedDecade = null;
-  }
-
-  createTimeline(images: ImagesMapped): ImagesMapped {
-    const DECADES = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
-    const timeline: ImagesMapped = {};
-    const decades = Object.entries(images);
-
-    DECADES.forEach(decade => (timeline[decade] = null));
-
-    decades.forEach(([decade, images]) => {
-      timeline[parseInt(decade)] = images;
-    });
-
-    return timeline;
-  }
-
   get initialDecade(): number {
     const { data } = this.store.apiData;
 
@@ -68,26 +42,6 @@ export default class ImagesStore implements BaseStore {
 
     return this.getMaxDecadeWithImage(data.images);
   }
-
-  changeSelectedDecade(decade: string): void {
-    this.selectedDecade = parseInt(decade);
-  }
-
-  isDecadeActive(decade: string): boolean {
-    return this.selectedDecade === parseInt(decade);
-  }
-
-  private getMaxDecadeWithImage(images: ImagesMapped): number {
-    return Math.max(...Object.keys(images).map(decade => parseInt(decade)));
-  }
-
-  changeSelectedImageId(id: ImageId): void {
-    this.selectedImageId = id;
-  }
-
-  isImageActive = (id: ImageId): boolean => {
-    return id === this.selectedImageId;
-  };
 
   get initialImageId(): ImageId {
     const { data } = this.store.apiData;
@@ -101,6 +55,55 @@ export default class ImagesStore implements BaseStore {
     return data.images[decade][0].id;
   }
 
+  private static DECADES = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+
+  resetData(): void {
+    this.store = null;
+    this.selectedImageId = null;
+    this.selectedDecade = null;
+  }
+
+  createTimeline(images: ImagesMapped): ImagesMapped {
+    const timeline: ImagesMapped = {};
+    const decades = Object.entries(images);
+
+    ImagesStore.DECADES.forEach(decade => (timeline[decade] = null));
+
+    decades.forEach(([decade, images]) => {
+      timeline[parseInt(decade)] = images;
+    });
+
+    return timeline;
+  }
+
+  changeSelectedDecade(decade: string): void {
+    this.selectedDecade = parseInt(decade);
+  }
+
+  isDecadeActive(decade: string): boolean {
+    return this.selectedDecade === parseInt(decade);
+  }
+
+  changeSelectedImageId(id: ImageId): void {
+    this.selectedImageId = id;
+  }
+
+  isImageActive(id: ImageId): boolean {
+    return id === this.selectedImageId;
+  }
+
+  private getMaxDecadeWithImage(images: ImagesMapped): number {
+    return Math.max(...Object.keys(images).map(decade => parseInt(decade)));
+  }
+
+  private static getImageId(params: URLSearchParams): ImageId {
+    return params.get('image');
+  }
+
+  private static getImageDecade(id: ImageId): number {
+    return parseInt(`${id.split(',')[0].substring(0, 3)}0`);
+  }
+
   constructor() {
     this.store = null;
 
@@ -108,9 +111,9 @@ export default class ImagesStore implements BaseStore {
       const params = new URLSearchParams(location.search);
 
       if (params.has('image')) {
-        const id = getImageId(params);
+        const id = ImagesStore.getImageId(params);
         this.selectedImageId = id;
-        this.selectedDecade = getImageDecade(id);
+        this.selectedDecade = ImagesStore.getImageDecade(id);
       }
     }
 
