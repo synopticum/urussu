@@ -18,12 +18,10 @@ const Template: Story<Props> = args => (
   </>
 );
 
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-};
+export const Default = Template.bind({});
 
-export const Secondary = Template.bind({});
-Secondary.args = {
-  primary: false,
+Default.args = {
+  placeholder: 'Please enter text...',
+  disabled: false,
+  required: false,
 };

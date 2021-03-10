@@ -36,12 +36,6 @@ const overrides = `
   input, textarea, button { font-family: "PT Serif", Times New Roman, "Helvetica Neue", sans-serif; }
   input:active, textarea:active, button:active, input:focus, textarea:focus, button:focus { outline: none; }
 
-  input,
-  input:hover,
-  input:focus,
-  input:active {
-    transition: background-color 5000s ease-in-out 0s;
-  }
   input[type=text]::-ms-clear {
     display: none;
   }

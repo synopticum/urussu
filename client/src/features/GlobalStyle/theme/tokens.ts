@@ -5,10 +5,13 @@ const tokens = {
   },
   colors: {
     'black-1': '#111',
-    'black-2': '#444',
+    'black-2': '#555',
+    'black-3': '#999',
     'white-1': '#fff',
-    'white-2': '#eee',
+    'white-2': '#ddd',
+    'white-3': '#aaa',
     'blue-1': '#337ab7',
+    'red-1': '#b00',
     'yellow-1': '#fff7da',
   },
   shadows: {
