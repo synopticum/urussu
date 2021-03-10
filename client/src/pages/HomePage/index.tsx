@@ -3,9 +3,9 @@ import { RouteComponentProps } from '@reach/router';
 import Timer from './Timer';
 import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
-import Page from 'src/components/Page';
-import Aside from 'src/components/Page/Aside';
-import Content from 'src/components/Page/Content';
+import Page from 'src/features/Page';
+import Aside from 'src/features/Page/Aside';
+import Content from 'src/features/Page/Content';
 import { globalStore } from 'src/stores/GlobalStore';
 
 const StyledHomePage = styled(Page)``;

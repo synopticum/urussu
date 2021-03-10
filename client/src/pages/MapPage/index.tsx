@@ -2,8 +2,8 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import Map from 'src/features/Map';
 import styled from 'styled-components';
-import Page from 'src/components/Page';
-import Aside from 'src/components/Page/Aside';
+import Page from 'src/features/Page';
+import Aside from 'src/features/Page/Aside';
 
 const StyledMapPage = styled(Page)``;
 

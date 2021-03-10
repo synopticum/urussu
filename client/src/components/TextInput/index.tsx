@@ -9,12 +9,12 @@ const StyledTextInput = styled.div`
   background-size: 100%;
 `;
 
-type Props = {
+export type Props = {
   primary: boolean;
 };
 
 const TextInput: React.FC<Props> = ({ primary }) => {
-  return <StyledTextInput>Hello {primary}</StyledTextInput>;
+  return <StyledTextInput>Hello {JSON.stringify(primary)}</StyledTextInput>;
 };
 
 export default TextInput;

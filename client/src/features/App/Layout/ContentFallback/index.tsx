@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import Aside from 'src/components/Page/Aside';
+import Aside from 'src/features/Page/Aside';
 import Content, { Link } from 'src/features/App/Layout/Content';
 import { color } from 'src/features/GlobalStyle/theme/helpers';
 
