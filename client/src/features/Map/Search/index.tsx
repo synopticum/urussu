@@ -45,7 +45,7 @@ const Input = styled.input`
   background: none;
 
   &:focus {
-    background-color: red;
+    background-color: ${color('yellow-1')};
   }
 `;
 
