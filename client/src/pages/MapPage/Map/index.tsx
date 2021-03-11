@@ -17,6 +17,8 @@ import { Control } from 'src/features/Page/Aside';
 import { mapStore } from 'src/stores/MapStore';
 import { controlsStore } from 'src/stores/ControlsStore';
 import theme from 'src/features/App/GlobalStyle/theme';
+import Drawer from 'src/pages/MapPage/Map/Drawer';
+import { userStore } from 'src/stores/UserStore';
 
 const StyledMap = styled.div`
   height: 100%;
@@ -33,6 +35,7 @@ const Map: React.FC = observer(() => {
   useMap(containerRef);
 
   const { entity } = mapStore;
+  const { isAdmin } = userStore;
 
   const toggleSearch = (): void => {
     mapStore.toggleSearch();
@@ -48,6 +51,8 @@ const Map: React.FC = observer(() => {
     <StyledMap>
       <Router />
       <Container ref={containerRef}>
+        {isAdmin && <Drawer />}
+
         <Dots />
         <Objects />
         <Paths />

@@ -26,6 +26,16 @@ export default class UserStore extends BaseAsyncStore<UserDto, UserMapped> imple
     };
   }
 
+  get isAdmin(): boolean {
+    const { data } = this.apiData;
+
+    if (!data) {
+      return null;
+    }
+
+    return data.role === 'admin';
+  }
+
   fetchApiData(): void {
     fetchData<UserDto, UserMapped>('/user', this.getApiOptions(map));
   }
@@ -39,6 +49,7 @@ export default class UserStore extends BaseAsyncStore<UserDto, UserMapped> imple
 
     makeObservable(this, {
       author: computed,
+      isAdmin: computed,
     });
   }
 }

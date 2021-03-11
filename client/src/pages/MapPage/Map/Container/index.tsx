@@ -155,6 +155,11 @@ const Container = styled.div`
   .leaflet-control-layers {
     display: none;
   }
+
+  .leaflet-top.leaflet-left {
+    left: 58px;
+    top: 13px;
+  }
 `;
 
 export default Container;
