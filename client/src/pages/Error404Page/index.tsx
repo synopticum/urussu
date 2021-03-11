@@ -6,9 +6,7 @@ const StyledError404 = styled.div`
   color: red;
 `;
 
-type Props = {} & RouteComponentProps;
-
-const Error404: React.FC<Props> = () => {
+const Error404: React.FC<RouteComponentProps> = () => {
   return <StyledError404>Hello 404</StyledError404>;
 };
 

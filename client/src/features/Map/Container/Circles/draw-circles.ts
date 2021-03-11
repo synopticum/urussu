@@ -13,7 +13,7 @@ const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
   circles.forEach(item => {
     const { coordinates, radius } = item;
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     circle(coordinates[0], parseInt(radius), {
       color: 'rgb(255, 198, 0)',

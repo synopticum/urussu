@@ -1,10 +1,10 @@
 import { Marker, DomUtil, DragEndEvent } from 'leaflet';
 
 export const useRotatedMarker = (): void => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const proto_initIcon = Marker.prototype._initIcon;
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   const proto_setPos = Marker.prototype._setPos;
 

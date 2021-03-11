@@ -4,9 +4,7 @@ import TimerState from 'src/pages/HomePage/Timer/state';
 import { autorun } from 'mobx';
 import l from './locale';
 
-type Props = {};
-
-const Timer: React.FC<Props> = observer(() => {
+const Timer: React.FC = observer(() => {
   const [timer] = useState(() => new TimerState());
 
   useEffect(

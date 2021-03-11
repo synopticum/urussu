@@ -4,9 +4,7 @@ import { useLocation } from '@reach/router';
 import { parse } from 'query-string';
 import { authStore } from 'src/stores/AuthStore';
 
-type Props = {} & RouteComponentProps;
-
-const LoginPage: React.FC<Props> = () => {
+const LoginPage: React.FC<RouteComponentProps> = () => {
   const location = useLocation();
   const { code } = parse(location.search);
 

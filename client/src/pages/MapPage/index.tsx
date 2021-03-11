@@ -7,9 +7,7 @@ import Aside from 'src/features/Page/Aside';
 
 const StyledMapPage = styled(Page)``;
 
-type Props = {} & RouteComponentProps;
-
-const MapPage: React.FC<Props> = () => {
+const MapPage: React.FC<RouteComponentProps> = () => {
   return (
     <StyledMapPage>
       <Map />

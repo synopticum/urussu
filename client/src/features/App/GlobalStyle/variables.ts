@@ -1,35 +1,34 @@
 import { CSSChunk } from 'src/features/App/GlobalStyle/theme';
 import tokens, { Tokens } from 'src/features/App/GlobalStyle/theme/tokens';
 
-const _variables: string[] = [];
-
-const handle = (entry: object, path = ''): void => {
-  // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-  // @ts-ignore
+const process = (entry: [string, unknown], path = ''): unknown => {
   const [, value] = entry;
 
   if (typeof value === 'function') {
-    return;
+    // Tokens may contain helper functions, which must not be added to CSS Variables
+    return null;
   }
 
   if (typeof value === 'object') {
-    return Object.entries(value).forEach(entry => handle(entry, `${path}-${entry[0]}`));
+    // Tokens can be nested
+    return Object.entries(value).flatMap(entry => process(entry, `${path}-${entry[0]}`));
   }
 
-  _variables.push(`--${path}: ${value}`);
+  return `--${path}: ${value}`;
 };
 
-Object.entries(tokens).forEach(entry => handle(entry, entry[0]));
-console.log(_variables);
-
 const generateVariables = (tokens: Tokens): CSSChunk => {
+  const variables = Object.entries(tokens)
+    .flatMap(entry => process(entry, entry[0]))
+    .filter(Boolean)
+    .join(';');
+
   return `
-  :root {
-    ${_variables.join(';')}
-  }
+    :root {
+      ${variables}
+    }
   `;
 };
 
 const variables = generateVariables(tokens);
-
 export default variables;

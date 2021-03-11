@@ -10,9 +10,7 @@ import { globalStore } from 'src/stores/GlobalStore';
 
 const StyledHomePage = styled(Page)``;
 
-type Props = {} & RouteComponentProps;
-
-const HomePage: React.FC<Props> = observer(() => {
+const HomePage: React.FC<RouteComponentProps> = observer(() => {
   return (
     <StyledHomePage>
       <Aside>asd</Aside>

@@ -5,11 +5,9 @@ import Page from 'src/features/Page';
 import Aside from 'src/features/Page/Aside';
 import Content from 'src/features/Page/Content';
 
-type Props = {} & RouteComponentProps;
-
 const StyledContactUsPage = styled(Page)``;
 
-const ContactUs: React.FC<Props> = () => (
+const ContactUs: React.FC<RouteComponentProps> = () => (
   <StyledContactUsPage>
     <Aside>zz</Aside>
     <Content>contact us</Content>

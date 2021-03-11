@@ -1,53 +1,42 @@
 import tokens, { Tokens } from 'src/features/App/GlobalStyle/theme/tokens';
+import cloneDeep from 'clone-deep';
 
-type Theme = Partial<Tokens>;
-
+type Theme = Tokens;
 export type CSSChunk = string;
 export type CSSVariable = string;
 
-const generateGetters = <T>(groupName: string, groupSource: T): T => {
-  const groupSourceWithGetters = JSON.parse(JSON.stringify(groupSource));
-
-  Object.entries(groupSourceWithGetters).forEach(([group, value]) => {
-    if (typeof value === 'object') {
-      Object.entries(value).forEach(([name, nestedValue]) => {
-        Object.defineProperty(value, name, {
-          get(): string {
-            return `var(--${groupName}-${group}-${name})`;
-          },
-        });
-      });
-    }
-
-    return `var(--${groupName}-${value})`;
-  });
-
-  return groupSourceWithGetters;
-};
-
 const generateTheme = (tokens: Tokens): Theme => {
-  const theme: Theme = {};
-  const entries = Object.entries(tokens);
-  const skip = ['animations', 'chunks'];
+  const theme: Theme = cloneDeep(tokens);
 
-  for (const group of entries) {
-    const [name, value] = group;
+  const process = (entry: [string, unknown], parent?: unknown, path?: string): void => {
+    const [name, value] = entry;
 
-    if (skip.includes(name)) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-      // @ts-ignore
-      theme[name] = value;
-      continue;
+    if (typeof value === 'function') {
+      // Tokens may contain helper functions, which must not be converted to getter
+      return;
     }
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore
-    theme[name] = generateGetters(name, value);
+    if (typeof value === 'object') {
+      // Tokens can be nested
+      for (const entry of Object.entries(value)) {
+        process(entry, value, `${path}-${entry[0]}`);
+      }
+      return;
+    }
+
+    Object.defineProperty(parent, name, {
+      get(): string {
+        return `var(--${path})`;
+      },
+    });
+  };
+
+  for (const entry of Object.entries(theme)) {
+    process(entry, null, entry[0]);
   }
 
   return theme;
 };
 
 const theme = generateTheme(tokens);
-// console.log(theme.colors.black.superB);
 export default theme;

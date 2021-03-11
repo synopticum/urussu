@@ -148,7 +148,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
 
   private apply1pxGapFix(): void {
     if (window.navigator.userAgent.indexOf('Chrome') > -1) {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       const originalInitTile = GridLayer.prototype._initTile;
 

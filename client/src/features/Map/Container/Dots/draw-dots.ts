@@ -28,7 +28,7 @@ const createMarker = (item: DotMapped): Marker => {
   return marker(item.coordinates, {
     icon,
     draggable: false,
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     rotationAngle: item.rotationAngle || 0,
   }).on('click', () => setEntity(item.id));
