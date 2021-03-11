@@ -5,7 +5,7 @@ import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import Comment from './Comment';
 import { Add } from 'src/features/Map/EntityPage/Comments/Add';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledComments = styled.div`
   position: absolute;

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 export const getClassName = (item: DotMapped | ObjectMapped | PathMapped): string => {
   let className = `id_${item.id}`;

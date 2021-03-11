@@ -6,7 +6,7 @@ import curlyBracesImage from './images/curly.png';
 import arrowImage from './images/arrow.svg';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { ImageId } from 'src/contracts/entities';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledYears = styled.ul<{ isDecadeActive: boolean }>`
   position: absolute;

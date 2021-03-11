@@ -5,7 +5,7 @@ import { debounce } from 'ts-debounce';
 import { useAutoFocus } from 'src/features/App/hooks/use-auto-focus';
 import Results from 'src/features/Map/Search/Results';
 import { mapStore } from 'src/stores/MapStore';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledSearch = styled.div`
   position: absolute;

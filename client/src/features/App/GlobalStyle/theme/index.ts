@@ -1,4 +1,4 @@
-import tokens, { Tokens } from 'src/features/GlobalStyle/theme/tokens';
+import tokens, { Tokens } from 'src/features/App/GlobalStyle/theme/tokens';
 
 type Theme = Partial<Tokens>;
 
@@ -49,4 +49,5 @@ const generateTheme = (tokens: Tokens): Theme => {
 };
 
 const theme = generateTheme(tokens);
+// console.log(theme.colors.black.superB);
 export default theme;

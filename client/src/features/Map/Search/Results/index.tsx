@@ -6,7 +6,7 @@ import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { DotItem, ObjectItem, PathItem } from 'src/features/Map/Search/Results/Item';
 import { mapStore } from 'src/stores/MapStore';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledResults = styled.div`
   max-height: 100%;

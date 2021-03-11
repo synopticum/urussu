@@ -4,7 +4,7 @@ import shadows from './shadows';
 import animations from './animations';
 import chunks from './chunks';
 
-export const tokens = {
+const tokens = {
   colors,
   fonts,
   shadows,

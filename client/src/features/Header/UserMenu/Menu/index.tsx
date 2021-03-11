@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 export const Menu = styled.ul`
   position: absolute;

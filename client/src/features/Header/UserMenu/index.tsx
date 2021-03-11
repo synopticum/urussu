@@ -7,7 +7,7 @@ import { useClickOutside } from 'src/features/App/hooks/use-outside-click';
 import { Menu, MenuItem } from 'src/features/Header/UserMenu/Menu';
 import { authStore } from 'src/stores/AuthStore';
 import { userStore } from 'src/stores/UserStore';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledUserMenu = styled.span`
   position: relative;

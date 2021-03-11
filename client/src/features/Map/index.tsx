@@ -16,7 +16,7 @@ import Search from 'src/features/Map/Search';
 import { Control } from 'src/features/Page/Aside';
 import { mapStore } from 'src/stores/MapStore';
 import { controlsStore } from 'src/stores/ControlsStore';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledMap = styled.div`
   height: 100%;

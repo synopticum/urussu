@@ -1,5 +1,5 @@
 import React from 'react';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 export const ActiveEntity: React.FC<{ id: string }> = ({ id }) => {
   return (

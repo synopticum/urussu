@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledTextarea = styled.div`
   display: inline-flex;

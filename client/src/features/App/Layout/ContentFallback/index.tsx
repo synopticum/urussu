@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import React from 'react';
 import Aside from 'src/features/Page/Aside';
 import Content, { Link } from 'src/features/App/Layout/Content';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const Fallback = styled.div`
   display: flex;

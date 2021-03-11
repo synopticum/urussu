@@ -1,7 +1,7 @@
 import React from 'react';
 import { CommentMapped } from 'src/stores/MapStore/EntityStore/CommentsStore/map';
 import styled from 'styled-components';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 type Props = {
   item: CommentMapped;

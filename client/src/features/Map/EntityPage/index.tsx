@@ -4,7 +4,7 @@ import { Entity, mapStore } from 'src/stores/MapStore';
 import ObjectPage from 'src/features/Map/EntityPage/ObjectPage';
 import DotPage from 'src/features/Map/EntityPage/DotPage';
 import PathPage from 'src/features/Map/EntityPage/PathPage';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledEntityPage = styled.div`
   position: absolute;

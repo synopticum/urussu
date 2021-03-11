@@ -3,6 +3,16 @@ export default {
     a: '#111',
     b: '#555',
     c: '#999',
+    superB: {
+      x: 'red',
+      z: {
+        b: {
+          zxczxc: {
+            test: 'orange',
+          },
+        },
+      },
+    },
   },
   white: {
     a: '#fff',

@@ -1,5 +1,5 @@
 import React from 'react';
-import GlobalStyle from 'src/features/GlobalStyle';
+import GlobalStyle from 'src/features/App/GlobalStyle';
 import { Meta, Story } from '@storybook/react/types-6-0';
 import Button, { Props } from 'src/components/Button';
 

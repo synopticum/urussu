@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from 'src/features/App/Layout';
 import './mobxConfig';
 import ErrorBoundary from 'src/features/ErrorBoundary';
-import GlobalStyle from 'src/features/GlobalStyle';
+import GlobalStyle from 'src/features/App/GlobalStyle';
 
 const Providers: React.FC = ({ children }) => {
   return (

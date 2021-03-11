@@ -1,4 +1,4 @@
-import { CSSChunk, CSSVariable } from 'src/features/GlobalStyle/theme';
+import { CSSChunk, CSSVariable } from 'src/features/App/GlobalStyle/theme';
 
 export default {
   scrollbar: (baseColor: CSSVariable, secondaryColor: CSSVariable): CSSChunk => {

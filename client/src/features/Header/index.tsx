@@ -5,7 +5,7 @@ import UserMenu from './UserMenu';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
-import theme from 'src/features/GlobalStyle/theme';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledHeader = styled.header`
   position: relative;
