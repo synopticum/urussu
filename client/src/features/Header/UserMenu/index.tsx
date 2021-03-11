@@ -7,7 +7,7 @@ import { useClickOutside } from 'src/features/App/hooks/use-outside-click';
 import { Menu, MenuItem } from 'src/features/Header/UserMenu/Menu';
 import { authStore } from 'src/stores/AuthStore';
 import { userStore } from 'src/stores/UserStore';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledUserMenu = styled.span`
   position: relative;
@@ -16,7 +16,7 @@ const StyledUserMenu = styled.span`
 const Link = styled.span`
   cursor: pointer;
   text-decoration: underline;
-  color: ${color('blue-1')};
+  color: ${theme.colors.blue.a};
 `;
 
 const Avatar = styled.img`

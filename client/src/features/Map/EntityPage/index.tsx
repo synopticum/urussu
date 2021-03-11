@@ -4,7 +4,7 @@ import { Entity, mapStore } from 'src/stores/MapStore';
 import ObjectPage from 'src/features/Map/EntityPage/ObjectPage';
 import DotPage from 'src/features/Map/EntityPage/DotPage';
 import PathPage from 'src/features/Map/EntityPage/PathPage';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledEntityPage = styled.div`
   position: absolute;
@@ -22,7 +22,7 @@ const Wrapper = styled.div`
   width: calc(100% - 100px);
   height: calc(100% - 50px);
   border-radius: 10px;
-  background-color: ${color('white-1')};
+  background-color: ${theme.colors.white.a};
 `;
 
 const Close = styled.button`

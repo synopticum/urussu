@@ -1,7 +1,7 @@
 import React from 'react';
 import { CommentMapped } from 'src/stores/MapStore/EntityStore/CommentsStore/map';
 import styled from 'styled-components';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 type Props = {
   item: CommentMapped;
@@ -9,7 +9,7 @@ type Props = {
 
 const StyledComment = styled.div`
   padding: 10px 0;
-  border-bottom: 1px solid ${color('white-2')};
+  border-bottom: 1px solid ${theme.colors.white.b};
 
   &:first-of-type {
     padding-top: 0;

@@ -16,11 +16,11 @@ import Search from 'src/features/Map/Search';
 import { Control } from 'src/features/Page/Aside';
 import { mapStore } from 'src/stores/MapStore';
 import { controlsStore } from 'src/stores/ControlsStore';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledMap = styled.div`
   height: 100%;
-  background-color: ${color('black-1')};
+  background-color: ${theme.colors.black.a};
 `;
 
 const Router: React.FC = observer(() => {

@@ -5,10 +5,8 @@ import { observer } from 'mobx-react-lite';
 import curlyBracesImage from './images/curly.png';
 import arrowImage from './images/arrow.svg';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
 import { ImageId } from 'src/contracts/entities';
-import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
-import { controlsStore } from 'src/stores/ControlsStore';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledYears = styled.ul<{ isDecadeActive: boolean }>`
   position: absolute;
@@ -62,8 +60,8 @@ const YearValue = styled.div<{ isActive: boolean }>`
   border-radius: 5px;
   white-space: nowrap;
   font-size: 14px;
-  color: ${({ isActive }): string => (isActive ? color('black-1') : color('white-1'))};
-  background-color: ${({ isActive }): string => (isActive ? color('white-1') : color('black-1'))};
+  color: ${({ isActive }): string => (isActive ? theme.colors.black.a : theme.colors.white.a)};
+  background-color: ${({ isActive }): string => (isActive ? theme.colors.white.a : theme.colors.black.a)};
   user-select: none;
 `;
 
@@ -71,7 +69,7 @@ const NestedYearValue = styled(YearValue)<{ isActive: boolean }>`
   position: absolute;
   left: 0;
   bottom: calc(100% + 12px);
-  border-bottom: 2px solid ${color('white-1')};
+  border-bottom: 2px solid ${theme.colors.white.a};
 
   &::before {
     content: '';

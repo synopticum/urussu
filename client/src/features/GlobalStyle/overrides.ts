@@ -1,4 +1,4 @@
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const overrides = `
   *, *:before, *:after { box-sizing: inherit; }
@@ -30,7 +30,7 @@ const overrides = `
 
   a {
     margin-left: 5px;
-    color: ${color('blue-1')};
+    color: ${theme.colors.blue.a};
   }
 
   input, textarea, button { font-family: "PT Serif", Times New Roman, "Helvetica Neue", sans-serif; }

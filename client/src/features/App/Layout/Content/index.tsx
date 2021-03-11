@@ -1,10 +1,10 @@
 import styled from 'styled-components';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 export const Link = styled.span`
   cursor: pointer;
   text-decoration: underline;
-  color: ${color('blue-1')};
+  color: ${theme.colors.blue.a};
 `;
 
 export const Content = styled.div`
@@ -14,7 +14,7 @@ export const Content = styled.div`
   & > div {
     position: relative;
     flex: 1;
-    background-color: ${color('black-1')};
+    background-color: ${theme.colors.black.a};
     --inner-border: 15px;
 
     &::before,
@@ -44,7 +44,7 @@ export const Content = styled.div`
       background: transparent;
       border-radius: 10px;
       box-shadow: rgb(17 17 17) 0 0 0 10px;
-      outline: var(--inner-border) solid ${color('black-1')};
+      outline: var(--inner-border) solid ${theme.colors.black.a};
     }
   }
 `;

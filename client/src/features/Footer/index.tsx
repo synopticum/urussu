@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledFooter = styled.footer`
   position: relative;
@@ -9,7 +9,7 @@ const StyledFooter = styled.footer`
   justify-content: center;
   align-items: center;
   font-size: 14px;
-  background-color: ${color('black-1')};
+  background-color: ${theme.colors.black.a};
 `;
 
 export const Footer: React.FC = () => {

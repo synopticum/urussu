@@ -4,8 +4,8 @@ import { observer } from 'mobx-react-lite';
 import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import Comment from './Comment';
-import { color, scrollbar, shadow } from 'src/features/GlobalStyle/theme/helpers';
 import { Add } from 'src/features/Map/EntityPage/Comments/Add';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledComments = styled.div`
   position: absolute;
@@ -18,8 +18,8 @@ const StyledComments = styled.div`
   display: flex;
   flex-direction: column;
   opacity: 0.95;
-  background: ${color('white-1')};
-  box-shadow: ${shadow('shadow-2')};
+  background: ${theme.colors.white.a};
+  box-shadow: ${theme.shadows.b};
 
   &::before {
     display: none;
@@ -49,7 +49,7 @@ const List = styled.div`
   margin: 20px 0;
   padding-right: 10px;
   overflow-y: auto;
-  ${scrollbar(color('black-1'), color('white-1'))}
+  ${theme.chunks.scrollbar(theme.colors.black.a, theme.colors.white.a)}
 `;
 
 type Props = {

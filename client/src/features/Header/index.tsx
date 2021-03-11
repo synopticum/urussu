@@ -5,7 +5,7 @@ import UserMenu from './UserMenu';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledHeader = styled.header`
   position: relative;
@@ -14,7 +14,7 @@ const StyledHeader = styled.header`
   padding: 15px 25px 0 75px;
   display: flex;
   align-items: center;
-  background-color: ${color('black-1')};
+  background-color: ${theme.colors.black.a};
   justify-content: flex-end;
 `;
 
@@ -29,7 +29,7 @@ const StyledNavLink = styled(Link)`
   &.active {
     cursor: default;
     text-decoration: none;
-    color: ${color('black-1')};
+    color: ${theme.colors.black.a};
   }
 `;
 
@@ -37,7 +37,7 @@ const NavLink: React.FC<{ to: string }> = props => {
   const getProps = ({ isCurrent }: { isCurrent: boolean }): unknown => {
     return {
       style: {
-        color: isCurrent ? color('white-1') : color('blue-1'),
+        color: isCurrent ? theme.colors.white.a : theme.colors.blue.a,
         textDecoration: isCurrent ? 'none' : 'underline',
         cursor: isCurrent ? 'default' : 'pointer',
       },
@@ -50,7 +50,7 @@ const NavLink: React.FC<{ to: string }> = props => {
 const Title = styled.div`
   font-size: 32px;
   margin-right: auto;
-  color: ${color('white-1')};
+  color: ${theme.colors.white.a};
 `;
 
 const Header: React.FC = observer(() => {

@@ -2,14 +2,14 @@ import styled from 'styled-components';
 import React from 'react';
 import Aside from 'src/features/Page/Aside';
 import Content, { Link } from 'src/features/App/Layout/Content';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const Fallback = styled.div`
   display: flex;
   height: 100%;
   justify-content: center;
   align-items: center;
-  background-color: ${color('white-1')};
+  background-color: ${theme.colors.white.a};
 `;
 
 const Image = styled.img`

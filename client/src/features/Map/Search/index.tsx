@@ -5,7 +5,7 @@ import { debounce } from 'ts-debounce';
 import { useAutoFocus } from 'src/features/App/hooks/use-auto-focus';
 import Results from 'src/features/Map/Search/Results';
 import { mapStore } from 'src/stores/MapStore';
-import { color, shadow } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledSearch = styled.div`
   position: absolute;
@@ -19,8 +19,8 @@ const StyledSearch = styled.div`
   border-radius: 5px;
   display: flex;
   flex-direction: column;
-  background: ${color('white-1')};
-  box-shadow: ${shadow('shadow-1')};
+  background: ${theme.colors.white.a};
+  box-shadow: ${theme.shadows.a};
 
   &::before {
     content: '';
@@ -45,7 +45,7 @@ const Input = styled.input`
   background: none;
 
   &:focus {
-    background-color: ${color('yellow-1')};
+    background-color: ${theme.colors.yellow.a};
   }
 `;
 

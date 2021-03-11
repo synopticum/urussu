@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 export const getClassName = (item: DotMapped | ObjectMapped | PathMapped): string => {
   let className = `id_${item.id}`;
@@ -21,7 +21,7 @@ const Container = styled.div`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: ${color('black-1')};
+  background-color: ${theme.colors.black.a};
   pointer-events: all;
 
   &:active {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { color } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledTextInput = styled.div``;
 
@@ -8,21 +8,21 @@ const Input = styled.input`
   width: 100%;
   padding: 8px 12px;
   font-size: 14px;
-  color: ${color('black-1')};
+  color: ${theme.colors.black.a};
   outline: none;
   transition: border-color 0.3s, background-color 0.3s;
-  border: 1px dashed ${color('white-2')};
-  background-color: ${color('white-1')};
+  border: 1px dashed ${theme.colors.white.b};
+  background-color: ${theme.colors.white.a};
 
   &::placeholder {
-    color: ${color('white-3')};
+    color: ${theme.colors.white.c};
     font-style: italic;
     opacity: 1;
     transition: opacity 0.3s;
   }
 
   &:focus {
-    background-color: ${color('yellow-1')};
+    background-color: ${theme.colors.yellow.a};
 
     &::placeholder {
       opacity: 0;
@@ -30,27 +30,27 @@ const Input = styled.input`
   }
 
   &::selection {
-    color: ${color('white-1')};
-    background-color: ${color('black-1')};
+    color: ${theme.colors.white.a};
+    background-color: ${theme.colors.black.a};
   }
 
   &:disabled {
-    color: ${color('white-2')};
+    color: ${theme.colors.white.b};
     background-image: repeating-linear-gradient(-45deg, #eaeaea, #eaeaea 11px, #fff 10px, #fff 20px);
     background-size: 28px 28px;
     animation: move 0.5s linear infinite;
 
     &::placeholder {
-      color: ${color('white-2')};
+      color: ${theme.colors.white.b};
     }
   }
 
   &:required {
-    border-color: ${color('red-1')};
+    border-color: ${theme.colors.red.a};
 
     &::selection {
-      color: ${color('white-1')};
-      background-color: ${color('red-1')};
+      color: ${theme.colors.white.a};
+      background-color: ${theme.colors.black.a};
     }
   }
 

@@ -6,13 +6,13 @@ import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { DotItem, ObjectItem, PathItem } from 'src/features/Map/Search/Results/Item';
 import { mapStore } from 'src/stores/MapStore';
-import { color, scrollbar } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 const StyledResults = styled.div`
   max-height: 100%;
   overflow-y: auto;
   margin-bottom: 20px;
-  ${scrollbar(color('black-1'), color('white-1'))}
+  ${theme.chunks.scrollbar(theme.colors.black.a, theme.colors.white.a)}
 `;
 
 const Results: React.FC = observer(() => {

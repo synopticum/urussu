@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { color, shadow } from 'src/features/GlobalStyle/theme/helpers';
+import theme from 'src/features/GlobalStyle/theme';
 
 export const Menu = styled.ul`
   position: absolute;
@@ -8,8 +8,8 @@ export const Menu = styled.ul`
   width: 150px;
   padding: 15px;
   border-radius: 5px;
-  background-color: ${color('white-1')};
-  box-shadow: ${shadow('shadow-1')};
+  background-color: ${theme.colors.white.a};
+  box-shadow: ${theme.shadows.a};
 `;
 
 export const MenuItem = styled.li`
