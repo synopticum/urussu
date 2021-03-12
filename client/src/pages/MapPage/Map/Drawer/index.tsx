@@ -4,6 +4,7 @@ import { mapStore } from 'src/stores/MapStore';
 import * as L from 'leaflet';
 import 'leaflet-draw';
 import 'leaflet-draw/dist/leaflet.draw.css';
+import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
 
 const drawTools = (map: L.Map): void => {
   const editableLayers = new L.FeatureGroup();
@@ -55,7 +56,7 @@ const drawTools = (map: L.Map): void => {
       case types.object:
         {
           const coordinates = layer.editing.latlngs[0];
-          // this.addObjectToMap(coordinates);
+          objectsStore.addObject(coordinates);
         }
         break;
 

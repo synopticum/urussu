@@ -1,6 +1,6 @@
 import { computed, makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
-import { AsyncData, fetchData } from 'src/stores/helpers';
+import { AsyncData, fetchData, put } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
 import { ObjectMapped, map } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { EntityId, ImageId } from 'src/contracts/entities';
