@@ -11,7 +11,9 @@ const StyledCheckbox = styled.div`
 
 const Label = styled.label`
   position: relative;
-  padding: 0 0 0 25px;
+  padding: 1px 0 0 25px;
+  min-height: 20px;
+  font-size: 14px;
 
   &::before {
     content: '';
@@ -54,15 +56,16 @@ const NativeCheckbox = styled.input`
 
 export type Props = {
   onChange: () => void;
+  checked?: boolean;
   disabled?: boolean;
 };
 
-const Checkbox: React.FC<Props> = ({ children, disabled, onChange }) => {
+const Checkbox: React.FC<Props> = ({ children, checked, disabled, onChange }) => {
   const checkboxId = uuidv4();
 
   return (
     <StyledCheckbox>
-      <NativeCheckbox id={checkboxId} type="checkbox" onChange={onChange} disabled={disabled} />
+      <NativeCheckbox id={checkboxId} type="checkbox" onChange={onChange} checked={checked} disabled={disabled} />
       <Label htmlFor={checkboxId}>{children}</Label>
     </StyledCheckbox>
   );

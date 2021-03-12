@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import { EntityId, EntityInstanceType, ImageId } from 'src/contracts/entities';
 import { v4 as uuidv4 } from 'uuid';
 import FileInput from 'src/components/FileInput';
+import Checkbox from 'src/components/Checkbox';
 
 const StyledUploadImage = styled.div``;
 
@@ -14,15 +15,7 @@ const Select = styled.select``;
 const Option = styled.option``;
 
 const Join = styled.div`
-  margin: 10px 0;
-
-  input {
-    border: 1px solid red;
-  }
-
-  label {
-    color: #ff0000;
-  }
+  margin: 5px 0;
 `;
 
 const Upload = styled.div`
@@ -82,14 +75,9 @@ const UploadImage: React.FC<Props> = observer(
         </Select>
 
         <Join>
-          <input
-            id={checkboxId}
-            type="checkbox"
-            onChange={toggleIsJoined}
-            checked={state.isJoined}
-            disabled={disabled}
-          />
-          <label htmlFor={checkboxId}>Совместить с текущим</label>
+          <Checkbox onChange={toggleIsJoined} checked={state.isJoined} disabled={disabled}>
+            Совместить с текущим
+          </Checkbox>
         </Join>
 
         <Upload>
