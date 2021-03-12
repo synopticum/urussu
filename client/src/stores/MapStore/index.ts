@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import { GridLayer, LatLngBounds, LatLngBoundsExpression, LatLngTuple, Map, tileLayer } from 'leaflet';
 import { AxiosInstance } from 'axios';
-import { EntityId, EntityType } from 'src/contracts/entities';
+import { EntityId, EntityInstanceType } from 'src/contracts/entities';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { SearchResultDto } from 'src/contracts/search';
@@ -15,7 +15,7 @@ import { SearchResultMapped, map } from 'src/stores/MapStore/map';
 import { controlsStore } from 'src/stores/ControlsStore';
 
 export type Entity = {
-  type: EntityType;
+  type: EntityInstanceType;
   id: EntityId;
 };
 

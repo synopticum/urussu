@@ -1,9 +1,9 @@
-import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
+import { EntityId, EntityInstanceType, ImageId } from 'src/contracts/entities';
 
 export type CommentDto = {
   id: string;
   date: string;
-  originType: EntityType;
+  originType: EntityInstanceType;
   originId: EntityId;
   imageId?: ImageId;
   text: string;

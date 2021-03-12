@@ -6,7 +6,6 @@ const PathSchema = new Schema(
   {
     id: { type: String, required: true },
     instanceType: { type: String, required: true },
-    type: { type: String, required: true },
     coordinates: { type: Array, required: true },
 
     title: { type: String, required: false },

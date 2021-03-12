@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import { observer } from 'mobx-react-lite';
-import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
+import { EntityId, EntityInstanceType, ImageId } from 'src/contracts/entities';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import Comment from './Comment';
 import { Add } from 'src/pages/MapPage/Map/EntityPage/Comments/Add';
@@ -53,7 +53,7 @@ const List = styled.div`
 `;
 
 type Props = {
-  entityType: EntityType;
+  entityType: EntityInstanceType;
   entityId: EntityId;
   imageId?: ImageId;
 };

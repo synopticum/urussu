@@ -1,10 +1,9 @@
 import { LatLngExpression } from 'leaflet';
-import { EntityId, EntityType, ImagesDto } from 'src/contracts/entities';
+import { EntityId, EntityInstanceType, ImagesDto } from 'src/contracts/entities';
 
 export type PathDto = {
   id: EntityId;
-  instanceType: EntityType;
-  type: string;
+  instanceType: EntityInstanceType;
   coordinates: LatLngExpression[];
   title?: string;
   shortDescription?: string;

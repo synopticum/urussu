@@ -5,6 +5,7 @@ import * as L from 'leaflet';
 import 'leaflet-draw';
 import 'leaflet-draw/dist/leaflet.draw.css';
 import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
+import { pathsStore } from 'src/stores/MapStore/PathsStore';
 
 const drawTools = (map: L.Map): void => {
   const editableLayers = new L.FeatureGroup();
@@ -56,22 +57,22 @@ const drawTools = (map: L.Map): void => {
       case types.object:
         {
           const coordinates = layer.editing.latlngs[0];
-          objectsStore.addObject(coordinates);
+          objectsStore.add('object', coordinates);
         }
         break;
 
       case types.path:
         {
           const coordinates = layer.editing.latlngs[0];
-          // this.addPathToMap(coordinates);
+          pathsStore.add(coordinates);
         }
         break;
 
       case types.circle:
         {
+          const coordinates = layer._latlng;
           const radius = layer._mRadius;
-          const latlng = layer._latlng;
-          // this.addCircleToMap(latlng, radius);
+          objectsStore.add('circle', coordinates, radius);
         }
         break;
     }

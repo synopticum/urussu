@@ -1,10 +1,12 @@
-import { LatLngExpression, LatLngTuple } from 'leaflet';
-import { EntityId, EntityType, ImagesDto } from 'src/contracts/entities';
+import { LatLng, LatLngTuple } from 'leaflet';
+import { EntityId, EntityInstanceType, ImagesDto } from 'src/contracts/entities';
+
+export type ObjectType = 'object' | 'circle';
 
 export type ObjectDto = {
   id: EntityId;
-  instanceType: EntityType;
-  type: string;
+  instanceType: EntityInstanceType;
+  type: ObjectType;
   coordinates: LatLngTuple[][];
   title?: string;
   shortDescription?: string;
@@ -13,5 +15,5 @@ export type ObjectDto = {
   images?: ImagesDto;
   street?: string;
   house?: string;
-  radius?: string;
+  radius?: number;
 };

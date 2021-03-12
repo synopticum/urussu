@@ -11,6 +11,6 @@ export type ImagesDto = {
   [decade: number]: ImageDto[];
 };
 
-export type EntityType = 'dot' | 'object' | 'path' | 'circle';
+export type EntityInstanceType = 'dot' | 'object' | 'path';
 
 export type EntityId = string;

@@ -6,7 +6,7 @@ import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData, put } from 'src/stores/helpers';
 import { CommentDto } from 'src/contracts/entities/comments';
 import { CommentMapped, map } from 'src/stores/MapStore/EntityStore/CommentsStore/map';
-import { EntityId, EntityType, ImageId } from 'src/contracts/entities';
+import { EntityId, EntityInstanceType, ImageId } from 'src/contracts/entities';
 import { v4 as uuidv4 } from 'uuid';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { userStore } from 'src/stores/UserStore';
@@ -17,7 +17,7 @@ export default class CommentsStore extends BaseAsyncStore<CommentDto[], CommentM
 
   currentValue: string;
 
-  fetchApiData(entityType: EntityType, entityId: EntityId, imageId?: ImageId): void {
+  fetchApiData(entityType: EntityInstanceType, entityId: EntityId, imageId?: ImageId): void {
     let url = `${entityType}/${entityId}/comments`;
 
     if (imageId) {

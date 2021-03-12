@@ -1,6 +1,6 @@
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData, put } from 'src/stores/helpers';
-import { ObjectDto } from 'src/contracts/entities/object';
+import { ObjectDto, ObjectType } from 'src/contracts/entities/object';
 import { map } from 'src/stores/MapStore/ObjectsStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
@@ -16,15 +16,16 @@ export default class ObjectsStore extends BaseAsyncStore<ObjectDto[], ObjectMapp
     this.apiData = new AsyncData<ObjectMapped[]>();
   }
 
-  async addObject(coordinates: LatLngTuple[][]): Promise<void> {
+  async add(type: ObjectType, coordinates: LatLngTuple[][], radius?: number): Promise<void> {
     const id = uuidv4();
     const url = `/objects/${id}`;
 
     const object: ObjectMapped = {
       id,
-      type: 'object',
+      type,
       instanceType: 'object',
-      coordinates,
+      coordinates: type === 'object' ? coordinates : ((coordinates as unknown) as LatLngTuple[][]),
+      radius,
     };
 
     try {
