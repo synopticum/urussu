@@ -5,10 +5,9 @@ import State from './state';
 import { observer } from 'mobx-react-lite';
 import { EntityId, EntityInstanceType, ImageId } from 'src/contracts/entities';
 import { v4 as uuidv4 } from 'uuid';
+import FileInput from 'src/components/FileInput';
 
 const StyledUploadImage = styled.div``;
-
-const InputFile = styled.input``;
 
 const Select = styled.select``;
 
@@ -44,7 +43,7 @@ export type Props = {
 const UploadImage: React.FC<Props> = observer(
   ({ entityType, entityId, selectedImageYear, selectedImageId, onUploadComplete, disabled, required }) => {
     const [state] = useState(new State());
-    const inputRef = useRef(null);
+    const inputRef = useRef<HTMLInputElement>(null);
     const checkboxId = uuidv4();
 
     const change = (): void => {
@@ -61,7 +60,7 @@ const UploadImage: React.FC<Props> = observer(
 
     return (
       <StyledUploadImage>
-        <InputFile type="file" accept="image/png, image/jpeg" onChange={change} disabled={disabled} ref={inputRef} />
+        <FileInput accept="image/png, image/jpeg" onChange={change} disabled={disabled} ref={inputRef} />
 
         <Select>
           <Option value="">1</Option>

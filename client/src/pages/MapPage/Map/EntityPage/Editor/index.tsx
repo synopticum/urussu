@@ -7,7 +7,7 @@ import { editorStore } from 'src/stores/MapStore/EntityStore/EditorStore';
 import TextInput from 'src/components/TextInput';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import Textarea from 'src/components/Textarea';
-import UploadImage from 'src/components/UploadImage';
+import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
 const StyledEditor = styled.div`

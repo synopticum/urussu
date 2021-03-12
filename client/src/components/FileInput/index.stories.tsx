@@ -1,27 +1,26 @@
 import React from 'react';
 import GlobalStyle from 'src/features/App/GlobalStyle';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import UploadImage, { Props } from 'src/components/UploadImage';
+import Button, { Props } from 'src/components/Button';
 
 export default {
-  title: 'GUI/UploadImage',
-  component: UploadImage,
+  title: 'GUI/Button',
+  component: Button,
+  // argTypes: {
+  //   backgroundColor: { control: 'color' },
+  // },
 } as Meta;
 
 const Template: Story<Props> = args => (
   <>
     <GlobalStyle />
-    <UploadImage {...args} />
+    <Button {...args}>Submit me</Button>
   </>
 );
 
 export const Default = Template.bind({});
 
 Default.args = {
-  entityType: 'object',
-  entityId: '1234',
-  onUploadCompleted: (): void => {
-    alert(123);
-  },
-  selectedImageId: '123',
+  disabled: false,
+  required: false,
 };
