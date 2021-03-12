@@ -162,13 +162,13 @@ const Container = styled.div`
   }
 
   .leaflet-draw-draw-polyline {
-    border-top-left-radius: 5px !important;
-    border-top-right-radius: 5px !important;
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
   }
 
   .leaflet-draw-draw-circle {
-    border-bottom-left-radius: 5px !important;
-    border-bottom-right-radius: 5px !important;
+    border-bottom-left-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
   }
 `;
 
