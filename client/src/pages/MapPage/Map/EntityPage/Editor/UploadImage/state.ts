@@ -16,6 +16,12 @@ class State {
     return Boolean(this.year);
   }
 
+  resetData(): void {
+    this.image = null;
+    this.isJoined = false;
+    this.year = null;
+  }
+
   toggleIsJoined(): void {
     this.isJoined = !this.isJoined;
   }

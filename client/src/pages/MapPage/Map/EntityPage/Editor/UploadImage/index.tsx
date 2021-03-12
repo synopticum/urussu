@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Button from 'src/components/Button';
 import State from './state';
@@ -45,6 +45,12 @@ const UploadImage: React.FC<Props> = observer(
     const [state] = useState(new State());
     const inputRef = useRef<HTMLInputElement>(null);
     const checkboxId = uuidv4();
+
+    useEffect(() => {
+      return (): void => {
+        state.resetData();
+      };
+    }, []);
 
     const change = (): void => {
       state.change(inputRef);
