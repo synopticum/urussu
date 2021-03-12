@@ -19,6 +19,8 @@ export type Entity = {
   id: EntityId;
 };
 
+export type EntityMapped = DotMapped | ObjectMapped | PathMapped;
+
 export const getEntity = (params: URLSearchParams): Entity => {
   const [type, id] = params.get('entity').split(',');
 

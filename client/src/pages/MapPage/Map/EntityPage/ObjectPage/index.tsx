@@ -9,6 +9,7 @@ import { Control } from 'src/features/Page/Aside';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { controlsStore } from 'src/stores/ControlsStore';
+import Editor from 'src/pages/MapPage/Map/EntityPage/Editor';
 
 const StyledObjectPage = styled.div`
   height: 100%;
@@ -34,6 +35,7 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
   }
 
   const toggleComments = (): void => controlsStore.toggle('comments');
+  const toggleEditor = (): void => controlsStore.toggle('editor');
 
   return (
     <StyledObjectPage>
@@ -41,10 +43,12 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
       {controlsStore.selected === 'comments' && (
         <Comments entityType="object" entityId={id} imageId={imagesStore.selectedImageId} />
       )}
+      {controlsStore.selected === 'editor' && <Editor>z</Editor>}
 
       <Portal parent={controlsStore.ref}>
         <Control>
           <Button type={controlsStore.getStateFor('comments')} onClick={toggleComments} />
+          <Button type={controlsStore.getStateFor('editor')} onClick={toggleEditor} />
         </Control>
       </Portal>
     </StyledObjectPage>

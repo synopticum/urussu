@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import searchImage from './images/search.svg';
 import commentsImage from './images/comments.svg';
+import editorImage from './images/editor.svg';
 import closeImage from './images/close.svg';
 import { Controls } from 'src/stores/ControlsStore';
 
@@ -12,6 +13,7 @@ const icons: {
 } = {
   search: searchImage,
   comments: commentsImage,
+  editor: editorImage,
   close: closeImage,
 };
 

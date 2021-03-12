@@ -54,11 +54,11 @@ const Title = styled.div`
 `;
 
 const Header: React.FC = observer(() => {
-  const { address } = objectStore;
+  const { address, title } = objectStore;
 
   return (
     <StyledHeader>
-      {address && <Title>{address}</Title>}
+      <Title>{address || title}</Title>
 
       <Nav>
         <NavLink to="map">{l('Карта')}</NavLink>

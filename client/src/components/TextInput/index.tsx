@@ -65,17 +65,19 @@ const Input = styled.input`
 `;
 
 export type Props = {
+  onInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
 };
 
-const TextInput: React.FC<Props> = ({ value, placeholder, disabled, required }) => {
+const TextInput: React.FC<Props> = ({ onInput, value, placeholder, disabled, required }) => {
   return (
     <StyledTextInput>
       <Input
         type="text"
+        onInput={onInput}
         value={value}
         placeholder={placeholder}
         autoComplete="off"

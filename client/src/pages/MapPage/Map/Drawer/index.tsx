@@ -92,7 +92,7 @@ const Drawer: React.FC = observer(() => {
     };
   }, []);
 
-  return <>Hello</>;
+  return null;
 });
 
 export default Drawer;

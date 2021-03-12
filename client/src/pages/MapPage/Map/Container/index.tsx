@@ -160,6 +160,16 @@ const Container = styled.div`
     left: 58px;
     top: 13px;
   }
+
+  .leaflet-draw-draw-polyline {
+    border-top-left-radius: 5px !important;
+    border-top-right-radius: 5px !important;
+  }
+
+  .leaflet-draw-draw-circle {
+    border-bottom-left-radius: 5px !important;
+    border-bottom-right-radius: 5px !important;
+  }
 `;
 
 export default Container;

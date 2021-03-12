@@ -3,7 +3,7 @@ import { MutableRefObject } from 'react';
 import { BaseStore } from 'src/stores';
 import { ButtonTypes } from 'src/features/Page/Aside/Button';
 
-export type Controls = 'search' | 'comments';
+export type Controls = 'search' | 'comments' | 'editor';
 
 export default class ControlsStore implements BaseStore {
   ref: MutableRefObject<HTMLDivElement>;

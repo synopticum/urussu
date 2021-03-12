@@ -1,4 +1,4 @@
-import { computed, makeObservable, observable } from 'mobx';
+import { computed, makeObservable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData, put } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
@@ -7,6 +7,7 @@ import { EntityId, ImageId } from 'src/contracts/entities';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
+import { editorStore, ObjectState } from 'src/stores/MapStore/EntityStore/EditorStore';
 
 export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped> implements BaseStore {
   get address(): string {
@@ -19,8 +20,19 @@ export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped>
     return `${data.street}, ${data.house}`;
   }
 
-  fetchApiData(id: EntityId): void {
-    fetchData<ObjectDto, ObjectMapped>(`/objects/${id}`, this.getApiOptions(map));
+  get title(): string {
+    const { data } = this.apiData;
+
+    if (!data || !data.title) {
+      return null;
+    }
+
+    return data.title;
+  }
+
+  async fetchApiData(id: EntityId): Promise<void> {
+    await fetchData<ObjectDto, ObjectMapped>(`/objects/${id}`, this.getApiOptions(map));
+    editorStore.initData(this, new ObjectState(this.apiData.data));
   }
 
   initData(id: ImageId): void {
@@ -32,6 +44,26 @@ export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped>
   resetData(): void {
     this.apiData = new AsyncData<ObjectMapped>();
     imagesStore.resetData();
+    commentsStore.resetData();
+    editorStore.resetData();
+  }
+
+  async update(id: EntityId): Promise<void> {
+    const { data } = this.apiData;
+    const url = `/objects/${id}`;
+
+    const object = {
+      ...data,
+      ...editorStore.state,
+    };
+
+    try {
+      const newObjectDto = await put<ObjectDto, ObjectMapped>(url, object, 'json');
+      this.apiData.data = map(newObjectDto);
+    } catch (e) {
+      alert('hui');
+      // handle somehow
+    }
   }
 
   constructor(api: AxiosInstance) {
@@ -39,6 +71,7 @@ export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped>
 
     makeObservable(this, {
       address: computed,
+      title: computed,
     });
   }
 }
