@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Button from 'src/components/Button';
 import State from './state';
@@ -52,8 +52,12 @@ const UploadImage: React.FC<Props> = observer(
       };
     }, []);
 
-    const change = (): void => {
-      state.change(inputRef);
+    const changeImage = (): void => {
+      state.changeImage(inputRef);
+    };
+
+    const changeYear: ChangeEventHandler<HTMLSelectElement> = e => {
+      state.changeYear(e.target.value);
     };
 
     const toggleIsJoined = (): void => {
@@ -66,10 +70,15 @@ const UploadImage: React.FC<Props> = observer(
 
     return (
       <StyledUploadImage>
-        <FileInput accept="image/png, image/jpeg" onChange={change} disabled={disabled} ref={inputRef} />
+        <FileInput accept="image/png, image/jpeg" onChange={changeImage} disabled={disabled} ref={inputRef} />
 
-        <Select>
-          <Option value="">1</Option>
+        <Select onChange={changeYear}>
+          <Option selected disabled>
+            Select year
+          </Option>
+          <Option value="1981">1981</Option>
+          <Option value="1982">1982</Option>
+          <Option value="1983">1983</Option>
         </Select>
 
         <Join>

@@ -26,8 +26,12 @@ class State {
     this.isJoined = !this.isJoined;
   }
 
-  change(inputRef: React.MutableRefObject<HTMLInputElement>): void {
+  changeImage(inputRef: React.MutableRefObject<HTMLInputElement>): void {
     this.image = inputRef.current.files[0];
+  }
+
+  changeYear(value: string): void {
+    this.year = value;
   }
 
   async upload(
