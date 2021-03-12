@@ -3,16 +3,20 @@ import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledButton = styled.div`
+  position: relative;
   display: inline-flex;
 `;
 
-const TargetButton = styled.button`
+const TargetButton = styled.button<{ icon?: string }>`
   cursor: pointer;
   outline: 0;
   border: none;
-  background: ${theme.colors.black.a};
+  background: ${({ icon }): string =>
+    icon ? `url(${icon}) no-repeat 10px calc(50% - 1px) ${theme.colors.black.a}` : theme.colors.black.a};
+  background-size: 20px;
   color: ${theme.colors.white.a};
   padding: 8px 15px 9px 15px;
+  padding-left: ${({ icon }): string => (icon ? '35px' : '15px')};
   font-weight: bold;
   border-radius: 5px;
   box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
@@ -20,12 +24,11 @@ const TargetButton = styled.button`
 
   &:hover {
     background-color: ${theme.colors.black.a};
-    background-image: none;
     box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
   }
 
   &:active {
-    background-color: ${theme.colors.black.b};
+    background-color: ${theme.colors.black.a};
     box-shadow: 0 0 0 1px transparent inset;
   }
 
@@ -40,13 +43,14 @@ const TargetButton = styled.button`
 
 export type Props = {
   onClick: () => void;
+  icon?: string;
   disabled?: boolean;
 };
 
-const Button: React.FC<Props> = ({ children, disabled, onClick }) => {
+const Button: React.FC<Props> = ({ children, icon, disabled, onClick }) => {
   return (
     <StyledButton>
-      <TargetButton type="button" onClick={onClick} disabled={disabled}>
+      <TargetButton type="button" onClick={onClick} icon={icon} disabled={disabled}>
         {children}
       </TargetButton>
     </StyledButton>
