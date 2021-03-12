@@ -34,7 +34,7 @@ const Close = styled.button`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: url('/images/common/close.svg') no-repeat 50% 50% #fff;
+  background: url('/images/common/close.svg') no-repeat 50% 50% ${theme.colors.white.a};
   background-size: 20px;
 `;
 

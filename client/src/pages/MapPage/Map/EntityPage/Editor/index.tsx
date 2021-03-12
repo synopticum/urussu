@@ -21,6 +21,18 @@ const StyledEditor = styled.div`
   opacity: 0.95;
   background: ${theme.colors.white.a};
   box-shadow: ${theme.shadows.b};
+
+  &::before {
+    content: '';
+    position: absolute;
+    left: -10px;
+    top: 60px;
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid ${theme.colors.white.a};
+  }
 `;
 
 const Title = styled.h1`
