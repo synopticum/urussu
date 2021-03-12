@@ -7,6 +7,8 @@ import { editorStore } from 'src/stores/MapStore/EntityStore/EditorStore';
 import TextInput from 'src/components/TextInput';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import Textarea from 'src/components/Textarea';
+import UploadImage from 'src/components/UploadImage';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
 const StyledEditor = styled.div`
   position: absolute;
@@ -100,6 +102,18 @@ const Editor: React.FC = observer(() => {
 
         <Section>
           <Textarea onInput={setFullDescription} value={state.fullDescription} />
+        </Section>
+
+        <Section>
+          <UploadImage
+            entityType={data.instanceType}
+            entityId={data.id}
+            selectedImageYear={imagesStore.selectedImageYear}
+            selectedImageId={imagesStore.selectedImageId}
+            onUploadComplete={(): void => {
+              alert(1);
+            }}
+          />
         </Section>
       </List>
 

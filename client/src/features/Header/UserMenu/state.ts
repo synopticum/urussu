@@ -1,4 +1,4 @@
-import { makeAutoObservable, makeObservable, observable } from 'mobx';
+import { makeObservable, observable } from 'mobx';
 
 class State {
   isOpen: boolean;

@@ -1,7 +1,7 @@
 import { computed, makeObservable, observable } from 'mobx';
 import ObjectStore from 'src/stores/MapStore/EntityStore/ObjectStore';
 import DotStore from 'src/stores/MapStore/EntityStore/DotStore';
-import { ImagesMapped } from 'src/stores/MapStore/EntityStore';
+import { ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntityStore';
 import PathStore from 'src/stores/MapStore/EntityStore/PathStore';
 import { BaseStore } from 'src/stores';
 import { ImageId } from 'src/contracts/entities';
@@ -10,10 +10,20 @@ import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 
 export default class ImagesStore implements BaseStore {
   store: ObjectStore | DotStore | PathStore;
-
   selectedImageId: ImageId;
-
   selectedDecade: number;
+
+  get selectedImageYear(): string {
+    const { data } = this.store.apiData;
+
+    if (!data || !data.images) {
+      return null;
+    }
+
+    const image = this.findImage(data.images);
+
+    return image.year;
+  }
 
   get selectedImageUrl(): string {
     const { data } = this.store.apiData;
@@ -22,15 +32,7 @@ export default class ImagesStore implements BaseStore {
       return null;
     }
 
-    const images = Object.values(data.images).flat();
-
-    images.forEach(({ image: nestedImage }) => {
-      if (nestedImage) {
-        images.push(nestedImage);
-      }
-    });
-
-    const image = images.find(image => image.id === this.selectedImageId);
+    const image = this.findImage(data.images);
 
     return `${process.env.S3_URL}/${image.url}`;
   }
@@ -108,6 +110,18 @@ export default class ImagesStore implements BaseStore {
     return parseInt(`${id.split(',')[0].substring(0, 3)}0`);
   }
 
+  private findImage(images: ImagesMapped): ImageMapped {
+    const _images = Object.values(images).flat();
+
+    _images.forEach(({ image: nestedImage }) => {
+      if (nestedImage) {
+        _images.push(nestedImage);
+      }
+    });
+
+    return _images.find(image => image.id === this.selectedImageId);
+  }
+
   constructor() {
     this.store = null;
 
@@ -129,6 +143,7 @@ export default class ImagesStore implements BaseStore {
       initialImageId: computed,
       initialDecade: computed,
       selectedImageUrl: computed,
+      selectedImageYear: computed,
     });
   }
 }
