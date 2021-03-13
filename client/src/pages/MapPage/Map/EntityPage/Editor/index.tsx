@@ -93,7 +93,7 @@ const Editor: React.FC = observer(() => {
 
       <List>
         <Section>
-          <TextInput onInput={setTitle} value={state.title} />
+          <TextInput type="text" onInput={setTitle} value={state.title} label="Заголовок" />
         </Section>
 
         <Section>

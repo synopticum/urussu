@@ -1,8 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
+import { v4 as uuidv4 } from 'uuid';
 
-const StyledTextInput = styled.div``;
+type LabelPosition = 'top' | 'right' | 'bottom' | 'left';
+type StyledTextInputProps = { labelPosition: LabelPosition };
+
+const getLabelPosition = ({ labelPosition }: StyledTextInputProps): string => {
+  const map = {
+    top: 'column',
+    right: 'row',
+    bottom: 'column-reverse',
+    left: 'row-reverse',
+  };
+
+  return map[labelPosition];
+};
+
+const getLabelMargin = ({ labelPosition }: StyledTextInputProps): string => {
+  const map = {
+    top: '0 0 4px 0',
+    right: '0 4px 0 0',
+    bottom: '4px 0 0 0',
+    left: '0 0 0 4px',
+  };
+
+  return map[labelPosition];
+};
+
+const StyledTextInput = styled.div<StyledTextInputProps>`
+  display: inline-flex;
+  flex-direction: ${getLabelPosition};
+`;
 
 const Input = styled.input`
   width: 100%;
@@ -64,26 +93,38 @@ const Input = styled.input`
   }
 `;
 
+const Label = styled.label`
+  display: block;
+  font-size: 14px;
+  margin: ${getLabelMargin};
+  color: ${theme.colors.black.b};
+`;
+
 export type Props = {
+  type: 'text' | 'number';
   onInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
+  label?: string;
+  labelPosition?: LabelPosition;
+  min?: string;
+  max?: string;
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
 };
 
-const TextInput: React.FC<Props> = ({ onInput, value, placeholder, disabled, required }) => {
+const TextInput: React.FC<Props> = props => {
+  const inputId = uuidv4();
+  const { label, labelPosition = 'top' } = props;
+
   return (
-    <StyledTextInput>
-      <Input
-        type="text"
-        onInput={onInput}
-        value={value}
-        placeholder={placeholder}
-        autoComplete="off"
-        disabled={disabled}
-        required={required}
-      />
+    <StyledTextInput labelPosition={labelPosition}>
+      {label && (
+        <Label htmlFor={inputId} labelPosition={labelPosition}>
+          {label}
+        </Label>
+      )}
+      <Input {...props} autoComplete="off" />
     </StyledTextInput>
   );
 };

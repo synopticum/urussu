@@ -7,12 +7,13 @@ import { EntityId, EntityInstanceType, ImageId } from 'src/contracts/entities';
 import { v4 as uuidv4 } from 'uuid';
 import FileInput from 'src/components/FileInput';
 import Checkbox from 'src/components/Checkbox';
+import TextInput from 'src/components/TextInput';
 
 const StyledUploadImage = styled.div``;
 
-const Select = styled.select``;
-
-const Option = styled.option``;
+const SelectImage = styled.div`
+  display: flex;
+`;
 
 const Join = styled.div`
   margin: 5px 0;
@@ -37,7 +38,6 @@ const UploadImage: React.FC<Props> = observer(
   ({ entityType, entityId, selectedImageYear, selectedImageId, onUploadComplete, disabled, required }) => {
     const [state] = useState(new State());
     const inputRef = useRef<HTMLInputElement>(null);
-    const checkboxId = uuidv4();
 
     useEffect(() => {
       return (): void => {
@@ -49,7 +49,7 @@ const UploadImage: React.FC<Props> = observer(
       state.changeImage(inputRef);
     };
 
-    const changeYear: ChangeEventHandler<HTMLSelectElement> = e => {
+    const changeYear: ChangeEventHandler<HTMLInputElement> = e => {
       state.changeYear(e.target.value);
     };
 
@@ -63,16 +63,10 @@ const UploadImage: React.FC<Props> = observer(
 
     return (
       <StyledUploadImage>
-        <FileInput accept="image/png, image/jpeg" onChange={changeImage} disabled={disabled} ref={inputRef} />
-
-        <Select onChange={changeYear}>
-          <Option selected disabled>
-            Select year
-          </Option>
-          <Option value="1981">1981</Option>
-          <Option value="1982">1982</Option>
-          <Option value="1983">1983</Option>
-        </Select>
+        <SelectImage>
+          <FileInput accept="image/png, image/jpeg" onChange={changeImage} disabled={disabled} ref={inputRef} />
+          <TextInput type="number" min="1940" max="2021" onInput={changeYear} label="Год съемки" />
+        </SelectImage>
 
         <Join>
           <Checkbox onChange={toggleIsJoined} checked={state.isJoined} disabled={disabled}>

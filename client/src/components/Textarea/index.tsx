@@ -1,9 +1,37 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
+import { v4 as uuidv4 } from 'uuid';
+
+type LabelPosition = 'top' | 'right' | 'bottom' | 'left';
+type StyledTextAreaProps = { labelPosition: LabelPosition };
+
+const getLabelPosition = ({ labelPosition }: StyledTextAreaProps): string => {
+  const map = {
+    top: 'column',
+    right: 'row',
+    bottom: 'column-reverse',
+    left: 'row-reverse',
+  };
+
+  return map[labelPosition];
+};
+
+const getLabelMargin = ({ labelPosition }: StyledTextAreaProps): string => {
+  const map = {
+    top: '0 0 4px 0',
+    right: '0 4px 0 0',
+    bottom: '4px 0 0 0',
+    left: '0 0 0 4px',
+  };
+
+  return map[labelPosition];
+};
 
 const StyledTextarea = styled.div`
   display: inline-flex;
+  flex-direction: ${getLabelPosition};
+  margin: ${getLabelMargin};
 `;
 
 const TargetTextarea = styled.textarea`
@@ -66,17 +94,30 @@ const TargetTextarea = styled.textarea`
   }
 `;
 
+const Label = styled.label`
+  display: block;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: ${theme.colors.black.b};
+`;
+
 export type Props = {
   onInput: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
   value?: string;
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
+  label?: string;
+  labelPosition?: LabelPosition;
 };
 
 const Textarea: React.FC<Props> = props => {
+  const inputId = uuidv4();
+  const { label, labelPosition = 'top' } = props;
+
   return (
-    <StyledTextarea>
+    <StyledTextarea labelPosition={labelPosition}>
+      {label && <Label htmlFor={inputId}>{label}</Label>}
       <TargetTextarea {...props} />
     </StyledTextarea>
   );
