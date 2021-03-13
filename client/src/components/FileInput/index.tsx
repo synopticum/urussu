@@ -51,7 +51,7 @@ const FileInput = forwardRef<HTMLInputElement, Props>(({ accept, onChange, disab
         Выбрать изображение
         <NativeFileInput type="file" accept={accept} onChange={change} disabled={disabled} ref={ref} />
       </SelectButton>
-      <FilePath>{filePath}</FilePath>
+      {filePath && <FilePath>{filePath}</FilePath>}
     </StyledFileInput>
   );
 });

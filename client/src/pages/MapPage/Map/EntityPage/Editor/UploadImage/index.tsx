@@ -9,14 +9,22 @@ import FileInput from 'src/components/FileInput';
 import Checkbox from 'src/components/Checkbox';
 import TextInput from 'src/components/TextInput';
 
-const StyledUploadImage = styled.div``;
+const StyledUploadImage = styled.div`
+  width: 100%;
+`;
 
 const SelectImage = styled.div`
   display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+`;
+
+const SelectYear = styled(TextInput)`
+  width: 120px;
 `;
 
 const Join = styled.div`
-  margin: 5px 0;
+  margin: 10px 0 5px 0;
 `;
 
 const Upload = styled.div`
@@ -64,13 +72,13 @@ const UploadImage: React.FC<Props> = observer(
     return (
       <StyledUploadImage>
         <SelectImage>
+          <SelectYear type="number" min="1940" max="2021" onInput={changeYear} label="Год съемки" />
           <FileInput accept="image/png, image/jpeg" onChange={changeImage} disabled={disabled} ref={inputRef} />
-          <TextInput type="number" min="1940" max="2021" onInput={changeYear} label="Год съемки" />
         </SelectImage>
 
         <Join>
           <Checkbox onChange={toggleIsJoined} checked={state.isJoined} disabled={disabled}>
-            Совместить с текущим
+            Пересъемка
           </Checkbox>
         </Join>
 

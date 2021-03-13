@@ -35,7 +35,7 @@ const StyledTextInput = styled.div<StyledTextInputProps>`
 
 const Input = styled.input`
   width: 100%;
-  padding: 8px 12px;
+  padding: 7px 12px;
   font-size: 14px;
   color: ${theme.colors.black.a};
   outline: none;
