@@ -28,68 +28,74 @@ const Join = styled.div`
 `;
 
 const Upload = styled.div`
+  margin-top: 10px;
   display: flex;
   justify-content: flex-end;
 `;
 
 export type Props = {
-  entityType: EntityInstanceType;
-  entityId: EntityId;
-  selectedImageYear: string;
-  selectedImageId: ImageId;
   onUploadComplete?: () => void;
   disabled?: boolean;
   required?: boolean;
 };
 
-const UploadImage: React.FC<Props> = observer(
-  ({ entityType, entityId, selectedImageYear, selectedImageId, onUploadComplete, disabled, required }) => {
-    const [state] = useState(new State());
-    const inputRef = useRef<HTMLInputElement>(null);
+const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, required }) => {
+  const [state] = useState(new State());
+  const inputRef = useRef<HTMLInputElement>(null);
 
-    useEffect(() => {
-      return (): void => {
-        state.resetData();
-      };
-    }, []);
-
-    const changeImage = (): void => {
-      state.changeImage(inputRef);
+  useEffect(() => {
+    return (): void => {
+      state.resetData();
     };
+  }, []);
 
-    const changeYear: ChangeEventHandler<HTMLInputElement> = e => {
-      state.changeYear(e.target.value);
-    };
+  const changeImage = (): void => {
+    state.changeImage(inputRef);
+  };
 
-    const toggleIsJoined = (): void => {
-      state.toggleIsJoined();
-    };
+  const changeYear: ChangeEventHandler<HTMLInputElement> = e => {
+    state.changeYear(e.target.value);
+  };
 
-    const upload = (): void => {
-      state.upload(entityType, entityId, selectedImageYear, onUploadComplete);
-    };
+  const toggleIsJoined = (): void => {
+    state.toggleIsJoined();
+  };
 
-    return (
-      <StyledUploadImage>
-        <SelectImage>
-          <SelectYear type="number" min="1940" max="2021" onInput={changeYear} label="Год съемки" />
-          <FileInput accept="image/png, image/jpeg" onChange={changeImage} disabled={disabled} ref={inputRef} />
-        </SelectImage>
+  const upload = (): void => {
+    state.upload(onUploadComplete);
+  };
 
-        <Join>
-          <Checkbox onChange={toggleIsJoined} checked={state.isJoined} disabled={disabled}>
-            Пересъемка
-          </Checkbox>
-        </Join>
+  return (
+    <StyledUploadImage>
+      <SelectImage>
+        <SelectYear
+          type="number"
+          min={state.minYear}
+          max={state.maxYear}
+          onInput={changeYear}
+          label="Год съемки"
+          disabled={disabled || !state.isImageSelected}
+        />
+        <FileInput accept="image/png, image/jpeg" onChange={changeImage} disabled={disabled} ref={inputRef} />
+      </SelectImage>
 
-        <Upload>
-          <Button onClick={upload} disabled={disabled || !state.isFileSelected || !state.isYearSelected}>
-            Загрузить
-          </Button>
-        </Upload>
-      </StyledUploadImage>
-    );
-  },
-);
+      <Join>
+        <Checkbox
+          onChange={toggleIsJoined}
+          checked={state.isJoined}
+          disabled={disabled || !state.isImageSelected || !state.canBeJoined}
+        >
+          Пересъемка
+        </Checkbox>
+      </Join>
+
+      <Upload>
+        <Button onClick={upload} disabled={disabled || !state.isValid}>
+          Загрузить
+        </Button>
+      </Upload>
+    </StyledUploadImage>
+  );
+});
 
 export default UploadImage;

@@ -20,7 +20,7 @@ const TargetButton = styled.button<{ icon?: string }>`
   font-weight: bold;
   border-radius: 5px;
   box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
-  transition: opacity 0.1s ease, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+  transition: opacity 0.3s, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
 
   &:hover {
     background-color: ${theme.colors.black.a};
@@ -37,7 +37,8 @@ const TargetButton = styled.button<{ icon?: string }>`
   }
 
   &:disabled {
-    opacity: 0.5;
+    cursor: default;
+    opacity: 0.3;
   }
 `;
 

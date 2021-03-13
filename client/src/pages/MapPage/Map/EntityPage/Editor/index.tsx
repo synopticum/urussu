@@ -114,10 +114,6 @@ const Editor: React.FC = observer(() => {
 
         <Section>
           <UploadImage
-            entityType={data.instanceType}
-            entityId={data.id}
-            selectedImageYear={imagesStore.selectedImageYear}
-            selectedImageId={imagesStore.selectedImageId}
             onUploadComplete={(): void => {
               alert(1);
             }}

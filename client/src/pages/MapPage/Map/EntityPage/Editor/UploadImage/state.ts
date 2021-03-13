@@ -1,19 +1,43 @@
 import { computed, makeObservable, observable } from 'mobx';
 import React from 'react';
-import { EntityId, EntityInstanceType } from 'src/contracts/entities';
 import { put } from 'src/stores/helpers';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
+import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 
 class State {
+  readonly minYear: string;
+  readonly maxYear: string;
+
   image: File;
   year: string;
   isJoined: boolean;
 
-  get isFileSelected(): boolean {
+  get isValid(): boolean {
+    return this.isImageSelected && this.isYearValid && !imagesStore.isSelectedImageARetake;
+  }
+
+  get canBeJoined(): boolean {
+    return !imagesStore.isEmpty;
+  }
+
+  get isImageSelected(): boolean {
     return Boolean(this.image);
   }
 
   get isYearSelected(): boolean {
     return Boolean(this.year);
+  }
+
+  get isYearValid(): boolean {
+    const year = parseInt(this.year);
+    const maxYear = parseInt(this.maxYear);
+    let minYear = this.isJoined ? parseInt(imagesStore.selectedImageYear) : parseInt(this.minYear);
+
+    if (this.isJoined) {
+      minYear++;
+    }
+
+    return this.isYearSelected && year >= minYear && year <= maxYear;
   }
 
   resetData(): void {
@@ -34,14 +58,12 @@ class State {
     this.year = value;
   }
 
-  async upload(
-    entityType: EntityInstanceType,
-    entityId: EntityId,
-    selectedImageYear: string,
-    onUploadComplete: () => void,
-  ): Promise<void> {
+  async upload(onUploadComplete: () => void): Promise<void> {
+    const { data } = objectStore.apiData;
+    const { selectedImageYear } = imagesStore;
+
     const yearName = this.isJoined ? `${selectedImageYear}_${this.year}` : this.year;
-    const url = `/${entityType}/${entityId}/photos/${yearName}`;
+    const url = `/${data.instanceType}/${data.id}/photos/${yearName}`;
 
     const formData = new FormData();
     formData.append('photo', this.image);
@@ -58,14 +80,21 @@ class State {
   }
 
   constructor() {
+    this.minYear = '1940';
+    this.maxYear = '2021';
+
     this.image = null;
     this.isJoined = false;
     this.year = null;
 
     makeObservable(this, {
       image: observable,
+      year: observable,
       isJoined: observable,
-      isFileSelected: computed,
+
+      isImageSelected: computed,
+      isYearSelected: computed,
+      isValid: computed,
     });
   }
 }

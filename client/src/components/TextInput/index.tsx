@@ -39,7 +39,7 @@ const Input = styled.input`
   font-size: 14px;
   color: ${theme.colors.black.a};
   outline: none;
-  transition: border-color 0.3s, background-color 0.3s;
+  transition: border-color 0.3s, background-color 0.3s, opacity 0.3s;
   border: 1px dashed ${theme.colors.white.b};
   background-color: ${theme.colors.white.a};
 
@@ -64,6 +64,10 @@ const Input = styled.input`
   }
 
   &:disabled {
+    opacity: 0.3;
+  }
+
+  .loading {
     color: ${theme.colors.white.b};
     background-image: repeating-linear-gradient(-45deg, #eaeaea, #eaeaea 11px, #fff 10px, #fff 20px);
     background-size: 28px 28px;

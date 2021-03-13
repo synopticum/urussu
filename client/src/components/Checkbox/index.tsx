@@ -14,6 +14,7 @@ const Label = styled.label`
   padding: 1px 0 0 25px;
   min-height: 20px;
   font-size: 14px;
+  transition: opacity 0.3s;
 
   &::before {
     content: '';
@@ -37,10 +38,6 @@ const Label = styled.label`
   &:focus {
     color: #000000;
   }
-
-  &:disabled {
-    color: #000000;
-  }
 `;
 
 const NativeCheckbox = styled.input`
@@ -51,6 +48,10 @@ const NativeCheckbox = styled.input`
       background: url(${checkIcon}) no-repeat 50% 50%;
       background-size: 14px;
     }
+  }
+
+  &:disabled ~ label {
+    opacity: 0.3;
   }
 `;
 

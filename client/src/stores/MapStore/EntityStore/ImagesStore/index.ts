@@ -13,6 +13,21 @@ export default class ImagesStore implements BaseStore {
   selectedImageId: ImageId;
   selectedDecade: number;
 
+  get isEmpty(): boolean {
+    const { data } = this.store.apiData;
+
+    return !data || !data.images;
+  }
+
+  get isSelectedImageARetake(): boolean {
+    return this.selectedImageId?.split(',')[0].includes('_');
+  }
+
+  get hasSelectedRetaken(): boolean {
+    // return this.selectedImageId?.split(',')[0].includes('_');
+    return false;
+  }
+
   get selectedImageYear(): string {
     const { data } = this.store.apiData;
 
@@ -144,6 +159,9 @@ export default class ImagesStore implements BaseStore {
       initialDecade: computed,
       selectedImageUrl: computed,
       selectedImageYear: computed,
+      isEmpty: computed,
+      isSelectedImageARetake: computed,
+      hasSelectedRetaken: computed,
     });
   }
 }
