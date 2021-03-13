@@ -33,7 +33,18 @@ export const Images = observer(() => {
 
   if (!store || !data.images) {
     return (
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '100%',
+          fontSize: '32px',
+          background: 'url("/images/common/skyline.svg") no-repeat 50% calc(100% + 5px)',
+          backgroundSize: '100%',
+        }}
+      >
         Фотографии отсутствуют.
       </div>
     );
