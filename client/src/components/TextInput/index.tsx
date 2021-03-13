@@ -111,20 +111,21 @@ export type Props = {
   placeholder?: string;
   disabled?: boolean;
   required?: boolean;
+  className?: string;
 };
 
 const TextInput: React.FC<Props> = props => {
   const inputId = uuidv4();
-  const { label, labelPosition = 'top' } = props;
+  const { className, label, labelPosition = 'top' } = props;
 
   return (
-    <StyledTextInput labelPosition={labelPosition}>
+    <StyledTextInput className={className} labelPosition={labelPosition}>
       {label && (
         <Label htmlFor={inputId} labelPosition={labelPosition}>
           {label}
         </Label>
       )}
-      <Input {...props} autoComplete="off" />
+      <Input {...props} className={null} autoComplete="off" />
     </StyledTextInput>
   );
 };

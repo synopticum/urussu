@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import styled from 'styled-components';
+import styled, { StyledComponent } from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import Button from 'src/components/Button';
 import { editorStore } from 'src/stores/MapStore/EntityStore/EditorStore';
@@ -51,8 +51,8 @@ const List = styled.div`
 `;
 
 const Section = styled.div`
+  display: flex;
   padding: 10px 0;
-  border-bottom: 1px solid ${theme.colors.white.b};
 
   &:first-of-type {
     padding-top: 0;
@@ -61,6 +61,14 @@ const Section = styled.div`
   &:last-of-type {
     border-bottom: 0;
   }
+`;
+
+const ExtendedTextInput = styled(TextInput)`
+  flex: 1;
+`;
+
+const ExtendedTextarea = styled(Textarea)`
+  flex: 1;
 `;
 
 const Editor: React.FC = observer(() => {
@@ -93,15 +101,15 @@ const Editor: React.FC = observer(() => {
 
       <List>
         <Section>
-          <TextInput type="text" onInput={setTitle} value={state.title} label="Заголовок" />
+          <ExtendedTextInput type="text" onInput={setTitle} value={state.title} label="Заголовок" />
         </Section>
 
         <Section>
-          <Textarea onInput={setShortDescription} value={state.shortDescription} />
+          <ExtendedTextarea onInput={setShortDescription} value={state.shortDescription} label="Краткое описание" />
         </Section>
 
         <Section>
-          <Textarea onInput={setFullDescription} value={state.fullDescription} />
+          <ExtendedTextarea onInput={setFullDescription} value={state.fullDescription} label="Полное описание" />
         </Section>
 
         <Section>

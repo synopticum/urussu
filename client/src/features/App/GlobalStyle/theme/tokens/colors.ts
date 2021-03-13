@@ -16,7 +16,7 @@ export default {
   },
   white: {
     a: '#fff',
-    b: '#ddd',
+    b: '#eee',
     c: '#aaa',
   },
   blue: {

@@ -109,14 +109,15 @@ export type Props = {
   required?: boolean;
   label?: string;
   labelPosition?: LabelPosition;
+  className?: string;
 };
 
 const Textarea: React.FC<Props> = props => {
   const inputId = uuidv4();
-  const { label, labelPosition = 'top' } = props;
+  const { className, label, labelPosition = 'top' } = props;
 
   return (
-    <StyledTextarea labelPosition={labelPosition}>
+    <StyledTextarea className={className} labelPosition={labelPosition}>
       {label && <Label htmlFor={inputId}>{label}</Label>}
       <TargetTextarea {...props} />
     </StyledTextarea>
