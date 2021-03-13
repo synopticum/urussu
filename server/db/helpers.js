@@ -48,6 +48,33 @@ const mapImages = (imagesDto) => {
   return imagesMapped;
 };
 
+const unMapImages = (imagesMapped) => {
+  if (!imagesMapped) {
+    return null;
+  }
+
+  const imagesDto = {};
+  const _images = [];
+
+  Object.entries(imagesMapped)
+    .flat(2)
+    .filter((item) => typeof item !== "string")
+    .forEach((item) => {
+      _images.push(item);
+
+      if (item.image) {
+        _images.push(item.image);
+      }
+    });
+
+  _images.forEach((item) => {
+    const yearName = item.id.split(",")[0];
+    imagesDto[yearName] = item.url;
+  });
+
+  return imagesDto;
+};
+
 const shortenId = (id) => id.split("-")[0];
 
 const prepare = (raw, map) => (raw.length ? raw.map(map) : map(raw));
@@ -67,6 +94,7 @@ const commonMap = (model) => {
 
 module.exports = {
   mapImages,
+  unMapImages,
   shortenId,
   prepare,
   commonMap,

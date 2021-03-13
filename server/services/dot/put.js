@@ -14,21 +14,25 @@ async function registerRoutes(fastify, opts) {
   });
 
   async function put(request, reply) {
-    let dot = request.body;
+    let model = request.body;
 
-    if (await canPut(request, dot)) {
-      if (dot) {
+    if (await canPut(request, model)) {
+      if (model) {
         try {
+          model.images = unMapImages(model.images);
+
           await DotModel.findOneAndUpdate(
-            { id: { $regex: dot.id, $options: "i" } },
-            dot,
+            { id: { $regex: model.id, $options: "i" } },
+            model,
             { upsert: true, useFindAndModify: false }
           );
+
           reply.type("application/json").code(200);
 
           const raw = await DotModel.findOne({
-            id: { $regex: dot.id, $options: "i" },
+            id: { $regex: model.id, $options: "i" },
           }).select({ _id: 0, __v: 0 });
+
           return prepare(raw);
         } catch (e) {
           reply.type("application/json").code(500);
