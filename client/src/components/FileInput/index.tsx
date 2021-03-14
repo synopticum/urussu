@@ -1,7 +1,5 @@
 import React, { ChangeEventHandler, forwardRef, useState } from 'react';
 import styled from 'styled-components';
-import theme from 'src/features/App/GlobalStyle/theme';
-import icon from './images/icon.svg';
 import Button from 'src/components/Button';
 
 const StyledFileInput = styled.div`
@@ -47,7 +45,7 @@ const FileInput = forwardRef<HTMLInputElement, Props>(({ accept, onChange, disab
 
   return (
     <StyledFileInput>
-      <SelectButton onClick={(): void => {}} icon={icon}>
+      <SelectButton onClick={(): void => {}} icon="upload">
         Выбрать изображение
         <NativeFileInput type="file" accept={accept} onChange={change} disabled={disabled} ref={ref} />
       </SelectButton>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { observer } from 'mobx-react-lite';
-import styled, { StyledComponent } from 'styled-components';
+import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import Button from 'src/components/Button';
 import { editorStore } from 'src/stores/MapStore/EntityStore/EditorStore';
@@ -53,6 +53,7 @@ const List = styled.div`
 const Section = styled.div`
   display: flex;
   padding: 10px 0;
+  border-bottom: 1px solid ${theme.colors.white.b};
 
   &:first-of-type {
     padding-top: 0;
@@ -61,6 +62,10 @@ const Section = styled.div`
   &:last-of-type {
     border-bottom: 0;
   }
+`;
+
+const SaveSection = styled(Section)`
+  justify-content: flex-end;
 `;
 
 const ExtendedTextInput = styled(TextInput)`
@@ -95,6 +100,10 @@ const Editor: React.FC = observer(() => {
     state.setFullDescription(e.target.value);
   };
 
+  const removeImage = (): void => {
+    editorStore.removeImage();
+  };
+
   return (
     <StyledEditor>
       <Title>Редактирование</Title>
@@ -113,15 +122,25 @@ const Editor: React.FC = observer(() => {
         </Section>
 
         <Section>
-          <UploadImage
-            onUploadComplete={(): void => {
-              alert(1);
-            }}
-          />
+          <UploadImage onUploadComplete={(): void => {}} />
+        </Section>
+
+        <Section>
+          <Button onClick={removeImage} type="warning" icon="remove" disabled={imagesStore.hasSelectedImageRetaken}>
+            Удалить выбранное фото
+          </Button>
+        </Section>
+
+        <Section>
+          <Button onClick={(): void => {}} type="warning" icon="remove">
+            Удалить объект
+          </Button>
         </Section>
       </List>
 
-      <Button onClick={update}>Сохранить</Button>
+      <SaveSection>
+        <Button onClick={update}>Сохранить</Button>
+      </SaveSection>
     </StyledEditor>
   );
 });

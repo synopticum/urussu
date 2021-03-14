@@ -1,18 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
+import uploadIcon from './images/upload.svg';
+import removeIcon from './images/remove.svg';
 
 const StyledButton = styled.div`
   position: relative;
   display: inline-flex;
 `;
 
-const TargetButton = styled.button<{ icon?: string }>`
+const TargetButton = styled.button<{ buttonType: ButtonType; icon?: string }>`
   cursor: pointer;
   outline: 0;
   border: none;
-  background: ${({ icon }): string =>
-    icon ? `url(${icon}) no-repeat 10px calc(50% - 1px) ${theme.colors.black.a}` : theme.colors.black.a};
+  background: ${({ icon }): string => (icon ? `url(${icon}) no-repeat 10px calc(50% - 1px)` : 'none')};
+  background-color: ${({ buttonType }): string =>
+    buttonType === 'warning' ? theme.colors.red.a : theme.colors.black.a};
   background-size: 20px;
   color: ${theme.colors.white.a};
   padding: 8px 15px 9px 15px;
@@ -23,17 +26,15 @@ const TargetButton = styled.button<{ icon?: string }>`
   transition: opacity 0.3s, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
 
   &:hover {
-    background-color: ${theme.colors.black.a};
     box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
   }
 
   &:active {
-    background-color: ${theme.colors.black.a};
     box-shadow: 0 0 0 1px transparent inset;
   }
 
   &:focus {
-    background-color: ${theme.colors.black.b};
+    opacity: 0.75;
   }
 
   &:disabled {
@@ -42,16 +43,26 @@ const TargetButton = styled.button<{ icon?: string }>`
   }
 `;
 
+const ButtonIcons = {
+  upload: uploadIcon,
+  remove: removeIcon,
+};
+
+type ButtonIcon = keyof typeof ButtonIcons;
+
+type ButtonType = 'regular' | 'warning';
+
 export type Props = {
   onClick: () => void;
-  icon?: string;
+  type?: ButtonType;
+  icon?: ButtonIcon;
   disabled?: boolean;
 };
 
-const Button: React.FC<Props> = ({ children, icon, disabled, onClick }) => {
+const Button: React.FC<Props> = ({ children, type = 'regular', icon, disabled, onClick }) => {
   return (
     <StyledButton>
-      <TargetButton type="button" onClick={onClick} icon={icon} disabled={disabled}>
+      <TargetButton type="button" buttonType={type} onClick={onClick} icon={ButtonIcons[icon]} disabled={disabled}>
         {children}
       </TargetButton>
     </StyledButton>

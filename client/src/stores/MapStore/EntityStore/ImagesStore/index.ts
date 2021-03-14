@@ -13,9 +13,12 @@ export default class ImagesStore implements BaseStore {
   selectedImageId: ImageId;
   selectedDecade: number;
 
+  get selectedImage(): ImageMapped {
+    return this.findImage(this.selectedImageId);
+  }
+
   get isEmpty(): boolean {
     const { data } = this.store.apiData;
-
     return !data || !data.images;
   }
 
@@ -23,55 +26,54 @@ export default class ImagesStore implements BaseStore {
     return this.selectedImageId?.split(',')[0].includes('_');
   }
 
-  get hasSelectedRetaken(): boolean {
-    // return this.selectedImageId?.split(',')[0].includes('_');
-    return false;
+  get hasSelectedImageRetaken(): boolean {
+    return Boolean(this.selectedImage && this.selectedImage.image);
   }
 
   get selectedImageYear(): string {
-    const { data } = this.store.apiData;
-
-    if (!data || !data.images) {
+    if (this.isEmpty) {
       return null;
     }
 
-    const image = this.findImage(data.images);
+    const image = this.findImage();
 
     return image.year;
   }
 
   get selectedImageUrl(): string {
-    const { data } = this.store.apiData;
-
-    if (!data || !data.images) {
+    if (this.isEmpty) {
       return null;
     }
 
-    const image = this.findImage(data.images);
+    const image = this.findImage();
 
     return `${process.env.S3_URL}/${image.url}`;
   }
 
   get initialDecade(): number {
-    const { data } = this.store.apiData;
-
-    if (!data || !data.images) {
+    if (this.isEmpty) {
       return null;
     }
+
+    const { data } = this.store.apiData;
 
     return this.getMaxDecadeWithImage(data.images);
   }
 
   get initialImageId(): ImageId {
-    const { data } = this.store.apiData;
-
-    if (!data || !data.images) {
+    if (this.isEmpty) {
       return null;
     }
+
+    const { data } = this.store.apiData;
 
     const decade = this.getMaxDecadeWithImage(data.images);
 
     return data.images[decade][0].id;
+  }
+
+  get selectedImageYearName(): string {
+    return this.selectedImageId.split(',')[0];
   }
 
   private static DECADES = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
@@ -113,6 +115,75 @@ export default class ImagesStore implements BaseStore {
     return id === this.selectedImageId;
   }
 
+  addImage(imageMapped: ImageMapped): void {
+    const { data } = this.store.apiData;
+    const { year, id } = imageMapped;
+    const decade = parseInt(`${year.substring(0, 3)}0`);
+
+    if (!data.images) {
+      data.images = {};
+    }
+
+    if (!data.images[decade]) {
+      data.images[decade] = [];
+    }
+
+    if (!imageMapped.id.includes('_')) {
+      data.images[decade].push(imageMapped);
+      this.selectedDecade = decade;
+    } else {
+      const originalYear = imageMapped.id.split('_')[0];
+      const originalDecade = parseInt(`${originalYear.toString().substring(0, 3)}0`);
+      const original = data.images[originalDecade].find(item => item.year === originalYear);
+
+      original.image = imageMapped;
+      this.selectedDecade = originalDecade;
+    }
+
+    this.selectedImageId = id;
+  }
+
+  removeImage(id: ImageId): void {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const { data } = this.store.apiData;
+
+    for (const decade in data.images) {
+      if (data.images.hasOwnProperty(decade)) {
+        const images = data.images[decade];
+
+        for (const index in images) {
+          if (images.hasOwnProperty(index)) {
+            const image = images[index];
+
+            if (image.id === id) {
+              delete images[index];
+            } else if (image.image) {
+              if (image.image.id === id) {
+                delete image.image;
+              }
+            }
+          }
+        }
+
+        data.images[decade] = data.images[decade].filter(item => Boolean(item));
+
+        if (!data.images[decade].length) {
+          delete data.images[decade];
+        }
+      }
+    }
+
+    if (!Object.keys(data.images).length) {
+      delete data.images;
+    }
+
+    this.selectedImageId = this.initialImageId;
+    this.selectedDecade = this.initialDecade;
+  }
+
   private getMaxDecadeWithImage(images: ImagesMapped): number {
     return Math.max(...Object.keys(images).map(decade => parseInt(decade)));
   }
@@ -125,8 +196,15 @@ export default class ImagesStore implements BaseStore {
     return parseInt(`${id.split(',')[0].substring(0, 3)}0`);
   }
 
-  private findImage(images: ImagesMapped): ImageMapped {
-    const _images = Object.values(images).flat();
+  private findImage(id?: ImageId): ImageMapped {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const { data } = this.store.apiData;
+
+    const _images = Object.values(data.images).flat();
+    const imageId = id || this.selectedImageId;
 
     _images.forEach(({ image: nestedImage }) => {
       if (nestedImage) {
@@ -134,7 +212,7 @@ export default class ImagesStore implements BaseStore {
       }
     });
 
-    return _images.find(image => image.id === this.selectedImageId);
+    return _images.find(image => image.id === imageId);
   }
 
   constructor() {
@@ -161,7 +239,8 @@ export default class ImagesStore implements BaseStore {
       selectedImageYear: computed,
       isEmpty: computed,
       isSelectedImageARetake: computed,
-      hasSelectedRetaken: computed,
+      hasSelectedImageRetaken: computed,
+      selectedImage: computed,
     });
   }
 }

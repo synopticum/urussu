@@ -3,6 +3,8 @@ import React from 'react';
 import { put } from 'src/stores/helpers';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
+import { ImageDto } from 'src/contracts/entities';
+import { ImageMapped } from 'src/stores/MapStore/EntityStore';
 
 class State {
   readonly minYear: string;
@@ -69,8 +71,9 @@ class State {
     formData.append('photo', this.image);
 
     try {
-      await put(url, formData, 'formData');
-      this.image = null;
+      const imageDto: ImageDto = await put(url, formData, 'formData');
+      imagesStore.addImage(imageDto as ImageMapped);
+      this.resetData();
     } catch (e) {
       alert('hui');
       // handle somehow

@@ -63,3 +63,14 @@ export const put = async function <Dto, Mapped>(url: string, model: Mapped, type
 
   return data;
 };
+
+export const del = async function (url: string): Promise<void> {
+  const { data } = await api.delete(url, {
+    headers: {
+      'Content-Type': 'json',
+      token: authStore.token,
+    },
+  });
+
+  return data;
+};

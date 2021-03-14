@@ -1,5 +1,5 @@
 import { computed, makeObservable, observable } from 'mobx';
-import ObjectStore from 'src/stores/MapStore/EntityStore/ObjectStore';
+import ObjectStore, { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import DotStore from 'src/stores/MapStore/EntityStore/DotStore';
 import PathStore from 'src/stores/MapStore/EntityStore/PathStore';
 import { BaseStore } from 'src/stores';
@@ -8,6 +8,8 @@ import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
 import { ImagesDto } from 'src/contracts/entities';
 import { EntityMapped } from 'src/stores/MapStore';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
+import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
+import { del, put } from 'src/stores/helpers';
 
 class EditorState {
   title: string;
@@ -90,6 +92,19 @@ export default class EditorStore implements BaseStore {
   resetData(): void {
     this.store = null;
     this.state = null;
+  }
+
+  async removeImage(): Promise<void> {
+    const { data } = this.store.apiData;
+    const url = `/${data.instanceType}/${data.id}/photos/${imagesStore.selectedImageYearName}`;
+
+    try {
+      await del(url);
+      imagesStore.removeImage(imagesStore.selectedImageId);
+    } catch (e) {
+      alert('hui');
+      // handle somehow
+    }
   }
 
   constructor() {

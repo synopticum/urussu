@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import Aside from 'src/features/Page/Aside';
-import Content, { Link } from 'src/features/App/Layout/Content';
+import Content from 'src/features/App/Layout/Content';
 import theme from 'src/features/App/GlobalStyle/theme';
 
 const Fallback = styled.div`
@@ -36,7 +36,7 @@ const ContentFallback: React.FC = () => {
             <br />
             Произошла неизвестная ошибка.
             <br />
-            Пожалуйста, <Link onClick={reload}>перезагрузите страницу</Link>.
+            Пожалуйста, <a href="/map">перезагрузите страницу</a>.
           </Message>
         </Fallback>
       </div>

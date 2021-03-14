@@ -98,4 +98,5 @@ module.exports = {
   shortenId,
   prepare,
   commonMap,
+  hashImage,
 };
