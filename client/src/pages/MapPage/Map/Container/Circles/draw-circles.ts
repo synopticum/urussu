@@ -26,7 +26,7 @@ const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
 };
 
 export const drawCircles = (map: Map, data: ObjectMapped[]): void => {
-  const circles = data.filter(object => object.type === 'circle');
+  const circles = data.filter(object => object.instanceType === 'object' && object.type === 'circle');
 
   removeCurrentCircles();
   addCirclesToMap(map, circles);

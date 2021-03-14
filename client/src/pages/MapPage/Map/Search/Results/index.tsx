@@ -36,9 +36,6 @@ const Results: React.FC = observer(() => {
 
           case 'path':
             return <PathItem item={item as PathMapped} key={item.id} />;
-
-          // case 'circle':
-          //   return <ObjectItem item={item as ObjectMapped} key={item.id} />;
         }
 
         return null;
