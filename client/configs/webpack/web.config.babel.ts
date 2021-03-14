@@ -30,7 +30,7 @@ const config = merge([
     performance: {
       hints: false,
     },
-    devtool: 'source-map',
+    devtool: isProduction ? false : 'source-map',
     plugins: [
       new ESLintPlugin({ extensions: ['ts', 'tsx'] }),
       new StylelintPlugin({ files: '**/*.(ts|tsx)' }),
@@ -45,7 +45,7 @@ const config = merge([
         ],
       }),
       new CleanWebpackPlugin(),
-      // ...(isProduction ? [] : [new BundleAnalyzerPlugin()]),
+      // ...(isProduction ? [new BundleAnalyzerPlugin()] : [new BundleAnalyzerPlugin()]),
     ],
     output: {
       path: path.resolve(path.join('.', 'dist', 'web')),
