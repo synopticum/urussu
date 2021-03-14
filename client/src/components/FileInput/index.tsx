@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, forwardRef, useState } from 'react';
+import React, { ChangeEventHandler, forwardRef, useEffect } from 'react';
 import styled from 'styled-components';
 import Button from 'src/components/Button';
 
@@ -29,17 +29,17 @@ const NativeFileInput = styled.input`
 `;
 
 export type Props = {
+  image: File;
   onChange: ChangeEventHandler<HTMLInputElement>;
   accept: string;
   disabled?: boolean;
   required?: boolean;
 };
 
-const FileInput = forwardRef<HTMLInputElement, Props>(({ accept, onChange, disabled, required }, ref) => {
-  const [filePath, setFilePath] = useState(null);
+const FileInput = forwardRef<HTMLInputElement, Props>(({ image, accept, onChange, disabled, required }, ref) => {
+  const filePath = image && image.name;
 
   const change: ChangeEventHandler<HTMLInputElement> = e => {
-    setFilePath(e.target.files[0].name);
     onChange(e);
   };
 

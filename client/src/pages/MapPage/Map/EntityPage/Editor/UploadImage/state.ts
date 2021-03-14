@@ -45,7 +45,7 @@ class State {
   resetData(): void {
     this.image = null;
     this.isJoined = false;
-    this.year = null;
+    this.year = '';
   }
 
   toggleIsJoined(): void {
@@ -88,7 +88,7 @@ class State {
 
     this.image = null;
     this.isJoined = false;
-    this.year = null;
+    this.year = '';
 
     makeObservable(this, {
       image: observable,

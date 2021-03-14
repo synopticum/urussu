@@ -47,6 +47,12 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
     };
   }, []);
 
+  useEffect(() => {
+    if (!state.image) {
+      inputRef.current.value = '';
+    }
+  }, [state.image]);
+
   const changeImage = (): void => {
     state.changeImage(inputRef);
   };
@@ -71,10 +77,17 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
           min={state.minYear}
           max={state.maxYear}
           onInput={changeYear}
+          value={state.year}
           label="Год съемки"
           disabled={disabled || !state.isImageSelected}
         />
-        <FileInput accept="image/png, image/jpeg" onChange={changeImage} disabled={disabled} ref={inputRef} />
+        <FileInput
+          accept="image/png, image/jpeg"
+          onChange={changeImage}
+          image={state.image}
+          disabled={disabled}
+          ref={inputRef}
+        />
       </SelectImage>
 
       <Join>
