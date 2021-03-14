@@ -126,7 +126,7 @@ const Editor: React.FC = observer(() => {
         </Section>
 
         <Section>
-          <Button onClick={removeImage} type="warning" icon="remove" disabled={imagesStore.hasSelectedImageRetaken}>
+          <Button onClick={removeImage} icon="remove" disabled={imagesStore.hasSelectedImageRetaken}>
             Удалить выбранное фото
           </Button>
         </Section>

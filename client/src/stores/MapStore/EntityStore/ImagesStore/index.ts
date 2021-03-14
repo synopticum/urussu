@@ -5,7 +5,6 @@ import { ImageMapped, ImagesMapped } from 'src/stores/MapStore/EntityStore';
 import PathStore from 'src/stores/MapStore/EntityStore/PathStore';
 import { BaseStore } from 'src/stores';
 import { ImageId } from 'src/contracts/entities';
-import { controlsStore } from 'src/stores/ControlsStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 
 export default class ImagesStore implements BaseStore {
@@ -107,8 +106,7 @@ export default class ImagesStore implements BaseStore {
 
   changeSelectedImageId(id: ImageId): void {
     this.selectedImageId = id;
-    controlsStore.toggle('comments');
-    commentsStore.resetData();
+    commentsStore.fetchApiData(this.store.entityType, this.store.entityId, id);
   }
 
   isImageActive(id: ImageId): boolean {

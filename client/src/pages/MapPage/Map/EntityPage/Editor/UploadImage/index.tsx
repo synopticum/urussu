@@ -3,8 +3,6 @@ import styled from 'styled-components';
 import Button from 'src/components/Button';
 import State from './state';
 import { observer } from 'mobx-react-lite';
-import { EntityId, EntityInstanceType, ImageId } from 'src/contracts/entities';
-import { v4 as uuidv4 } from 'uuid';
 import FileInput from 'src/components/FileInput';
 import Checkbox from 'src/components/Checkbox';
 import TextInput from 'src/components/TextInput';
@@ -85,7 +83,7 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
           checked={state.isJoined}
           disabled={disabled || !state.isImageSelected || !state.canBeJoined}
         >
-          Пересъемка
+          Пересъемка выбранного фото
         </Checkbox>
       </Join>
 

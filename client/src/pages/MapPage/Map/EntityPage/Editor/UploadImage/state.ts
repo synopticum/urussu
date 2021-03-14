@@ -19,7 +19,7 @@ class State {
   }
 
   get canBeJoined(): boolean {
-    return !imagesStore.isEmpty;
+    return !imagesStore.isEmpty && !imagesStore.hasSelectedImageRetaken && !imagesStore.isSelectedImageARetake;
   }
 
   get isImageSelected(): boolean {
