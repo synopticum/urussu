@@ -144,7 +144,7 @@ export type Props = WithTooltip & {
 const TextInput: React.FC<Props> = ({
   type,
   onInput,
-  value,
+  value = '',
   placeholder,
   min,
   max,
