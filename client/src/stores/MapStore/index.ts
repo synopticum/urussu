@@ -32,7 +32,7 @@ export const getEntity = (params: URLSearchParams): Entity => {
 };
 
 export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResultMapped> implements BaseStore {
-  private readonly defaultZoom = 5;
+  private readonly defaultZoom = 6;
   private readonly defaultLat = 69.65;
   private readonly defaultLng = -20.25;
 
