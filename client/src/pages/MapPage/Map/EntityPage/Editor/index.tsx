@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
@@ -10,6 +10,8 @@ import Textarea from 'src/components/Textarea';
 import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
 import ValidationState, { isValid } from 'src/components/ValidationState';
 import ConfirmationTooltip from 'src/components/Tooltip/ConfirmationTooltip';
+import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
+import { mapStore } from 'src/stores/MapStore';
 
 const StyledEditor = styled.div`
   position: absolute;
@@ -99,7 +101,8 @@ const Editor: React.FC = observer(() => {
   };
 
   const removeObject = (): void => {
-    // editorStore.isConfirmation = true;
+    objectsStore.remove(data.id);
+    mapStore.setEntity(null);
   };
 
   const update = (): void => {

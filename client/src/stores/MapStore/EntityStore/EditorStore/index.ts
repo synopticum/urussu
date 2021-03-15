@@ -107,6 +107,8 @@ export default class EditorStore implements BaseStore {
   resetData(): void {
     this.store = null;
     this.state = null;
+    this.validation = new EditorValidation();
+    this.isConfirmation = false;
   }
 
   async removeImage(): Promise<void> {

@@ -1,11 +1,12 @@
 import { AxiosInstance } from 'axios';
-import { AsyncData, fetchData, put } from 'src/stores/helpers';
+import { AsyncData, del, fetchData, put } from 'src/stores/helpers';
 import { ObjectDto, ObjectType } from 'src/contracts/entities/object';
 import { map } from 'src/stores/MapStore/ObjectsStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { LatLngTuple } from 'leaflet';
 import { v4 as uuidv4 } from 'uuid';
+import { EntityId } from 'src/contracts/entities';
 
 export default class ObjectsStore extends BaseAsyncStore<ObjectDto[], ObjectMapped[]> implements BaseStore {
   fetchApiData(): void {
@@ -32,6 +33,18 @@ export default class ObjectsStore extends BaseAsyncStore<ObjectDto[], ObjectMapp
       const newObjectDto = await put<ObjectDto, ObjectMapped>(url, object, 'json');
       const [newObjectMapped] = map([newObjectDto]);
       this.apiData.data.push(newObjectMapped);
+    } catch (e) {
+      alert('hui');
+      // handle somehow
+    }
+  }
+
+  async remove(id: EntityId): Promise<void> {
+    const url = `/objects/${id}`;
+
+    try {
+      // await del(url);
+      this.apiData.data = this.apiData.data.filter(item => item.id !== id);
     } catch (e) {
       alert('hui');
       // handle somehow

@@ -3,7 +3,25 @@ import { getClassName } from 'src/pages/MapPage/Map/Container';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { mapStore } from 'src/stores/MapStore';
 
-const removeCurrentCircles = (): void => {};
+const removeCurrentCircles = (map: Map): void => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  // const _layers = map._layers;
+  // const layers = Object.entries(_layers);
+  //
+  // for (const layer of layers) {
+  //   const [id] = layer;
+  //   const _layer = _layers[id];
+  //
+  //   if (_layer._path !== undefined) {
+  //     try {
+  //       map.removeLayer(_layer);
+  //     } catch (e) {
+  //       console.log('Problem with ' + e + _layer);
+  //     }
+  //   }
+  // }
+};
 
 const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
   const setEntity = (id: string): void => {
@@ -28,6 +46,6 @@ const addCirclesToMap = (map: Map, circles: ObjectMapped[]): void => {
 export const drawCircles = (map: Map, data: ObjectMapped[]): void => {
   const circles = data.filter(object => object.instanceType === 'object' && object.type === 'circle');
 
-  removeCurrentCircles();
+  removeCurrentCircles(map);
   addCirclesToMap(map, circles);
 };
