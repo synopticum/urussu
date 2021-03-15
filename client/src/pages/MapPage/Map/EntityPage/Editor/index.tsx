@@ -9,6 +9,7 @@ import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import Textarea from 'src/components/Textarea';
 import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
+import ValidationState from 'src/components/ValidationState';
 
 const StyledEditor = styled.div`
   position: absolute;
@@ -126,7 +127,17 @@ const Editor: React.FC = observer(() => {
         </Section>
 
         <Section>
-          <Button onClick={removeImage} icon="remove" disabled={imagesStore.hasSelectedImageRetaken}>
+          <Button
+            onClick={removeImage}
+            icon="remove"
+            disabled={editorStore.isRemoveImageButtonDisabled}
+            tooltipContent={
+              editorStore.isRemoveImageButtonDisabled && (
+                <ValidationState state={editorStore.removeImageButtonValidityState} />
+              )
+            }
+            tooltipDirection="top"
+          >
             Удалить выбранное фото
           </Button>
         </Section>

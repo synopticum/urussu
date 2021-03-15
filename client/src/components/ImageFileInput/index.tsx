@@ -51,12 +51,11 @@ const NativeFileInput = styled.input`
 export type Props = {
   image: File;
   onChange: ChangeEventHandler<HTMLInputElement>;
-  accept: string;
   disabled?: boolean;
   required?: boolean;
 };
 
-const FileInput = forwardRef<HTMLInputElement, Props>(({ image, accept, onChange, disabled, required }, ref) => {
+const ImageFileInput = forwardRef<HTMLInputElement, Props>(({ image, onChange, disabled, required }, ref) => {
   const imageRef = useRef(null);
 
   const change: ChangeEventHandler<HTMLInputElement> = e => {
@@ -67,7 +66,7 @@ const FileInput = forwardRef<HTMLInputElement, Props>(({ image, accept, onChange
     if (image) {
       const reader = new FileReader();
 
-      reader.onloadend = function (): void {
+      reader.onloadend = (): void => {
         imageRef.current.src = reader.result;
       };
 
@@ -79,7 +78,7 @@ const FileInput = forwardRef<HTMLInputElement, Props>(({ image, accept, onChange
     <StyledFileInput>
       <SelectButton onClick={(): void => {}} icon="upload">
         Выбрать фото
-        <NativeFileInput type="file" accept={accept} onChange={change} disabled={disabled} ref={ref} />
+        <NativeFileInput type="file" accept="image/png, image/jpeg" onChange={change} disabled={disabled} ref={ref} />
       </SelectButton>
 
       {image && (
@@ -91,4 +90,4 @@ const FileInput = forwardRef<HTMLInputElement, Props>(({ image, accept, onChange
   );
 });
 
-export default FileInput;
+export default ImageFileInput;

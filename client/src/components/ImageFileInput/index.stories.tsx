@@ -1,17 +1,17 @@
 import React from 'react';
 import GlobalStyle from 'src/features/App/GlobalStyle';
 import { Meta, Story } from '@storybook/react/types-6-0';
-import FileInput, { Props } from 'src/components/FileInput';
+import ImageFileInput, { Props } from 'src/components/ImageFileInput';
 
 export default {
   title: 'GUI/FileInput',
-  component: FileInput,
+  component: ImageFileInput,
 } as Meta;
 
 const Template: Story<Props> = args => (
   <>
     <GlobalStyle />
-    <FileInput {...args} />
+    <ImageFileInput {...args} />
   </>
 );
 

@@ -80,8 +80,8 @@ class State {
     this.isJoined = !this.isJoined;
   }
 
-  changeImage(inputRef: React.MutableRefObject<HTMLInputElement>): void {
-    this.image = inputRef.current.files[0];
+  changeImage(image: File): void {
+    this.image = image;
   }
 
   changeYear(value: string): void {

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import Button from 'src/components/Button';
 import State from './state';
 import { observer } from 'mobx-react-lite';
-import FileInput from 'src/components/FileInput';
+import ImageFileInput from 'src/components/ImageFileInput';
 import Checkbox from 'src/components/Checkbox';
 import TextInput from 'src/components/TextInput';
 import ValidationState from 'src/components/ValidationState';
@@ -54,8 +54,8 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
     }
   }, [state.image]);
 
-  const changeImage = (): void => {
-    state.changeImage(inputRef);
+  const changeImage: ChangeEventHandler<HTMLInputElement> = (e): void => {
+    state.changeImage(e.target.files[0]);
   };
 
   const changeYear: ChangeEventHandler<HTMLInputElement> = e => {
@@ -84,13 +84,7 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
           tooltipContent={state.isYearButtonDisabled && <ValidationState state={state.yearButtonValidationState} />}
           tooltipDirection="right"
         />
-        <FileInput
-          accept="image/png, image/jpeg"
-          onChange={changeImage}
-          image={state.image}
-          disabled={disabled}
-          ref={inputRef}
-        />
+        <ImageFileInput onChange={changeImage} image={state.image} disabled={disabled} ref={inputRef} />
       </SelectImage>
 
       <Join>
