@@ -77,7 +77,6 @@ const StyledTooltip = styled.div<StyledTooltipProps>`
   background-color: ${theme.colors.white.a};
   box-shadow: ${theme.shadows.c};
   border-radius: 5px;
-  min-width: 100%;
   padding: 8px 15px;
   transition: opacity 0.3s;
   font-size: 12px;
@@ -98,7 +97,7 @@ export type TooltipDirection = 'top' | 'right' | 'bottom' | 'left';
 
 export type Props = {
   isVisible: boolean;
-  direction?: TooltipDirection;
+  direction: TooltipDirection;
   className?: string;
 };
 

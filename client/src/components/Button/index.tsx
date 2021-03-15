@@ -22,6 +22,7 @@ const StyledButton = styled.div`
   &:hover {
     ${ExtendedTooltip} {
       opacity: 1;
+      pointer-events: all;
     }
   }
 `;
@@ -89,8 +90,6 @@ const Button: React.FC<Props> = ({
   disabled,
   onClick,
 }) => {
-  const isTooltipVisible = Boolean(tooltipContent);
-
   return (
     <StyledButton>
       <TargetButton type="button" buttonType={type} onClick={onClick} icon={ButtonIcons[icon]} disabled={disabled}>
@@ -98,7 +97,7 @@ const Button: React.FC<Props> = ({
       </TargetButton>
 
       {tooltipContent && (
-        <ExtendedTooltip isVisible={isTooltipVisible} direction={tooltipDirection}>
+        <ExtendedTooltip isVisible direction={tooltipDirection}>
           {tooltipContent}
         </ExtendedTooltip>
       )}

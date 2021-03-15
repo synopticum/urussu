@@ -1,21 +1,41 @@
-import React, { ChangeEventHandler, forwardRef } from 'react';
+import React, { ChangeEventHandler, forwardRef, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import Button from 'src/components/Button';
+import Tooltip from 'src/components/Tooltip';
+
+const ExtendedTooltip = styled(Tooltip)`
+  z-index: 100;
+`;
 
 const StyledFileInput = styled.div`
   position: relative;
   display: inline-flex;
   flex-direction: column;
-  overflow: hidden;
+
+  ${ExtendedTooltip} {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+    font-size: 0;
+  }
+
+  &:hover {
+    ${ExtendedTooltip} {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
 `;
 
 const SelectButton = styled(Button)`
   position: relative;
 `;
 
-const FilePath = styled.div`
-  margin-top: 2px;
-  font-size: 14px;
+const Preview = styled.img`
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin: 7px 0;
 `;
 
 const NativeFileInput = styled.input`
@@ -37,11 +57,23 @@ export type Props = {
 };
 
 const FileInput = forwardRef<HTMLInputElement, Props>(({ image, accept, onChange, disabled, required }, ref) => {
-  const filePath = image && image.name;
+  const imageRef = useRef(null);
 
   const change: ChangeEventHandler<HTMLInputElement> = e => {
     onChange(e);
   };
+
+  useEffect(() => {
+    if (image) {
+      const reader = new FileReader();
+
+      reader.onloadend = function (): void {
+        imageRef.current.src = reader.result;
+      };
+
+      reader.readAsDataURL(image);
+    }
+  }, [image]);
 
   return (
     <StyledFileInput>
@@ -49,7 +81,12 @@ const FileInput = forwardRef<HTMLInputElement, Props>(({ image, accept, onChange
         Выбрать изображение
         <NativeFileInput type="file" accept={accept} onChange={change} disabled={disabled} ref={ref} />
       </SelectButton>
-      {filePath && <FilePath>{filePath}</FilePath>}
+
+      {image && (
+        <ExtendedTooltip isVisible direction="top">
+          <Preview alt="" ref={imageRef} />
+        </ExtendedTooltip>
+      )}
     </StyledFileInput>
   );
 });
