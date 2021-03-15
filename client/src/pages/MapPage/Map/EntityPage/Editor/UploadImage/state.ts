@@ -5,6 +5,7 @@ import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import { ImageDto } from 'src/contracts/entities';
 import { ImageMapped } from 'src/stores/MapStore/EntityStore';
+import { ValidationState, isValid } from 'src/components/ValidationState';
 
 class State {
   readonly minYear: string;
@@ -14,8 +15,16 @@ class State {
   year: string;
   isJoined: boolean;
 
-  get isValid(): boolean {
-    return this.isImageSelected && this.isYearValid && !imagesStore.isSelectedImageARetake;
+  get isSubmitValid(): boolean {
+    return isValid(this.submitValidationState);
+  }
+
+  get submitValidationState(): ValidationState {
+    return {
+      'Изображение не выбрано': !this.isImageSelected,
+      'Год не выбран': !this.isYearValid,
+      'Изображение уже переснято': imagesStore.isSelectedImageARetake,
+    };
   }
 
   get canBeJoined(): boolean {
@@ -60,7 +69,7 @@ class State {
     this.year = value;
   }
 
-  async upload(onUploadComplete: () => void): Promise<void> {
+  async submit(onUploadComplete: () => void): Promise<void> {
     const { data } = objectStore.apiData;
     const { selectedImageYear } = imagesStore;
 
@@ -97,7 +106,7 @@ class State {
 
       isImageSelected: computed,
       isYearSelected: computed,
-      isValid: computed,
+      isSubmitValid: computed,
     });
   }
 }

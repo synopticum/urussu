@@ -28,7 +28,7 @@ export default class ImagesStore implements BaseStore {
   }
 
   get isSelectedImageARetake(): boolean {
-    return this.selectedImageId?.split(',')[0].includes('_');
+    return Boolean(this.selectedImageId?.split(',')[0].includes('_'));
   }
 
   get selectedImageUrl(): string {

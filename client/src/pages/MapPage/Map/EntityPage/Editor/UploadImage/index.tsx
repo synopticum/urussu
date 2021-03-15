@@ -6,6 +6,7 @@ import { observer } from 'mobx-react-lite';
 import FileInput from 'src/components/FileInput';
 import Checkbox from 'src/components/Checkbox';
 import TextInput from 'src/components/TextInput';
+import ValidationState from 'src/components/ValidationState';
 
 const StyledUploadImage = styled.div`
   width: 100%;
@@ -65,8 +66,8 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
     state.toggleIsJoined();
   };
 
-  const upload = (): void => {
-    state.upload(onUploadComplete);
+  const submit = (): void => {
+    state.submit(onUploadComplete);
   };
 
   return (
@@ -101,7 +102,11 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
       </Join>
 
       <Upload>
-        <Button onClick={upload} disabled={disabled || !state.isValid}>
+        <Button
+          onClick={submit}
+          disabled={disabled || !state.isSubmitValid}
+          tooltipContent={!state.isSubmitValid && <ValidationState state={state.submitValidationState} />}
+        >
           Загрузить
         </Button>
       </Upload>

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import uploadIcon from './images/upload.svg';
 import removeIcon from './images/remove.svg';
+import Tooltip from 'src/components/Tooltip';
 
 const StyledButton = styled.div`
   position: relative;
@@ -57,14 +58,18 @@ export type Props = {
   type?: ButtonType;
   icon?: ButtonIcon;
   disabled?: boolean;
+  tooltipContent?: React.ReactElement;
 };
 
-const Button: React.FC<Props> = ({ children, type = 'regular', icon, disabled, onClick }) => {
+const Button: React.FC<Props> = ({ tooltipContent, children, type = 'regular', icon, disabled, onClick }) => {
+  const isTooltipVisible = Boolean(tooltipContent);
+
   return (
     <StyledButton>
       <TargetButton type="button" buttonType={type} onClick={onClick} icon={ButtonIcons[icon]} disabled={disabled}>
         {children}
       </TargetButton>
+      <Tooltip isVisible={isTooltipVisible}>{tooltipContent}</Tooltip>
     </StyledButton>
   );
 };
