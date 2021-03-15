@@ -78,7 +78,7 @@ const FileInput = forwardRef<HTMLInputElement, Props>(({ image, accept, onChange
   return (
     <StyledFileInput>
       <SelectButton onClick={(): void => {}} icon="upload">
-        Выбрать изображение
+        Выбрать фото
         <NativeFileInput type="file" accept={accept} onChange={change} disabled={disabled} ref={ref} />
       </SelectButton>
 

@@ -15,33 +15,29 @@ class State {
   year: string;
   isJoined: boolean;
 
-  get isSubmitDisabled(): boolean {
-    return !isValid(this.submitValidationState);
+  get isSubmitButtonDisabled(): boolean {
+    return !isValid(this.submitButtonValidationState);
   }
 
-  get submitValidationState(): ValidationState {
+  get submitButtonValidationState(): ValidationState {
     return {
-      'Изображение не выбрано': !this.isImageSelected,
+      'Загружаемое фото не выбрано': !this.isImageSelected,
       'Год не выбран': !this.isYearValid,
-      'Изображение уже переснято': imagesStore.isSelectedImageARetake,
+      'Фото уже переснято': imagesStore.isSelectedImageARetake,
     };
-  }
-
-  get canBeJoined(): boolean {
-    return !imagesStore.isEmpty && !imagesStore.hasSelectedImageRetaken && !imagesStore.isSelectedImageARetake;
   }
 
   get isImageSelected(): boolean {
     return Boolean(this.image);
   }
 
-  get isYearDisabled(): boolean {
-    return !isValid(this.yearValidationState);
+  get isYearButtonDisabled(): boolean {
+    return !isValid(this.yearButtonValidationState);
   }
 
-  get yearValidationState(): ValidationState {
+  get yearButtonValidationState(): ValidationState {
     return {
-      'Изображение не выбрано': !this.isImageSelected,
+      'Загружаемое фото не выбрано': !this.isImageSelected,
     };
   }
 
@@ -59,6 +55,19 @@ class State {
     }
 
     return this.isYearSelected && year >= minYear && year <= maxYear;
+  }
+
+  get isJoinCheckboxDisabled(): boolean {
+    return !isValid(this.joinCheckboxValidationState);
+  }
+
+  get joinCheckboxValidationState(): ValidationState {
+    return {
+      'Загружаемое фото не выбрано': !this.isImageSelected,
+      'Оригинальное фото не выбрано': imagesStore.isEmpty,
+      'Оригинальное фото уже переснято': imagesStore.hasSelectedImageRetaken,
+      'Пересъемка пересъемки запрещена': imagesStore.isSelectedImageARetake,
+    };
   }
 
   resetData(): void {

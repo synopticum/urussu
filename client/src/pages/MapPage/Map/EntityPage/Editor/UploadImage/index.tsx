@@ -80,8 +80,8 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
           onInput={changeYear}
           value={state.year}
           label="Год съемки"
-          disabled={disabled || state.isYearDisabled}
-          tooltipContent={state.isYearDisabled && <ValidationState state={state.yearValidationState} />}
+          disabled={disabled || state.isYearButtonDisabled}
+          tooltipContent={state.isYearButtonDisabled && <ValidationState state={state.yearButtonValidationState} />}
           tooltipDirection="right"
         />
         <FileInput
@@ -97,7 +97,9 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
         <Checkbox
           onChange={toggleIsJoined}
           checked={state.isJoined}
-          disabled={disabled || !state.isImageSelected || !state.canBeJoined}
+          disabled={disabled || state.isJoinCheckboxDisabled}
+          tooltipContent={state.isJoinCheckboxDisabled && <ValidationState state={state.joinCheckboxValidationState} />}
+          tooltipDirection="bottom"
         >
           Пересъемка выбранного фото
         </Checkbox>
@@ -106,8 +108,8 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
       <Upload>
         <Button
           onClick={submit}
-          disabled={disabled || state.isSubmitDisabled}
-          tooltipContent={state.isSubmitDisabled && <ValidationState state={state.submitValidationState} />}
+          disabled={disabled || state.isSubmitButtonDisabled}
+          tooltipContent={state.isSubmitButtonDisabled && <ValidationState state={state.submitButtonValidationState} />}
           tooltipDirection="left"
         >
           Загрузить

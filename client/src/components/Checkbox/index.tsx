@@ -3,10 +3,28 @@ import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import checkIcon from './images/check.svg';
 import { v4 as uuidv4 } from 'uuid';
+import Tooltip, { WithTooltip } from 'src/components/Tooltip';
+
+const ExtendedTooltip = styled(Tooltip)`
+  z-index: 100;
+`;
 
 const StyledCheckbox = styled.div`
   position: relative;
   display: inline-flex;
+
+  ${ExtendedTooltip} {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  &:hover {
+    ${ExtendedTooltip} {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
 `;
 
 const Label = styled.label`
@@ -55,19 +73,25 @@ const NativeCheckbox = styled.input`
   }
 `;
 
-export type Props = {
+export type Props = WithTooltip & {
   onChange: () => void;
   checked?: boolean;
   disabled?: boolean;
 };
 
-const Checkbox: React.FC<Props> = ({ children, checked, disabled, onChange }) => {
+const Checkbox: React.FC<Props> = ({ children, checked, disabled, onChange, tooltipContent, tooltipDirection }) => {
   const checkboxId = uuidv4();
 
   return (
     <StyledCheckbox>
       <NativeCheckbox id={checkboxId} type="checkbox" onChange={onChange} checked={checked} disabled={disabled} />
       <Label htmlFor={checkboxId}>{children}</Label>
+
+      {tooltipContent && (
+        <ExtendedTooltip isVisible direction={tooltipDirection}>
+          {tooltipContent}
+        </ExtendedTooltip>
+      )}
     </StyledCheckbox>
   );
 };
