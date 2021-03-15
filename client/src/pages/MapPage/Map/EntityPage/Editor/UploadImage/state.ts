@@ -1,4 +1,4 @@
-import { computed, makeObservable, observable } from 'mobx';
+import { computed, makeAutoObservable, makeObservable, observable } from 'mobx';
 import React from 'react';
 import { put } from 'src/stores/helpers';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
@@ -15,8 +15,8 @@ class State {
   year: string;
   isJoined: boolean;
 
-  get isSubmitValid(): boolean {
-    return isValid(this.submitValidationState);
+  get isSubmitDisabled(): boolean {
+    return !isValid(this.submitValidationState);
   }
 
   get submitValidationState(): ValidationState {
@@ -33,6 +33,16 @@ class State {
 
   get isImageSelected(): boolean {
     return Boolean(this.image);
+  }
+
+  get isYearDisabled(): boolean {
+    return !isValid(this.yearValidationState);
+  }
+
+  get yearValidationState(): ValidationState {
+    return {
+      'Изображение не выбрано': !this.isImageSelected,
+    };
   }
 
   get isYearSelected(): boolean {
@@ -99,15 +109,7 @@ class State {
     this.isJoined = false;
     this.year = '';
 
-    makeObservable(this, {
-      image: observable,
-      year: observable,
-      isJoined: observable,
-
-      isImageSelected: computed,
-      isYearSelected: computed,
-      isSubmitValid: computed,
-    });
+    makeAutoObservable(this);
   }
 }
 

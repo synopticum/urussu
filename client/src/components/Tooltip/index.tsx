@@ -95,6 +95,11 @@ const Wrapper = styled.div``;
 
 export type TooltipDirection = 'top' | 'right' | 'bottom' | 'left';
 
+export type WithTooltip = {
+  tooltipContent?: React.ReactElement;
+  tooltipDirection?: TooltipDirection;
+};
+
 export type Props = {
   isVisible: boolean;
   direction: TooltipDirection;

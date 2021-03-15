@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import { v4 as uuidv4 } from 'uuid';
+import Tooltip, { WithTooltip } from 'src/components/Tooltip';
 
 type LabelPosition = 'top' | 'right' | 'bottom' | 'left';
 type StyledTextInputProps = { labelPosition: LabelPosition };
@@ -28,9 +29,31 @@ const getLabelMargin = ({ labelPosition }: StyledTextInputProps): string => {
   return map[labelPosition];
 };
 
+const ExtendedTooltip = styled(Tooltip)`
+  z-index: 100;
+`;
+
 const StyledTextInput = styled.div<StyledTextInputProps>`
+  position: relative;
   display: inline-flex;
   flex-direction: ${getLabelPosition};
+
+  ${ExtendedTooltip} {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  &:hover {
+    ${ExtendedTooltip} {
+      opacity: 1;
+      pointer-events: all;
+    }
+  }
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
 `;
 
 const Input = styled.input`
@@ -104,7 +127,7 @@ const Label = styled.label`
   color: ${theme.colors.black.b};
 `;
 
-export type Props = {
+export type Props = WithTooltip & {
   type: 'text' | 'number';
   onInput: (e: React.ChangeEvent<HTMLInputElement>) => void;
   value?: string;
@@ -118,9 +141,21 @@ export type Props = {
   className?: string;
 };
 
-const TextInput: React.FC<Props> = props => {
+const TextInput: React.FC<Props> = ({
+  type,
+  onInput,
+  value,
+  placeholder,
+  min,
+  max,
+  className,
+  label,
+  labelPosition = 'top',
+  tooltipContent,
+  tooltipDirection,
+  disabled,
+}) => {
   const inputId = uuidv4();
-  const { className, label, labelPosition = 'top' } = props;
 
   return (
     <StyledTextInput className={className} labelPosition={labelPosition}>
@@ -129,7 +164,25 @@ const TextInput: React.FC<Props> = props => {
           {label}
         </Label>
       )}
-      <Input {...props} className={null} autoComplete="off" />
+      <InputWrapper>
+        <Input
+          type={type}
+          onInput={onInput}
+          value={value}
+          placeholder={placeholder}
+          min={min}
+          max={max}
+          className={null}
+          autoComplete="off"
+          disabled={disabled}
+        />
+
+        {tooltipContent && (
+          <ExtendedTooltip isVisible direction={tooltipDirection}>
+            {tooltipContent}
+          </ExtendedTooltip>
+        )}
+      </InputWrapper>
     </StyledTextInput>
   );
 };

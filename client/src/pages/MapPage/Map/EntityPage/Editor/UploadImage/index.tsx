@@ -80,7 +80,9 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
           onInput={changeYear}
           value={state.year}
           label="Год съемки"
-          disabled={disabled || !state.isImageSelected}
+          disabled={disabled || state.isYearDisabled}
+          tooltipContent={state.isYearDisabled && <ValidationState state={state.yearValidationState} />}
+          tooltipDirection="right"
         />
         <FileInput
           accept="image/png, image/jpeg"
@@ -104,8 +106,8 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
       <Upload>
         <Button
           onClick={submit}
-          disabled={disabled || !state.isSubmitValid}
-          tooltipContent={!state.isSubmitValid && <ValidationState state={state.submitValidationState} />}
+          disabled={disabled || state.isSubmitDisabled}
+          tooltipContent={state.isSubmitDisabled && <ValidationState state={state.submitValidationState} />}
           tooltipDirection="left"
         >
           Загрузить

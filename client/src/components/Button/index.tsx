@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import uploadIcon from './images/upload.svg';
 import removeIcon from './images/remove.svg';
-import Tooltip, { TooltipDirection } from 'src/components/Tooltip';
+import Tooltip, { WithTooltip } from 'src/components/Tooltip';
 
 const ExtendedTooltip = styled(Tooltip)`
   z-index: 100;
@@ -72,13 +72,11 @@ type ButtonIcon = keyof typeof ButtonIcons;
 
 type ButtonType = 'regular' | 'warning';
 
-export type Props = {
+export type Props = WithTooltip & {
   onClick: () => void;
   type?: ButtonType;
   icon?: ButtonIcon;
   disabled?: boolean;
-  tooltipContent?: React.ReactElement;
-  tooltipDirection?: TooltipDirection;
 };
 
 const Button: React.FC<Props> = ({
