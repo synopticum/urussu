@@ -20,7 +20,7 @@ export default class ControlsStore implements BaseStore {
   }
 
   toggle(value: Controls): void {
-    if (!this.selected) {
+    if (!this.selected || this.selected !== value) {
       this.selected = value;
       return;
     }
