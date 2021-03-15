@@ -1,12 +1,12 @@
 import React, { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 import Button from 'src/components/Button';
-import State from './state';
+import UploadImageState from './state';
 import { observer } from 'mobx-react-lite';
 import ImageFileInput from 'src/components/ImageFileInput';
 import Checkbox from 'src/components/Checkbox';
 import TextInput from 'src/components/TextInput';
-import ValidationState from 'src/components/ValidationState';
+import ValidationState, { isValid } from 'src/components/ValidationState';
 
 const StyledUploadImage = styled.div`
   width: 100%;
@@ -39,7 +39,7 @@ export type Props = {
 };
 
 const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, required }) => {
-  const [state] = useState(new State());
+  const [state] = useState(new UploadImageState());
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
@@ -70,6 +70,8 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
     state.submit(onUploadComplete);
   };
 
+  const { validation } = state;
+
   return (
     <StyledUploadImage>
       <SelectImage>
@@ -80,8 +82,8 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
           onInput={changeYear}
           value={state.year}
           label="Год съемки"
-          disabled={disabled || state.isYearButtonDisabled}
-          tooltipContent={state.isYearButtonDisabled && <ValidationState state={state.yearButtonValidationState} />}
+          disabled={disabled || !isValid(validation.selectYear)}
+          tooltipContent={!isValid(validation.selectYear) && <ValidationState state={validation.selectYear} />}
           tooltipDirection="right"
         />
         <ImageFileInput onChange={changeImage} image={state.image} disabled={disabled} ref={inputRef} />
@@ -91,8 +93,8 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
         <Checkbox
           onChange={toggleIsJoined}
           checked={state.isJoined}
-          disabled={disabled || state.isJoinCheckboxDisabled}
-          tooltipContent={state.isJoinCheckboxDisabled && <ValidationState state={state.joinCheckboxValidationState} />}
+          disabled={disabled || !isValid(validation.join)}
+          tooltipContent={!isValid(validation.join) && <ValidationState state={validation.join} />}
           tooltipDirection="bottom"
         >
           Пересъемка выбранного фото
@@ -102,8 +104,8 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
       <Upload>
         <Button
           onClick={submit}
-          disabled={disabled || state.isSubmitButtonDisabled}
-          tooltipContent={state.isSubmitButtonDisabled && <ValidationState state={state.submitButtonValidationState} />}
+          disabled={disabled || !isValid(state.validation.submit)}
+          tooltipContent={!isValid(validation.submit) && <ValidationState state={validation.submit} />}
           tooltipDirection="left"
         >
           Загрузить

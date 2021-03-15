@@ -7,38 +7,49 @@ import { ImageDto } from 'src/contracts/entities';
 import { ImageMapped } from 'src/stores/MapStore/EntityStore';
 import { ValidationState, isValid } from 'src/components/ValidationState';
 
-class State {
-  readonly minYear: string;
-  readonly maxYear: string;
+class UploadImageValidation {
+  root: UploadImageState;
 
-  image: File;
-  year: string;
-  isJoined: boolean;
-
-  get isSubmitButtonDisabled(): boolean {
-    return !isValid(this.submitButtonValidationState);
+  get selectYear(): ValidationState {
+    return {
+      'Загружаемое фото не выбрано': !this.root.isImageSelected,
+    };
   }
 
-  get submitButtonValidationState(): ValidationState {
+  get join(): ValidationState {
     return {
-      'Загружаемое фото не выбрано': !this.isImageSelected,
-      'Год не выбран': !this.isYearValid,
+      'Загружаемое фото не выбрано': !this.root.isImageSelected,
+      'Оригинальное фото не выбрано': imagesStore.isEmpty,
+      'Оригинальное фото уже переснято': imagesStore.hasSelectedImageRetaken,
+      'Пересъемка пересъемки запрещена': imagesStore.isSelectedImageARetake,
+    };
+  }
+
+  get submit(): ValidationState {
+    return {
+      'Загружаемое фото не выбрано': !this.root.isImageSelected,
+      'Год не выбран': !this.root.isYearValid,
       'Фото уже переснято': imagesStore.isSelectedImageARetake,
     };
   }
 
+  constructor(root: UploadImageState) {
+    this.root = root;
+    makeAutoObservable(this);
+  }
+}
+
+class UploadImageState {
+  readonly minYear: string = '1940';
+  readonly maxYear: string = '2021';
+
+  image: File;
+  year: string;
+  isJoined: boolean;
+  validation: UploadImageValidation;
+
   get isImageSelected(): boolean {
     return Boolean(this.image);
-  }
-
-  get isYearButtonDisabled(): boolean {
-    return !isValid(this.yearButtonValidationState);
-  }
-
-  get yearButtonValidationState(): ValidationState {
-    return {
-      'Загружаемое фото не выбрано': !this.isImageSelected,
-    };
   }
 
   get isYearSelected(): boolean {
@@ -55,19 +66,6 @@ class State {
     }
 
     return this.isYearSelected && year >= minYear && year <= maxYear;
-  }
-
-  get isJoinCheckboxDisabled(): boolean {
-    return !isValid(this.joinCheckboxValidationState);
-  }
-
-  get joinCheckboxValidationState(): ValidationState {
-    return {
-      'Загружаемое фото не выбрано': !this.isImageSelected,
-      'Оригинальное фото не выбрано': imagesStore.isEmpty,
-      'Оригинальное фото уже переснято': imagesStore.hasSelectedImageRetaken,
-      'Пересъемка пересъемки запрещена': imagesStore.isSelectedImageARetake,
-    };
   }
 
   resetData(): void {
@@ -111,9 +109,7 @@ class State {
   }
 
   constructor() {
-    this.minYear = '1940';
-    this.maxYear = '2021';
-
+    this.validation = new UploadImageValidation(this);
     this.image = null;
     this.isJoined = false;
     this.year = '';
@@ -122,4 +118,4 @@ class State {
   }
 }
 
-export default State;
+export default UploadImageState;

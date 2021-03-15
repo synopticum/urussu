@@ -1,4 +1,4 @@
-import { computed, makeObservable, observable } from 'mobx';
+import { computed, makeAutoObservable, makeObservable, observable } from 'mobx';
 import ObjectStore from 'src/stores/MapStore/EntityStore/ObjectStore';
 import DotStore from 'src/stores/MapStore/EntityStore/DotStore';
 import PathStore from 'src/stores/MapStore/EntityStore/PathStore';
@@ -10,7 +10,20 @@ import { EntityMapped } from 'src/stores/MapStore';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { del } from 'src/stores/helpers';
-import { isValid, ValidationState } from 'src/components/ValidationState';
+import { ValidationState } from 'src/components/ValidationState';
+
+class EditorValidation {
+  get removeButton(): ValidationState {
+    return {
+      'Фото для удаления не выбрано': imagesStore.isEmpty,
+      'Сначала удалите переснятое фото': imagesStore.hasSelectedImageRetaken,
+    };
+  }
+
+  constructor() {
+    makeAutoObservable(this);
+  }
+}
 
 class EditorState {
   title: string;
@@ -82,8 +95,8 @@ type State = DotState | ObjectState | PathState;
 
 export default class EditorStore implements BaseStore {
   store: Store;
-
   state: State;
+  validation: EditorValidation;
 
   initData(store: Store, state: State): void {
     this.store = store;
@@ -108,25 +121,15 @@ export default class EditorStore implements BaseStore {
     }
   }
 
-  get isRemoveImageButtonDisabled(): boolean {
-    return !isValid(this.removeImageButtonValidityState);
-  }
-
-  get removeImageButtonValidityState(): ValidationState {
-    return {
-      'Фото для удаления не выбрано': imagesStore.isEmpty,
-      'Сначала удалите переснятое фото': imagesStore.hasSelectedImageRetaken,
-    };
-  }
-
   constructor() {
     this.store = null;
     this.state = null;
+    this.validation = new EditorValidation();
 
     makeObservable(this, {
       store: observable,
       state: observable,
-      isRemoveImageButtonDisabled: computed,
+      validation: observable,
     });
   }
 }

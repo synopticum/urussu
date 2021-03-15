@@ -8,8 +8,7 @@ import TextInput from 'src/components/TextInput';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import Textarea from 'src/components/Textarea';
 import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
-import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
-import ValidationState from 'src/components/ValidationState';
+import ValidationState, { isValid } from 'src/components/ValidationState';
 
 const StyledEditor = styled.div`
   position: absolute;
@@ -105,6 +104,8 @@ const Editor: React.FC = observer(() => {
     editorStore.removeImage();
   };
 
+  const { validation } = editorStore;
+
   return (
     <StyledEditor>
       <Title>Редактирование</Title>
@@ -130,12 +131,8 @@ const Editor: React.FC = observer(() => {
           <Button
             onClick={removeImage}
             icon="remove"
-            disabled={editorStore.isRemoveImageButtonDisabled}
-            tooltipContent={
-              editorStore.isRemoveImageButtonDisabled && (
-                <ValidationState state={editorStore.removeImageButtonValidityState} />
-              )
-            }
+            disabled={!isValid(validation.removeButton)}
+            tooltipContent={!isValid(validation.removeButton) && <ValidationState state={validation.removeButton} />}
             tooltipDirection="top"
           >
             Удалить выбранное фото
