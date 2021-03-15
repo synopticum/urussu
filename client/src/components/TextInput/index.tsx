@@ -41,7 +41,7 @@ const StyledTextInput = styled.div<StyledTextInputProps>`
   ${ExtendedTooltip} {
     opacity: 0;
     pointer-events: none;
-    transition: opacity 0.3s;
+    transition: opacity 0.15s;
   }
 
   &:hover {

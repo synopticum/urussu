@@ -9,6 +9,7 @@ import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import Textarea from 'src/components/Textarea';
 import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
 import ValidationState, { isValid } from 'src/components/ValidationState';
+import ConfirmationTooltip from 'src/components/Tooltip/ConfirmationTooltip';
 
 const StyledEditor = styled.div`
   position: absolute;
@@ -76,6 +77,11 @@ const ExtendedTextarea = styled(Textarea)`
   flex: 1;
 `;
 
+const ConfirmationWrapper = styled.div`
+  position: relative;
+  z-index: 50;
+`;
+
 const Editor: React.FC = observer(() => {
   const { data } = objectStore.apiData;
   const { store, state } = editorStore;
@@ -83,6 +89,18 @@ const Editor: React.FC = observer(() => {
   if (!data) {
     return null;
   }
+
+  const confirm = (): void => {
+    editorStore.isConfirmation = true;
+  };
+
+  const cancelConfirmation = (): void => {
+    editorStore.isConfirmation = false;
+  };
+
+  const removeObject = (): void => {
+    // editorStore.isConfirmation = true;
+  };
 
   const update = (): void => {
     store.update(data.id);
@@ -140,9 +158,17 @@ const Editor: React.FC = observer(() => {
         </Section>
 
         <Section>
-          <Button onClick={(): void => {}} type="warning" icon="remove">
-            Удалить объект
-          </Button>
+          <ConfirmationWrapper>
+            <Button onClick={confirm} type="warning" icon="remove">
+              Удалить объект
+            </Button>
+            <ConfirmationTooltip
+              isVisible={editorStore.isConfirmation}
+              direction="top"
+              onCancel={cancelConfirmation}
+              onConfirm={removeObject}
+            />
+          </ConfirmationWrapper>
         </Section>
       </List>
 

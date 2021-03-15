@@ -97,6 +97,7 @@ export default class EditorStore implements BaseStore {
   store: Store;
   state: State;
   validation: EditorValidation;
+  isConfirmation: boolean;
 
   initData(store: Store, state: State): void {
     this.store = store;
@@ -125,11 +126,13 @@ export default class EditorStore implements BaseStore {
     this.store = null;
     this.state = null;
     this.validation = new EditorValidation();
+    this.isConfirmation = false;
 
     makeObservable(this, {
       store: observable,
       state: observable,
       validation: observable,
+      isConfirmation: observable,
     });
   }
 }

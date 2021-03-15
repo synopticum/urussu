@@ -72,13 +72,14 @@ type StyledTooltipProps = Props;
 
 const StyledTooltip = styled.div<StyledTooltipProps>`
   opacity: ${({ isVisible }): string => (isVisible ? '1' : '0')};
+  pointer-events: ${({ isVisible }): string => (isVisible ? 'auto' : 'none')};
   position: absolute;
   ${({ direction }): CSSChunk => getTooltipPosition(direction)}
   background-color: ${theme.colors.white.a};
   box-shadow: ${theme.shadows.c};
   border-radius: 5px;
   padding: 8px 15px;
-  transition: opacity 0.3s;
+  transition: opacity 0.15s;
   font-size: 12px;
 
   &::before {

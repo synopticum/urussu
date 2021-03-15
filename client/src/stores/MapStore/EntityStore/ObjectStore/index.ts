@@ -75,7 +75,7 @@ export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped>
       const newObjectDto = await put<ObjectDto, ObjectMapped>(url, object, 'json');
       this.apiData.data = map(newObjectDto);
     } catch (e) {
-      alert('hui');
+      // alert('hui');
       // handle somehow
     }
   }
