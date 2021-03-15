@@ -106,6 +106,7 @@ const UploadImage: React.FC<Props> = observer(({ onUploadComplete, disabled, req
           onClick={submit}
           disabled={disabled || !state.isSubmitValid}
           tooltipContent={!state.isSubmitValid && <ValidationState state={state.submitValidationState} />}
+          tooltipDirection="left"
         >
           Загрузить
         </Button>

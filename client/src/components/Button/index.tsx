@@ -3,14 +3,32 @@ import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import uploadIcon from './images/upload.svg';
 import removeIcon from './images/remove.svg';
-import Tooltip from 'src/components/Tooltip';
+import Tooltip, { TooltipDirection } from 'src/components/Tooltip';
+
+const ExtendedTooltip = styled(Tooltip)`
+  z-index: 100;
+`;
 
 const StyledButton = styled.div`
   position: relative;
   display: inline-flex;
+
+  ${ExtendedTooltip} {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  &:hover {
+    ${ExtendedTooltip} {
+      opacity: 1;
+    }
+  }
 `;
 
 const TargetButton = styled.button<{ buttonType: ButtonType; icon?: string }>`
+  position: relative;
+  z-index: 50;
   cursor: pointer;
   outline: 0;
   border: none;
@@ -59,9 +77,18 @@ export type Props = {
   icon?: ButtonIcon;
   disabled?: boolean;
   tooltipContent?: React.ReactElement;
+  tooltipDirection?: TooltipDirection;
 };
 
-const Button: React.FC<Props> = ({ tooltipContent, children, type = 'regular', icon, disabled, onClick }) => {
+const Button: React.FC<Props> = ({
+  tooltipContent,
+  tooltipDirection,
+  children,
+  type = 'regular',
+  icon,
+  disabled,
+  onClick,
+}) => {
   const isTooltipVisible = Boolean(tooltipContent);
 
   return (
@@ -69,7 +96,12 @@ const Button: React.FC<Props> = ({ tooltipContent, children, type = 'regular', i
       <TargetButton type="button" buttonType={type} onClick={onClick} icon={ButtonIcons[icon]} disabled={disabled}>
         {children}
       </TargetButton>
-      <Tooltip isVisible={isTooltipVisible}>{tooltipContent}</Tooltip>
+
+      {tooltipContent && (
+        <ExtendedTooltip isVisible={isTooltipVisible} direction={tooltipDirection}>
+          {tooltipContent}
+        </ExtendedTooltip>
+      )}
     </StyledButton>
   );
 };
