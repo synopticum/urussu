@@ -224,8 +224,8 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
 
     if (location.search) {
       const params = new URLSearchParams(location.search);
-      this.lat = parseInt(params.get('lat'));
-      this.lng = parseInt(params.get('lng'));
+      this.lat = parseFloat(params.get('lat'));
+      this.lng = parseFloat(params.get('lng'));
       this.zoom = parseInt(params.get('zoom'));
 
       if (params.has('entity')) {
