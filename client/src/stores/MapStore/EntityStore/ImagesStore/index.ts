@@ -8,6 +8,8 @@ import { ImageId } from 'src/contracts/entities';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 
 export default class ImagesStore implements BaseStore {
+  private static DECADES = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+
   store: ObjectStore | DotStore | PathStore;
   selectedImageId: ImageId;
   selectedDecade: number;
@@ -21,12 +23,22 @@ export default class ImagesStore implements BaseStore {
     return !data || !data.images;
   }
 
+  get hasSelectedImageRetaken(): boolean {
+    return Boolean(this.selectedImage && this.selectedImage.image);
+  }
+
   get isSelectedImageARetake(): boolean {
     return this.selectedImageId?.split(',')[0].includes('_');
   }
 
-  get hasSelectedImageRetaken(): boolean {
-    return Boolean(this.selectedImage && this.selectedImage.image);
+  get selectedImageUrl(): string {
+    if (this.isEmpty) {
+      return null;
+    }
+
+    const image = this.findImage();
+
+    return `${process.env.S3_URL}/${image.url}`;
   }
 
   get selectedImageYear(): string {
@@ -39,14 +51,8 @@ export default class ImagesStore implements BaseStore {
     return image.year;
   }
 
-  get selectedImageUrl(): string {
-    if (this.isEmpty) {
-      return null;
-    }
-
-    const image = this.findImage();
-
-    return `${process.env.S3_URL}/${image.url}`;
+  get selectedImageYearName(): string {
+    return this.selectedImageId.split(',')[0];
   }
 
   get initialDecade(): number {
@@ -71,11 +77,13 @@ export default class ImagesStore implements BaseStore {
     return data.images[decade][0].id;
   }
 
-  get selectedImageYearName(): string {
-    return this.selectedImageId.split(',')[0];
+  private static getImageId(params: URLSearchParams): ImageId {
+    return params.get('image');
   }
 
-  private static DECADES = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
+  private static getImageDecade(id: ImageId): number {
+    return parseInt(`${id.split(',')[0].substring(0, 3)}0`);
+  }
 
   resetData(): void {
     this.store = null;
@@ -100,13 +108,13 @@ export default class ImagesStore implements BaseStore {
     this.selectedDecade = parseInt(decade);
   }
 
-  isDecadeActive(decade: string): boolean {
-    return this.selectedDecade === parseInt(decade);
-  }
-
   changeSelectedImageId(id: ImageId): void {
     this.selectedImageId = id;
     commentsStore.fetchApiData(this.store.entityType, this.store.entityId, id);
+  }
+
+  isDecadeActive(decade: string): boolean {
+    return this.selectedDecade === parseInt(decade);
   }
 
   isImageActive(id: ImageId): boolean {
@@ -186,14 +194,6 @@ export default class ImagesStore implements BaseStore {
     return Math.max(...Object.keys(images).map(decade => parseInt(decade)));
   }
 
-  private static getImageId(params: URLSearchParams): ImageId {
-    return params.get('image');
-  }
-
-  private static getImageDecade(id: ImageId): number {
-    return parseInt(`${id.split(',')[0].substring(0, 3)}0`);
-  }
-
   private findImage(id?: ImageId): ImageMapped {
     if (this.isEmpty) {
       return null;
@@ -233,12 +233,12 @@ export default class ImagesStore implements BaseStore {
 
       initialImageId: computed,
       initialDecade: computed,
+      selectedImage: computed,
       selectedImageUrl: computed,
       selectedImageYear: computed,
       isEmpty: computed,
       isSelectedImageARetake: computed,
       hasSelectedImageRetaken: computed,
-      selectedImage: computed,
     });
   }
 }
