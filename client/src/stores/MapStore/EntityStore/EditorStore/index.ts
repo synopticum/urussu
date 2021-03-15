@@ -1,5 +1,5 @@
-import { computed, makeObservable, observable } from 'mobx';
-import ObjectStore, { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
+import { makeObservable, observable } from 'mobx';
+import ObjectStore from 'src/stores/MapStore/EntityStore/ObjectStore';
 import DotStore from 'src/stores/MapStore/EntityStore/DotStore';
 import PathStore from 'src/stores/MapStore/EntityStore/PathStore';
 import { BaseStore } from 'src/stores';
@@ -9,7 +9,7 @@ import { ImagesDto } from 'src/contracts/entities';
 import { EntityMapped } from 'src/stores/MapStore';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
-import { del, put } from 'src/stores/helpers';
+import { del } from 'src/stores/helpers';
 
 class EditorState {
   title: string;

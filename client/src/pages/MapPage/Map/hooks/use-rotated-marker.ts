@@ -1,4 +1,4 @@
-import { Marker, DomUtil, DragEndEvent } from 'leaflet';
+import { DomUtil, DragEndEvent, Marker } from 'leaflet';
 
 export const useRotatedMarker = (): void => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment

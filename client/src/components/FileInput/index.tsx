@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, forwardRef, useEffect } from 'react';
+import React, { ChangeEventHandler, forwardRef } from 'react';
 import styled from 'styled-components';
 import Button from 'src/components/Button';
 

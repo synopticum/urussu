@@ -1,6 +1,5 @@
 import React from 'react';
-import { Redirect, RouteComponentProps } from '@reach/router';
-import { useLocation } from '@reach/router';
+import { Redirect, RouteComponentProps, useLocation } from '@reach/router';
 import { parse } from 'query-string';
 import { authStore } from 'src/stores/AuthStore';
 

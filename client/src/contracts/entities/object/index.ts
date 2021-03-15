@@ -1,4 +1,4 @@
-import { LatLng, LatLngTuple } from 'leaflet';
+import { LatLngTuple } from 'leaflet';
 import { EntityId, EntityInstanceType, ImagesDto } from 'src/contracts/entities';
 
 export type ObjectType = 'object' | 'circle';

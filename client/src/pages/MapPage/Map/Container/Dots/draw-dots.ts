@@ -1,4 +1,4 @@
-import { Map, divIcon, marker, layerGroup, control, Marker, Control, LayerGroup } from 'leaflet';
+import { control, Control, divIcon, layerGroup, LayerGroup, Map, marker, Marker } from 'leaflet';
 import { getClassName } from 'src/pages/MapPage/Map/Container';
 import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
 import { mapStore } from 'src/stores/MapStore';

@@ -1,4 +1,4 @@
-import { makeObservable, computed, observable } from 'mobx';
+import { computed, makeObservable, observable } from 'mobx';
 
 class Timer {
   secondsPassed = 0;

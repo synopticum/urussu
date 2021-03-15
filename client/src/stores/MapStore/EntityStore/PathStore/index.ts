@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData } from 'src/stores/helpers';
 import { EntityId, EntityInstanceType, ImageId } from 'src/contracts/entities';
-import { PathMapped, map } from 'src/stores/MapStore/EntityStore/PathStore/map';
+import { map, PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { PathDto } from 'src/contracts/entities/path';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
