@@ -1,11 +1,12 @@
 import { AxiosInstance } from 'axios';
-import { AsyncData, fetchData } from 'src/stores/helpers';
+import { AsyncData, fetchData, put } from 'src/stores/helpers';
 import { EntityId, EntityInstanceType, ImageId } from 'src/contracts/entities';
 import { map, PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { PathDto } from 'src/contracts/entities/path';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
-import { editorStore } from 'src/stores/MapStore/EntityStore/EditorStore';
+import { editorStore, ObjectState, PathState } from 'src/stores/MapStore/EntityStore/EditorStore';
+import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 
 export default class PathStore extends BaseAsyncStore<PathDto, PathMapped> implements BaseStore {
   get entityType(): EntityInstanceType {
@@ -24,23 +25,40 @@ export default class PathStore extends BaseAsyncStore<PathDto, PathMapped> imple
 
   title: Pick<PathMapped, 'title'>;
 
-  fetchApiData(id: EntityId): void {
-    fetchData<PathDto, PathMapped>(`/paths/${id}`, this.getApiOptions(map));
+  async fetchApiData(id: EntityId): Promise<void> {
+    await fetchData<PathDto, PathMapped>(`/paths/${id}`, this.getApiOptions(map));
+    editorStore.initData(this, new PathState(this.apiData.data));
   }
 
   initData(id: ImageId): void {
     imagesStore.store = this;
-    editorStore.store = this;
+    commentsStore.store = this;
     this.fetchApiData(id);
   }
 
   resetData(): void {
     this.apiData = new AsyncData<PathMapped>();
     imagesStore.resetData();
+    commentsStore.resetData();
+    editorStore.resetData();
   }
 
-  update(): void {
-    //
+  async update(id: EntityId): Promise<void> {
+    const { data } = this.apiData;
+    const url = `/paths/${id}`;
+
+    const path = {
+      ...data,
+      ...editorStore.state,
+    };
+
+    try {
+      const newPathDto = await put<PathDto, PathMapped>(url, path, 'json');
+      this.apiData.data = map(newPathDto);
+    } catch (e) {
+      alert('hui');
+      // handle somehow
+    }
   }
 
   constructor(api: AxiosInstance) {

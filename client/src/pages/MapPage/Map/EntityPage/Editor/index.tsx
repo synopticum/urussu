@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import Button from 'src/components/Button';
 import { editorStore } from 'src/stores/MapStore/EntityStore/EditorStore';
 import TextInput from 'src/components/TextInput';
-import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import Textarea from 'src/components/Textarea';
 import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
 import ValidationState, { isValid } from 'src/components/ValidationState';
@@ -85,7 +84,7 @@ const ConfirmationWrapper = styled.div`
 `;
 
 const Editor: React.FC = observer(() => {
-  const { data } = objectStore.apiData;
+  const { data } = editorStore.store.apiData;
   const { store, state } = editorStore;
 
   if (!data) {

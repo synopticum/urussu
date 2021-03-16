@@ -43,7 +43,7 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
       {controlsStore.selected === 'comments' && (
         <Comments entityType="object" entityId={id} imageId={imagesStore.selectedImageId} />
       )}
-      {controlsStore.selected === 'editor' && <Editor>z</Editor>}
+      {controlsStore.selected === 'editor' && <Editor />}
 
       <Portal parent={controlsStore.ref}>
         <Control>
