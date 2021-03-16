@@ -99,8 +99,8 @@ const Editor: React.FC = observer(() => {
     editorStore.isConfirmation = false;
   };
 
-  const removeObject = (): void => {
-    objectsStore.remove(data.id);
+  const removeEntity = (): void => {
+    editorStore.removeEntity();
     mapStore.setEntity(null);
   };
 
@@ -168,7 +168,7 @@ const Editor: React.FC = observer(() => {
               isVisible={editorStore.isConfirmation}
               direction="top"
               onCancel={cancelConfirmation}
-              onConfirm={removeObject}
+              onConfirm={removeEntity}
             />
           </ConfirmationWrapper>
         </Section>

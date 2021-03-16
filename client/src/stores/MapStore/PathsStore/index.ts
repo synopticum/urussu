@@ -6,6 +6,7 @@ import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { LatLngExpression } from 'leaflet';
 import { v4 as uuidv4 } from 'uuid';
+import { EntityId } from 'src/contracts/entities';
 
 export default class PathsStore extends BaseAsyncStore<PathDto[], PathMapped[]> implements BaseStore {
   fetchApiData(): void {
@@ -30,6 +31,18 @@ export default class PathsStore extends BaseAsyncStore<PathDto[], PathMapped[]> 
       const newPathDto = await put<PathDto, PathMapped>(url, path, 'json');
       const [newPathMapped] = map([newPathDto]);
       this.apiData.data.push(newPathMapped);
+    } catch (e) {
+      alert('hui');
+      // handle somehow
+    }
+  }
+
+  async remove(id: EntityId): Promise<void> {
+    const url = `/paths/${id}`;
+
+    try {
+      // await del(url);
+      this.apiData.data = this.apiData.data.filter(item => item.id !== id);
     } catch (e) {
       alert('hui');
       // handle somehow

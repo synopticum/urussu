@@ -11,6 +11,9 @@ import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { del } from 'src/stores/helpers';
 import { ValidationState } from 'src/components/ValidationState';
+import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
+import { dotsStore } from 'src/stores/MapStore/DotsStore';
+import { pathsStore } from 'src/stores/MapStore/PathsStore';
 
 class EditorValidation {
   get removeButton(): ValidationState {
@@ -109,6 +112,18 @@ export default class EditorStore implements BaseStore {
     this.state = null;
     this.validation = new EditorValidation();
     this.isConfirmation = false;
+  }
+
+  removeEntity(): void {
+    const { data } = this.store.apiData;
+
+    const stores = {
+      dot: dotsStore,
+      object: objectsStore,
+      path: pathsStore,
+    };
+
+    stores[data.instanceType].remove(data.id);
   }
 
   async removeImage(): Promise<void> {
