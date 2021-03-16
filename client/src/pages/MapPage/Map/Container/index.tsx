@@ -156,7 +156,7 @@ const Container = styled.div<{ mode?: Mode }>`
   }
 
   path.leaflet-interactive--has-images {
-    /*opacity: .75;*/
+    opacity: 0.75;
   }
 
   @keyframes disappear {

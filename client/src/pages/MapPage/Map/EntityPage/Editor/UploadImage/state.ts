@@ -1,11 +1,10 @@
-import { computed, makeAutoObservable, makeObservable, observable } from 'mobx';
-import React from 'react';
+import { makeAutoObservable } from 'mobx';
 import { put } from 'src/stores/helpers';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
-import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import { ImageDto } from 'src/contracts/entities';
 import { ImageMapped } from 'src/stores/MapStore/EntityStore';
-import { ValidationState, isValid } from 'src/components/ValidationState';
+import { ValidationState } from 'src/components/ValidationState';
+import { editorStore } from 'src/stores/MapStore/EntityStore/EditorStore';
 
 class UploadImageValidation {
   root: UploadImageState;
@@ -87,7 +86,7 @@ class UploadImageState {
   }
 
   async submit(onUploadComplete: () => void): Promise<void> {
-    const { data } = objectStore.apiData;
+    const { data } = editorStore.store.apiData;
     const { selectedImageYear } = imagesStore;
 
     const yearName = this.isJoined ? `${selectedImageYear}_${this.year}` : this.year;
