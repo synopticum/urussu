@@ -20,6 +20,8 @@ const addPathsToMap = (map: Map, data: PathMapped[]): void => {
 };
 
 export const drawPaths = (map: Map, data: PathMapped[]): void => {
+  const paths = data.filter(object => object.instanceType === 'path');
+
   removeCurrentEntities(map, 'paths');
-  addPathsToMap(map, data);
+  addPathsToMap(map, paths);
 };

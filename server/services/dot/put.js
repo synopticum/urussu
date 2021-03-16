@@ -1,5 +1,6 @@
 const { DotModel, prepare } = require("../../db/dot.model");
 const verifyVkAuth = require("../authenticate/verifyVkAuth");
+const { unMapImages } = require("../../db/helpers");
 const { currentUser } = require("../authenticate/request.helpers");
 
 module.exports = async function (fastify, opts) {
