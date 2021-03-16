@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { drawPaths } from 'src/pages/MapPage/Map/Container/Paths/draw-paths';
 import { pathsStore } from 'src/stores/MapStore/PathsStore';
 import { mapStore } from 'src/stores/MapStore';
 
@@ -18,7 +17,9 @@ export const Paths: React.FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (mapStore.map && isDataLoaded) drawPaths(mapStore.map, data);
+    if (mapStore.map && isDataLoaded) {
+      pathsStore.draw();
+    }
   }, [mapStore.map, isDataLoaded, data]);
 
   return null;
