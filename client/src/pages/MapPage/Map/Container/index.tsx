@@ -4,6 +4,7 @@ import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import theme from 'src/features/App/GlobalStyle/theme';
 import { Map } from 'leaflet';
+import { Mode } from 'src/stores/MapStore';
 
 export const removeCurrentEntities = (map: Map, type: 'dots' | 'objects' | 'circles' | 'paths'): void => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -44,8 +45,8 @@ export const getClassName = (item: DotMapped | ObjectMapped | PathMapped): strin
   return `${className}`;
 };
 
-const Container = styled.div`
-  cursor: grab;
+const Container = styled.div<{ mode?: Mode }>`
+  cursor: ${({ mode }): string => (mode === 'add' ? 'default !important' : 'grab')};
   position: absolute;
   left: 0;
   top: 0;

@@ -1,9 +1,10 @@
-import { computed, makeObservable, observable } from 'mobx';
+import { computed, makeAutoObservable, makeObservable, observable } from 'mobx';
 import {
   GridLayer,
   LatLngBounds,
   LatLngBoundsExpression,
   LatLngTuple,
+  LeafletMouseEvent,
   Map,
   map as leafletMap,
   tileLayer,
@@ -20,6 +21,9 @@ import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { debounce } from 'ts-debounce';
 import { map, SearchResultMapped } from 'src/stores/MapStore/map';
 import { controlsStore } from 'src/stores/ControlsStore';
+import { userStore } from 'src/stores/UserStore';
+import { TooltipDirection } from 'src/components/Tooltip';
+import { dotsStore } from 'src/stores/MapStore/DotsStore';
 
 export type Entity = {
   type: EntityInstanceType;
@@ -37,6 +41,36 @@ export const getEntity = (params: URLSearchParams): Entity => {
 
   return { type, id };
 };
+
+class TooltipState {
+  x: number;
+  y: number;
+  direction: TooltipDirection;
+  coordinates: LatLngTuple;
+  isVisible: boolean;
+
+  hide(): void {
+    this.isVisible = false;
+  }
+
+  constructor(
+    x = 0,
+    y = 0,
+    direction: TooltipDirection = 'right',
+    coordinates: LatLngTuple = [0, 0],
+    isVisible = false,
+  ) {
+    this.x = x;
+    this.y = y;
+    this.direction = direction;
+    this.coordinates = coordinates;
+    this.isVisible = isVisible;
+
+    makeAutoObservable(this);
+  }
+}
+
+export type Mode = 'default' | 'add';
 
 export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResultMapped> implements BaseStore {
   private readonly defaultZoom = 6;
@@ -58,6 +92,8 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
   zoom: number;
   lat: number;
   lng: number;
+  mode: Mode;
+  tooltip: TooltipState;
 
   resetData(): void {
     this.map = null;
@@ -66,6 +102,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
     this.zoom = this.defaultZoom;
     this.lat = this.defaultLat;
     this.lng = this.defaultLng;
+    this.mode = 'default';
   }
 
   setEntity(entity: Entity): void {
@@ -130,6 +167,11 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
     this.map.setView(coordinates[0], 6);
   }
 
+  addDot(): void {
+    dotsStore.add();
+    this.tooltip.hide();
+  }
+
   /**
    * Methods responsible for drawing map using Leaflet.js
    */
@@ -140,6 +182,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
 
     this.map.on('zoomend', this.updateSettings.bind(this));
     this.map.on('drag', () => debouncedUpdateSettings());
+    this.map.on('dblclick', (e: LeafletMouseEvent): void => MapStore.showDotCreator(e, mapRootNode));
 
     this.apply1pxGapFix();
     this.setInitialSettings();
@@ -212,6 +255,20 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
     this.lng = lng;
   }
 
+  private static showDotCreator(e: LeafletMouseEvent, mapRootNode: HTMLElement): void {
+    if (userStore.isAdmin) {
+      const controlsWidth = 50;
+      const mapWidth = mapRootNode.clientWidth - controlsWidth;
+
+      const coordinates: LatLngTuple = [e.latlng.lat, e.latlng.lng];
+      const x = e.containerPoint.x;
+      const y = e.containerPoint.y;
+      const direction = mapWidth / 2 - x < 0 ? 'left' : 'right';
+
+      mapStore.tooltip = new TooltipState(x, y, direction, coordinates, true);
+    }
+  }
+
   /**
    * @constructor
    */
@@ -221,6 +278,8 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
     this.map = null;
     this.entity = null;
     this.activeEntityId = null;
+    this.mode = 'default';
+    this.tooltip = new TooltipState();
 
     if (location.search) {
       const params = new URLSearchParams(location.search);
@@ -245,6 +304,9 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
       lng: observable,
       entity: observable,
       activeEntityId: observable,
+      mode: observable,
+      tooltip: observable,
+
       route: computed,
     });
   }

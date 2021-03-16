@@ -24,16 +24,25 @@ const ExtendedButton = styled(Button)`
 type Props = TooltipProps & {
   onCancel: () => void;
   onConfirm: () => void;
+  cancelText?: string;
+  confirmText?: string;
 };
 
-const ConfirmationTooltip: React.FC<Props> = ({ isVisible, direction, onCancel, onConfirm }) => {
+const ConfirmationTooltip: React.FC<Props> = ({
+  isVisible,
+  direction,
+  onCancel,
+  onConfirm,
+  cancelText = 'Нет',
+  confirmText = 'Да',
+}) => {
   return (
     <ExtendedTooltip isVisible={isVisible} direction={direction}>
       <ExtendedButton onClick={onCancel} icon="cancel">
-        Нет
+        {cancelText}
       </ExtendedButton>
       <ExtendedButton onClick={onConfirm} icon="confirm">
-        Да
+        {confirmText}
       </ExtendedButton>
     </ExtendedTooltip>
   );
