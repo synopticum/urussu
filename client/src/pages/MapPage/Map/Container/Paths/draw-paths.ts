@@ -1,9 +1,7 @@
 import { Map, polyline } from 'leaflet';
-import { getClassName } from 'src/pages/MapPage/Map/Container';
+import { getClassName, removeCurrentEntities } from 'src/pages/MapPage/Map/Container';
 import { mapStore } from 'src/stores/MapStore';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
-
-const removeCurrentPaths = (): void => {};
 
 const addPathsToMap = (map: Map, data: PathMapped[]): void => {
   const setEntity = (id: string): void => {
@@ -22,6 +20,6 @@ const addPathsToMap = (map: Map, data: PathMapped[]): void => {
 };
 
 export const drawPaths = (map: Map, data: PathMapped[]): void => {
-  removeCurrentPaths();
+  removeCurrentEntities(map, 'paths');
   addPathsToMap(map, data);
 };

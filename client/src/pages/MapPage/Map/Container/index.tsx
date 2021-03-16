@@ -3,6 +3,36 @@ import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import theme from 'src/features/App/GlobalStyle/theme';
+import { Map } from 'leaflet';
+
+export const removeCurrentEntities = (map: Map, type: 'dots' | 'objects' | 'circles' | 'paths'): void => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-ignore
+  const _layers = map._layers;
+  const layers = Object.entries(_layers);
+
+  for (const layer of layers) {
+    const [id] = layer;
+    const _layer = _layers[id];
+
+    const { color, weight, icon, rotationAngle, radius } = _layer.options;
+    const isDot = Boolean(icon && rotationAngle);
+    const isObject = color !== 'green' && weight === 2;
+    const isCircle = Boolean(radius);
+    const isPath = color === 'green' && weight === 8;
+
+    const conditions = {
+      dots: isDot,
+      objects: isObject,
+      circles: isCircle,
+      paths: isPath,
+    };
+
+    if (_layer._path !== undefined && conditions[type]) {
+      map.removeLayer(_layer);
+    }
+  }
+};
 
 export const getClassName = (item: DotMapped | ObjectMapped | PathMapped): string => {
   let className = `id_${item.id}`;
