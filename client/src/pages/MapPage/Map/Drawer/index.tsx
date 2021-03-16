@@ -23,20 +23,13 @@ const drawTools = (map: L.Map): void => {
       draw: {
         polygon: {
           allowIntersection: false,
-
-          drawError: {
-            color: '#e1e100',
-            message: "<strong>Oh snap!<strong> you can't draw that!",
-          },
-
           shapeOptions: {
-            color: '#97009c',
+            color: 'transparent',
           },
         },
         polyline: {
           shapeOptions: {
-            color: '#f357a1',
-            weight: 10,
+            color: 'transparent',
           },
         },
         circle: {},

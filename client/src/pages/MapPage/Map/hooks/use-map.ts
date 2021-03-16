@@ -8,7 +8,7 @@ export const useMap = (containerRef: RefObject<HTMLDivElement>): void => {
 
   useEffect(() => {
     if (containerRef.current && !map) {
-      mapStore.drawMap(containerRef.current);
+      mapStore.draw(containerRef.current);
     }
 
     return (): void => {

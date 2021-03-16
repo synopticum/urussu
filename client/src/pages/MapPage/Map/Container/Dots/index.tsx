@@ -18,7 +18,7 @@ export const Dots: React.FC = observer(() => {
 
   useEffect(() => {
     if (mapStore.map && isDataLoaded) {
-      dotsStore.drawDots();
+      dotsStore.draw();
     }
   }, [mapStore.map, isDataLoaded, data]);
 

@@ -172,7 +172,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
   /**
    * Methods responsible for drawing map using Leaflet.js
    */
-  drawMap(mapRootNode: HTMLElement): void {
+  draw(mapRootNode: HTMLElement): void {
     this.createMap(mapRootNode);
     const { maxBounds } = this;
     const debouncedUpdateSettings = debounce(this.updateSettings.bind(this), 50);

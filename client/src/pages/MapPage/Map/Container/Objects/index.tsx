@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { drawObjects } from 'src/pages/MapPage/Map/Container/Objects/draw-objects';
 import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
 import { mapStore } from 'src/stores/MapStore';
 
@@ -19,7 +18,7 @@ export const Objects: React.FC = observer(() => {
 
   useEffect(() => {
     if (mapStore.map && isDataLoaded) {
-      drawObjects(mapStore.map, data);
+      objectsStore.draw();
     }
   }, [mapStore.map, isDataLoaded, data]);
 

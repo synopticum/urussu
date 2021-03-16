@@ -47,7 +47,7 @@ export default class DotsStore extends BaseAsyncStore<DotDto[], DotMapped[]> imp
       const newDotDto = await put<DotDto, DotMapped>(url, dot, 'json');
       const [newDotMapped] = map([newDotDto]);
       this.apiData.data.push(newDotMapped);
-      this.drawDots();
+      this.draw();
     } catch (e) {
       alert('hui');
       // handle somehow
@@ -60,14 +60,14 @@ export default class DotsStore extends BaseAsyncStore<DotDto[], DotMapped[]> imp
     try {
       await del(url);
       this.apiData.data = this.apiData.data.filter(item => item.id !== id);
-      this.drawDots();
+      this.draw();
     } catch (e) {
       alert('hui');
       // handle somehow
     }
   }
 
-  drawDots(): void {
+  draw(): void {
     this.removeCurrentLayersAndMarkers();
     this.addMarkersToMap();
     this.addLayersToMap();
