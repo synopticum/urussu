@@ -1,5 +1,6 @@
 import { computed, makeAutoObservable, makeObservable, observable } from 'mobx';
 import {
+  divIcon,
   GridLayer,
   LatLngBounds,
   LatLngBoundsExpression,
@@ -7,6 +8,7 @@ import {
   LeafletMouseEvent,
   Map,
   map as leafletMap,
+  marker,
   tileLayer,
 } from 'leaflet';
 import { AxiosInstance } from 'axios';
@@ -42,7 +44,7 @@ export const getEntity = (params: URLSearchParams): Entity => {
   return { type, id };
 };
 
-class TooltipState {
+class DotCreatorState {
   x: number;
   y: number;
   direction: TooltipDirection;
@@ -93,7 +95,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
   lat: number;
   lng: number;
   mode: Mode;
-  tooltip: TooltipState;
+  dotCreator: DotCreatorState;
 
   resetData(): void {
     this.map = null;
@@ -167,9 +169,24 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
     this.map.setView(coordinates[0], 6);
   }
 
-  addDot(): void {
-    dotsStore.add();
-    this.tooltip.hide();
+  async addDot(): Promise<void> {
+    try {
+      const { coordinates, rotationAngle } = await dotsStore.add();
+
+      const m = marker(coordinates, {
+        icon: divIcon({
+          iconSize: [9, 9],
+        }),
+        draggable: false,
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore
+        rotationAngle,
+      });
+
+      this.dotCreator.hide();
+    } catch (e) {
+      alert('hui');
+    }
   }
 
   /**
@@ -265,7 +282,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
       const y = e.containerPoint.y;
       const direction = mapWidth / 2 - x < 0 ? 'left' : 'right';
 
-      mapStore.tooltip = new TooltipState(x, y, direction, coordinates, true);
+      mapStore.dotCreator = new DotCreatorState(x, y, direction, coordinates, true);
     }
   }
 
@@ -279,7 +296,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
     this.entity = null;
     this.activeEntityId = null;
     this.mode = 'default';
-    this.tooltip = new TooltipState();
+    this.dotCreator = new DotCreatorState();
 
     if (location.search) {
       const params = new URLSearchParams(location.search);
@@ -305,7 +322,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
       entity: observable,
       activeEntityId: observable,
       mode: observable,
-      tooltip: observable,
+      dotCreator: observable,
 
       route: computed,
     });

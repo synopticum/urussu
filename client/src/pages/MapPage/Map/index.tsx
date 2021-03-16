@@ -49,7 +49,7 @@ const Map: React.FC = observer(() => {
   const containerRef = useRef(null);
   useMap(containerRef);
 
-  const { entity, tooltip } = mapStore;
+  const { entity, dotCreator } = mapStore;
   const { isAdmin } = userStore;
 
   const toggleSearch = (): void => {
@@ -69,7 +69,7 @@ const Map: React.FC = observer(() => {
   };
 
   const cancelCreatingDot = (): void => {
-    tooltip.hide();
+    dotCreator.hide();
   };
 
   const confirmCreatingDot = (): void => {
@@ -98,10 +98,10 @@ const Map: React.FC = observer(() => {
         <Paths />
         <Circles />
 
-        <DotCreator x={tooltip.x} y={tooltip.y} isVisible={tooltip.isVisible}>
+        <DotCreator x={dotCreator.x} y={dotCreator.y} isVisible={dotCreator.isVisible}>
           <ConfirmationTooltip
-            isVisible={tooltip.isVisible}
-            direction={tooltip.direction}
+            isVisible={dotCreator.isVisible}
+            direction={dotCreator.direction}
             onCancel={cancelCreatingDot}
             onConfirm={confirmCreatingDot}
             cancelText="Отмена"

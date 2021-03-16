@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
-import { drawDots } from 'src/pages/MapPage/Map/Container/Dots/draw-dots';
 import { dotsStore } from 'src/stores/MapStore/DotsStore';
 import { mapStore } from 'src/stores/MapStore';
 
@@ -18,7 +17,9 @@ export const Dots: React.FC = observer(() => {
   }, []);
 
   useEffect(() => {
-    if (mapStore.map && isDataLoaded) drawDots(mapStore.map, data);
+    if (mapStore.map && isDataLoaded) {
+      dotsStore.drawDots();
+    }
   }, [mapStore.map, isDataLoaded, data]);
 
   return null;

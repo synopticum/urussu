@@ -162,7 +162,7 @@ const Editor: React.FC = observer(() => {
         <Section>
           <ConfirmationWrapper>
             <Button onClick={confirm} type="warning" icon="remove">
-              Удалить объект
+              Удалить сущность
             </Button>
             <ConfirmationTooltip
               isVisible={editorStore.isConfirmation}
