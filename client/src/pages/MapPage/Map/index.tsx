@@ -73,7 +73,8 @@ const Map: React.FC = observer(() => {
   };
 
   const confirmCreatingDot = (): void => {
-    mapStore.addDot();
+    dotsStore.add();
+    dotCreator.hide();
   };
 
   useEffect(() => {

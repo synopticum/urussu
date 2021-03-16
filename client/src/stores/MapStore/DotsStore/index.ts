@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { AsyncData, fetchData, put } from 'src/stores/helpers';
+import { AsyncData, del, fetchData, put } from 'src/stores/helpers';
 import { DotDto } from 'src/contracts/entities/dot';
 import { map } from 'src/stores/MapStore/DotsStore/map';
 import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
@@ -25,7 +25,7 @@ export default class DotsStore extends BaseAsyncStore<DotDto[], DotMapped[]> imp
     this.apiData = new AsyncData<DotMapped[]>();
   }
 
-  async add(): Promise<DotMapped> {
+  async add(): Promise<void> {
     const id = uuidv4();
     const url = `/dots/${id}`;
 
@@ -47,8 +47,7 @@ export default class DotsStore extends BaseAsyncStore<DotDto[], DotMapped[]> imp
       const newDotDto = await put<DotDto, DotMapped>(url, dot, 'json');
       const [newDotMapped] = map([newDotDto]);
       this.apiData.data.push(newDotMapped);
-
-      return newDotMapped;
+      this.drawDots();
     } catch (e) {
       alert('hui');
       // handle somehow
@@ -59,8 +58,9 @@ export default class DotsStore extends BaseAsyncStore<DotDto[], DotMapped[]> imp
     const url = `/dots/${id}`;
 
     try {
-      // await del(url);
+      await del(url);
       this.apiData.data = this.apiData.data.filter(item => item.id !== id);
+      this.drawDots();
     } catch (e) {
       alert('hui');
       // handle somehow

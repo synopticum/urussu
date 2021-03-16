@@ -169,26 +169,6 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
     this.map.setView(coordinates[0], 6);
   }
 
-  async addDot(): Promise<void> {
-    try {
-      const { coordinates, rotationAngle } = await dotsStore.add();
-
-      const m = marker(coordinates, {
-        icon: divIcon({
-          iconSize: [9, 9],
-        }),
-        draggable: false,
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        // @ts-ignore
-        rotationAngle,
-      });
-
-      this.dotCreator.hide();
-    } catch (e) {
-      alert('hui');
-    }
-  }
-
   /**
    * Methods responsible for drawing map using Leaflet.js
    */
