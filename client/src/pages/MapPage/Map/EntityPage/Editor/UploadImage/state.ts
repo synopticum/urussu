@@ -28,7 +28,6 @@ class UploadImageValidation {
     return {
       'Загружаемое фото не выбрано': !this.root.isImageSelected,
       'Год не выбран': !this.root.isYearValid,
-      'Фото уже переснято': imagesStore.isSelectedImageARetake,
     };
   }
 
