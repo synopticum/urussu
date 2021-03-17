@@ -21,7 +21,11 @@ const CurrentImage = styled.div`
   }
 `;
 
-export const Images = observer(() => {
+type Props = {
+  onClick: () => void;
+};
+
+export const Images: React.FC<Props> = observer(({ onClick }) => {
   const { store } = imagesStore;
   const { data } = store.apiData;
 
@@ -53,7 +57,7 @@ export const Images = observer(() => {
   imagesStore.selectedImageId = imagesStore.selectedImageId || imagesStore.initialImageId;
 
   return (
-    <StyledImages>
+    <StyledImages onClick={onClick}>
       <CurrentImage>
         <img src={imagesStore.selectedImageUrl} alt="" />
       </CurrentImage>
