@@ -45,11 +45,12 @@ const Input = styled.input`
   background: none;
 `;
 
+const search = (e: ChangeEvent<HTMLInputElement>): void => mapStore.search(e.target.value);
+
+const debouncedSearch = debounce(search, 300);
+
 const Search: React.FC = observer(() => {
   const inputRef = useRef(null);
-
-  const search = (e: ChangeEvent<HTMLInputElement>): void => mapStore.search(e.target.value);
-  const debouncedSearch = debounce(search, 300);
 
   useAutoFocus(inputRef);
 

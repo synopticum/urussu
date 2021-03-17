@@ -15,10 +15,11 @@ const CommentArea = styled(Textarea)`
   margin-bottom: 10px;
 `;
 
-export const Add: React.FC = observer(() => {
-  const addComment = (): Promise<void> => commentsStore.add();
-  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => commentsStore.handleInput(e.target.value);
+const addComment = (): Promise<void> => commentsStore.add();
 
+const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>): void => commentsStore.handleInput(e.target.value);
+
+export const Add: React.FC = observer(() => {
   return (
     <StyledAdd>
       <CommentArea onInput={handleInput} value={commentsStore.currentValue} />

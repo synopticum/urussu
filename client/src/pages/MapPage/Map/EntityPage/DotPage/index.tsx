@@ -15,6 +15,10 @@ const StyledDotPage = styled.div`
   height: 100%;
 `;
 
+const toggleComments = (): void => controlsStore.toggle('comments');
+
+const toggleEditor = (): void => controlsStore.toggle('editor');
+
 type Props = {
   id: string;
 };
@@ -33,9 +37,6 @@ export const DotPage: React.FC<Props> = observer(({ id }) => {
   if (!data) {
     return null;
   }
-
-  const toggleComments = (): void => controlsStore.toggle('comments');
-  const toggleEditor = (): void => controlsStore.toggle('editor');
 
   return (
     <StyledDotPage>

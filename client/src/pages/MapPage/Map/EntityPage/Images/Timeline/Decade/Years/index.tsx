@@ -84,14 +84,14 @@ const NestedYearValue = styled(YearValue)<{ isActive: boolean }>`
   }
 `;
 
+const changeSelectedImage = (id: ImageId): void => imagesStore.changeSelectedImageId(id);
+
 type Props = {
   images: ImageMapped[];
   isDecadeActive?: boolean;
 };
 
 export const Years: React.FC<Props> = observer(({ images, isDecadeActive }) => {
-  const changeSelectedImage = (id: ImageId): void => imagesStore.changeSelectedImageId(id);
-
   return (
     <StyledYears isDecadeActive={isDecadeActive}>
       {images.map(({ year, id, image }) => {

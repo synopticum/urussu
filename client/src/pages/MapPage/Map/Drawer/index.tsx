@@ -7,7 +7,13 @@ import 'leaflet-draw/dist/leaflet.draw.css';
 import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
 import { pathsStore } from 'src/stores/MapStore/PathsStore';
 
-const drawTools = (map: L.Map): void => {
+const drawTools = (): void => {
+  const { map } = mapStore;
+
+  if (!map) {
+    return;
+  }
+
   const editableLayers = new L.FeatureGroup();
   const types = {
     object: 'polygon',
@@ -76,7 +82,7 @@ const drawTools = (map: L.Map): void => {
 
 const Drawer: React.FC = observer(() => {
   useEffect(() => {
-    if (mapStore.map) drawTools(mapStore.map);
+    drawTools();
   }, [mapStore.map]);
 
   useEffect(() => {

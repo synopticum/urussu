@@ -45,9 +45,9 @@ export default class DotStore extends BaseAsyncStore<DotDto, DotMapped> implemen
     editorStore.resetData();
   }
 
-  async update(id: EntityId): Promise<void> {
+  async update(): Promise<void> {
     const { data } = this.apiData;
-    const url = `/dots/${id}`;
+    const url = `/dots/${data.id}`;
 
     const dot = {
       ...data,

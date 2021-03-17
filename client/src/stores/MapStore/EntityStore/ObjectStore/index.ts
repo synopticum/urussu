@@ -62,9 +62,9 @@ export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped>
     editorStore.resetData();
   }
 
-  async update(id: EntityId): Promise<void> {
+  async update(): Promise<void> {
     const { data } = this.apiData;
-    const url = `/objects/${id}`;
+    const url = `/objects/${data.id}`;
 
     const object = {
       ...data,

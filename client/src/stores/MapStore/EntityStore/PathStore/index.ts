@@ -43,9 +43,9 @@ export default class PathStore extends BaseAsyncStore<PathDto, PathMapped> imple
     editorStore.resetData();
   }
 
-  async update(id: EntityId): Promise<void> {
+  async update(): Promise<void> {
     const { data } = this.apiData;
-    const url = `/paths/${id}`;
+    const url = `/paths/${data.id}`;
 
     const path = {
       ...data,

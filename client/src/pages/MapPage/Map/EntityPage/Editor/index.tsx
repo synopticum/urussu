@@ -83,9 +83,42 @@ const ConfirmationWrapper = styled.div`
   z-index: 50;
 `;
 
+const confirm = (): void => {
+  editorStore.isConfirmation = true;
+};
+
+const cancelConfirmation = (): void => {
+  editorStore.isConfirmation = false;
+};
+
+const removeEntity = (): void => {
+  editorStore.removeEntity();
+  mapStore.setEntity(null);
+};
+
+const update = (): void => {
+  editorStore.store.update();
+};
+
+const setTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  editorStore.state.setTitle(e.target.value);
+};
+
+const setShortDescription = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  editorStore.state.setShortDescription(e.target.value);
+};
+
+const setFullDescription = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+  editorStore.state.setFullDescription(e.target.value);
+};
+
+const removeImage = (): void => {
+  editorStore.removeImage();
+};
+
 const Editor: React.FC = observer(() => {
   const { data } = editorStore.store.apiData;
-  const { store, state } = editorStore;
+  const { state } = editorStore;
 
   if (!data) {
     return null;
@@ -102,39 +135,6 @@ const Editor: React.FC = observer(() => {
       editorStore.isReady = false;
     };
   }, []);
-
-  const confirm = (): void => {
-    editorStore.isConfirmation = true;
-  };
-
-  const cancelConfirmation = (): void => {
-    editorStore.isConfirmation = false;
-  };
-
-  const removeEntity = (): void => {
-    editorStore.removeEntity();
-    mapStore.setEntity(null);
-  };
-
-  const update = (): void => {
-    store.update(data.id);
-  };
-
-  const setTitle = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    state.setTitle(e.target.value);
-  };
-
-  const setShortDescription = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    state.setShortDescription(e.target.value);
-  };
-
-  const setFullDescription = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
-    state.setFullDescription(e.target.value);
-  };
-
-  const removeImage = (): void => {
-    editorStore.removeImage();
-  };
 
   const { validation } = editorStore;
 

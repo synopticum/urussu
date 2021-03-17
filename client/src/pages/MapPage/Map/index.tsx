@@ -21,7 +21,6 @@ import Drawer from 'src/pages/MapPage/Map/Drawer';
 import { userStore } from 'src/stores/UserStore';
 import ConfirmationTooltip from 'src/components/Tooltip/ConfirmationTooltip';
 import { dotsStore } from 'src/stores/MapStore/DotsStore';
-import { LeafletMouseEvent } from 'leaflet';
 
 const StyledMap = styled.div`
   height: 100%;
@@ -40,6 +39,19 @@ const DotCreator = styled.div<{ x: number; y: number; isVisible: boolean }>`
   z-index: 1050;
 `;
 
+const toggleSearch = (): void => {
+  mapStore.toggleSearch();
+};
+
+const cancelCreatingDot = (): void => {
+  mapStore.dotCreator.hide();
+};
+
+const confirmCreatingDot = (): void => {
+  dotsStore.add();
+  mapStore.dotCreator.hide();
+};
+
 const Router: React.FC = observer(() => {
   window.history.replaceState({}, '', mapStore.route);
   return null;
@@ -52,10 +64,6 @@ const Map: React.FC = observer(() => {
   const { entity, dotCreator } = mapStore;
   const { isAdmin } = userStore;
 
-  const toggleSearch = (): void => {
-    mapStore.toggleSearch();
-  };
-
   const switchToAddMode = (e: KeyboardEvent): void => {
     if (containerRef.current && e.key === 'Alt') {
       containerRef.current.style.setProperty('cursor', 'crosshair', 'important');
@@ -66,15 +74,6 @@ const Map: React.FC = observer(() => {
     if (containerRef.current && e.key === 'Alt') {
       containerRef.current.style.setProperty('cursor', 'grab', 'important');
     }
-  };
-
-  const cancelCreatingDot = (): void => {
-    dotCreator.hide();
-  };
-
-  const confirmCreatingDot = (): void => {
-    dotsStore.add();
-    dotCreator.hide();
   };
 
   useEffect(() => {

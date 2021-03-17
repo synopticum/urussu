@@ -45,6 +45,16 @@ const Pages: { dot: typeof DotPage; object: typeof ObjectPage; path: typeof Obje
   circle: ObjectPage,
 };
 
+const close = (): void => {
+  mapStore.setEntity(null);
+};
+
+const handleEscape = (e: KeyboardEvent): void => {
+  if (e.key === 'Escape') {
+    close();
+  }
+};
+
 type Props = {
   entity: Entity;
 };
@@ -53,16 +63,6 @@ export const EntityPage: React.FC<Props> = ({ entity }) => {
   if (!entity) {
     return null;
   }
-
-  const close = (): void => {
-    mapStore.setEntity(null);
-  };
-
-  const handleEscape = (e: KeyboardEvent): void => {
-    if (e.key === 'Escape') {
-      close();
-    }
-  };
 
   useEffect(() => {
     document.addEventListener('keyup', handleEscape);
