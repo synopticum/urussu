@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import Button from 'src/components/Button';
-import { editorStore } from 'src/stores/MapStore/EntityStore/EditorStore';
+import { editorStore, ObjectState } from 'src/stores/MapStore/EntityStore/EditorStore';
 import TextInput from 'src/components/TextInput';
 import Textarea from 'src/components/Textarea';
 import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
@@ -66,8 +66,8 @@ const Section = styled.div`
   }
 `;
 
-const SaveSection = styled(Section)`
-  justify-content: flex-end;
+const SubmitSection = styled(Section)`
+  justify-content: space-between;
 `;
 
 const ExtendedTextInput = styled(TextInput)`
@@ -112,6 +112,18 @@ const setFullDescription = (e: React.ChangeEvent<HTMLTextAreaElement>): void => 
   editorStore.state.setFullDescription(e.target.value);
 };
 
+const setStreet = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  if (editorStore.state instanceof ObjectState) {
+    editorStore.state.setStreet(e.target.value);
+  }
+};
+
+const setHouse = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  if (editorStore.state instanceof ObjectState) {
+    editorStore.state.setHouse(e.target.value);
+  }
+};
+
 const removeImage = (): void => {
   editorStore.removeImage();
 };
@@ -147,6 +159,13 @@ const Editor: React.FC = observer(() => {
           <ExtendedTextInput type="text" onInput={setTitle} value={state.title} label="Заголовок" />
         </Section>
 
+        {state instanceof ObjectState && (
+          <Section>
+            <ExtendedTextInput type="text" onInput={setStreet} value={state.street} label="Улица" />
+            <ExtendedTextInput type="text" onInput={setHouse} value={state.house} label="Дом" />
+          </Section>
+        )}
+
         <Section>
           <ExtendedTextarea onInput={setShortDescription} value={state.shortDescription} label="Краткое описание" />
         </Section>
@@ -170,25 +189,23 @@ const Editor: React.FC = observer(() => {
             Удалить выбранное фото
           </Button>
         </Section>
-
-        <Section>
-          <ConfirmationWrapper>
-            <Button onClick={confirm} type="warning" icon="remove">
-              Удалить сущность
-            </Button>
-            <ConfirmationTooltip
-              isVisible={editorStore.isConfirmation}
-              direction="top"
-              onCancel={cancelConfirmation}
-              onConfirm={removeEntity}
-            />
-          </ConfirmationWrapper>
-        </Section>
       </List>
 
-      <SaveSection>
+      <SubmitSection>
+        <ConfirmationWrapper>
+          <Button onClick={confirm} type="warning" icon="remove">
+            Удалить
+          </Button>
+          <ConfirmationTooltip
+            isVisible={editorStore.isConfirmation}
+            direction="top"
+            onCancel={cancelConfirmation}
+            onConfirm={removeEntity}
+          />
+        </ConfirmationWrapper>
+
         <Button onClick={update}>Сохранить</Button>
-      </SaveSection>
+      </SubmitSection>
     </StyledEditor>
   );
 });

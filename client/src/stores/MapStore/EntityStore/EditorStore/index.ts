@@ -66,11 +66,24 @@ export class ObjectState extends EditorState {
   street: string;
   house: string;
 
+  setStreet(street: string): void {
+    this.street = street;
+  }
+
+  setHouse(house: string): void {
+    this.house = house;
+  }
+
   constructor(entity: ObjectMapped) {
     super(entity);
 
     this.street = entity.street;
     this.house = entity.house;
+
+    makeObservable(this, {
+      street: observable,
+      house: observable,
+    });
   }
 }
 
