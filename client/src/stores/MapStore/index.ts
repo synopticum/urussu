@@ -93,6 +93,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
   lng: number;
   mode: Mode;
   dotCreator: DotCreatorState;
+  dotsRotated: boolean;
 
   resetData(): void {
     this.map = null;
@@ -274,6 +275,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
     this.activeEntityId = null;
     this.mode = 'default';
     this.dotCreator = new DotCreatorState();
+    this.dotsRotated = false;
 
     if (location.search) {
       const params = new URLSearchParams(location.search);
@@ -300,6 +302,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
       activeEntityId: observable,
       mode: observable,
       dotCreator: observable,
+      dotsRotated: observable,
 
       route: computed,
     });

@@ -4,7 +4,11 @@ import { mapStore } from 'src/stores/MapStore';
 
 export const useMap = (containerRef: RefObject<HTMLDivElement>): void => {
   const { map } = mapStore;
-  useRotatedMarker();
+
+  if (!mapStore.dotsRotated) {
+    useRotatedMarker();
+    mapStore.dotsRotated = true;
+  }
 
   useEffect(() => {
     if (containerRef.current && !map) {

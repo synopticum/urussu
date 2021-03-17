@@ -83,7 +83,7 @@ const Container = styled.div<{ mode?: Mode }>`
   }
 
   .leaflet-marker-icon {
-    cursor: default !important;
+    cursor: pointer !important;
     background: rgb(232, 168, 38);
     border: 2px solid rgb(182, 118, -12);
     border-radius: 50%;
@@ -113,7 +113,7 @@ const Container = styled.div<{ mode?: Mode }>`
   }
 
   .leaflet-marker-icon:hover::after {
-    opacity: 0.5;
+    opacity: 0.3;
   }
 
   .leaflet-marker-icon:focus {
