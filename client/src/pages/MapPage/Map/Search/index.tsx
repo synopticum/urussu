@@ -43,10 +43,6 @@ const Input = styled.input`
   font-size: 16px;
   border: 0;
   background: none;
-
-  &:focus {
-    background-color: ${theme.colors.yellow.a};
-  }
 `;
 
 const Search: React.FC = observer(() => {

@@ -76,7 +76,6 @@ const TargetButton = styled.button<{ buttonType: ButtonType; icon?: string; icon
   padding-left: ${({ icon, iconName }): string => (icon ? buttonIcons[iconName]?.paddingLeft || '35px' : '15px')};
   font-weight: bold;
   border-radius: 5px;
-  box-shadow: 0 0 0 1px transparent inset, 0 0 0 0 rgba(34, 36, 38, 0.15) inset;
   transition: opacity 0.3s, background-color 0.1s ease, color 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
 
   &:hover {
@@ -88,7 +87,7 @@ const TargetButton = styled.button<{ buttonType: ButtonType; icon?: string; icon
   }
 
   &:focus {
-    opacity: 0.75;
+    box-shadow: 0 0 5px ${theme.colors.blue.a};
   }
 
   &:disabled {
