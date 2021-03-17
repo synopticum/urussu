@@ -10,6 +10,8 @@ import Editor from 'src/pages/MapPage/Map/EntityPage/Editor';
 import Portal from 'src/features/App/Portal';
 import { Control } from 'src/features/Page/Controls';
 import Button from 'src/features/Page/Controls/Button';
+import { globalStore } from 'src/stores/GlobalStore';
+import { pathStore } from 'src/stores/MapStore/EntityStore/PathStore';
 
 const StyledDotPage = styled.div`
   height: 100%;
@@ -42,6 +44,8 @@ export const DotPage: React.FC<Props> = observer(({ id }) => {
 
   return (
     <StyledDotPage>
+      <Portal parent={globalStore.titleRef}>{dotStore.title}</Portal>
+
       <Images onClick={closeActiveControls} />
       {controlsStore.selected === 'comments' && (
         <Comments entityType="dot" entityId={id} imageId={imagesStore.selectedImageId} />

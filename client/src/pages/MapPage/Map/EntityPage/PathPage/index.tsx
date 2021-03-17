@@ -10,6 +10,8 @@ import Editor from 'src/pages/MapPage/Map/EntityPage/Editor';
 import Portal from 'src/features/App/Portal';
 import { Control } from 'src/features/Page/Controls';
 import Button from 'src/features/Page/Controls/Button';
+import { globalStore } from 'src/stores/GlobalStore';
+import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 
 const StyledPathPage = styled.div`
   height: 100%;
@@ -42,6 +44,8 @@ export const PathPage: React.FC<Props> = observer(({ id }) => {
 
   return (
     <StyledPathPage>
+      <Portal parent={globalStore.titleRef}>{pathStore.title}</Portal>
+
       <Images onClick={closeActiveControls} />
       {controlsStore.selected === 'comments' && (
         <Comments entityType="path" entityId={id} imageId={imagesStore.selectedImageId} />

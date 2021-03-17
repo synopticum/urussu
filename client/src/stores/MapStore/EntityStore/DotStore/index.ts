@@ -10,6 +10,7 @@ import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { ObjectDto } from 'src/contracts/entities/object';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { controlsStore } from 'src/stores/ControlsStore';
+import { computed, makeObservable } from 'mobx';
 
 export default class DotStore extends BaseAsyncStore<DotDto, DotMapped> implements BaseStore {
   get entityType(): EntityInstanceType {
@@ -26,7 +27,15 @@ export default class DotStore extends BaseAsyncStore<DotDto, DotMapped> implemen
     return data.id;
   }
 
-  title: Pick<DotMapped, 'title'>;
+  get title(): string {
+    const { data } = this.apiData;
+
+    if (!data || !data.title) {
+      return null;
+    }
+
+    return data.title;
+  }
 
   async fetchApiData(id: EntityId): Promise<void> {
     await fetchData<DotDto, DotMapped>(`/dots/${id}`, this.getApiOptions(map));
@@ -67,6 +76,10 @@ export default class DotStore extends BaseAsyncStore<DotDto, DotMapped> implemen
 
   constructor(api: AxiosInstance) {
     super(api);
+
+    makeObservable(this, {
+      title: computed,
+    });
   }
 }
 

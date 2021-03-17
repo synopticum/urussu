@@ -9,6 +9,7 @@ import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { editorStore, ObjectState } from 'src/stores/MapStore/EntityStore/EditorStore';
 import { controlsStore } from 'src/stores/ControlsStore';
+import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
 
 export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped> implements BaseStore {
   get entityType(): EntityInstanceType {

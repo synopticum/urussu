@@ -8,6 +8,7 @@ import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { editorStore, ObjectState, PathState } from 'src/stores/MapStore/EntityStore/EditorStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { controlsStore } from 'src/stores/ControlsStore';
+import { computed, makeObservable } from 'mobx';
 
 export default class PathStore extends BaseAsyncStore<PathDto, PathMapped> implements BaseStore {
   get entityType(): EntityInstanceType {
@@ -24,7 +25,15 @@ export default class PathStore extends BaseAsyncStore<PathDto, PathMapped> imple
     return data.id;
   }
 
-  title: Pick<PathMapped, 'title'>;
+  get title(): string {
+    const { data } = this.apiData;
+
+    if (!data || !data.title) {
+      return null;
+    }
+
+    return data.title;
+  }
 
   async fetchApiData(id: EntityId): Promise<void> {
     await fetchData<PathDto, PathMapped>(`/paths/${id}`, this.getApiOptions(map));
@@ -65,6 +74,10 @@ export default class PathStore extends BaseAsyncStore<PathDto, PathMapped> imple
 
   constructor(api: AxiosInstance) {
     super(api);
+
+    makeObservable(this, {
+      title: computed,
+    });
   }
 }
 

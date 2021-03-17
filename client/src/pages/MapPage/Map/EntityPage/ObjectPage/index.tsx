@@ -5,14 +5,24 @@ import Images from 'src/pages/MapPage/Map/EntityPage/Images';
 import Comments from 'src/pages/MapPage/Map/EntityPage/Comments';
 import Portal from 'src/features/App/Portal';
 import Button from 'src/features/Page/Controls/Button';
-import { Control } from 'src/features/Page/Controls';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { controlsStore } from 'src/stores/ControlsStore';
 import Editor from 'src/pages/MapPage/Map/EntityPage/Editor';
+import theme from 'src/features/App/GlobalStyle/theme';
+import { globalStore } from 'src/stores/GlobalStore';
 
 const StyledObjectPage = styled.div`
   height: 100%;
+`;
+
+const Title = styled.div`
+  position: absolute;
+  left: 0;
+  top: -50px;
+  font-size: 32px;
+  margin-right: auto;
+  color: ${theme.colors.white.a};
 `;
 
 const toggleComments = (): void => controlsStore.toggle('comments');
@@ -42,6 +52,8 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
 
   return (
     <StyledObjectPage>
+      <Portal parent={globalStore.titleRef}>{objectStore.address || objectStore.title}</Portal>
+
       <Images onClick={closeActiveControls} />
       {controlsStore.selected === 'comments' && (
         <Comments entityType="object" entityId={id} imageId={imagesStore.selectedImageId} />

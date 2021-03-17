@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { MutableRefObject } from 'react';
 import { makeObservable, observable } from 'mobx';
 import { BaseStore } from 'src/stores';
 
 export default class GlobalStore implements BaseStore {
   language: string;
   title: string;
+  titleRef: MutableRefObject<HTMLDivElement>;
 
   handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     this.title = e.target.value;

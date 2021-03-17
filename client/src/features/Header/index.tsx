@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
-import UserMenu from '../Page/Controls/UserMenu';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
 import theme from 'src/features/App/GlobalStyle/theme';
+import { controlsStore } from 'src/stores/ControlsStore';
+import { globalStore } from 'src/stores/GlobalStore';
 
 const StyledHeader = styled.header`
   position: relative;
@@ -53,8 +54,22 @@ const Title = styled.div`
 `;
 
 const Header: React.FC = observer(() => {
+  const titleRef = useRef(null);
+
+  useEffect(() => {
+    if (titleRef.current) {
+      globalStore.titleRef = titleRef;
+    }
+
+    return (): void => {
+      globalStore.titleRef = null;
+    };
+  }, [titleRef.current]);
+
   return (
     <StyledHeader>
+      <Title ref={titleRef} />
+
       <Nav>
         <NavLink to="map">{l('Карта')}</NavLink>
         <NavLink to="contact-us">{l('Страница')}</NavLink>
