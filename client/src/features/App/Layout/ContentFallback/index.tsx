@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import React from 'react';
-import Aside from 'src/features/Page/Aside';
+import Controls from 'src/features/Page/Controls';
 import Content from 'src/features/App/Layout/Content';
 import theme from 'src/features/App/GlobalStyle/theme';
 
@@ -30,7 +30,7 @@ const ContentFallback: React.FC = () => {
     <Content>
       <div>
         <Fallback>
-          <Aside />
+          <Controls />
           <Message>
             <Image src="/images/common/spinner.gif" />
             <br />

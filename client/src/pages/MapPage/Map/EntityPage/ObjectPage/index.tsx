@@ -4,8 +4,8 @@ import { observer } from 'mobx-react-lite';
 import Images from 'src/pages/MapPage/Map/EntityPage/Images';
 import Comments from 'src/pages/MapPage/Map/EntityPage/Comments';
 import Portal from 'src/features/App/Portal';
-import Button from 'src/features/Page/Aside/Button';
-import { Control } from 'src/features/Page/Aside';
+import Button from 'src/features/Page/Controls/Button';
+import { Control } from 'src/features/Page/Controls';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { controlsStore } from 'src/stores/ControlsStore';
@@ -49,10 +49,8 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
       {controlsStore.selected === 'editor' && <Editor />}
 
       <Portal parent={controlsStore.ref}>
-        <Control>
-          <Button type={controlsStore.getStateFor('comments')} onClick={toggleComments} />
-          <Button type={controlsStore.getStateFor('editor')} onClick={toggleEditor} />
-        </Control>
+        <Button type={controlsStore.getStateFor('comments')} onClick={toggleComments} />
+        <Button type={controlsStore.getStateFor('editor')} onClick={toggleEditor} />
       </Portal>
     </StyledObjectPage>
   );

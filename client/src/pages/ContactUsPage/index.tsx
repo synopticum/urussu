@@ -2,14 +2,14 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import styled from 'styled-components';
 import Page from 'src/features/Page';
-import Aside from 'src/features/Page/Aside';
+import Controls from 'src/features/Page/Controls';
 import Content from 'src/features/Page/Content';
 
 const StyledContactUsPage = styled(Page)``;
 
 const ContactUs: React.FC<RouteComponentProps> = () => (
   <StyledContactUsPage>
-    <Aside>zz</Aside>
+    <Controls>zz</Controls>
     <Content>contact us</Content>
   </StyledContactUsPage>
 );

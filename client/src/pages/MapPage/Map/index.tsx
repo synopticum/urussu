@@ -11,9 +11,9 @@ import Circles from './Container/Circles';
 import EntityPage from './EntityPage';
 import { ActiveEntity } from 'src/pages/MapPage/Map/Container/ActiveEntity';
 import Portal from 'src/features/App/Portal';
-import Button from 'src/features/Page/Aside/Button';
+import Button from 'src/features/Page/Controls/Button';
 import Search from 'src/pages/MapPage/Map/Search';
-import { Control } from 'src/features/Page/Aside';
+import { Control } from 'src/features/Page/Controls';
 import { mapStore } from 'src/stores/MapStore';
 import { controlsStore } from 'src/stores/ControlsStore';
 import theme from 'src/features/App/GlobalStyle/theme';
@@ -116,9 +116,7 @@ const Map: React.FC = observer(() => {
 
       {!entity && (
         <Portal parent={controlsStore.ref}>
-          <Control>
-            <Button type={controlsStore.getStateFor('search')} onClick={toggleSearch} />
-          </Control>
+          <Button type={controlsStore.getStateFor('search')} onClick={toggleSearch} />
         </Portal>
       )}
 

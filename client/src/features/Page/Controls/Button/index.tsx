@@ -4,6 +4,7 @@ import searchImage from './images/search.svg';
 import commentsImage from './images/comments.svg';
 import editorImage from './images/editor.svg';
 import closeImage from './images/close.svg';
+import loginImage from './images/login.svg';
 import { Controls } from 'src/stores/ControlsStore';
 
 export type ButtonTypes = Controls | 'close';
@@ -15,9 +16,10 @@ const icons: {
   comments: commentsImage,
   editor: editorImage,
   close: closeImage,
+  login: loginImage,
 };
 
-export const StyledButton = styled.button<{ icon: string }>`
+const StyledButton = styled.button<{ icon: string }>`
   display: block;
   position: relative;
   width: 44px;
@@ -62,10 +64,11 @@ export const StyledButton = styled.button<{ icon: string }>`
 type Props = {
   type: ButtonTypes;
   onClick: () => void;
+  className?: string;
 };
 
-const Button: React.FC<Props> = ({ type, onClick }) => {
-  return <StyledButton icon={icons[type]} onClick={onClick} />;
+const Button: React.FC<Props> = ({ type, onClick, className }) => {
+  return <StyledButton icon={icons[type]} onClick={onClick} className={className} />;
 };
 
 export default Button;

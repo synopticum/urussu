@@ -1,9 +1,9 @@
 import { makeObservable, observable } from 'mobx';
 import { MutableRefObject } from 'react';
 import { BaseStore } from 'src/stores';
-import { ButtonTypes } from 'src/features/Page/Aside/Button';
+import { ButtonTypes } from 'src/features/Page/Controls/Button';
 
-export type Controls = 'search' | 'comments' | 'editor';
+export type Controls = 'search' | 'comments' | 'editor' | 'login';
 
 export default class ControlsStore implements BaseStore {
   ref: MutableRefObject<HTMLDivElement>;

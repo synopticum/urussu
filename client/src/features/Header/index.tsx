@@ -1,10 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from '@reach/router';
-import UserMenu from './UserMenu';
+import UserMenu from '../Page/Controls/UserMenu';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
-import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledHeader = styled.header`
@@ -54,18 +53,13 @@ const Title = styled.div`
 `;
 
 const Header: React.FC = observer(() => {
-  const { address, title } = objectStore;
-
   return (
     <StyledHeader>
-      <Title>{address || title}</Title>
-
       <Nav>
         <NavLink to="map">{l('Карта')}</NavLink>
         <NavLink to="contact-us">{l('Страница')}</NavLink>
         <NavLink to="chunked-page/123">Chunked Page</NavLink>
       </Nav>
-      <UserMenu />
     </StyledHeader>
   );
 });

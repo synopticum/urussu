@@ -3,7 +3,7 @@ import { RouteComponentProps } from '@reach/router';
 import Map from 'src/pages/MapPage/Map';
 import styled from 'styled-components';
 import Page from 'src/features/Page';
-import Aside from 'src/features/Page/Aside';
+import Controls from 'src/features/Page/Controls';
 
 const StyledMapPage = styled(Page)``;
 
@@ -11,7 +11,7 @@ const MapPage: React.FC<RouteComponentProps> = () => {
   return (
     <StyledMapPage>
       <Map />
-      <Aside />
+      <Controls />
     </StyledMapPage>
   );
 };
