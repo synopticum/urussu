@@ -8,10 +8,8 @@ import Comments from 'src/pages/MapPage/Map/EntityPage/Comments';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import Editor from 'src/pages/MapPage/Map/EntityPage/Editor';
 import Portal from 'src/features/App/Portal';
-import { Control } from 'src/features/Page/Controls';
 import Button from 'src/features/Page/Controls/Button';
 import { globalStore } from 'src/stores/GlobalStore';
-import { pathStore } from 'src/stores/MapStore/EntityStore/PathStore';
 
 const StyledDotPage = styled.div`
   height: 100%;

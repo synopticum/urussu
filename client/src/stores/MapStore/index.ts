@@ -1,6 +1,5 @@
 import { computed, makeAutoObservable, makeObservable, observable } from 'mobx';
 import {
-  divIcon,
   GridLayer,
   LatLngBounds,
   LatLngBoundsExpression,
@@ -8,7 +7,6 @@ import {
   LeafletMouseEvent,
   Map,
   map as leafletMap,
-  marker,
   tileLayer,
 } from 'leaflet';
 import { AxiosInstance } from 'axios';
@@ -25,7 +23,6 @@ import { map, SearchResultMapped } from 'src/stores/MapStore/map';
 import { controlsStore } from 'src/stores/ControlsStore';
 import { userStore } from 'src/stores/UserStore';
 import { TooltipDirection } from 'src/components/Tooltip';
-import { dotsStore } from 'src/stores/MapStore/DotsStore';
 
 export type Entity = {
   type: EntityInstanceType;

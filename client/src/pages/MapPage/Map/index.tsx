@@ -13,7 +13,6 @@ import { ActiveEntity } from 'src/pages/MapPage/Map/Container/ActiveEntity';
 import Portal from 'src/features/App/Portal';
 import Button from 'src/features/Page/Controls/Button';
 import Search from 'src/pages/MapPage/Map/Search';
-import { Control } from 'src/features/Page/Controls';
 import { mapStore } from 'src/stores/MapStore';
 import { controlsStore } from 'src/stores/ControlsStore';
 import theme from 'src/features/App/GlobalStyle/theme';

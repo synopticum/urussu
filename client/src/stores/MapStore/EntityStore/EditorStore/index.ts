@@ -1,4 +1,4 @@
-import { computed, makeAutoObservable, makeObservable, observable } from 'mobx';
+import { makeAutoObservable, makeObservable, observable } from 'mobx';
 import ObjectStore from 'src/stores/MapStore/EntityStore/ObjectStore';
 import DotStore from 'src/stores/MapStore/EntityStore/DotStore';
 import PathStore from 'src/stores/MapStore/EntityStore/PathStore';

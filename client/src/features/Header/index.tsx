@@ -4,7 +4,6 @@ import { Link } from '@reach/router';
 import l from './locale';
 import { observer } from 'mobx-react-lite';
 import theme from 'src/features/App/GlobalStyle/theme';
-import { controlsStore } from 'src/stores/ControlsStore';
 import { globalStore } from 'src/stores/GlobalStore';
 
 const StyledHeader = styled.header`

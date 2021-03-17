@@ -4,7 +4,7 @@ import { ObjectDto, ObjectType } from 'src/contracts/entities/object';
 import { map } from 'src/stores/MapStore/ObjectsStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
-import { LatLngTuple, polygon, circle } from 'leaflet';
+import { circle, LatLngTuple, polygon } from 'leaflet';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityId } from 'src/contracts/entities';
 import { mapStore } from 'src/stores/MapStore';

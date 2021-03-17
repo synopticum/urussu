@@ -7,8 +7,6 @@ import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { DotState, editorStore } from 'src/stores/MapStore/EntityStore/EditorStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
-import { ObjectDto } from 'src/contracts/entities/object';
-import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { controlsStore } from 'src/stores/ControlsStore';
 import { computed, makeObservable } from 'mobx';
 

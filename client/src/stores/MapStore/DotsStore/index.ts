@@ -5,7 +5,7 @@ import { map } from 'src/stores/MapStore/DotsStore/map';
 import { DotMapped } from 'src/stores/MapStore/EntityStore/DotStore/map';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { EntityId } from 'src/contracts/entities';
-import { control, Control, divIcon, LayerGroup, layerGroup, Map, Marker, marker } from 'leaflet';
+import { control, Control, divIcon, LayerGroup, layerGroup, Marker, marker } from 'leaflet';
 import { v4 as uuidv4 } from 'uuid';
 import { userStore } from 'src/stores/UserStore';
 import { mapStore } from 'src/stores/MapStore';

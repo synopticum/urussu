@@ -5,7 +5,7 @@ import { map, PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import { PathDto } from 'src/contracts/entities/path';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
-import { editorStore, ObjectState, PathState } from 'src/stores/MapStore/EntityStore/EditorStore';
+import { editorStore, PathState } from 'src/stores/MapStore/EntityStore/EditorStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { controlsStore } from 'src/stores/ControlsStore';
 import { computed, makeObservable } from 'mobx';
