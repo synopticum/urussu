@@ -37,6 +37,11 @@ const Close = styled.button`
   border-radius: 50%;
   background: url('/images/common/close.svg') no-repeat 50% 50% ${theme.colors.white.a};
   background-size: 20px;
+  transition: transform 0.5s;
+
+  &:hover {
+    transform: rotate(180deg);
+  }
 `;
 
 const Pages: { dot: typeof DotPage; object: typeof ObjectPage; path: typeof ObjectPage; circle: typeof ObjectPage } = {

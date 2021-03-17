@@ -28,7 +28,7 @@ export default class CommentsStore extends BaseAsyncStore<CommentDto[], CommentM
   }
 
   resetData(): void {
-    this.currentValue = null;
+    this.currentValue = '';
     this.isReady = false;
     this.apiData = new AsyncData<CommentMapped[]>();
   }

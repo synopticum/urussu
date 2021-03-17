@@ -118,7 +118,7 @@ export type Props = {
 
 const Textarea: React.FC<Props> = props => {
   const inputId = uuidv4();
-  const { className, label, labelPosition = 'top', value = '' } = props;
+  const { className, label, labelPosition = 'top' } = props;
 
   return (
     <StyledTextarea className={className} labelPosition={labelPosition}>
