@@ -5,6 +5,7 @@ import ObjectPage from 'src/pages/MapPage/Map/EntityPage/ObjectPage';
 import DotPage from 'src/pages/MapPage/Map/EntityPage/DotPage';
 import PathPage from 'src/pages/MapPage/Map/EntityPage/PathPage';
 import theme from 'src/features/App/GlobalStyle/theme';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 const StyledEntityPage = styled.div`
   position: absolute;
@@ -51,6 +52,11 @@ const close = (): void => {
 
 const handleEscape = (e: KeyboardEvent): void => {
   if (e.key === 'Escape') {
+    if (controlsStore.selected) {
+      controlsStore.toggle(controlsStore.selected);
+      return;
+    }
+
     close();
   }
 };
