@@ -103,11 +103,24 @@ export class DotState extends EditorState {
   layer: string;
   rotationAngle: number;
 
+  setLayer(layer: string): void {
+    this.layer = layer;
+  }
+
+  setRotationAngle(rotationAngle: number): void {
+    this.rotationAngle = rotationAngle;
+  }
+
   constructor(entity: DotMapped) {
     super(entity);
 
     this.layer = entity.layer;
-    this.rotationAngle = entity.rotationAngle;
+    this.rotationAngle = entity.rotationAngle || 0;
+
+    makeObservable(this, {
+      layer: observable,
+      rotationAngle: observable,
+    });
   }
 }
 

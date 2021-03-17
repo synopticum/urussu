@@ -3,7 +3,7 @@ import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import Button from 'src/components/Button';
-import { editorStore, ObjectState } from 'src/stores/MapStore/EntityStore/EditorStore';
+import { DotState, editorStore, ObjectState } from 'src/stores/MapStore/EntityStore/EditorStore';
 import TextInput from 'src/components/TextInput';
 import Textarea from 'src/components/Textarea';
 import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
@@ -94,6 +94,20 @@ const HouseInput = styled(TextInput)`
   flex: 1;
 `;
 
+const DotSection = styled(Section)`
+  justify-content: space-between;
+`;
+
+const LayerInput = styled(TextInput)`
+  flex: 2;
+  margin-right: 10px;
+`;
+
+const RotationAngleInput = styled(TextInput)`
+  flex: 3;
+  margin-right: 10px;
+`;
+
 const ConfirmationWrapper = styled.div`
   position: relative;
   z-index: 50;
@@ -143,6 +157,18 @@ const toggleNoAddress = (): void => {
 const setHouse = (e: React.ChangeEvent<HTMLInputElement>): void => {
   if (editorStore.state instanceof ObjectState) {
     editorStore.state.setHouse(e.target.value);
+  }
+};
+
+const setLayer = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  if (editorStore.state instanceof DotState) {
+    editorStore.state.setLayer(e.target.value);
+  }
+};
+
+const setRotationAngle = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  if (editorStore.state instanceof DotState) {
+    editorStore.state.setRotationAngle(parseInt(e.target.value));
   }
 };
 
@@ -200,6 +226,21 @@ const Editor: React.FC = observer(() => {
               </Checkbox>
             </Section>
           </>
+        )}
+
+        {state instanceof DotState && (
+          <Section>
+            <DotSection>
+              <LayerInput type="text" onInput={setLayer} value={state.layer} label="Слой на карте" />
+
+              <RotationAngleInput
+                type="number"
+                onInput={setRotationAngle}
+                value={state.rotationAngle.toString()}
+                label="Направление взгляда, °"
+              />
+            </DotSection>
+          </Section>
         )}
 
         <Section>
