@@ -8,6 +8,7 @@ import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { editorStore, ObjectState } from 'src/stores/MapStore/EntityStore/EditorStore';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped> implements BaseStore {
   get entityType(): EntityInstanceType {
@@ -74,6 +75,7 @@ export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped>
     try {
       const newObjectDto = await put<ObjectDto, ObjectMapped>(url, object, 'json');
       this.apiData.data = map(newObjectDto);
+      controlsStore.toggle('editor');
     } catch (e) {
       alert('hui');
       // handle somehow

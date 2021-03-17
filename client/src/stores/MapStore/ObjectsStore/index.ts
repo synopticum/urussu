@@ -72,10 +72,12 @@ export default class ObjectsStore extends BaseAsyncStore<ObjectDto[], ObjectMapp
   }
 
   private static getObjectColor(object: ObjectMapped): string {
+    if (object.noAddress) {
+      return '#00f';
+    }
+
     if (object.street && object.house) {
       return '#ffc600';
-    } else if (object.street === '' && object.house === '') {
-      return '#00f';
     }
 
     return '#f00';

@@ -7,6 +7,7 @@ import { api, BaseAsyncStore, BaseStore } from 'src/stores';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { editorStore, ObjectState, PathState } from 'src/stores/MapStore/EntityStore/EditorStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 export default class PathStore extends BaseAsyncStore<PathDto, PathMapped> implements BaseStore {
   get entityType(): EntityInstanceType {
@@ -55,6 +56,7 @@ export default class PathStore extends BaseAsyncStore<PathDto, PathMapped> imple
     try {
       const newPathDto = await put<PathDto, PathMapped>(url, path, 'json');
       this.apiData.data = map(newPathDto);
+      controlsStore.toggle('editor');
     } catch (e) {
       alert('hui');
       // handle somehow

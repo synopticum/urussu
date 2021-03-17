@@ -9,6 +9,7 @@ import { DotState, editorStore } from 'src/stores/MapStore/EntityStore/EditorSto
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { ObjectDto } from 'src/contracts/entities/object';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 export default class DotStore extends BaseAsyncStore<DotDto, DotMapped> implements BaseStore {
   get entityType(): EntityInstanceType {
@@ -57,6 +58,7 @@ export default class DotStore extends BaseAsyncStore<DotDto, DotMapped> implemen
     try {
       const newDotDto = await put<DotDto, DotMapped>(url, dot, 'json');
       this.apiData.data = map(newDotDto);
+      controlsStore.toggle('editor');
     } catch (e) {
       alert('hui');
       // handle somehow

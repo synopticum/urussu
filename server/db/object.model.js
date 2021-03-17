@@ -18,6 +18,7 @@ const ObjectSchema = new Schema(
 
     street: { type: String, required: false },
     house: { type: String, required: false },
+    noAddress: { type: Boolean, required: false },
 
     // circle
     radius: { type: Number, required: false },

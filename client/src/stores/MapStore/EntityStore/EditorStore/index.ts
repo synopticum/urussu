@@ -65,6 +65,7 @@ class EditorState {
 export class ObjectState extends EditorState {
   street: string;
   house: string;
+  noAddress: boolean;
 
   setStreet(street: string): void {
     this.street = street;
@@ -74,15 +75,26 @@ export class ObjectState extends EditorState {
     this.house = house;
   }
 
+  toggleNoAddress(): void {
+    if (!this.noAddress) {
+      this.street = '';
+      this.house = '';
+    }
+
+    this.noAddress = !this.noAddress;
+  }
+
   constructor(entity: ObjectMapped) {
     super(entity);
 
     this.street = entity.street;
     this.house = entity.house;
+    this.noAddress = entity.noAddress || false;
 
     makeObservable(this, {
       street: observable,
       house: observable,
+      noAddress: observable,
     });
   }
 }

@@ -15,5 +15,6 @@ export type ObjectDto = {
   images?: ImagesDto;
   street?: string;
   house?: string;
+  noAddress?: boolean;
   radius?: number;
 };

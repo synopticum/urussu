@@ -10,6 +10,7 @@ import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
 import ValidationState, { isValid } from 'src/components/ValidationState';
 import ConfirmationTooltip from 'src/components/Tooltip/ConfirmationTooltip';
 import { mapStore } from 'src/stores/MapStore';
+import Checkbox from 'src/components/Checkbox';
 
 const StyledEditor = styled.div<{ isReady: boolean }>`
   position: absolute;
@@ -78,6 +79,21 @@ const ExtendedTextarea = styled(Textarea)`
   flex: 1;
 `;
 
+const AddressSection = styled(Section)`
+  justify-content: space-between;
+  border-bottom: 0;
+  padding-bottom: 0;
+`;
+
+const StreetInput = styled(TextInput)`
+  flex: 2;
+  margin-right: 10px;
+`;
+
+const HouseInput = styled(TextInput)`
+  flex: 1;
+`;
+
 const ConfirmationWrapper = styled.div`
   position: relative;
   z-index: 50;
@@ -115,6 +131,12 @@ const setFullDescription = (e: React.ChangeEvent<HTMLTextAreaElement>): void => 
 const setStreet = (e: React.ChangeEvent<HTMLInputElement>): void => {
   if (editorStore.state instanceof ObjectState) {
     editorStore.state.setStreet(e.target.value);
+  }
+};
+
+const toggleNoAddress = (): void => {
+  if (editorStore.state instanceof ObjectState) {
+    editorStore.state.toggleNoAddress();
   }
 };
 
@@ -160,10 +182,24 @@ const Editor: React.FC = observer(() => {
         </Section>
 
         {state instanceof ObjectState && (
-          <Section>
-            <ExtendedTextInput type="text" onInput={setStreet} value={state.street} label="Улица" />
-            <ExtendedTextInput type="text" onInput={setHouse} value={state.house} label="Дом" />
-          </Section>
+          <>
+            <AddressSection>
+              <StreetInput
+                type="text"
+                onInput={setStreet}
+                value={state.street}
+                disabled={state.noAddress}
+                label="Улица"
+              />
+              <HouseInput type="text" onInput={setHouse} value={state.house} disabled={state.noAddress} label="Дом" />
+            </AddressSection>
+
+            <Section>
+              <Checkbox onChange={toggleNoAddress} checked={state.noAddress}>
+                Без адреса
+              </Checkbox>
+            </Section>
+          </>
         )}
 
         <Section>
