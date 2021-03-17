@@ -101,6 +101,7 @@ export default class EditorStore implements BaseStore {
   state: State;
   validation: EditorValidation;
   isConfirmation: boolean;
+  isReady: boolean;
 
   initData(store: Store, state: State): void {
     this.store = store;
@@ -112,6 +113,7 @@ export default class EditorStore implements BaseStore {
     this.state = null;
     this.validation = new EditorValidation();
     this.isConfirmation = false;
+    this.isReady = false;
   }
 
   removeEntity(): void {
@@ -144,12 +146,14 @@ export default class EditorStore implements BaseStore {
     this.state = null;
     this.validation = new EditorValidation();
     this.isConfirmation = false;
+    this.isReady = false;
 
     makeObservable(this, {
       store: observable,
       state: observable,
       validation: observable,
       isConfirmation: observable,
+      isReady: observable,
     });
   }
 }

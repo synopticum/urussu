@@ -14,8 +14,8 @@ import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 
 export default class CommentsStore extends BaseAsyncStore<CommentDto[], CommentMapped[]> implements BaseStore {
   store: ObjectStore | DotStore | PathStore;
-
   currentValue: string;
+  isReady: boolean;
 
   fetchApiData(entityType: EntityInstanceType, entityId: EntityId, imageId?: ImageId): void {
     let url = `${entityType}/${entityId}/comments`;
@@ -29,6 +29,7 @@ export default class CommentsStore extends BaseAsyncStore<CommentDto[], CommentM
 
   resetData(): void {
     this.currentValue = null;
+    this.isReady = false;
     this.apiData = new AsyncData<CommentMapped[]>();
   }
 
@@ -73,10 +74,12 @@ export default class CommentsStore extends BaseAsyncStore<CommentDto[], CommentM
     super(api);
 
     this.currentValue = '';
+    this.isReady = false;
 
     makeObservable(this, {
       store: observable,
       currentValue: observable,
+      isReady: observable,
     });
   }
 }

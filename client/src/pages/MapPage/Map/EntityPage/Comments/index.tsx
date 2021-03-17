@@ -7,7 +7,7 @@ import Comment from './Comment';
 import { Add } from 'src/pages/MapPage/Map/EntityPage/Comments/Add';
 import theme from 'src/features/App/GlobalStyle/theme';
 
-const StyledComments = styled.div`
+const StyledComments = styled.div<{ isReady: boolean }>`
   position: absolute;
   left: 0;
   top: 0;
@@ -17,9 +17,10 @@ const StyledComments = styled.div`
   border-radius: 10px 0 0 10px;
   display: flex;
   flex-direction: column;
-  opacity: 0.95;
   background: ${theme.colors.white.a};
   box-shadow: ${theme.shadows.b};
+  opacity: ${({ isReady }): string => (isReady ? '1' : '0')};
+  transition: opacity 0.3s;
 
   &::before {
     content: '';
@@ -62,6 +63,11 @@ export const Comments: React.FC<Props> = observer(({ entityType, entityId, image
 
   useEffect(() => {
     commentsStore.fetchApiData(entityType, entityId, imageId);
+    const delay = 150;
+
+    setTimeout(() => {
+      commentsStore.isReady = true;
+    }, delay);
 
     return (): void => {
       commentsStore.resetData();
@@ -73,7 +79,7 @@ export const Comments: React.FC<Props> = observer(({ entityType, entityId, image
   }
 
   return (
-    <StyledComments>
+    <StyledComments isReady={commentsStore.isReady}>
       <Title>Комментарии</Title>
 
       {!data.length && <NoComments>Никто не оставил ни одного комментария.</NoComments>}

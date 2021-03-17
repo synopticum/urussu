@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { observer } from 'mobx-react-lite';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
@@ -9,10 +9,9 @@ import Textarea from 'src/components/Textarea';
 import UploadImage from 'src/pages/MapPage/Map/EntityPage/Editor/UploadImage';
 import ValidationState, { isValid } from 'src/components/ValidationState';
 import ConfirmationTooltip from 'src/components/Tooltip/ConfirmationTooltip';
-import { objectsStore } from 'src/stores/MapStore/ObjectsStore';
 import { mapStore } from 'src/stores/MapStore';
 
-const StyledEditor = styled.div`
+const StyledEditor = styled.div<{ isReady: boolean }>`
   position: absolute;
   left: 0;
   top: 0;
@@ -22,9 +21,10 @@ const StyledEditor = styled.div`
   border-radius: 10px 0 0 10px;
   display: flex;
   flex-direction: column;
-  opacity: 0.95;
   background: ${theme.colors.white.a};
   box-shadow: ${theme.shadows.b};
+  opacity: ${({ isReady }): string => (isReady ? '1' : '0')};
+  transition: opacity 0.3s;
 
   &::before {
     content: '';
@@ -91,6 +91,18 @@ const Editor: React.FC = observer(() => {
     return null;
   }
 
+  useEffect(() => {
+    const delay = 150;
+
+    setTimeout(() => {
+      editorStore.isReady = true;
+    }, delay);
+
+    return (): void => {
+      editorStore.isReady = false;
+    };
+  }, []);
+
   const confirm = (): void => {
     editorStore.isConfirmation = true;
   };
@@ -127,7 +139,7 @@ const Editor: React.FC = observer(() => {
   const { validation } = editorStore;
 
   return (
-    <StyledEditor>
+    <StyledEditor isReady={editorStore.isReady}>
       <Title>Редактирование</Title>
 
       <List>
