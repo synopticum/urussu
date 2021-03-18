@@ -31,6 +31,7 @@ const Close = styled.button`
   position: absolute;
   right: 20px;
   top: 20px;
+  z-index: 100;
   border: 0;
   width: 40px;
   height: 40px;
