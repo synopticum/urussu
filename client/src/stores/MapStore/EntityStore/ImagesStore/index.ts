@@ -6,7 +6,6 @@ import PathStore from 'src/stores/MapStore/EntityStore/PathStore';
 import { BaseStore } from 'src/stores';
 import { ImageId } from 'src/contracts/entities';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
-import React, { MouseEvent } from 'react';
 
 export default class ImagesStore implements BaseStore {
   private static DECADES = [1940, 1950, 1960, 1970, 1980, 1990, 2000, 2010, 2020];
@@ -14,12 +13,6 @@ export default class ImagesStore implements BaseStore {
   store: ObjectStore | DotStore | PathStore;
   selectedImageId: ImageId;
   selectedDecade: number;
-  isImageLoading: boolean;
-  clientWidth: number;
-  clientHeight: number;
-  naturalWidth: number;
-  naturalHeight: number;
-  ref: React.MutableRefObject<HTMLImageElement>;
 
   get selectedImage(): ImageMapped {
     return this.findImage(this.selectedImageId);
@@ -96,12 +89,6 @@ export default class ImagesStore implements BaseStore {
     this.store = null;
     this.selectedImageId = null;
     this.selectedDecade = null;
-    this.isImageLoading = true;
-    this.clientWidth = 0;
-    this.clientHeight = 0;
-    this.naturalWidth = 0;
-    this.naturalHeight = 0;
-    this.ref = null;
   }
 
   createTimeline(images: ImagesMapped): ImagesMapped {
@@ -123,7 +110,6 @@ export default class ImagesStore implements BaseStore {
 
   changeSelectedImageId(id: ImageId): void {
     this.selectedImageId = id;
-    this.isImageLoading = true;
     commentsStore.fetchApiData(this.store.entityType, this.store.entityId, id);
   }
 
@@ -227,72 +213,8 @@ export default class ImagesStore implements BaseStore {
     return _images.find(image => image.id === imageId);
   }
 
-  get aspectRatio(): number {
-    return this.clientWidth / this.clientHeight;
-  }
-
-  get height(): string {
-    if (!this.ref || !this.ref.current) {
-      return 'auto';
-    }
-
-    const current = this.ref.current;
-    const { clientWidth: parentWidth } = current.parentElement;
-
-    return this.naturalHeight > parentWidth ? '100%' : 'auto';
-  }
-
-  get scale(): number {
-    if (!this.ref || !this.ref.current) {
-      return 1;
-    }
-
-    const current = this.ref.current;
-    const { clientWidth: parentWidth, clientHeight: parentHeight } = current.parentElement;
-    const scale =
-      this.naturalHeight > parentHeight ? parentWidth / this.clientWidth : parentWidth / this.clientWidth - 1;
-    const roundedScale = parseFloat(Number(scale).toFixed(4));
-
-    return this.aspectRatio > 1 ? roundedScale : 1;
-  }
-
-  get moveRange(): number {
-    if (!this.ref || !this.ref.current) {
-      return null;
-    }
-
-    const currentHeight = this.ref.current.clientHeight;
-    const range = (currentHeight * this.scale - currentHeight) / this.scale;
-
-    return parseInt(Number(range).toFixed());
-  }
-
-  move(e: MouseEvent<HTMLDivElement>): void {
-    if (!this.ref || !this.ref.current) {
-      return null;
-    }
-
-    if (this.naturalHeight < this.clientHeight) {
-      return null;
-    }
-
-    const currentHeight = this.ref.current.clientHeight;
-    const y = e.pageY - 94;
-    const rangeScale = currentHeight / this.moveRange;
-
-    const translateY = parseInt(Number(y / rangeScale - this.moveRange / 2).toFixed());
-
-    this.ref.current.style.transform = `scale(${this.scale}) translateY(${translateY}px)`;
-  }
-
   constructor() {
     this.store = null;
-    this.isImageLoading = true;
-    this.clientWidth = 0;
-    this.clientHeight = 0;
-    this.naturalWidth = 0;
-    this.naturalHeight = 0;
-    this.ref = null;
 
     if (location.search) {
       const params = new URLSearchParams(location.search);
@@ -308,12 +230,6 @@ export default class ImagesStore implements BaseStore {
       store: observable,
       selectedImageId: observable,
       selectedDecade: observable,
-      isImageLoading: observable,
-      clientWidth: observable,
-      clientHeight: observable,
-      naturalWidth: observable,
-      naturalHeight: observable,
-      ref: observable,
 
       initialImageId: computed,
       initialDecade: computed,
@@ -323,11 +239,6 @@ export default class ImagesStore implements BaseStore {
       isEmpty: computed,
       isSelectedImageARetake: computed,
       hasSelectedImageRetaken: computed,
-
-      height: computed,
-      scale: computed,
-      moveRange: computed,
-      aspectRatio: computed,
     });
   }
 }

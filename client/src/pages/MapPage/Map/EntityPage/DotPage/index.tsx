@@ -19,8 +19,6 @@ const toggleComments = (): void => controlsStore.toggle('comments');
 
 const toggleEditor = (): void => controlsStore.toggle('editor');
 
-const closeActiveControls = (): void => controlsStore.toggle(controlsStore.selected);
-
 type Props = {
   id: string;
 };
@@ -44,7 +42,7 @@ export const DotPage: React.FC<Props> = observer(({ id }) => {
     <StyledDotPage>
       <Portal parent={globalStore.titleRef}>{dotStore.title}</Portal>
 
-      <Images onClick={closeActiveControls} />
+      <Images />
       {controlsStore.selected === 'comments' && (
         <Comments entityType="dot" entityId={id} imageId={imagesStore.selectedImageId} />
       )}

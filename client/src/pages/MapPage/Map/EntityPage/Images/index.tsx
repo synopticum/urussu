@@ -1,9 +1,10 @@
-import React, { MouseEventHandler, MutableRefObject, ReactEventHandler, useEffect, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { Timeline } from 'src/pages/MapPage/Map/EntityPage/Images/Timeline';
 import { observer } from 'mobx-react-lite';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
-import { throttle } from 'src/utils/throttle';
+import CurrentImage from 'src/pages/MapPage/Map/EntityPage/Images/CurrentImage';
+import { controlsStore } from 'src/stores/ControlsStore';
 
 const StyledImages = styled.div`
   height: 100%;
@@ -20,76 +21,9 @@ const NoImages = styled.div`
   background-size: 100%;
 `;
 
-const CurrentImage = styled.div`
-  display: flex;
-  justify-content: center;
-  align-content: center;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  border-radius: 10px;
-`;
+const closeActiveControls = (): void => controlsStore.toggle(controlsStore.selected);
 
-export type ImageProps = {
-  clientWidth: number;
-  clientHeight: number;
-  naturalWidth: number;
-  naturalHeight: number;
-  current: HTMLImageElement;
-};
-
-const StyledImage = styled.img<{ height: string; scale: number }>`
-  width: auto;
-  height: ${({ height }): string => height};
-  user-select: none;
-  transform: ${({ scale }): string => {
-    // debugger;
-    return `scale(1)`;
-  }};
-  transition: transform 0.3s linear;
-`;
-
-const Image: React.FC = observer(() => {
-  const ref = useRef<HTMLImageElement>(null);
-
-  useEffect(() => {
-    if (ref.current) {
-      imagesStore.ref = ref;
-    }
-  }, [ref.current]);
-
-  const onImageLoad: ReactEventHandler<HTMLImageElement> = e => {
-    const target = e.target as HTMLImageElement;
-
-    imagesStore.isImageLoading = false;
-
-    imagesStore.clientWidth = target.clientWidth;
-    imagesStore.clientHeight = target.clientHeight;
-    imagesStore.naturalWidth = target.naturalWidth;
-    imagesStore.naturalHeight = target.naturalHeight;
-
-    imagesStore.ref.current.style.transform = `scale(${imagesStore.scale}) translateY(0)`;
-  };
-
-  const throttledMove = throttle<MouseEventHandler<HTMLDivElement>>(imagesStore.move.bind(imagesStore), 16);
-
-  return (
-    <StyledImage
-      src={imagesStore.selectedImageUrl}
-      height={imagesStore.height}
-      scale={imagesStore.scale}
-      ref={ref}
-      onLoad={onImageLoad}
-      onMouseMove={throttledMove}
-    />
-  );
-});
-
-type Props = {
-  onClick: () => void;
-};
-
-export const Images: React.FC<Props> = observer(({ onClick }) => {
+export const Images = observer(() => {
   const { store } = imagesStore;
   const { data } = store.apiData;
 
@@ -100,11 +34,8 @@ export const Images: React.FC<Props> = observer(({ onClick }) => {
   imagesStore.selectedImageId = imagesStore.selectedImageId || imagesStore.initialImageId;
 
   return (
-    <StyledImages onClick={onClick}>
-      <CurrentImage>
-        <Image />
-      </CurrentImage>
-
+    <StyledImages onClick={closeActiveControls}>
+      <CurrentImage />
       <Timeline />
     </StyledImages>
   );
