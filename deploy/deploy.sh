@@ -1,9 +1,9 @@
 # Stop script if any errors
 set -e
 
-IMAGE_CLIENT="synopticum/user-experience-client"
-IMAGE_SSR="synopticum/user-experience-ssr"
-IMAGE_NGINX="synopticum/user-experience-nginx"
+IMAGE_CLIENT="synopticum/urussu-client"
+IMAGE_SSR="synopticum/urussu-ssr"
+IMAGE_NGINX="synopticum/urussu-nginx"
 GIT_VERSION=$(git describe --always --abbrev --tags --long)
 
 # Building images
@@ -25,4 +25,4 @@ docker push ${IMAGE_NGINX}:latest
 docker push ${IMAGE_SSR}:latest
 
 # Redeploy on VDS
-ssh root@user-experience.ru 'bash -s' < ./deploy/restart.sh
+ssh synoptic@www.u-r-u-s-s-u.com 'bash -s' < ./deploy/restart.sh

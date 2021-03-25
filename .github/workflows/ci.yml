@@ -11,9 +11,9 @@ jobs:
       - name: Push to server
         uses: appleboy/ssh-action@master
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.HOST_USERNAME }}
-          key: ${{ secrets.HOST_SSH_KEY }}
+          host: ${{ secrets.HOST_NAME }}
+          username: ${{ secrets.HOST_SSH_USERNAME }}
+          password: ${{ secrets.HOST_SSH_PASSWORD }}
           script: |
             cd ${{ secrets.PROJECT_PATH }}
             bash ./deploy/prod/stop.sh

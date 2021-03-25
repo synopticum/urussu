@@ -25,4 +25,4 @@ services:
       - '80:80'
       - '443:443'
     volumes:
-      - /usr/apps/certs:/etc/nginx/certs
+      - /Users/synoptic/Desktop/server/certs:/etc/nginx/certs
