@@ -15,7 +15,10 @@ jobs:
           username: ${{ secrets.HOST_SSH_USERNAME }}
           password: ${{ secrets.HOST_SSH_PASSWORD }}
           script: |
+            export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
             cd ${{ secrets.PROJECT_PATH }}
+            echo $PATH
             bash ./deploy/prod/stop.sh
             git pull
             docker-compose up -d --build
+          script_stop: true
