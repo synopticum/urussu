@@ -1,9 +1,9 @@
 version: '3'
 services:
   ssr:
-    image: "synopticum/user-experience-ssr"
+    image: "synopticum/urussu-ssr"
   client:
-    image: "synopticum/user-experience-client"
+    image: "synopticum/urussu-client"
     ports:
       - '9000:9000'
   nginx:
@@ -11,6 +11,6 @@ services:
       - ssr
       - client
     restart: always
-    image: "synopticum/user-experience-nginx"
+    image: "synopticum/urussu-nginx"
     ports:
       - '80:80'
