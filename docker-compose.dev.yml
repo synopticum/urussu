@@ -1,5 +1,13 @@
 version: '3'
 services:
+  api:
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    volumes:
+      - /app/node_modules
+      - ./api:/app
   ssr:
     restart: always
     build:
@@ -20,6 +28,7 @@ services:
       - '9000:9000'
   nginx:
     depends_on:
+      - api
       - ssr
       - client
     restart: always

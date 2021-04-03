@@ -2,7 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import SSR from './middlewares/ssr';
 
-const PORT = 3000;
+const PORT = 4000;
 const app = express();
 
 app.use(morgan('combined'));

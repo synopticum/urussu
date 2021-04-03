@@ -1,5 +1,19 @@
 version: '3'
 services:
+  mongo:
+    stdin_open: true
+    restart: always
+    image: mongo
+  api:
+    depends_on:
+      - mongo
+    stdin_open: true
+    restart: always
+    build:
+      dockerfile: Dockerfile
+      context: ./api
+    ports:
+      - '3000:3000'
   ssr:
     stdin_open: true
     restart: always
@@ -15,6 +29,7 @@ services:
       - '9000:9000'
   nginx:
     depends_on:
+      - api
       - ssr
       - client
     restart: always

@@ -12,9 +12,7 @@ const config = {
     hints: false,
   },
   devtool: 'source-map',
-  plugins: [
-    new webpack.EnvironmentPlugin(Object.keys(process.env).filter(x => x !== 'API_URL')),
-  ],
+  plugins: [new webpack.EnvironmentPlugin(Object.keys(process.env))],
   externals: nodeExternals(),
   output: {
     path: path.resolve(path.join('.', 'dist')),

@@ -1,5 +1,11 @@
 version: '3'
 services:
+  mongo:
+    image: "synopticum/urussu-mongo"
+  api:
+    depends_on:
+      - mongo
+    image: "synopticum/urussu-api"
   ssr:
     image: "synopticum/urussu-ssr"
   client:
@@ -8,6 +14,7 @@ services:
       - '9000:9000'
   nginx:
     depends_on:
+      - api
       - ssr
       - client
     restart: always
