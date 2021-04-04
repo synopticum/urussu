@@ -1,24 +1,15 @@
-## About
+## Server-side rendering server
 
-This application fetches some data from server and draws draggable rectangles in special area. Position of the rectangles is based on fetched data.
+Simple SSR server based on [puppeteer](https://developers.google.com/web/tools/puppeteer), and made according to [Google recommendations](https://developers.google.com/web/tools/puppeteer/articles/ssr).
+Supposed to be used for search engine crawlers only.
 
-- Frontend core is based on [React](https://reactjs.org/), [Redux](https://redux.js.org/) with [Redux Toolkit](https://redux-toolkit.js.org/), and [Typescript](https://www.typescriptlang.org/)
-- Draggable renderer is powered by [GSAP](https://greensock.com/draggable/)
-- A tiny API server, providing ability to fetch data remotely and save updated rectangle position once dragging is finished (in memory) powered by [Express](https://expressjs.com/)
+### Development usage
 
-## How to start
+- Create .env file based on `env.example`
+- `npm run dev`
 
-First, create `.env` file in repository root folder with the content below:
-```
-NODE_TLS_REJECT_UNAUTHORIZED=0
-NODE_ENV=development
+### Production usage
 
-API_URL=http://localhost:3000
-```
+This service is dockerized and starts with the whole application.
 
-Run next commands:
-- `npm install` or `yarn`
-- `npm run dev:server` or `yarn dev:server` to start API server
-- `npm run dev:web` or `yarn dev:web` to start webpack development server on http://localhost:9000
-
-Enjoy
+Make sure that prod env file exists and passed to `./ssr` folder during deploy phase. See `./.github/workflows/ci.yml` for details.
