@@ -20,7 +20,8 @@ jobs:
             git pull
             bash ./deploy/stop.sh
             cp ../env/.client-env ./client/.env
-            cp ../env/.server-env ./api/.env
+            cp ../env/.mongo-env ./mongo/.env
+            cp ../env/.api-env ./api/.env
             cp ../env/.ssr-env ./ssr/.env
             docker-compose up -d --build
           script_stop: true

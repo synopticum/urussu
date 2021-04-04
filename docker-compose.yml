@@ -4,6 +4,12 @@ services:
     stdin_open: true
     restart: always
     image: mongo
+    env_file:
+      - ./mongo/.env
+    ports:
+      - 27017:27017
+    volumes:
+      - ../db:/data/db
   api:
     depends_on:
       - mongo

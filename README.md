@@ -41,6 +41,5 @@ There is `./deploy` folder with all the necessary scripts:
 - `restart.sh` pulls latest containers, starts them using `docker-compose.yml`, and makes clean-up
 - `docker-compose.yml` - version of docker-compose for usage with Docker Hub  
 - `stop.sh` stops the containers and makes clean-up
-- `docker-compose.yml`
 
 
