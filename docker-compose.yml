@@ -23,8 +23,6 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./client
-    ports:
-      - '9000:9000'
   nginx:
     depends_on:
       - api
