@@ -17,7 +17,7 @@ jobs:
           script: |
             export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
             cd ${{ secrets.PROJECT_PATH }}
-            bash ./deploy/prod/stop.sh
+            bash ./deploy/stop.sh
             git pull
             cp ../env/.client-env ./client/.env
             cp ../env/.server-env ./api/.env
