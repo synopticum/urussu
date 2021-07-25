@@ -73,8 +73,8 @@ export type Mode = 'default' | 'add';
 
 export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResultMapped> implements BaseStore {
   private readonly defaultZoom = 6;
-  private readonly defaultLat = 69.65;
-  private readonly defaultLng = -20.25;
+  private readonly defaultLat = 67.38;
+  private readonly defaultLng = -36.71;
 
   readonly width: number = 10000;
   readonly height: number = 6250;
