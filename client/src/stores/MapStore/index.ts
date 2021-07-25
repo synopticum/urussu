@@ -225,7 +225,7 @@ export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResu
     const { map, width, height, minZoom, maxZoom } = this;
     const bounds = new LatLngBounds(map.unproject([0, height], maxZoom), map.unproject([width, 0], maxZoom));
 
-    tileLayer(`/images/tiles/{z}/{x}/{y}.png.webp`, {
+    tileLayer(`/images/tiles/{z}/{x}/{y}.webp`, {
       minZoom,
       maxZoom,
       bounds,
