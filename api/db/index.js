@@ -1,6 +1,15 @@
 const mongoose = require("mongoose");
-const { DB_HOST, DB_ADMIN_USERNAME, DB_ADMIN_PASSWORD } = process.env;
-const dbPath = `mongodb://${DB_ADMIN_USERNAME}:${DB_ADMIN_PASSWORD}@${DB_HOST}:27017/urussu?authSource=admin`;
+const {
+  ENV,
+  DB_HOST,
+  DB_ADMIN_USERNAME,
+  DB_ADMIN_PASSWORD,
+} = require("../config");
+
+const dbPath =
+  ENV === "dev"
+    ? `mongodb://${process.env.DB_HOST}:27017/urussu`
+    : `mongodb://${DB_ADMIN_USERNAME}:${DB_ADMIN_PASSWORD}@${DB_HOST}:27017/urussu?authSource=admin`;
 
 const options = {
   useNewUrlParser: true,

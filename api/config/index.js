@@ -9,6 +9,9 @@ const {
   VK_CLIENT_SECRET,
   VK_API_VERSION,
   IDENTITY_POOL_ID,
+  DB_HOST,
+  DB_ADMIN_USERNAME,
+  DB_ADMIN_PASSWORD,
 } = process.env;
 
 if (
@@ -61,4 +64,7 @@ module.exports = {
   VK_CLIENT_SECRET,
   VK_API_VERSION,
   IDENTITY_POOL_ID,
+  DB_HOST,
+  DB_ADMIN_USERNAME,
+  DB_ADMIN_PASSWORD,
 };
