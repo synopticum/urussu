@@ -4,6 +4,7 @@ import { observer } from 'mobx-react-lite';
 import { currentImageStore } from 'src/stores/MapStore/EntityStore/ImagesStore/CurrentImageStore';
 import { throttle } from 'src/utils/throttle';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledCurrentImage = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ const StyledCurrentImage = styled.div`
   overflow: hidden;
   border-radius: 10px;
   user-select: none;
+  background-color: ${theme.colors.black.a};
 `;
 
 const Image = styled.img<{ height: string; scale: number }>`
