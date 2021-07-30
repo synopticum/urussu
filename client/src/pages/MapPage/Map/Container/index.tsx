@@ -138,7 +138,6 @@ const Container = styled.div<{ mode?: Mode }>`
 
   path.leaflet-interactive {
     cursor: pointer;
-    /*opacity: .75;*/
     opacity: 0;
     transition: opacity 0.3s;
   }

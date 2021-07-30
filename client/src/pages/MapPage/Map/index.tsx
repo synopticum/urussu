@@ -94,7 +94,7 @@ const Map: React.FC = observer(() => {
 
         <Dots />
         <Objects />
-        <Paths />
+        {/*<Paths />*/}
         <Circles />
 
         <DotCreator x={dotCreator.x} y={dotCreator.y} isVisible={dotCreator.isVisible}>
