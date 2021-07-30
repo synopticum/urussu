@@ -1,10 +1,10 @@
 import { AxiosInstance } from 'axios';
-import { AsyncData, del, fetchData, put } from 'src/stores/helpers';
+import { AsyncData, del, fetchData, put, get } from 'src/stores/helpers';
 import { ObjectDto, ObjectType } from 'src/contracts/entities/object';
 import { map } from 'src/stores/MapStore/ObjectsStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { api, BaseAsyncStore, BaseStore } from 'src/stores';
-import { circle, LatLngTuple, polygon } from 'leaflet';
+import { circle, LatLngTuple, Polygon, polygon } from 'leaflet';
 import { v4 as uuidv4 } from 'uuid';
 import { EntityId } from 'src/contracts/entities';
 import { mapStore } from 'src/stores/MapStore';
@@ -40,6 +40,17 @@ export default class ObjectsStore extends BaseAsyncStore<ObjectDto[], ObjectMapp
     } catch (e) {
       alert('hui');
       // handle somehow
+    }
+  }
+
+  async update(id: EntityId, coordinates: LatLngTuple[][]): Promise<void> {
+    const url = `/objects/${id}`;
+
+    try {
+      const object = await get<ObjectDto, ObjectMapped>(`/objects/${id}`, 'json');
+      await put<ObjectDto, ObjectMapped>(url, { ...object, coordinates }, 'json');
+    } catch (e) {
+      alert('hui');
     }
   }
 
@@ -94,13 +105,32 @@ export default class ObjectsStore extends BaseAsyncStore<ObjectDto[], ObjectMapp
     };
 
     objects.forEach((item: ObjectMapped) => {
-      polygon(item.coordinates, {
+      const p = polygon(item.coordinates, {
         color: ObjectsStore.getObjectColor(item),
         className: getClassName(item),
         weight: 2,
       })
         .on('click', () => setEntity(item.id))
         .addTo(map);
+
+      // this.enableDragging(p);
+    });
+  }
+
+  private enableDragging(p: Polygon): void {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    p.dragging.enable();
+
+    p.on('dragend', ({ target }) => {
+      const { _path, _latlngs: coordinates } = target;
+      const id = _path
+        .getAttribute('class')
+        .split(' ')
+        .find((className: string) => className.startsWith('id'))
+        .substring(3);
+
+      this.update(id, coordinates);
     });
   }
 

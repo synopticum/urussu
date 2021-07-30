@@ -53,6 +53,17 @@ const contentTypes = {
   formData: 'multipart/form-data',
 };
 
+export const get = async function <Dto, Mapped>(url: string, type: 'json' | 'formData'): Promise<Dto> {
+  const { data } = await api.get<Dto>(url, {
+    headers: {
+      'Content-Type': contentTypes[type],
+      token: authStore.token,
+    },
+  });
+
+  return data;
+};
+
 export const put = async function <Dto, Mapped>(url: string, model: Mapped, type: 'json' | 'formData'): Promise<Dto> {
   const { data } = await api.put<Dto>(url, model, {
     headers: {

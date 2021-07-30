@@ -4,6 +4,7 @@ import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';
 import { PathMapped } from 'src/stores/MapStore/EntityStore/PathStore/map';
 import theme from 'src/features/App/GlobalStyle/theme';
 import { Map } from 'leaflet';
+import 'leaflet.path.drag';
 import { Mode } from 'src/stores/MapStore';
 
 export const removeCurrentEntities = (map: Map, type: 'dots' | 'objects' | 'circles' | 'paths'): void => {
