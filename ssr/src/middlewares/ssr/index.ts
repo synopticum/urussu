@@ -2,7 +2,10 @@ import puppeteer from 'puppeteer';
 import ssr from './ssr';
 import type { Request, Response } from 'express';
 
-const BASE_URL = 'http://client:9000';
+const HOST = process.env.NODE_ENV === 'development' ? 'localhost' : 'client';
+const PORT = 9000;
+const BASE_URL = `http://${HOST}:${PORT}`;
+
 let browserWSEndpoint: string = null;
 
 export default async (req: Request, res: Response): Promise<Response> => {
@@ -10,7 +13,7 @@ export default async (req: Request, res: Response): Promise<Response> => {
     if (!browserWSEndpoint) {
       const browser = await puppeteer.launch({
         headless: true,
-        args: ['--no-sandbox']
+        args: ['--no-sandbox'],
       });
       browserWSEndpoint = await browser.wsEndpoint();
     }
