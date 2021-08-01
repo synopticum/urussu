@@ -1,8 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
-import { observer } from 'mobx-react-lite';
-import { mapStore } from 'src/stores/MapStore';
 
 const StyledFooter = styled.footer`
   position: relative;
@@ -31,8 +29,12 @@ const Logo = styled.div`
   }
 `;
 
-export const Footer: React.FC = observer(() => {
-  return <StyledFooter>{!mapStore.entity && <Logo />}</StyledFooter>;
-});
+export const Footer: React.FC = () => {
+  return (
+    <StyledFooter>
+      <Logo />
+    </StyledFooter>
+  );
+};
 
 export default Footer;
