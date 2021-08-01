@@ -180,7 +180,7 @@ const Container = styled.div<{ mode?: Mode }>`
   .leaflet-control-attribution a {
     color: #fff !important;
     text-decoration: none !important;
-    opacity: 0.5;
+    opacity: 0.3;
   }
 
   .leaflet-control-layers {
@@ -190,6 +190,11 @@ const Container = styled.div<{ mode?: Mode }>`
   .leaflet-top.leaflet-left {
     left: 58px;
     top: 13px;
+  }
+
+  .leaflet-bottom.leaflet-right {
+    right: 60px;
+    bottom: -5px;
   }
 
   .leaflet-draw-draw-polyline {

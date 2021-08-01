@@ -37,10 +37,11 @@ const Layout: React.FC = observer(() => {
       <ErrorBoundary fallback={ContentFallback}>
         <Content>
           <Router primary={false}>
-            <Home path="/" />
-            <Map path="/map/" />
-            <ContactUs path="/contact-us/" />
-            <ChunkedPage path="/chunked-page/:id" />
+            <Map path="/" />
+            {/*<Home path="/" />*/}
+            {/*<Map path="/map/" />*/}
+            {/*<ContactUs path="/contact-us/" />*/}
+            {/*<ChunkedPage path="/chunked-page/:id" />*/}
             <LoginPage path="/login" />
             <Error404 default />
           </Router>

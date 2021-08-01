@@ -69,11 +69,11 @@ const Header: React.FC = observer(() => {
     <StyledHeader>
       <Title ref={titleRef} />
 
-      <Nav>
-        <NavLink to="map">{l('Карта')}</NavLink>
-        <NavLink to="contact-us">{l('Страница')}</NavLink>
-        <NavLink to="chunked-page/123">Chunked Page</NavLink>
-      </Nav>
+      {/*<Nav>*/}
+      {/*  <NavLink to="map">{l('Карта')}</NavLink>*/}
+      {/*  <NavLink to="contact-us">{l('Страница')}</NavLink>*/}
+      {/*  <NavLink to="chunked-page/123">Chunked Page</NavLink>*/}
+      {/*</Nav>*/}
     </StyledHeader>
   );
 });
