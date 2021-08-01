@@ -11,6 +11,7 @@ import { controlsStore } from 'src/stores/ControlsStore';
 import Editor from 'src/pages/MapPage/Map/EntityPage/Editor';
 import theme from 'src/features/App/GlobalStyle/theme';
 import { globalStore } from 'src/stores/GlobalStore';
+import { userStore } from 'src/stores/UserStore';
 
 const StyledObjectPage = styled.div`
   height: 100%;
@@ -60,7 +61,7 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
 
       <Portal parent={controlsStore.ref}>
         <Button type={controlsStore.getStateFor('comments')} onClick={toggleComments} />
-        <Button type={controlsStore.getStateFor('editor')} onClick={toggleEditor} />
+        {userStore.isAdmin && <Button type={controlsStore.getStateFor('editor')} onClick={toggleEditor} />}
       </Portal>
     </StyledObjectPage>
   );

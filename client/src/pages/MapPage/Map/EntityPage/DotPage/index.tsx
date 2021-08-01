@@ -10,6 +10,7 @@ import Editor from 'src/pages/MapPage/Map/EntityPage/Editor';
 import Portal from 'src/features/App/Portal';
 import Button from 'src/features/Page/Controls/Button';
 import { globalStore } from 'src/stores/GlobalStore';
+import { userStore } from 'src/stores/UserStore';
 
 const StyledDotPage = styled.div`
   height: 100%;
@@ -50,7 +51,7 @@ export const DotPage: React.FC<Props> = observer(({ id }) => {
 
       <Portal parent={controlsStore.ref}>
         <Button type={controlsStore.getStateFor('comments')} onClick={toggleComments} />
-        <Button type={controlsStore.getStateFor('editor')} onClick={toggleEditor} />
+        {userStore.isAdmin && <Button type={controlsStore.getStateFor('editor')} onClick={toggleEditor} />}
       </Portal>
     </StyledDotPage>
   );
