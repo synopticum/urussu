@@ -3,6 +3,7 @@ const Timeout = require("await-timeout");
 const UserModel = require("../../db/user.model");
 const uuidv4 = require("uuid/v4");
 const {
+  HOST,
   VK_CLIENT_ID,
   VK_CLIENT_SECRET,
   VK_API_VERSION,
@@ -17,7 +18,7 @@ async function registerRoutes(fastify, opts) {
     method: "GET",
     url: "/authenticate",
     handler: async function verifyVkAuth(request, reply) {
-      let origin = `${request.headers.origin}/login`;
+      let origin = `${HOST}/login`;
       let code = request.query.code;
 
       if (code) {
@@ -82,18 +83,18 @@ async function registerRoutes(fastify, opts) {
 async function getAccessToken(code, origin) {
   try {
     let response = await fetch(
-        `https://oauth.vk.com/access_token?client_id=${VK_CLIENT_ID}&client_secret=${VK_CLIENT_SECRET}&redirect_uri=${origin}&code=${code}`
+      `https://oauth.vk.com/access_token?client_id=${VK_CLIENT_ID}&client_secret=${VK_CLIENT_SECRET}&redirect_uri=${origin}&code=${code}`
     );
     let json = await response.json();
 
-    console.log(VK_CLIENT_ID, VK_CLIENT_SECRET, origin, code);
-    console.log(json);
+    // console.log(VK_CLIENT_ID, VK_CLIENT_SECRET, origin, code);
+    // console.log(json);
 
     return !json.error
-        ? { accessToken: json.access_token, expiresIn: json.expires_in }
-        : {};
+      ? { accessToken: json.access_token, expiresIn: json.expires_in }
+      : {};
   } catch (e) {
-    console.error(e);
+    // console.error(e);
     return {};
   }
 }
