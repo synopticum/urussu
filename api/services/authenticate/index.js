@@ -80,14 +80,22 @@ async function registerRoutes(fastify, opts) {
 }
 
 async function getAccessToken(code, origin) {
-  let response = await fetch(
-    `https://oauth.vk.com/access_token?client_id=${VK_CLIENT_ID}&client_secret=${VK_CLIENT_SECRET}&redirect_uri=${origin}&code=${code}`
-  );
-  let json = await response.json();
+  try {
+    let response = await fetch(
+        `https://oauth.vk.com/access_token?client_id=${VK_CLIENT_ID}&client_secret=${VK_CLIENT_SECRET}&redirect_uri=${origin}&code=${code}`
+    );
+    let json = await response.json();
 
-  return !json.error
-    ? { accessToken: json.access_token, expiresIn: json.expires_in }
-    : {};
+    console.log(VK_CLIENT_ID, VK_CLIENT_SECRET, origin, code);
+    console.log(json);
+
+    return !json.error
+        ? { accessToken: json.access_token, expiresIn: json.expires_in }
+        : {};
+  } catch (e) {
+    console.error(e);
+    return {};
+  }
 }
 
 async function getUserInfo(accessToken) {
