@@ -37,7 +37,7 @@ const config = merge([
       new webpack.EnvironmentPlugin(Object.keys(process.env)),
       new LoadablePlugin(),
       new HtmlWebpackPlugin({
-        template: path.resolve(path.join('.', 'src', 'index.ejs')),
+        template: path.resolve(path.join('.', 'src', isProduction ? 'index.prod.ejs' : 'index.dev.ejs')),
       }),
       new CopyPlugin({
         patterns: [
