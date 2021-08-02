@@ -10,6 +10,7 @@ export const Link = styled.span`
 export const Content = styled.div`
   display: flex;
   flex: 1 1 0;
+  height: 100%;
 
   & > div {
     position: relative;

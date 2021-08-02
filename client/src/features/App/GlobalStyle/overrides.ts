@@ -29,7 +29,6 @@ const overrides = `
   }
 
   a {
-    margin-left: 5px;
     color: ${theme.colors.blue.a};
   }
 
