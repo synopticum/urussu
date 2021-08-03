@@ -53,7 +53,7 @@ const Container = styled.div<{ mode?: Mode }>`
   top: 0;
   width: 100%;
   height: 100%;
-  background-color: ${theme.colors.black.a};
+  background-color: ${theme.colors.black.a} !important;
   pointer-events: all;
 
   &:active {
@@ -190,11 +190,6 @@ const Container = styled.div<{ mode?: Mode }>`
   .leaflet-top.leaflet-left {
     left: 58px;
     top: 13px;
-  }
-
-  .leaflet-bottom.leaflet-right {
-    right: 60px;
-    bottom: -5px;
   }
 
   .leaflet-draw-draw-polyline {
