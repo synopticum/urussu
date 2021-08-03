@@ -12,10 +12,9 @@ const StyledComments = styled.div<{ isReady: boolean }>`
   position: absolute;
   left: 0;
   top: 0;
-  width: 400px;
-  padding: 20px 10px 20px 25px;
-  height: calc(100vh - 170px);
-  border-radius: 10px 0 0 10px;
+  width: 450px;
+  padding: 20px 10px 20px 75px;
+  height: calc(100vh - 140px);
   display: flex;
   flex-direction: column;
   background: ${theme.colors.white.a};

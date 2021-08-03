@@ -11,7 +11,7 @@ const StyledTimeline = styled.div`
   left: 0;
   bottom: 0;
   width: 100%;
-  height: 50px;
+  height: 70px;
   background-color: ${theme.colors.black.a};
 `;
 
@@ -19,6 +19,7 @@ const Decades = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 13px;
 `;
 
 export const Timeline = observer(() => {

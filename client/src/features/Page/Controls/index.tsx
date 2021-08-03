@@ -21,7 +21,7 @@ const StyledControls = styled.aside`
   width: 60px;
   height: 100%;
   display: flex;
-  padding: 23px 0 16px 10px;
+  padding: 23px 0 7px 10px;
 `;
 
 const UserButton = styled(Button)`

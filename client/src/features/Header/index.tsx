@@ -10,7 +10,7 @@ const StyledHeader = styled.header`
   position: relative;
   z-index: 1060;
   height: 70px;
-  padding: 15px 25px 0 75px;
+  padding: 0 25px 0 75px;
   display: flex;
   align-items: center;
   background-color: ${theme.colors.black.a};
@@ -47,7 +47,7 @@ const NavLink: React.FC<{ to: string }> = props => {
 };
 
 const Title = styled.div`
-  font-size: 32px;
+  font-size: 28px;
   margin-right: auto;
   color: ${theme.colors.white.a};
 `;

@@ -25,6 +25,7 @@ const Avatar = styled.img`
   cursor: pointer;
   border-radius: 5px;
   margin-left: 2px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
 `;
 
 const UserMenu: React.FC = observer(() => {

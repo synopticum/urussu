@@ -16,10 +16,9 @@ const StyledEditor = styled.div<{ isReady: boolean }>`
   position: absolute;
   left: 0;
   top: 0;
-  width: 400px;
-  padding: 20px 10px 20px 25px;
-  height: calc(100vh - 170px);
-  border-radius: 10px 0 0 10px;
+  width: 450px;
+  padding: 20px 10px 20px 75px;
+  height: calc(100vh - 140px);
   display: flex;
   flex-direction: column;
   background: ${theme.colors.white.a};
@@ -55,7 +54,7 @@ const List = styled.div`
 
 const Section = styled.div`
   display: flex;
-  padding: 10px 0;
+  padding: 15px 0;
   border-bottom: 1px solid ${theme.colors.white.b};
 
   &:first-of-type {
@@ -69,6 +68,7 @@ const Section = styled.div`
 
 const SubmitSection = styled(Section)`
   justify-content: space-between;
+  padding-right: 10px;
 `;
 
 const ExtendedTextInput = styled(TextInput)`
