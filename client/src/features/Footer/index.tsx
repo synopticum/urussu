@@ -9,7 +9,9 @@ const StyledFooter = styled.footer`
   justify-content: center;
   align-items: center;
   font-size: 14px;
+  background: url('/images/common/skyline.svg') no-repeat 50% calc(100% + 5px);
   background-color: ${theme.colors.black.a};
+  background-size: 1400px;
 `;
 
 export const Footer: React.FC = () => {
