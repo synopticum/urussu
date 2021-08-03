@@ -13,7 +13,6 @@ const StyledCurrentImage = styled.div`
   width: 100%;
   height: 100%;
   overflow: hidden;
-  border-radius: 10px;
   user-select: none;
   background-color: ${theme.colors.black.a};
 `;

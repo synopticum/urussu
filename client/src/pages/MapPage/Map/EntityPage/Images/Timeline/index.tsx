@@ -4,12 +4,15 @@ import { Decade } from 'src/pages/MapPage/Map/EntityPage/Images/Timeline/Decade'
 import { EmptyDecade } from 'src/pages/MapPage/Map/EntityPage/Images/Timeline/EmptyDecade';
 import { observer } from 'mobx-react-lite';
 import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledTimeline = styled.div`
   position: absolute;
   left: 0;
-  bottom: -54px;
+  bottom: 0;
   width: 100%;
+  height: 50px;
+  background-color: ${theme.colors.black.a};
 `;
 
 const Decades = styled.ul`

@@ -6,6 +6,7 @@ import editorImage from './images/editor.svg';
 import closeImage from './images/close.svg';
 import loginImage from './images/login.svg';
 import { Controls } from 'src/stores/ControlsStore';
+import theme from 'src/features/App/GlobalStyle/theme';
 
 export type ButtonTypes = Controls | 'close';
 
@@ -24,14 +25,15 @@ const StyledButton = styled.button<{ icon: string }>`
   position: relative;
   width: 44px;
   height: 44px;
+  border: 0;
   border-radius: 10px;
   cursor: pointer;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  box-shadow: inset 7px 7px 7px rgba(255, 255, 255, 0.1);
+  box-shadow: inset 7px 7px 7px rgba(255, 255, 255, 0.1), 2px 2px 5px rgba(0, 0, 0, 0.3);
   transition: border-radius 0.2s;
   margin-bottom: 7px;
   background: ${({ icon }): string => `url(${icon}) 50% 50% no-repeat`};
   background-size: 50%;
+  background-color: ${theme.colors.black.a};
 
   &:hover {
     opacity: 1;

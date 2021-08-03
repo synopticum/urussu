@@ -20,7 +20,6 @@ const StyledControls = styled.aside`
   z-index: 1060;
   width: 60px;
   height: 100%;
-  background: ${theme.colors.black.a};
   display: flex;
   padding: 23px 0 16px 10px;
 `;

@@ -18,11 +18,10 @@ const StyledEntityPage = styled.div`
 
 const Wrapper = styled.div`
   position: absolute;
-  left: 75px;
-  top: 25px;
-  width: calc(100% - 100px);
-  height: calc(100% - 50px);
-  border-radius: 10px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
   background-color: ${theme.colors.white.a};
 `;
 

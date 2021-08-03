@@ -42,7 +42,7 @@ const Logo = styled.div<{ isVisible: boolean }>`
   pointer-events: none;
   position: absolute;
   left: calc(50% - 75px);
-  bottom: -10px;
+  bottom: 10px;
   width: 150px;
   height: 54px;
   background: url('images/logo.png') no-repeat;
