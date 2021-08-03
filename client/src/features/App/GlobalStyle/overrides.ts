@@ -21,7 +21,6 @@ const overrides = `
 
   #main {
     min-height: 100%;
-    min-width: 1200px;
     margin: 0;
     display: flex;
     flex-direction: column;
