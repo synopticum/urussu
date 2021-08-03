@@ -65,7 +65,7 @@ export default class CommentsStore extends BaseAsyncStore<CommentDto[], CommentM
       this.apiData.data.push(newCommentMapped);
       this.currentValue = '';
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
   }

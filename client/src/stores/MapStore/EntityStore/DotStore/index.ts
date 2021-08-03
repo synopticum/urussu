@@ -67,7 +67,7 @@ export default class DotStore extends BaseAsyncStore<DotDto, DotMapped> implemen
       this.apiData.data = map(newDotDto);
       controlsStore.toggle('editor');
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
   }

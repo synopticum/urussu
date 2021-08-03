@@ -99,7 +99,7 @@ class UploadImageState {
       imagesStore.addImage(imageDto as ImageMapped);
       this.resetData();
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
 

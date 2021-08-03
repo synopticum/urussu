@@ -174,7 +174,7 @@ export default class EditorStore implements BaseStore {
       await del(url);
       imagesStore.removeImage(imagesStore.selectedImageId);
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
   }

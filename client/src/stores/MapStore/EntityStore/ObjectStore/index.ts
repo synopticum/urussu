@@ -77,7 +77,7 @@ export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped>
       this.apiData.data = map(newObjectDto);
       controlsStore.toggle('editor');
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
   }

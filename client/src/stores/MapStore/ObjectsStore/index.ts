@@ -38,7 +38,7 @@ export default class ObjectsStore extends BaseAsyncStore<ObjectDto[], ObjectMapp
       this.drawObjects();
       this.drawCircles();
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
   }
@@ -50,7 +50,7 @@ export default class ObjectsStore extends BaseAsyncStore<ObjectDto[], ObjectMapp
       const object = await get<ObjectDto, ObjectMapped>(`/objects/${id}`, 'json');
       await put<ObjectDto, ObjectMapped>(url, { ...object, coordinates }, 'json');
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
     }
   }
 
@@ -63,7 +63,7 @@ export default class ObjectsStore extends BaseAsyncStore<ObjectDto[], ObjectMapp
       this.drawObjects();
       this.drawCircles();
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
   }

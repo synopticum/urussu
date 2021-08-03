@@ -67,7 +67,7 @@ export default class PathStore extends BaseAsyncStore<PathDto, PathMapped> imple
       this.apiData.data = map(newPathDto);
       controlsStore.toggle('editor');
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
   }

@@ -6,6 +6,7 @@ import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import Comment from './Comment';
 import { Add } from 'src/pages/MapPage/Map/EntityPage/Comments/Add';
 import theme from 'src/features/App/GlobalStyle/theme';
+import { authStore } from 'src/stores/AuthStore';
 
 const StyledComments = styled.div<{ isReady: boolean }>`
   position: absolute;
@@ -52,6 +53,8 @@ const List = styled.div`
   ${theme.chunks.scrollbar(theme.colors.black.a, theme.colors.white.a)}
 `;
 
+const NotAuthorizedMessage = styled.div``;
+
 type Props = {
   entityType: EntityInstanceType;
   entityId: EntityId;
@@ -90,7 +93,11 @@ export const Comments: React.FC<Props> = observer(({ entityType, entityId, image
         ))}
       </List>
 
-      <Add />
+      {authStore.isLogged ? (
+        <Add />
+      ) : (
+        <NotAuthorizedMessage>Войдите на сайт через Вконтакте, чтобы оставлять комментарии.</NotAuthorizedMessage>
+      )}
     </StyledComments>
   );
 });

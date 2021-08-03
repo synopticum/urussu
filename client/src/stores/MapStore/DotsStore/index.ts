@@ -49,7 +49,7 @@ export default class DotsStore extends BaseAsyncStore<DotDto[], DotMapped[]> imp
       this.apiData.data.push(newDotMapped);
       this.draw();
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
   }
@@ -62,7 +62,7 @@ export default class DotsStore extends BaseAsyncStore<DotDto[], DotMapped[]> imp
       this.apiData.data = this.apiData.data.filter(item => item.id !== id);
       this.draw();
     } catch (e) {
-      alert('hui');
+      alert('Ошибка');
       // handle somehow
     }
   }
