@@ -23,6 +23,15 @@ const Wrapper = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${theme.colors.white.a};
+
+  &::before {
+    ${theme.chunks.innerBorder()}
+    display: none;
+
+    @media only screen and (min-width: 1000px) {
+      display: block;
+    }
+  }
 `;
 
 const Close = styled.button`

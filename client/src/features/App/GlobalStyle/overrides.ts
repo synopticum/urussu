@@ -15,7 +15,7 @@ const overrides = `
     overflow: auto;
     height: 100%;
     padding: 0;
-    background: var(--main-light);
+    background: ${theme.colors.black.a};
     line-height: 1.4;
   }
 

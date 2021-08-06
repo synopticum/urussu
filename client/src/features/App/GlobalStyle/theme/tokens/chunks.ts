@@ -35,4 +35,23 @@ export default {
         }
       `;
   },
+
+  innerBorder: (): CSSChunk => {
+    return `
+      content: '';
+      pointer-events: none;
+      position: absolute;
+      left: var(--inner-border);
+      top: 0;
+      z-index: 500;
+      width: calc(100% - var(--inner-border) * 2);
+      height: calc(100% - var(--inner-border) * 2);
+      margin: var(--inner-border) var(--inner-border) var(--inner-border) 0;
+      box-sizing: border-box;
+      background: transparent;
+      border-radius: 10px;
+      box-shadow: rgb(17 17 17) 0px 0px 0px 10px;
+      outline: var(--inner-border) solid var(--colors-black-a);
+    `;
+  },
 };

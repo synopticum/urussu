@@ -19,6 +19,7 @@ const NoImages = styled.div`
   font-size: 32px;
   background: url('/images/common/skyline.svg') no-repeat 50% calc(100% + 5px);
   background-size: 100%;
+  text-align: center;
 `;
 
 const closeActiveControls = (): void => controlsStore.toggle(controlsStore.selected);

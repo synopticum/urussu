@@ -37,9 +37,8 @@ const Layout: React.FC = observer(() => {
       <ErrorBoundary fallback={ContentFallback}>
         <Content>
           <Router primary={false}>
-            <Map path="/" />
             {/*<Home path="/" />*/}
-            {/*<Map path="/map/" />*/}
+            <Map path="/" />
             {/*<ContactUs path="/contact-us/" />*/}
             {/*<ChunkedPage path="/chunked-page/:id" />*/}
             <LoginPage path="/login" />

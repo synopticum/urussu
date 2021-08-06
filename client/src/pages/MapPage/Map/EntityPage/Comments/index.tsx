@@ -12,15 +12,21 @@ const StyledComments = styled.div<{ isReady: boolean }>`
   position: absolute;
   left: 0;
   top: 0;
-  width: 450px;
-  padding: 20px 10px 20px 75px;
-  height: calc(100vh - 140px);
+  padding: 20px 10px 20px 88px;
+  height: calc(100vh - 125px);
   display: flex;
   flex-direction: column;
   background: ${theme.colors.white.a};
   box-shadow: ${theme.shadows.b};
   opacity: ${({ isReady }): string => (isReady ? '1' : '0')};
   transition: opacity 0.3s;
+  width: 100%;
+
+  @media only screen and (min-width: 1000px) {
+    width: 463px;
+    border-bottom: 0;
+    padding-left: 75px;
+  }
 
   &::before {
     content: '';

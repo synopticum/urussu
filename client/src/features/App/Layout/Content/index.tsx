@@ -16,6 +16,16 @@ export const Content = styled.div`
     position: relative;
     flex: 1;
     background-color: ${theme.colors.black.a};
+    --inner-border: 10px;
+
+    &::before {
+      ${theme.chunks.innerBorder()}
+      display: none;
+
+      @media only screen and (min-width: 1000px) {
+        display: block;
+      }
+    }
 
     &::after {
       content: '';

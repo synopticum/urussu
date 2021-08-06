@@ -34,6 +34,7 @@ const DecadeValue = styled.div<{ isActive: boolean }>`
 
 const StyledDecade = styled.li`
   position: relative;
+  white-space: nowrap;
 
   &:first-of-type ${DecadeValue} {
     border-image-slice: 1;

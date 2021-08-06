@@ -13,6 +13,7 @@ const EmptyDecadeValue = styled.div`
 
 const StyledEmptyDecade = styled.li`
   position: relative;
+  white-space: nowrap;
 
   &:first-of-type ${EmptyDecadeValue} {
     border-image-slice: 1;

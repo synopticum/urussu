@@ -9,12 +9,17 @@ import { globalStore } from 'src/stores/GlobalStore';
 const StyledHeader = styled.header`
   position: relative;
   z-index: 1060;
-  height: 70px;
-  padding: 0 25px 0 75px;
+  height: 55px;
+  padding: 10px 25px 0 30px;
   display: flex;
   align-items: center;
   background-color: ${theme.colors.black.a};
-  justify-content: flex-end;
+  border-bottom: 10px solid ${theme.colors.black.a};
+
+  @media only screen and (min-width: 1000px) {
+    border-bottom: 0;
+    padding-left: 30px;
+  }
 `;
 
 const Nav = styled.div`
@@ -47,9 +52,13 @@ const NavLink: React.FC<{ to: string }> = props => {
 };
 
 const Title = styled.div`
-  font-size: 28px;
+  font-size: 24px;
   margin-right: auto;
   color: ${theme.colors.white.a};
+
+  @media only screen and (min-width: 1000px) {
+    font-size: 28px;
+  }
 `;
 
 const Header: React.FC = observer(() => {
@@ -69,11 +78,11 @@ const Header: React.FC = observer(() => {
     <StyledHeader>
       <Title ref={titleRef} />
 
-      {/*<Nav>*/}
-      {/*  <NavLink to="map">{l('Карта')}</NavLink>*/}
-      {/*  <NavLink to="contact-us">{l('Страница')}</NavLink>*/}
-      {/*  <NavLink to="chunked-page/123">Chunked Page</NavLink>*/}
-      {/*</Nav>*/}
+      <Nav>
+        {/*<NavLink to="/">{l('О посёлке')}</NavLink>*/}
+        {/*<NavLink to="/">{l('Карта')}</NavLink>*/}
+        {/*<NavLink to="chunked-page/123">Chunked Page</NavLink>*/}
+      </Nav>
     </StyledHeader>
   );
 });
