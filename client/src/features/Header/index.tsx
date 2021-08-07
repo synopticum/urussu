@@ -53,8 +53,9 @@ const NavLink: React.FC<{ to: string }> = props => {
 
 const Title = styled.div`
   font-size: 24px;
-  margin-right: auto;
   color: ${theme.colors.white.a};
+  flex: 1;
+  text-align: center;
 
   @media only screen and (min-width: 1000px) {
     font-size: 28px;
