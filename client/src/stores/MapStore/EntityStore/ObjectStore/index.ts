@@ -1,4 +1,4 @@
-import { computed, makeObservable } from 'mobx';
+import { computed, makeObservable, observable } from 'mobx';
 import { AxiosInstance } from 'axios';
 import { AsyncData, fetchData, put } from 'src/stores/helpers';
 import { ObjectDto } from 'src/contracts/entities/object';
@@ -9,8 +9,21 @@ import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { editorStore, ObjectState } from 'src/stores/MapStore/EntityStore/EditorStore';
 import { controlsStore } from 'src/stores/ControlsStore';
+import { Token } from 'src/stores/AuthStore';
 
 export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped> implements BaseStore {
+  siblings: ObjectMapped[];
+
+  get siblingsIds(): { previous: EntityId; next: EntityId } {
+    if (this.siblings) {
+      const [previous, next] = this.siblings;
+      return {
+        previous: previous?.id,
+        next: next?.id,
+      };
+    }
+  }
+
   get entityType(): EntityInstanceType {
     return 'object';
   }
@@ -50,10 +63,30 @@ export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped>
     editorStore.initData(this, new ObjectState(this.apiData.data));
   }
 
-  initData(id: ImageId): void {
+  async initData(id: ImageId): Promise<void> {
     imagesStore.store = this;
     commentsStore.store = this;
-    this.fetchApiData(id);
+    await this.fetchApiData(id);
+
+    const { street, house } = this.apiData.data;
+    await this.fetchStreetSiblings(street, house);
+  }
+
+  private async fetchStreetSiblings(street: string, house: string): Promise<ObjectMapped[]> {
+    if (street) {
+      try {
+        const { data } = await this.api.get(`/objects?street=${street}&house=${house}`);
+
+        if (data.error) {
+          console.info('Cannot get fetch siblings');
+          return null;
+        }
+
+        this.siblings = data;
+      } catch (e) {
+        return null;
+      }
+    }
   }
 
   resetData(): void {
@@ -88,6 +121,8 @@ export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped>
     makeObservable(this, {
       address: computed,
       title: computed,
+      siblings: observable,
+      siblingsIds: computed,
     });
   }
 }

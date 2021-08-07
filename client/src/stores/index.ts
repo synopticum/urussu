@@ -13,7 +13,7 @@ export interface BaseStore {
 export class BaseAsyncStore<Dto, Mapped> {
   apiData: AsyncData<Mapped>;
 
-  private api: AxiosInstance;
+  api: AxiosInstance;
 
   getApiOptions(map: (data: Dto) => Mapped): { apiData: AsyncData<Mapped>; map: (data: Dto) => Mapped } {
     const { apiData } = this;

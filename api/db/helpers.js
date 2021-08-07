@@ -80,6 +80,10 @@ const shortenId = (id) => id.split("-")[0];
 const prepare = (raw, map) => (raw.length ? raw.map(map) : map(raw));
 
 const commonMap = (model) => {
+  if (!model) {
+    return null;
+  }
+
   const { _doc: data } = model;
 
   if (!data) {
