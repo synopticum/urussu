@@ -28,26 +28,6 @@ const Title = styled.div`
   color: ${theme.colors.white.a};
 `;
 
-const Arrow = styled.div`
-  cursor: pointer;
-  position: absolute;
-  top: calc(50% - 8px);
-  color: ${theme.colors.white.a};
-  font-size: 18px;
-
-  &:hover {
-    text-decoration: underline;
-  }
-`;
-
-const Previous = styled(Arrow)`
-  left: 30px;
-`;
-
-const Next = styled(Arrow)`
-  right: 30px;
-`;
-
 const toggleComments = (): void => controlsStore.toggle('comments');
 
 const toggleEditor = (): void => controlsStore.toggle('editor');
@@ -71,21 +51,11 @@ export const ObjectPage: React.FC<Props> = observer(({ id }) => {
     return null;
   }
 
-  const navigate = (id: EntityId): void => {
-    objectStore.resetData();
-    objectStore.initData(id);
-    mapStore.setEntity({ type: 'object', id });
-  };
-
   return (
     <StyledObjectPage>
       <Portal parent={globalStore.titleRef}>{objectStore.address || objectStore.title}</Portal>
 
       <Images />
-      {objectStore.siblingsIds?.previous && (
-        <Previous onClick={(): void => navigate(objectStore.siblingsIds.previous)}>Previous</Previous>
-      )}
-      {objectStore.siblingsIds?.next && <Next onClick={(): void => navigate(objectStore.siblingsIds.next)}>Next</Next>}
 
       {controlsStore.selected === 'comments' && (
         <Comments entityType="object" entityId={id} imageId={imagesStore.selectedImageId} />
