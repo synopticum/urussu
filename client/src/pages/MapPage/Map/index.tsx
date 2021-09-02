@@ -38,25 +38,6 @@ const DotCreator = styled.div<{ x: number; y: number; isVisible: boolean }>`
   z-index: 1050;
 `;
 
-const Logo = styled.div<{ isVisible: boolean }>`
-  pointer-events: none;
-  position: absolute;
-  left: calc(50% - 75px);
-  bottom: 10px;
-  width: 150px;
-  height: 54px;
-  background: url('images/logo.png') no-repeat;
-  background-size: cover;
-  z-index: 500;
-  opacity: ${({ isVisible }): string => (isVisible ? '1' : '0')};
-  transition: opacity 0.3s;
-
-  @media screen and (-webkit-min-device-pixel-ratio: 1.25) {
-    background: url('images/logo@2x.png') no-repeat;
-    background-size: cover;
-  }
-`;
-
 const toggleSearch = (): void => {
   mapStore.toggleSearch();
 };
@@ -139,7 +120,6 @@ const Map: React.FC = observer(() => {
       )}
 
       <EntityPage entity={entity} />
-      <Logo isVisible={!Boolean(entity)} />
     </StyledMap>
   );
 });
