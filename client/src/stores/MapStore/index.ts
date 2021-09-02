@@ -72,9 +72,9 @@ class DotCreatorState {
 export type Mode = 'default' | 'add';
 
 export default class MapStore extends BaseAsyncStore<SearchResultDto, SearchResultMapped> implements BaseStore {
-  private readonly defaultZoom = 6;
-  private readonly defaultLat = 67.38;
-  private readonly defaultLng = -36.71;
+  private readonly defaultZoom = 5;
+  private readonly defaultLat = 68.39;
+  private readonly defaultLng = -38.36;
 
   readonly width: number = 10000;
   readonly height: number = 6250;
