@@ -98,10 +98,6 @@ const Map: React.FC = observer(() => {
     document.addEventListener('keydown', switchToAddMode);
     document.addEventListener('keyup', switchToDefaultMode);
 
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    window.dataLayer.push({ event: 'optimize.activate' });
-
     return (): void => {
       document.removeEventListener('keydown', switchToAddMode);
       document.addEventListener('keyup', switchToDefaultMode);
