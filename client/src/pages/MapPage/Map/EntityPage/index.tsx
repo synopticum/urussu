@@ -6,6 +6,8 @@ import DotPage from 'src/pages/MapPage/Map/EntityPage/DotPage';
 import PathPage from 'src/pages/MapPage/Map/EntityPage/PathPage';
 import theme from 'src/features/App/GlobalStyle/theme';
 import { controlsStore } from 'src/stores/ControlsStore';
+import { EntityId } from 'src/contracts/entities';
+import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 
 const StyledEntityPage = styled.div`
   position: absolute;
@@ -75,6 +77,24 @@ const handleEscape = (e: KeyboardEvent): void => {
   }
 };
 
+const handleImagesArrows = ({ code }: KeyboardEvent): void => {
+  if (code === 'ArrowLeft' || code === 'ArrowRight') {
+    const navigate = (id: EntityId): void => {
+      objectStore.resetData();
+      objectStore.initData(id);
+      mapStore.setEntity({ type: 'object', id });
+    };
+
+    if (code === 'ArrowLeft') {
+      navigate(objectStore.siblingsIds.previous);
+    }
+
+    if (code === 'ArrowRight') {
+      navigate(objectStore.siblingsIds.next);
+    }
+  }
+};
+
 type Props = {
   entity: Entity;
 };
@@ -86,9 +106,11 @@ export const EntityPage: React.FC<Props> = ({ entity }) => {
 
   useEffect(() => {
     document.addEventListener('keyup', handleEscape);
+    document.addEventListener('keyup', handleImagesArrows);
 
     return (): void => {
       document.removeEventListener('keyup', handleEscape);
+      document.removeEventListener('keyup', handleImagesArrows);
       close();
     };
   }, []);

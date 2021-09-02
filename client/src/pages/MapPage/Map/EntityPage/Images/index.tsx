@@ -32,16 +32,15 @@ const Arrow = styled.div`
   top: calc(50% - 45px);
   width: 70px;
   height: 70px;
-  background-color: ${theme.colors.black.a};
   background-repeat: no-repeat;
   background-position: 50% 50%;
   background-size: 50px;
   transition: background-position 0.3s;
-  z-index: 300;
+  z-index: 400;
 `;
 
 const Previous = styled(Arrow)`
-  left: 0;
+  left: 20px;
   background-image: url('/images/common/arrow-left.svg');
 
   &:hover {
@@ -50,11 +49,11 @@ const Previous = styled(Arrow)`
 `;
 
 const Next = styled(Arrow)`
-  right: 0;
+  right: 20px;
   background-image: url('/images/common/arrow-right.svg');
 
   &:hover {
-    background-position: calc(50% - 10px) 50%;
+    background-position: calc(50% + 10px) 50%;
   }
 `;
 
