@@ -17,7 +17,7 @@ const StyledEditor = styled.div<{ isReady: boolean }>`
   left: 0;
   top: 0;
   width: 463px;
-  padding: 20px 10px 20px 88px;
+  padding: 28px 10px 20px 90px;
   height: calc(100vh - 125px);
   display: flex;
   flex-direction: column;
