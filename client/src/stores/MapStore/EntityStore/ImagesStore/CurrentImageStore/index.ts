@@ -42,7 +42,7 @@ export default class CurrentImageStore implements BaseStore {
     const current = this.ref.current;
     const { clientWidth: parentWidth, clientHeight: parentHeight } = current.parentElement;
     const scale =
-      this.naturalHeight > parentHeight ? parentWidth / this.clientWidth : parentWidth / this.clientWidth - 1;
+      this.naturalHeight > parentHeight ? parentWidth / this.clientWidth : 1 - (parentWidth / this.clientWidth - 1);
     const roundedScale = parseFloat(Number(scale).toFixed(4));
 
     return this.aspectRatio > 1 ? roundedScale : 1;
