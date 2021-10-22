@@ -50,7 +50,7 @@ export default {
       box-sizing: border-box;
       background: transparent;
       border-radius: 10px;
-      box-shadow: rgb(17 17 17) 0px 0px 0px 10px;
+      box-shadow: rgb(17 17 17) 0px 0px 0px 20px;
       outline: var(--inner-border) solid var(--colors-black-a);
     `;
   },
