@@ -80,8 +80,8 @@ const Header: React.FC = observer(() => {
       <Title ref={titleRef} />
 
       <Nav>
-        {/*<NavLink to="/">{l('О посёлке')}</NavLink>*/}
-        {/*<NavLink to="/">{l('Карта')}</NavLink>*/}
+        <NavLink to="/">{l('Главная')}</NavLink>
+        <NavLink to="/map">{l('Карта')}</NavLink>
         {/*<NavLink to="chunked-page/123">Chunked Page</NavLink>*/}
       </Nav>
     </StyledHeader>

@@ -10,11 +10,9 @@ import { observer } from 'mobx-react-lite';
 import { authStore } from 'src/stores/AuthStore';
 import { userStore } from 'src/stores/UserStore';
 import ContentFallback from 'src/features/App/Layout/ContentFallback';
-import Content from 'src/features/App/Layout/Content';
+import Screen from 'src/features/App/Layout/Screen';
 
 const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/HomePage'));
-const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/MapPage'));
-const ContactUs = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/ContactUsPage'));
 const ChunkedPage = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/ChunkedPage'));
 
 const Layout: React.FC = observer(() => {
@@ -30,21 +28,13 @@ const Layout: React.FC = observer(() => {
 
   return (
     <>
-      <ErrorBoundary>
-        <Header />
-      </ErrorBoundary>
-
       <ErrorBoundary fallback={ContentFallback}>
-        <Content>
-          <Router primary={false}>
-            {/*<Home path="/" />*/}
-            <Map path="/" />
-            {/*<ContactUs path="/contact-us/" />*/}
-            {/*<ChunkedPage path="/chunked-page/:id" />*/}
-            <LoginPage path="/login" />
-            <Error404 default />
-          </Router>
-        </Content>
+        <Router primary={false}>
+          <Home path="/" />
+          {/*<ChunkedPage path="/chunked-page/:id" />*/}
+          <LoginPage path="/login" />
+          <Error404 default />
+        </Router>
       </ErrorBoundary>
 
       <ErrorBoundary>

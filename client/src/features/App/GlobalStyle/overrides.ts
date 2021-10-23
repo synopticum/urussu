@@ -12,7 +12,6 @@ const overrides = `
     font-family: 'PT Serif', serif;
     box-sizing: border-box;
     word-break: break-word;
-    overflow: auto;
     height: 100%;
     padding: 0;
     background: ${theme.colors.black.a};

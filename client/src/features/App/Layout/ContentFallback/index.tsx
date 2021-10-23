@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import React from 'react';
 import Controls from 'src/features/Page/Controls';
-import Content from 'src/features/App/Layout/Content';
+import Screen from 'src/features/App/Layout/Screen';
 import theme from 'src/features/App/GlobalStyle/theme';
 
 export const Fallback = styled.div`
@@ -27,7 +27,7 @@ const ContentFallback: React.FC = () => {
   const reload = (): void => window.location.reload();
 
   return (
-    <Content>
+    <Screen>
       <div>
         <Fallback>
           <Controls />
@@ -40,7 +40,7 @@ const ContentFallback: React.FC = () => {
           </Message>
         </Fallback>
       </div>
-    </Content>
+    </Screen>
   );
 };
 

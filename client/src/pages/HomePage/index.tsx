@@ -1,26 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { RouteComponentProps } from '@reach/router';
-import Timer from './Timer';
 import { observer } from 'mobx-react-lite';
-import styled from 'styled-components';
-import Page from 'src/features/Page';
-import Content from 'src/features/Page/Content';
+import Controls from './Controls';
+import SplashScreen from './SplashScreen';
+// import InfoScreen from './InfoScreen';
+import loadable from '@loadable/component';
 import { globalStore } from 'src/stores/GlobalStore';
 
-const StyledHomePage = styled(Page)``;
+const MapScreen = loadable(() => import(/* webpackPrefetch: true */ './MapScreen'));
 
 const HomePage: React.FC<RouteComponentProps> = observer(() => {
+  useEffect(() => {
+    setTimeout(() => window.scrollTo({ top: 0 }), 300);
+  }, []);
+
   return (
-    <StyledHomePage>
-      <Content>
-        <h1>Trulala trulala 2!</h1>
-        <div>{globalStore.title}</div>
-        <div>
-          <button>test async</button>
-        </div>
-        <Timer />
-      </Content>
-    </StyledHomePage>
+    <>
+      <Controls />
+
+      <SplashScreen />
+      {/*<InfoScreen isVisible={globalStore.currentScreen === 'info'} />*/}
+      <MapScreen isVisible={globalStore.currentScreen === 'map'} />
+    </>
   );
 });
 

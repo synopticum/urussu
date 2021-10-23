@@ -4,15 +4,20 @@ import Map from 'src/pages/MapPage/Map';
 import styled from 'styled-components';
 import Page from 'src/features/Page';
 import Controls from 'src/features/Page/Controls';
+import Content from 'src/features/Page/Content';
 
 const StyledMapPage = styled(Page)``;
 
 const MapPage: React.FC<RouteComponentProps> = () => {
   return (
-    <StyledMapPage>
-      <Map />
-      <Controls />
-    </StyledMapPage>
+    <Content>
+      <div>
+        <StyledMapPage>
+          <Map />
+          <Controls />
+        </StyledMapPage>
+      </div>
+    </Content>
   );
 };
 

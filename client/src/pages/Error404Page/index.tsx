@@ -1,12 +1,12 @@
 import React from 'react';
 import { RouteComponentProps } from '@reach/router';
-import Content from 'src/features/App/Layout/Content';
+import Screen from 'src/features/App/Layout/Screen';
 import Controls from 'src/features/Page/Controls';
 import { Fallback, Message, Image } from 'src/features/App/Layout/ContentFallback';
 
 const Error404: React.FC<RouteComponentProps> = () => {
   return (
-    <Content>
+    <Screen>
       <div>
         <Fallback>
           <Controls />
@@ -19,7 +19,7 @@ const Error404: React.FC<RouteComponentProps> = () => {
           </Message>
         </Fallback>
       </div>
-    </Content>
+    </Screen>
   );
 };
 
