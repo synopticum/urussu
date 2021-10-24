@@ -8,6 +8,7 @@ import theme from 'src/features/App/GlobalStyle/theme';
 import { controlsStore } from 'src/stores/ControlsStore';
 import { EntityId } from 'src/contracts/entities';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
+import Button from 'src/features/Page/Controls/Button';
 
 const StyledEntityPage = styled.div`
   position: absolute;
@@ -19,6 +20,7 @@ const StyledEntityPage = styled.div`
 `;
 
 const Wrapper = styled.div`
+  --inner-border: 10px;
   position: absolute;
   left: 0;
   top: 0;
@@ -36,23 +38,11 @@ const Wrapper = styled.div`
   }
 `;
 
-const Close = styled.button`
-  cursor: pointer;
+const Close = styled(Button)`
   position: absolute;
   right: 20px;
-  top: 20px;
-  z-index: 100;
-  border: 0;
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: url('/images/common/close.svg') no-repeat 50% 50% ${theme.colors.white.a};
-  background-size: 20px;
-  transition: transform 0.5s;
-
-  &:hover {
-    transform: rotate(180deg);
-  }
+  top: 23px;
+  z-index: 1060;
 `;
 
 const Pages: { dot: typeof DotPage; object: typeof ObjectPage; path: typeof ObjectPage; circle: typeof ObjectPage } = {
@@ -120,7 +110,7 @@ export const EntityPage: React.FC<Props> = ({ entity }) => {
   return (
     <StyledEntityPage>
       <Wrapper>
-        <Close onClick={close} />
+        <Close type="close" onClick={close} />
         <Page id={entity.id} />
       </Wrapper>
     </StyledEntityPage>

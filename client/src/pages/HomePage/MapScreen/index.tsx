@@ -1,7 +1,17 @@
 import React from 'react';
-import Map from 'src/pages/MapPage/Map';
-import Controls from 'src/features/Page/Controls';
 import Screen from 'src/features/App/Layout/Screen';
+import styled from 'styled-components';
+
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+`;
+
+const Go = styled.a`
+  display: block;
+`;
 
 type Props = {
   isVisible: boolean;
@@ -10,12 +20,15 @@ type Props = {
 const MapScreen: React.FC<Props> = ({ isVisible }) => {
   return (
     <Screen>
-      {isVisible && (
-        <>
-          <Map />
-          <Controls />
-        </>
-      )}
+      {/*{isVisible && (*/}
+      {/*  <>*/}
+      {/*    <Map />*/}
+      {/*    <Controls />*/}
+      {/*  </>*/}
+      {/*)}*/}
+      <Wrapper>
+        <Go href="/map">Начать просмотр</Go>
+      </Wrapper>
     </Screen>
   );
 };

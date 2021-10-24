@@ -13,6 +13,7 @@ import ContentFallback from 'src/features/App/Layout/ContentFallback';
 import Screen from 'src/features/App/Layout/Screen';
 
 const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/HomePage'));
+const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/MapPage'));
 const ChunkedPage = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/ChunkedPage'));
 
 const Layout: React.FC = observer(() => {
@@ -31,6 +32,7 @@ const Layout: React.FC = observer(() => {
       <ErrorBoundary fallback={ContentFallback}>
         <Router primary={false}>
           <Home path="/" />
+          <Map path="/map" />
           {/*<ChunkedPage path="/chunked-page/:id" />*/}
           <LoginPage path="/login" />
           <Error404 default />

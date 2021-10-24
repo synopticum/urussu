@@ -13,7 +13,7 @@ const StyledComments = styled.div<{ isReady: boolean }>`
   left: 0;
   top: 0;
   padding: 28px 10px 20px 90px;
-  height: calc(100vh - 125px);
+  height: calc(100vh - 70px);
   display: flex;
   flex-direction: column;
   background: ${theme.colors.white.a};
@@ -25,7 +25,6 @@ const StyledComments = styled.div<{ isReady: boolean }>`
   @media only screen and (min-width: 1000px) {
     width: 463px;
     border-bottom: 0;
-    padding-left: 75px;
   }
 
   &::before {
