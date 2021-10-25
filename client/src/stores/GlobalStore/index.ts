@@ -2,7 +2,7 @@ import React, { MutableRefObject } from 'react';
 import { makeObservable, observable } from 'mobx';
 import { BaseStore } from 'src/stores';
 
-type Screen = 'index' | 'info' | 'map';
+export type Screen = 'index' | 'info' | 'map';
 
 export default class GlobalStore implements BaseStore {
   language: string;

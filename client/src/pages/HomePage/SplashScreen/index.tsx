@@ -1,7 +1,8 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, { useRef } from 'react';
 import Screen from 'src/features/App/Layout/Screen';
 import { globalStore } from 'src/stores/GlobalStore';
+import { useIntersection } from '../hooks/useIntersection';
 
 const SplashVideo = styled.video`
   width: 100%;
@@ -32,16 +33,21 @@ const SplashLogo = styled.img`
 `;
 
 const SplashScreen: React.FC = () => {
-  return (
-    <Screen>
-      <SplashVideo autoPlay muted loop>
-        <source src="https://urussu.s3.eu-central-1.amazonaws.com/videos/mp4-splash.m4v" type="video/mp4" />
-      </SplashVideo>
+  const containerRef = useRef<HTMLDivElement>(null);
+  useIntersection(containerRef, 'index');
 
-      <SplashLogoContainer>
-        <SplashLogo src="/images/splash-logo.png" onClick={(): void => globalStore.setCurrentScreen('map')} />
-      </SplashLogoContainer>
-    </Screen>
+  return (
+    <div ref={containerRef}>
+      <Screen>
+        <SplashVideo autoPlay muted loop>
+          <source src="https://urussu.s3.eu-central-1.amazonaws.com/videos/mp4-splash.m4v" type="video/mp4" />
+        </SplashVideo>
+
+        <SplashLogoContainer>
+          <SplashLogo src="/images/splash-logo.png" onClick={(): void => globalStore.setCurrentScreen('map')} />
+        </SplashLogoContainer>
+      </Screen>
+    </div>
   );
 };
 

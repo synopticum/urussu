@@ -2,6 +2,9 @@ import React, { useEffect, useRef } from 'react';
 import Screen from 'src/features/App/Layout/Screen';
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
+import { observer } from 'mobx-react-lite';
+import { globalStore } from 'src/stores/GlobalStore';
+import { useIntersection } from 'src/pages/HomePage/hooks/useIntersection';
 
 const Background = styled.div`
   position: relative;
@@ -17,12 +20,12 @@ const Background = styled.div`
 
 const Go = styled.a`
   position: absolute;
-  left: calc(50% - 125px);
+  left: calc(50% - 150px);
   top: calc(50% - 35px);
   font-family: 'PT Mono', monospace;
-  font-size: 18px;
+  font-size: 24px;
   text-decoration: none;
-  width: 250px;
+  width: 300px;
   height: 70px;
   display: flex;
   justify-content: center;
@@ -37,10 +40,13 @@ const Go = styled.a`
 `;
 
 type Props = {
-  isVisible: boolean;
+  isVisible?: boolean;
 };
 
 const MapScreen: React.FC<Props> = ({ isVisible }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  useIntersection(containerRef, 'map');
+
   const backgroundRef = useRef<HTMLDivElement>(null);
 
   const mouseOver = (): void => {
@@ -54,18 +60,20 @@ const MapScreen: React.FC<Props> = ({ isVisible }) => {
   };
 
   return (
-    <Screen>
-      {/*{isVisible && (*/}
-      {/*  <>*/}
-      {/*    <Map />*/}
-      {/*    <Controls />*/}
-      {/*  </>*/}
-      {/*)}*/}
-      <Background ref={backgroundRef} />
-      <Go href="/map" onMouseOver={mouseOver} onMouseOut={mouseOut}>
-        Начать просмотр
-      </Go>
-    </Screen>
+    <div ref={containerRef}>
+      <Screen>
+        {/*{isVisible && (*/}
+        {/*  <>*/}
+        {/*    <Map />*/}
+        {/*    <Controls />*/}
+        {/*  </>*/}
+        {/*)}*/}
+        <Background ref={backgroundRef} />
+        <Go href="/map" onMouseOver={mouseOver} onMouseOut={mouseOut}>
+          Начать просмотр
+        </Go>
+      </Screen>
+    </div>
   );
 };
 

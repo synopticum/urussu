@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { observer } from 'mobx-react-lite';
 import Controls from './Controls';
@@ -20,7 +20,7 @@ const HomePage: React.FC<RouteComponentProps> = observer(() => {
 
       <SplashScreen />
       {/*<InfoScreen isVisible={globalStore.currentScreen === 'info'} />*/}
-      <MapScreen isVisible={globalStore.currentScreen === 'map'} />
+      <MapScreen />
     </>
   );
 });
