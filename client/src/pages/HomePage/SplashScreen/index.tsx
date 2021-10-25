@@ -30,6 +30,16 @@ const SplashLogo = styled.img`
   height: 473px;
   max-width: 100vw;
   object-fit: contain;
+  transition: transform 0.07s;
+  transform: scale(1);
+
+  &:hover {
+    transform: scale(1.01);
+  }
+
+  &:active {
+    transform: scale(0.99);
+  }
 `;
 
 const SplashScreen: React.FC = () => {
