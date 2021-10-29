@@ -17,6 +17,7 @@
     "axios": "0.21.1",
     "clone-deep": "4.0.1",
     "core-js": "3.9.1",
+    "cuon-matrix-ts": "1.1.0",
     "date-fns": "2.19.0",
     "ejs": "3.1.6",
     "history": "4.10.1",

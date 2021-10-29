@@ -6,7 +6,7 @@ import theme from 'src/features/App/GlobalStyle/theme';
 
 export const Fallback = styled.div`
   display: flex;
-  height: 100%;
+  height: 100vh;
   justify-content: center;
   align-items: center;
   background-color: ${theme.colors.white.a};
@@ -30,7 +30,7 @@ const ContentFallback: React.FC = () => {
     <Screen>
       <div>
         <Fallback>
-          <Controls />
+          {/*<Controls />*/}
           <Message>
             <Image src="/images/common/spinner.gif" />
             <br />

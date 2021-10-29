@@ -18,7 +18,7 @@ const HomePage: React.FC<RouteComponentProps> = observer(() => {
     <>
       <Controls />
 
-      <SplashScreen />
+      {/*<SplashScreen />*/}
       {/*<InfoScreen isVisible={globalStore.currentScreen === 'info'} />*/}
       <MapScreen />
     </>
