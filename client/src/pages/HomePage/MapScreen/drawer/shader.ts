@@ -1,16 +1,15 @@
 // language=GLSL
 export const vshader_source = `
   attribute vec3 a_Position;
-
   attribute vec2 a_TexCoord;
   varying vec2 v_TexCoord;
 
-//  uniform mat4 u_ModelMatrix;
+  uniform vec2 u_TextureMatrix;
 
   void main() {
 //    gl_Position = u_ModelMatrix * a_Position;
     gl_Position = vec4(a_Position, 1.0);
-    v_TexCoord = a_TexCoord;
+    v_TexCoord = a_TexCoord * u_TextureMatrix;
   }
 `;
 

@@ -1,5 +1,5 @@
 import Drawer from '../drawer';
-import { Mat4 } from 'cuon-matrix-ts';
+import { mat4 } from 'gl-matrix';
 
 class Triangle {
   private v = [
@@ -64,14 +64,22 @@ class Triangle {
     // this.angle = this.animate(this.angle);
     // this.translateX = 0.5;
 
-    const { gl, program } = this.drawer;
+    const { gl, program, canvas } = this.drawer;
     this.drawer.clear();
 
     const vertices = new Float32Array(this.v);
     const FSIZE = vertices.BYTES_PER_ELEMENT;
     // const radian = (Math.PI * this.angle) / 180;
 
-    // const modelMatrix = new Mat4();
+    const TEXTURE_WIDTH = 2560;
+    const TEXTURE_HEIGHT = 1440;
+    const widthRatio = canvas.clientWidth / TEXTURE_WIDTH;
+    const heightRatio = canvas.clientHeight / TEXTURE_HEIGHT;
+
+    const u_TextureMatrix = gl.getUniformLocation(program, 'u_TextureMatrix');
+    gl.uniform2fv(u_TextureMatrix, new Float32Array([widthRatio, heightRatio]));
+
+    // mat4.scale();
     // modelMatrix.setRotate(this.angle, 0, 0, 1);
     // modelMatrix.translate(this.Tx, 0, 0);
 
@@ -91,13 +99,15 @@ class Triangle {
     gl.enableVertexAttribArray(a_TexCoord);
     this.initTexture(6);
 
-    // this.raf = window.requestAnimationFrame(() => this._draw());
+    this.raf = window.requestAnimationFrame(() => this._draw());
   }
 
   clear(): void {
     cancelAnimationFrame(this.raf);
     this.drawer.clear();
   }
+
+  private texture: HTMLImageElement = null;
 
   private initTexture(n: number): void {
     const { gl, program } = this.drawer;
@@ -106,9 +116,13 @@ class Triangle {
     const u_Sampler0 = gl.getUniformLocation(program, 'u_Sampler0');
     const u_Sampler1 = gl.getUniformLocation(program, 'u_Sampler1');
 
-    const image0 = new Image();
-    image0.onload = (): void => this.loadTexture(image0, n, 0, u_Sampler0, texture0);
-    image0.src = '/images/splash-houses.jpg';
+    if (!this.texture) {
+      this.texture = new Image();
+      this.texture.onload = (): void => this.loadTexture(this.texture, n, 0, u_Sampler0, texture0);
+      this.texture.src = '/images/splash-houses.jpg';
+    } else {
+      this.loadTexture(this.texture, n, 0, u_Sampler0, texture0);
+    }
 
     // const image1 = new Image();
     // image1.onload = (): void => this.loadTexture(image1, n, 1, u_Sampler1, texture1);
