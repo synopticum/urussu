@@ -6,7 +6,6 @@ import { useMap } from 'src/pages/MapPage/Map/hooks/use-map';
 import Container from 'src/pages/MapPage/Map/Container';
 import Dots from './Container/Dots';
 import Objects from './Container/Objects';
-import Paths from './Container/Paths';
 import Circles from './Container/Circles';
 import EntityPage from './EntityPage';
 import { ActiveEntity } from 'src/pages/MapPage/Map/Container/ActiveEntity';

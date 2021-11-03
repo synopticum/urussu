@@ -1,5 +1,5 @@
 import { AxiosInstance } from 'axios';
-import { AsyncData, del, fetchData, put, get } from 'src/stores/helpers';
+import { AsyncData, del, fetchData, get, put } from 'src/stores/helpers';
 import { ObjectDto, ObjectType } from 'src/contracts/entities/object';
 import { map } from 'src/stores/MapStore/ObjectsStore/map';
 import { ObjectMapped } from 'src/stores/MapStore/EntityStore/ObjectStore/map';

@@ -1,11 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { RouteComponentProps } from '@reach/router';
 import { observer } from 'mobx-react-lite';
 import Controls from './Controls';
-import SplashScreen from './SplashScreen';
 // import InfoScreen from './InfoScreen';
 import loadable from '@loadable/component';
-import { globalStore } from 'src/stores/GlobalStore';
 
 const MapScreen = loadable(() => import(/* webpackPrefetch: true */ './MapScreen'));
 

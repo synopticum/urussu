@@ -1,8 +1,12 @@
-import Drawer from '../drawer';
-import { mat4 } from 'gl-matrix';
+import DrawContext from 'src/components/DrawContext';
+import { fshader_source, vshader_source } from './shader';
+import { makeObservable, observable } from 'mobx';
 
-class Triangle {
-  private v = [
+class Drawer {
+  raf: number = null;
+  isReady = false;
+
+  private readonly vertices = [
     // vertex 1.1
     -1.0,
     1.0,
@@ -46,30 +50,18 @@ class Triangle {
     1.0,
     1.0,
   ];
-  // private vertices = [-1.0, 1.0, 0.0, 1.0, -1.0, -1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, -1.0, 1.0, 0.0];
-  private readonly drawer: Drawer;
-
-  // private g_last: number = Date.now();
-  // private ANGLE_STEP = 45.0;
-
-  // angle = 0.0;
-  // translateX = 0.0;
-  raf: number = null;
+  private context: DrawContext;
 
   draw(): void {
     this._draw();
   }
 
   private _draw(): void {
-    // this.angle = this.animate(this.angle);
-    // this.translateX = 0.5;
+    const { gl, program, canvas } = this.context;
+    this.context.clear();
 
-    const { gl, program, canvas } = this.drawer;
-    this.drawer.clear();
-
-    const vertices = new Float32Array(this.v);
+    const vertices = new Float32Array(this.vertices);
     const FSIZE = vertices.BYTES_PER_ELEMENT;
-    // const radian = (Math.PI * this.angle) / 180;
 
     const TEXTURE_WIDTH = 2560;
     const TEXTURE_HEIGHT = 1440;
@@ -99,18 +91,18 @@ class Triangle {
     gl.enableVertexAttribArray(a_TexCoord);
     this.initTexture(6);
 
-    this.raf = window.requestAnimationFrame(() => this._draw());
+    // this.raf = window.requestAnimationFrame(() => this._draw());
   }
 
   clear(): void {
     cancelAnimationFrame(this.raf);
-    this.drawer.clear();
+    this.context.clear();
   }
 
   private texture: HTMLImageElement = null;
 
   private initTexture(n: number): void {
-    const { gl, program } = this.drawer;
+    const { gl, program } = this.context;
     const texture0 = gl.createTexture();
     const texture1 = gl.createTexture();
     const u_Sampler0 = gl.getUniformLocation(program, 'u_Sampler0');
@@ -139,7 +131,7 @@ class Triangle {
     u_Sampler: WebGLUniformLocation,
     texture: WebGLTexture,
   ): void {
-    const { gl } = this.drawer;
+    const { gl } = this.context;
 
     gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
 
@@ -152,7 +144,6 @@ class Triangle {
     }
 
     gl.bindTexture(gl.TEXTURE_2D, texture);
-    // gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
@@ -169,18 +160,17 @@ class Triangle {
     }
   }
 
-  // private animate(angle: number): number {
-  //   const now = Date.now();
-  //   const elapsed = now - this.g_last;
-  //   this.g_last = now;
-  //
-  //   let newAngle = angle + (this.ANGLE_STEP * elapsed) / 1000.0;
-  //   return (newAngle %= 360);
-  // }
+  initialize(canvas: HTMLCanvasElement): void {
+    this.context = new DrawContext(canvas, vshader_source, fshader_source);
+    this.isReady = true;
+    this.draw();
+  }
 
-  constructor(drawer: Drawer) {
-    this.drawer = drawer;
+  constructor() {
+    makeObservable(this, {
+      isReady: observable,
+    });
   }
 }
 
-export default Triangle;
+export default Drawer;

@@ -2,7 +2,7 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import Screen from 'src/features/App/Layout/Screen';
 import Controls from 'src/features/Page/Controls';
-import { Fallback, Message, Image } from 'src/features/App/Layout/ContentFallback';
+import { Fallback, Image, Message } from 'src/features/App/Layout/ContentFallback';
 
 const Error404: React.FC<RouteComponentProps> = () => {
   return (

@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Router } from '@reach/router';
 import loadable from '@loadable/component';
-import Header from 'src/features/Header';
 import Footer from 'src/features/Footer';
 import ErrorBoundary from '../../ErrorBoundary';
 import Error404 from 'src/pages/Error404Page';
@@ -10,7 +9,6 @@ import { observer } from 'mobx-react-lite';
 import { authStore } from 'src/stores/AuthStore';
 import { userStore } from 'src/stores/UserStore';
 import ContentFallback from 'src/features/App/Layout/ContentFallback';
-import Screen from 'src/features/App/Layout/Screen';
 
 const Home = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/HomePage'));
 const Map = loadable(() => import(/* webpackPrefetch: true */ '../../../pages/MapPage'));

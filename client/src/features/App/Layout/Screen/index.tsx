@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import theme from 'src/features/App/GlobalStyle/theme';
 import React from 'react';
-import ReactDOM from 'react-dom';
 
 export const StyledScreen = styled.div`
   position: relative;

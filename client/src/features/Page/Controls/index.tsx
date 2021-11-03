@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import React, { useEffect, useRef } from 'react';
 import { observer } from 'mobx-react-lite';
 import { controlsStore } from 'src/stores/ControlsStore';
-import theme from 'src/features/App/GlobalStyle/theme';
 import Button from 'src/features/Page/Controls/Button';
 import UserMenu from 'src/features/Page/Controls/UserMenu';
 import { authStore } from 'src/stores/AuthStore';

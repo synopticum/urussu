@@ -1,6 +1,4 @@
-import { fshader_source, vshader_source } from '../shader';
-
-export function compileShader(gl: WebGLRenderingContext, shaderSource: string, shaderType: number): WebGLShader {
+function compileShader(gl: WebGLRenderingContext, shaderSource: string, shaderType: number): WebGLShader {
   // Create the shader object
   const shader = gl.createShader(shaderType);
 
@@ -20,7 +18,7 @@ export function compileShader(gl: WebGLRenderingContext, shaderSource: string, s
   return shader;
 }
 
-export function createProgram(
+function createProgram(
   gl: WebGLRenderingContext,
   vertexShader: WebGLShader,
   fragmentShader: WebGLShader,
@@ -45,8 +43,10 @@ export function createProgram(
   return program;
 }
 
-export function setup(
+function setup(
   canvas: HTMLCanvasElement,
+  vshader_source: string,
+  fshader_source: string,
   clearColor: [number, number, number],
 ): { gl: WebGLRenderingContext; program: WebGLProgram } {
   const gl = canvas.getContext('webgl');
@@ -62,3 +62,30 @@ export function setup(
 
   return { gl, program };
 }
+
+class DrawContext {
+  canvas: HTMLCanvasElement;
+  gl: WebGLRenderingContext;
+  program: WebGLProgram;
+
+  clear(): void {
+    const color = this.getColor(256, 256, 256);
+    this.gl.clearColor(color[0], color[1], color[2], 1.0);
+    this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+  }
+
+  getColor(red: number, green: number, blue: number): [number, number, number] {
+    return [red / 256, green / 256, blue / 256];
+  }
+
+  constructor(canvas: HTMLCanvasElement, vshader_source: string, fshader_source: string) {
+    const bgColor = this.getColor(256, 256, 256);
+    const { gl, program } = setup(canvas, vshader_source, fshader_source, bgColor);
+
+    this.canvas = canvas;
+    this.gl = gl;
+    this.program = program;
+  }
+}
+
+export default DrawContext;

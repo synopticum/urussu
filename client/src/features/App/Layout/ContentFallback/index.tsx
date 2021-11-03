@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import React from 'react';
-import Controls from 'src/features/Page/Controls';
 import Screen from 'src/features/App/Layout/Screen';
 import theme from 'src/features/App/GlobalStyle/theme';
 

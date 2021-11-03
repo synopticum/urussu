@@ -9,7 +9,6 @@ import { imagesStore } from 'src/stores/MapStore/EntityStore/ImagesStore';
 import { commentsStore } from 'src/stores/MapStore/EntityStore/CommentsStore';
 import { editorStore, ObjectState } from 'src/stores/MapStore/EntityStore/EditorStore';
 import { controlsStore } from 'src/stores/ControlsStore';
-import { Token } from 'src/stores/AuthStore';
 
 export default class ObjectStore extends BaseAsyncStore<ObjectDto, ObjectMapped> implements BaseStore {
   siblings: ObjectMapped[];

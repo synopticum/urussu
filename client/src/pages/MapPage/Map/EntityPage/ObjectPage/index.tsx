@@ -12,8 +12,6 @@ import Editor from 'src/pages/MapPage/Map/EntityPage/Editor';
 import theme from 'src/features/App/GlobalStyle/theme';
 import { globalStore } from 'src/stores/GlobalStore';
 import { userStore } from 'src/stores/UserStore';
-import { EntityId } from 'src/contracts/entities';
-import { mapStore } from 'src/stores/MapStore';
 
 const StyledObjectPage = styled.div`
   height: 100%;

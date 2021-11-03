@@ -8,7 +8,6 @@ import { controlsStore } from 'src/stores/ControlsStore';
 import { objectStore } from 'src/stores/MapStore/EntityStore/ObjectStore';
 import { EntityId } from 'src/contracts/entities';
 import { mapStore } from 'src/stores/MapStore';
-import theme from 'src/features/App/GlobalStyle/theme';
 
 const StyledImages = styled.div`
   height: 100%;

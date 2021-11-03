@@ -2,7 +2,6 @@ import React from 'react';
 import { RouteComponentProps } from '@reach/router';
 import Map from 'src/pages/MapPage/Map';
 import styled from 'styled-components';
-import Page from 'src/features/Page';
 import Controls from 'src/features/Page/Controls';
 
 const StyledMapPage = styled.div``;
