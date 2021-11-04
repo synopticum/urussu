@@ -1,6 +1,7 @@
 import DrawContext from 'src/components/DrawContext';
 import { fshader_source, vshader_source } from './shader';
 import { makeObservable, observable } from 'mobx';
+import { vec3, mat4 } from 'gl-matrix';
 
 class Drawer {
   raf: number = null;
@@ -56,38 +57,44 @@ class Drawer {
     this._draw();
   }
 
+  tx = 0.0;
+  ty = 0.0;
+
   private _draw(): void {
     const { gl, program, canvas } = this.context;
     this.context.clear();
 
     const vertices = new Float32Array(this.vertices);
-    const FSIZE = vertices.BYTES_PER_ELEMENT;
+    const F_SIZE = vertices.BYTES_PER_ELEMENT;
 
     const TEXTURE_WIDTH = 2560;
     const TEXTURE_HEIGHT = 1440;
     const widthRatio = canvas.clientWidth / TEXTURE_WIDTH;
     const heightRatio = canvas.clientHeight / TEXTURE_HEIGHT;
 
+    const textureMatrix = mat4.create();
+
+    const scale = vec3.create();
+    vec3.set(scale, widthRatio, heightRatio, 0.0);
+    mat4.scale(textureMatrix, textureMatrix, scale);
+
+    const translation = vec3.create();
+    vec3.set(translation, this.tx, this.ty, 0.0);
+    mat4.translate(textureMatrix, textureMatrix, translation);
+
     const u_TextureMatrix = gl.getUniformLocation(program, 'u_TextureMatrix');
-    gl.uniform2fv(u_TextureMatrix, new Float32Array([widthRatio, heightRatio]));
-
-    // mat4.scale();
-    // modelMatrix.setRotate(this.angle, 0, 0, 1);
-    // modelMatrix.translate(this.Tx, 0, 0);
-
-    // const u_ModelMatrix = gl.getUniformLocation(program, 'u_ModelMatrix');
-    // gl.uniformMatrix4fv(u_ModelMatrix, false, modelMatrix.elements);
+    gl.uniformMatrix4fv(u_TextureMatrix, false, textureMatrix);
 
     const vertexBuffer = gl.createBuffer();
     gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
     gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
 
     const a_Position = gl.getAttribLocation(program, 'a_Position');
-    gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, FSIZE * 5, 0);
+    gl.vertexAttribPointer(a_Position, 3, gl.FLOAT, false, F_SIZE * 5, 0);
     gl.enableVertexAttribArray(a_Position);
 
     const a_TexCoord = gl.getAttribLocation(program, 'a_TexCoord');
-    gl.vertexAttribPointer(a_TexCoord, 2, gl.FLOAT, false, FSIZE * 5, FSIZE * 3);
+    gl.vertexAttribPointer(a_TexCoord, 2, gl.FLOAT, false, F_SIZE * 5, F_SIZE * 3);
     gl.enableVertexAttribArray(a_TexCoord);
     this.initTexture(6);
 
