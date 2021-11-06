@@ -3,7 +3,6 @@ export const vshader_source = `
   attribute vec3 a_Position;
   attribute vec2 a_TexCoord;
   varying vec2 v_TexCoord;
-
   uniform mat4 u_TextureMatrix;
 
   void main() {
@@ -24,7 +23,6 @@ export const fshader_source = `
   void main() {
     vec4 color0 = texture2D(u_Sampler0, v_TexCoord);
     vec4 color1 = texture2D(u_Sampler1, v_TexCoord);
-//    gl_FragColor = vec4(1.0, 0.0, 1.0, 1.0);
     gl_FragColor = color0;
   }
 `;

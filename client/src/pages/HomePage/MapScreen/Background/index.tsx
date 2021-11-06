@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, MouseEvent } from 'react';
 import styled from 'styled-components';
 import Drawer from './Drawer';
 import { observer } from 'mobx-react-lite';
@@ -23,7 +23,9 @@ const Background: React.FC<Props> = observer(() => {
     }
   }, [ref.current]);
 
-  return <Canvas width={width} height={height} ref={ref} />;
+  const mouseMove = (e: MouseEvent<HTMLCanvasElement>): void => drawer.mouseMove(e);
+
+  return <Canvas width={width} height={height} ref={ref} onMouseMove={mouseMove} />;
 });
 
 export default Background;

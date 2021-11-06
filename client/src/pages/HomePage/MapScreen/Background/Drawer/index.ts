@@ -1,11 +1,23 @@
 import DrawContext from 'src/components/DrawContext';
 import { fshader_source, vshader_source } from './shader';
-import { makeObservable, observable } from 'mobx';
+import { computed, makeObservable, observable } from 'mobx';
 import { vec3, mat4 } from 'gl-matrix';
+import { MouseEvent } from 'react';
+import { clamp } from 'src/utils/math';
+
+type MousePosition = {
+  x: number;
+  y: number;
+};
+
+type MouseWebGLPosition = MousePosition;
 
 class Drawer {
   raf: number = null;
-  isReady = false;
+
+  get isReady(): boolean {
+    return Boolean(this.context);
+  }
 
   private readonly vertices = [
     // vertex 1.1
@@ -79,6 +91,7 @@ class Drawer {
     mat4.scale(textureMatrix, textureMatrix, scale);
 
     const translation = vec3.create();
+    // vec3.set(translation, clamp(this.tx, -0.02, 0.02), clamp(this.ty, -0.01, 0.01), 0.0);
     vec3.set(translation, this.tx, this.ty, 0.0);
     mat4.translate(textureMatrix, textureMatrix, translation);
 
@@ -167,15 +180,49 @@ class Drawer {
     }
   }
 
+  private static getRelativeMousePosition(event: MouseEvent<HTMLCanvasElement>): MousePosition {
+    const target = event.target as HTMLCanvasElement;
+    const rect = target.getBoundingClientRect();
+
+    return {
+      x: event.clientX - rect.left,
+      y: event.clientY - rect.top,
+    };
+  }
+
+  private static getNoPaddingNoBorderCanvasRelativeMousePosition(event: MouseEvent<HTMLCanvasElement>): MousePosition {
+    const target = event.target as HTMLCanvasElement;
+    const position = Drawer.getRelativeMousePosition(event);
+
+    position.x = (position.x * target.width) / target.clientWidth;
+    position.y = (position.y * target.height) / target.clientHeight;
+
+    return position;
+  }
+
+  private getMousePosition(event: MouseEvent<HTMLCanvasElement>): MouseWebGLPosition {
+    const { gl } = this.context;
+    const position = Drawer.getNoPaddingNoBorderCanvasRelativeMousePosition(event);
+    const x = (position.x / gl.canvas.width) * 2 - 1;
+    const y = (position.y / gl.canvas.height) * -2 + 1;
+
+    return { x, y };
+  }
+
+  mouseMove(e: MouseEvent<HTMLCanvasElement>): void {
+    const position = this.getMousePosition(e);
+    this.tx = position.x;
+    this.ty = position.y;
+  }
+
   initialize(canvas: HTMLCanvasElement): void {
     this.context = new DrawContext(canvas, vshader_source, fshader_source);
-    this.isReady = true;
     this.draw();
   }
 
   constructor() {
     makeObservable(this, {
-      isReady: observable,
+      isReady: computed,
     });
   }
 }
