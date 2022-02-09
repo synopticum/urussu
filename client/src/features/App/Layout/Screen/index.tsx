@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 
 export const StyledScreen = styled.div`
   position: relative;
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   flex: 1 1 0;

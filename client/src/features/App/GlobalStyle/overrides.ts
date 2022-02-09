@@ -18,6 +18,33 @@ const overrides = `
     line-height: 1.4;
   }
 
+  body::-webkit-scrollbar, body::-webkit-scrollbar-track {
+    overflow: hidden;
+    background: ${theme.colors.black.a};
+  }
+
+  body::-webkit-scrollbar:horizontal {
+      height: 10px;
+  }
+
+  body::-webkit-scrollbar:vertical {
+      width: 1px;
+  }
+
+  body::-webkit-scrollbar-thumb {
+      transition: background .25s;
+      background: ${theme.colors.white.a};
+  }
+
+  body::-webkit-scrollbar-thumb:horizontal {
+      border-left: none;
+      border-right: none;
+  }
+
+  body::-webkit-scrollbar-thumb:hover {
+      background: ${theme.colors.white.a};
+  }
+
   #main {
     min-height: 100%;
     margin: 0;
