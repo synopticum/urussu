@@ -39,7 +39,7 @@ services:
       dockerfile: Dockerfile
       context: ./nginx
     ports:
-      - '80:80'
-      - '443:443'
+      - '80:8080'
+      - '443:8043'
     volumes:
       - /Users/synoptic/Desktop/server/certs:/etc/nginx/certs
