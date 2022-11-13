@@ -4,8 +4,8 @@ Client is the application front-end, based on [React](https://github.com/faceboo
 
 ### Development usage
 
-- Create .env file based on `env.example`
-- `npm run dev`
+- Create .env file based on `env.example`.
+- `npm run dev`.
 
 ### Production usage
 
