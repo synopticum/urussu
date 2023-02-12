@@ -15,6 +15,7 @@ coverage
 !.vscode/launch.json
 !.vscode/extensions.json
 *.code-workspace
+dumps/
 
 .yarn_cache
 .yarn

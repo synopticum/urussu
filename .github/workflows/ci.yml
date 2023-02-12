@@ -19,10 +19,10 @@ jobs:
             cd ${{ secrets.PROJECT_PATH }}
             git pull
             bash ./deploy/stop.sh
-            cp ../env/.client-env ./client/.env
-            cp ../env/.mongo-env ./mongo/.env
-            cp ../env/.api-env ./api/.env
-            cp ../env/.ssr-env ./ssr/.env
+            cp ../../env/u-r-u-s-s-u.com/.client-env ./client/.env
+            cp ../../env/u-r-u-s-s-u.com/.mongo-env ./mongo/.env
+            cp ../../env/u-r-u-s-s-u.com/.api-env ./api/.env
+            cp ../../env/u-r-u-s-s-u.com/.ssr-env ./ssr/.env
             docker-compose up -d --build
           script_stop: true
           command_timeout: 30m
