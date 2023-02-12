@@ -42,4 +42,4 @@ services:
       - '8080:8080'
       - '8043:8043'
     volumes:
-      - /Users/synoptic/Desktop/server/certs:/etc/nginx/certs
+      - /home/synoptic/Desktop/certs/u-r-u-s-s-u.com:/etc/nginx/certs

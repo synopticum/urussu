@@ -20,6 +20,10 @@ This service is dockerized and starts with the whole application.
 Make sure that prod env file exists and passed to `./api` folder during deploy phase. See `./.github/workflows/ci.yml` for details. 
 
 Database is placed on host machine filesystem, and passed to container via docker volumes. For the first run (when the db is empty) you need to import a dump manually:
+- `mongosh`
+- - `use admin`
+- - `db.createUser({ user: 'root', pwd: 'password', roles: ['root'] })`
+- - `exit`
 - `mongorestore --drop --uri 'mongodb://login:password@0.0.0.0:27017/urussu?authSource=admin' --archive=urussu.march.2021.gz --gzip --nsInclude 'urussu.*'`
 
 Also remember that db login and password will be set from `./mongo/.env` only on the first run, so changes of this file won't be applied for the next runs.
